@@ -1,0 +1,7 @@
+/* ============================================
+   DESIGNYSTEM — All Tokens
+   Import this file to get all design tokens
+   ============================================ */
+
+@import "./primitives.css";
+@import "./semantic.css";

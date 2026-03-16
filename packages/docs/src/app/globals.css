@@ -1,0 +1,170 @@
+@import "tailwindcss";
+
+/* Tell Tailwind v4 to scan component source files */
+@source "../../../../packages/react/src/**/*.tsx";
+@source "../**/*.tsx";
+
+/* Import design tokens (CSS variables) */
+@import "@designystem/tokens/css";
+
+/* ============================================
+   Tailwind v4 Theme — map CSS vars to utilities
+   ============================================ */
+@theme {
+  /* Colors */
+  --color-bg-base: var(--bg-base);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-bg-card: var(--bg-card);
+  --color-bg-input: var(--bg-input);
+  --color-bg-hover: var(--bg-hover);
+  --color-bg-selected: var(--bg-selected);
+  --color-bg-overlay: var(--bg-overlay);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-text-dimmed: var(--text-dimmed);
+  --color-text-inverse: var(--text-inverse);
+
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-muted: var(--accent-muted);
+  --color-accent-text: var(--accent-text);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-hover: var(--destructive-hover);
+  --color-destructive-muted: var(--destructive-muted);
+  --color-destructive-text: var(--destructive-text);
+
+  --color-success: var(--success);
+  --color-success-hover: var(--success-hover);
+  --color-success-muted: var(--success-muted);
+  --color-success-text: var(--success-text);
+
+  --color-warning: var(--warning);
+  --color-warning-hover: var(--warning-hover);
+  --color-warning-muted: var(--warning-muted);
+  --color-warning-text: var(--warning-text);
+
+  --color-border-subtle: var(--border-subtle);
+  --color-border-default: var(--border-default);
+  --color-border-strong: var(--border-strong);
+  --color-border-accent: var(--border-accent);
+
+  --color-ring: var(--ring-color);
+  --color-glass-bg: var(--glass-bg);
+  --color-glass-border: var(--glass-border);
+
+  /* Font families */
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  /* Border radius */
+  --radius-xs: var(--radius-xs);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+  --radius-2xl: var(--radius-2xl);
+  --radius-3xl: var(--radius-3xl);
+
+  /* Shadows */
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-neu-raised: var(--shadow-neu-raised);
+  --shadow-neu-pressed: var(--shadow-neu-pressed);
+  --shadow-neu-floating: var(--shadow-neu-floating);
+
+  /* Transitions (easing) */
+  --transition-timing-function-soft: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-timing-function-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-timing-function-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Animations */
+  --animate-fade-up: fade-up 0.3s var(--ease-smooth);
+  --animate-fade-down: fade-down 0.3s var(--ease-smooth);
+  --animate-scale-in: scale-in 0.2s var(--ease-smooth);
+  --animate-slide-in-right: slide-in-right 0.3s var(--ease-smooth);
+  --animate-slide-in-left: slide-in-left 0.3s var(--ease-smooth);
+  --animate-slide-in-up: slide-in-up 0.3s var(--ease-smooth);
+  --animate-slide-in-down: slide-in-down 0.3s var(--ease-smooth);
+  --animate-shimmer: shimmer 1.5s infinite linear;
+  --animate-pulse: pulse 2s infinite var(--ease-soft);
+
+  /* Z-index */
+  --z-index-dropdown: 50;
+  --z-index-sticky: 100;
+  --z-index-overlay: 200;
+  --z-index-modal: 300;
+  --z-index-popover: 400;
+  --z-index-toast: 500;
+
+  /* Durations */
+  --transition-duration-fast: 150ms;
+  --transition-duration-normal: 250ms;
+  --transition-duration-slow: 400ms;
+
+  /* Backdrop blur */
+  --backdrop-blur-glass: 20px;
+}
+
+@keyframes fade-up {
+  0% { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-down {
+  0% { opacity: 0; transform: translateY(-8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes scale-in {
+  0% { opacity: 0; transform: scale(0.95); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes slide-in-right {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(0); }
+}
+@keyframes slide-in-left {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(0); }
+}
+@keyframes slide-in-up {
+  0% { transform: translateY(100%); }
+  100% { transform: translateY(0); }
+}
+@keyframes slide-in-down {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(0); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--gray-800);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gray-700);
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-base);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

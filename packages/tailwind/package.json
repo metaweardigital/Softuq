@@ -1,0 +1,13 @@
+{
+  "name": "@designystem/tailwind",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "./src/preset.ts",
+  "exports": {
+    ".": "./src/preset.ts"
+  },
+  "files": ["src"],
+  "dependencies": {
+    "@designystem/tokens": "workspace:*"
+  }
+}

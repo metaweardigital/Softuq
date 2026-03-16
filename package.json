@@ -1,0 +1,13 @@
+{
+  "name": "designystem",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "pnpm -r build",
+    "dev": "pnpm --filter @designystem/docs dev",
+    "lint": "pnpm -r lint"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0"
+  }
+}
