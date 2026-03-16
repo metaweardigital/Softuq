@@ -1,7 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(grep -E \"^[A-Z][a-zA-Z ]+$\" /Users/michalmarek/Documents/Projects/design-patterns-mcp/User-psychology.md | head -50)"
-    ]
-  }
-}
