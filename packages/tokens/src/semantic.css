@@ -89,13 +89,13 @@
   --ds-radius-avatar: 9999px;
 
   /* Component spacing (defaults = default preset) */
-  --ds-spacing-card: 24px;
-  --ds-spacing-card-sm: 16px;
-  --ds-spacing-input-x: 16px;
-  --ds-spacing-input-y: 12px;
-  --ds-spacing-button-sm: 12px;
-  --ds-spacing-button-md: 16px;
-  --ds-spacing-button-lg: 24px;
+  --ds-space-card: 24px;
+  --ds-space-card-sm: 16px;
+  --ds-space-input-x: 16px;
+  --ds-space-input-y: 12px;
+  --ds-space-button-sm: 12px;
+  --ds-space-button-md: 16px;
+  --ds-space-button-lg: 24px;
 }
 
 /* --- Light Mode --- */

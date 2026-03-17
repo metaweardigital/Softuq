@@ -2,7 +2,7 @@
 import * as React from "react";
 
 type RadiusPreset = "none" | "sm" | "md" | "lg" | "full";
-type SpacingPreset = "compact" | "default" | "spacious";
+type SpacingPreset = "sm" | "md" | "lg";
 
 /* ---- Radius preset maps ---- */
 const RADIUS_PRESETS: Record<RadiusPreset, Record<string, string>> = {
@@ -50,32 +50,32 @@ const RADIUS_PRESETS: Record<RadiusPreset, Record<string, string>> = {
 
 /* ---- Spacing preset maps ---- */
 const SPACING_PRESETS: Record<SpacingPreset, Record<string, string>> = {
-  compact: {
-    "--ds-spacing-card": "16px",
-    "--ds-spacing-card-sm": "12px",
-    "--ds-spacing-input-x": "10px",
-    "--ds-spacing-input-y": "8px",
-    "--ds-spacing-button-sm": "8px",
-    "--ds-spacing-button-md": "12px",
-    "--ds-spacing-button-lg": "16px",
+  sm: {
+    "--ds-space-card": "16px",
+    "--ds-space-card-sm": "12px",
+    "--ds-space-input-x": "10px",
+    "--ds-space-input-y": "8px",
+    "--ds-space-button-sm": "8px",
+    "--ds-space-button-md": "12px",
+    "--ds-space-button-lg": "16px",
   },
-  default: {
-    "--ds-spacing-card": "24px",
-    "--ds-spacing-card-sm": "16px",
-    "--ds-spacing-input-x": "16px",
-    "--ds-spacing-input-y": "12px",
-    "--ds-spacing-button-sm": "12px",
-    "--ds-spacing-button-md": "16px",
-    "--ds-spacing-button-lg": "24px",
+  md: {
+    "--ds-space-card": "24px",
+    "--ds-space-card-sm": "16px",
+    "--ds-space-input-x": "16px",
+    "--ds-space-input-y": "12px",
+    "--ds-space-button-sm": "12px",
+    "--ds-space-button-md": "16px",
+    "--ds-space-button-lg": "24px",
   },
-  spacious: {
-    "--ds-spacing-card": "32px",
-    "--ds-spacing-card-sm": "20px",
-    "--ds-spacing-input-x": "20px",
-    "--ds-spacing-input-y": "16px",
-    "--ds-spacing-button-sm": "16px",
-    "--ds-spacing-button-md": "20px",
-    "--ds-spacing-button-lg": "32px",
+  lg: {
+    "--ds-space-card": "32px",
+    "--ds-space-card-sm": "20px",
+    "--ds-space-input-x": "20px",
+    "--ds-space-input-y": "16px",
+    "--ds-space-button-sm": "16px",
+    "--ds-space-button-md": "20px",
+    "--ds-space-button-lg": "32px",
   },
 };
 
@@ -90,7 +90,7 @@ interface DesignYstemContextValue {
 const DesignYstemContext = React.createContext<DesignYstemContextValue>({
   radius: "lg",
   setRadius: () => {},
-  spacing: "default",
+  spacing: "md",
   setSpacing: () => {},
 });
 
@@ -107,7 +107,7 @@ interface DesignYstemProviderProps {
 
 function DesignYstemProvider({
   radius: initialRadius = "lg",
-  spacing: initialSpacing = "default",
+  spacing: initialSpacing = "md",
   children,
 }: DesignYstemProviderProps) {
   const [radius, setRadius] = React.useState<RadiusPreset>(initialRadius);

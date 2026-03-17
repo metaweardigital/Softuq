@@ -54,7 +54,7 @@ import React from "react";
 /* Theme switcher                                            */
 /* --------------------------------------------------------- */
 const RADIUS_OPTIONS: RadiusPreset[] = ["none", "sm", "md", "lg", "full"];
-const SPACING_OPTIONS: SpacingPreset[] = ["compact", "default", "spacious"];
+const SPACING_OPTIONS: SpacingPreset[] = ["sm", "md", "lg"];
 
 function ThemeSwitcher({ theme, toggleTheme }: { theme: string; toggleTheme: () => void }) {
   const { radius, setRadius, spacing, setSpacing } = useDesignYstem();

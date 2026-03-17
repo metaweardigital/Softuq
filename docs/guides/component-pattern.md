@@ -66,7 +66,7 @@ Components use CSS custom properties for radius and spacing, controlled globally
 ```
 
 **Radius presets:** `none` | `sm` | `md` | `lg` | `full`
-**Spacing presets:** `compact` | `default` | `spacious`
+**Spacing presets:** `sm` | `md` | `lg`
 
 Components reference variables like `rounded-[var(--ds-radius-card)]` and `p-[var(--ds-spacing-card)]` instead of hardcoded values.
 

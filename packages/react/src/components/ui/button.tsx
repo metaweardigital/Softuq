@@ -22,9 +22,9 @@ const buttonVariants = cva(
         link: "text-accent-text underline-offset-4 hover:underline",
       },
       size: {
-        sm: "h-8 rounded-[var(--ds-radius-button)] px-[var(--ds-spacing-button-sm)] text-xs",
-        md: "h-10 rounded-[var(--ds-radius-button)] px-[var(--ds-spacing-button-md)] text-sm",
-        lg: "h-12 rounded-[var(--ds-radius-button)] px-[var(--ds-spacing-button-lg)] text-base",
+        sm: "h-8 rounded-[var(--ds-radius-button)] px-[var(--ds-space-button-sm)] text-xs",
+        md: "h-10 rounded-[var(--ds-radius-button)] px-[var(--ds-space-button-md)] text-sm",
+        lg: "h-12 rounded-[var(--ds-radius-button)] px-[var(--ds-space-button-lg)] text-base",
         icon: "h-10 w-10 rounded-[var(--ds-radius-button)]",
       },
     },

@@ -24,14 +24,6 @@ export {
   cardVariants,
 } from "./components/ui/card";
 export { Checkbox, type CheckboxProps, checkboxVariants } from "./components/ui/checkbox";
-// Provider
-export {
-  DesignYstemProvider,
-  type DesignYstemProviderProps,
-  type RadiusPreset,
-  type SpacingPreset,
-  useDesignYstem,
-} from "./components/ui/designystem-provider";
 export {
   Dialog,
   DialogContent,
@@ -74,6 +66,14 @@ export { Textarea, type TextareaProps, textareaVariants } from "./components/ui/
 export { type Toast, ToastItem, type ToastPosition, ToastProvider, useToast } from "./components/ui/toast";
 export { Toggle, type ToggleProps, toggleVariants } from "./components/ui/toggle";
 export { Tooltip, type TooltipProps } from "./components/ui/tooltip";
+// Provider
+export {
+  DesignYstemProvider,
+  type DesignYstemProviderProps,
+  type RadiusPreset,
+  type SpacingPreset,
+  useDesignYstem,
+} from "./designystem-provider";
 export { generateSquirclePath as squirclePath, useSquircleClip } from "./lib/squircle";
 
 // Utilities

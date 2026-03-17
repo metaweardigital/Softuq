@@ -82,8 +82,8 @@ const dialogContentVariants = cva(
   {
     variants: {
       size: {
-        sm: "max-w-sm p-[var(--ds-spacing-card)]",
-        md: "max-w-lg p-[var(--ds-spacing-card)]",
+        sm: "max-w-sm p-[var(--ds-space-card)]",
+        md: "max-w-lg p-[var(--ds-space-card)]",
         lg: "max-w-2xl p-8",
         fullscreen: "max-w-none h-screen w-screen rounded-none p-8",
       },
