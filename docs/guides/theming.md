@@ -97,7 +97,7 @@ Sets per-component spacing variables.
 |---|---|---|---|
 | `--ds-space-card` | 16px | 24px | 32px |
 | `--ds-space-card-sm` | 12px | 16px | 20px |
-| `--ds-space-input-x` | 10px | 16px | 20px |
+| `--ds-space-input-x` | 12px | 16px | 20px |
 | `--ds-space-input-y` | 8px | 12px | 16px |
 | `--ds-space-button-sm` | 8px | 12px | 16px |
 | `--ds-space-button-md` | 12px | 16px | 20px |

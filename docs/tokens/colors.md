@@ -8,7 +8,7 @@ All color values use **OKLCH** — `oklch(lightness chroma hue)`:
 
 ## Primitive palettes
 
-7 color scales defined in `packages/tokens/src/primitives.css`. Gray has 18 shades (50–980) for fine-grained dark UI control. All others have 10 shades (50–900).
+12 color scales defined in `packages/tokens/src/primitives.css`. Gray + 5 tinted variants have 18 shades (50–980) for fine-grained dark UI control. Accent colors have 10 shades (50–900).
 
 ### Gray
 
@@ -24,7 +24,7 @@ Achromatic (chroma 0, hue 0). Lightness range: 0.134–0.985.
 | `--gray-300` | `oklch(0.808 0 0)` |
 | `--gray-400` | `oklch(0.715 0 0)` |
 | `--gray-500` | `oklch(0.633 0 0)` |
-| `--gray-600` | `oklch(0.551 0.023 264.37)` |
+| `--gray-600` | `oklch(0.551 0 0)` |
 | `--gray-700` | `oklch(0.45 0 0)` |
 | `--gray-750` | `oklch(0.409 0 0)` |
 | `--gray-800` | `oklch(0.321 0 0)` |
@@ -136,6 +136,62 @@ Hue ~293. Secondary accent.
 | `--violet-700` | `oklch(0.491 0.241 292.58)` |
 | `--violet-800` | `oklch(0.432 0.211 292.76)` |
 | `--violet-900` | `oklch(0.38 0.178 293.74)` |
+
+## Tinted gray palettes
+
+5 tinted variants of the gray scale, used by `<DesignYstemProvider palette="...">`. Each has the same 18 shades as gray but with added chroma and hue. Low chroma keeps them neutral-feeling while adding warmth or coolness.
+
+### Zinc
+
+Hue ~264. Cool blue-gray. Low chroma (0.002–0.017).
+
+| Token | Value |
+|---|---|
+| `--zinc-50` | `oklch(0.985 0.002 240)` |
+| `--zinc-500` | `oklch(0.609 0.014 264.54)` |
+| `--zinc-980` | `oklch(0.12 0.006 264.54)` |
+
+### Stone
+
+Hue ~56–75. Warm beige-gray. Low chroma (0.002–0.013).
+
+| Token | Value |
+|---|---|
+| `--stone-50` | `oklch(0.985 0.002 75)` |
+| `--stone-500` | `oklch(0.617 0.013 56)` |
+| `--stone-980` | `oklch(0.126 0.003 56)` |
+
+### Slate
+
+Hue ~248–266. Saturated blue-gray. Higher chroma (0.003–0.042).
+
+| Token | Value |
+|---|---|
+| `--slate-50` | `oklch(0.984 0.003 247.86)` |
+| `--slate-500` | `oklch(0.606 0.036 264.05)` |
+| `--slate-980` | `oklch(0.118 0.022 265.75)` |
+
+### Mauve
+
+Hue ~310. Purple-gray. Low chroma (0.004–0.02).
+
+| Token | Value |
+|---|---|
+| `--mauve-50` | `oklch(0.985 0.004 310)` |
+| `--mauve-500` | `oklch(0.611 0.02 310)` |
+| `--mauve-980` | `oklch(0.126 0.005 310)` |
+
+### Olive
+
+Hue ~128. Green-gray. Low chroma (0.004–0.02).
+
+| Token | Value |
+|---|---|
+| `--olive-50` | `oklch(0.985 0.004 128)` |
+| `--olive-500` | `oklch(0.611 0.02 128)` |
+| `--olive-980` | `oklch(0.126 0.005 128)` |
+
+Full 18-shade tables for each tinted palette are in `packages/tokens/src/primitives.css`.
 
 ## Semantic mapping
 
