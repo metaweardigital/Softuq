@@ -1,5 +1,5 @@
-import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
+import * as React from "react";
 import { cn } from "../../lib/utils";
 
 const inputVariants = cva(
@@ -27,7 +27,7 @@ const inputVariants = cva(
       variant: "default",
       inputSize: "md",
     },
-  }
+  },
 );
 
 interface InputProps
@@ -36,17 +36,10 @@ interface InputProps
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, variant, inputSize, type, ...props }, ref) => {
-    return (
-      <input
-        type={type}
-        className={cn(inputVariants({ variant, inputSize, className }))}
-        ref={ref}
-        {...props}
-      />
-    );
-  }
+    return <input type={type} className={cn(inputVariants({ variant, inputSize, className }))} ref={ref} {...props} />;
+  },
 );
 Input.displayName = "Input";
 
-export { Input, inputVariants };
 export type { InputProps };
+export { Input, inputVariants };

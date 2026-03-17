@@ -1,5 +1,5 @@
-import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
+import * as React from "react";
 import { cn } from "../../lib/utils";
 
 const alertVariants = cva(
@@ -22,44 +22,29 @@ const alertVariants = cva(
       variant: "default",
       size: "full",
     },
-  }
+  },
 );
 
-interface AlertProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof alertVariants> {}
+interface AlertProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof alertVariants> {}
 
-const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
-  ({ className, variant, size, ...props }, ref) => (
-    <div
-      ref={ref}
-      role="alert"
-      className={cn(alertVariants({ variant, size, className }))}
-      {...props}
-    />
-  )
-);
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(({ className, variant, size, ...props }, ref) => (
+  <div ref={ref} role="alert" className={cn(alertVariants({ variant, size, className }))} {...props} />
+));
 Alert.displayName = "Alert";
 
-const AlertTitle = React.forwardRef<
-  HTMLHeadingElement,
-  React.HTMLAttributes<HTMLHeadingElement>
->(({ className, ...props }, ref) => (
-  <h5
-    ref={ref}
-    className={cn("font-semibold leading-tight tracking-tight [&:has(~p)]:mb-1", className)}
-    {...props}
-  />
-));
+const AlertTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLHeadingElement>>(
+  ({ className, ...props }, ref) => (
+    <h5 ref={ref} className={cn("font-semibold leading-tight tracking-tight [&:has(~p)]:mb-1", className)} {...props} />
+  ),
+);
 AlertTitle.displayName = "AlertTitle";
 
-const AlertDescription = React.forwardRef<
-  HTMLParagraphElement,
-  React.HTMLAttributes<HTMLParagraphElement>
->(({ className, ...props }, ref) => (
-  <p ref={ref} className={cn("text-sm text-text-secondary [&_p]:leading-relaxed", className)} {...props} />
-));
+const AlertDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(
+  ({ className, ...props }, ref) => (
+    <p ref={ref} className={cn("text-sm text-text-secondary [&_p]:leading-relaxed", className)} {...props} />
+  ),
+);
 AlertDescription.displayName = "AlertDescription";
 
-export { Alert, AlertTitle, AlertDescription, alertVariants };
 export type { AlertProps };
+export { Alert, AlertDescription, AlertTitle, alertVariants };

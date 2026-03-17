@@ -5,9 +5,12 @@
   "scripts": {
     "build": "pnpm -r build",
     "dev": "pnpm --filter @designystem/docs dev",
-    "lint": "pnpm -r lint"
+    "lint": "biome check .",
+    "lint:fix": "biome check --fix .",
+    "format": "biome format --write ."
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.4.7",
     "typescript": "^5.7.0"
   }
 }

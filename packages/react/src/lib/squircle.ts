@@ -12,11 +12,7 @@ import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
  *   bottom-right: 0    → π/2   (from right edge to bottom edge)
  *   bottom-left:  π/2  → π     (from bottom edge to left edge)
  */
-export function generateSquirclePath(
-  width: number,
-  height: number,
-  radius: number
-): string {
+export function generateSquirclePath(width: number, height: number, radius: number): string {
   if (width <= 0 || height <= 0) return "";
 
   const r = Math.min(radius, width / 2, height / 2);
@@ -30,15 +26,12 @@ export function generateSquirclePath(
   function se(t: number): [number, number] {
     const c = Math.cos(t);
     const s = Math.sin(t);
-    return [
-      Math.sign(c) * Math.pow(Math.abs(c), exp) * r,
-      Math.sign(s) * Math.pow(Math.abs(s), exp) * r,
-    ];
+    return [Math.sign(c) * Math.abs(c) ** exp * r, Math.sign(s) * Math.abs(s) ** exp * r];
   }
 
   const pts: string[] = [];
   function add(x: number, y: number) {
-    pts.push(`${(Math.round(x * 100) / 100)},${(Math.round(y * 100) / 100)}`);
+    pts.push(`${Math.round(x * 100) / 100},${Math.round(y * 100) / 100}`);
   }
 
   // Top-left corner: center (r, r), t from π to 3π/2
@@ -79,11 +72,7 @@ export function generateSquirclePath(
 /**
  * Hook: auto-measures element and returns squircle clip-path + SVG path.
  */
-export function useSquircleClip(
-  radius: number,
-  explicitWidth?: number,
-  explicitHeight?: number
-) {
+export function useSquircleClip(radius: number, explicitWidth?: number, explicitHeight?: number) {
   const ref = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState({ w: 0, h: 0 });
 
@@ -113,15 +102,9 @@ export function useSquircleClip(
   const w = explicitWidth ?? size.w;
   const h = explicitHeight ?? size.h;
 
-  const svgPath = useMemo(
-    () => generateSquirclePath(w, h, radius),
-    [w, h, radius]
-  );
+  const svgPath = useMemo(() => generateSquirclePath(w, h, radius), [w, h, radius]);
 
-  const clipPath = useMemo(
-    () => (svgPath ? `path('${svgPath}')` : undefined),
-    [svgPath]
-  );
+  const clipPath = useMemo(() => (svgPath ? `path('${svgPath}')` : undefined), [svgPath]);
 
   return { ref, clipPath, svgPath, width: w, height: h };
 }

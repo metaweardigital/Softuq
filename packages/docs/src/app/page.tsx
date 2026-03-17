@@ -1,30 +1,51 @@
 "use client";
 
-import React from "react";
-import { Plus, Terminal, Info, CheckCircle2, AlertTriangle, AlertCircle } from "lucide-react";
 import {
-  Button,
-  Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter,
-  Input,
-  Textarea,
-  Label,
-  Badge,
-  Select, SelectOption,
-  Toggle,
-  Checkbox,
-  RadioGroup, RadioGroupItem,
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+  Alert,
+  AlertDescription,
+  AlertTitle,
   Avatar,
-  Separator,
-  Skeleton,
-  Alert, AlertTitle, AlertDescription,
+  Badge,
+  Button,
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  Checkbox,
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  Input,
+  Label,
   Progress,
-  Tabs, TabsList, TabsTrigger, TabsContent,
-  Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter,
-  Tooltip,
-  ToastProvider, useToast,
-  Accordion, AccordionItem, AccordionTrigger, AccordionContent,
+  RadioGroup,
+  RadioGroupItem,
+  Select,
+  SelectOption,
+  Separator,
   Sheet,
+  Skeleton,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+  Textarea,
+  ToastProvider,
+  Toggle,
+  Tooltip,
+  useToast,
 } from "@designystem/react";
+import { AlertCircle, AlertTriangle, CheckCircle2, Info, Plus, Terminal } from "lucide-react";
+import React from "react";
 
 /* --------------------------------------------------------- */
 /* Section wrapper                                           */
@@ -32,9 +53,7 @@ import {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section className="space-y-4">
-      <h2 className="text-xl font-semibold text-text-primary border-b border-border-subtle pb-2">
-        {title}
-      </h2>
+      <h2 className="text-xl font-semibold text-text-primary border-b border-border-subtle pb-2">{title}</h2>
       {children}
     </section>
   );
@@ -59,19 +78,61 @@ function ToastDemo() {
       <div className="space-y-2">
         <p className="text-xs font-medium text-text-muted uppercase tracking-wide">Variants</p>
         <div className="flex flex-wrap gap-3">
-          <Button size="sm" variant="secondary" onClick={() => addToast({ title: "Heads up!", description: "You can add components to your app using the CLI." })}>
+          <Button
+            size="sm"
+            variant="secondary"
+            onClick={() =>
+              addToast({ title: "Heads up!", description: "You can add components to your app using the CLI." })
+            }
+          >
             Default
           </Button>
-          <Button size="sm" variant="secondary" onClick={() => addToast({ title: "Information", description: "This is an informational alert message.", variant: "info" })}>
+          <Button
+            size="sm"
+            variant="secondary"
+            onClick={() =>
+              addToast({
+                title: "Information",
+                description: "This is an informational alert message.",
+                variant: "info",
+              })
+            }
+          >
             Info
           </Button>
-          <Button size="sm" variant="secondary" onClick={() => addToast({ title: "Success", description: "Your changes have been saved successfully.", variant: "success" })}>
+          <Button
+            size="sm"
+            variant="secondary"
+            onClick={() =>
+              addToast({
+                title: "Success",
+                description: "Your changes have been saved successfully.",
+                variant: "success",
+              })
+            }
+          >
             Success
           </Button>
-          <Button size="sm" variant="secondary" onClick={() => addToast({ title: "Warning", description: "Please review your settings before proceeding.", variant: "warning" })}>
+          <Button
+            size="sm"
+            variant="secondary"
+            onClick={() =>
+              addToast({
+                title: "Warning",
+                description: "Please review your settings before proceeding.",
+                variant: "warning",
+              })
+            }
+          >
             Warning
           </Button>
-          <Button size="sm" variant="secondary" onClick={() => addToast({ title: "Error", description: "Something went wrong. Please try again.", variant: "error" })}>
+          <Button
+            size="sm"
+            variant="secondary"
+            onClick={() =>
+              addToast({ title: "Error", description: "Something went wrong. Please try again.", variant: "error" })
+            }
+          >
             Error
           </Button>
         </div>
@@ -90,7 +151,18 @@ function ToastDemo() {
       <div className="space-y-2">
         <p className="text-xs font-medium text-text-muted uppercase tracking-wide">Long content (truncated)</p>
         <div className="flex flex-wrap gap-3">
-          <Button size="sm" variant="ghost" onClick={() => addToast({ title: "Breaking changes in v2.0", description: "The API has been completely redesigned. All existing endpoints will be deprecated on March 31st. Please migrate your application to the new endpoints before the deadline.", variant: "warning" })}>
+          <Button
+            size="sm"
+            variant="ghost"
+            onClick={() =>
+              addToast({
+                title: "Breaking changes in v2.0",
+                description:
+                  "The API has been completely redesigned. All existing endpoints will be deprecated on March 31st. Please migrate your application to the new endpoints before the deadline.",
+                variant: "warning",
+              })
+            }
+          >
             Long text
           </Button>
         </div>
@@ -98,10 +170,32 @@ function ToastDemo() {
       <div className="space-y-2">
         <p className="text-xs font-medium text-text-muted uppercase tracking-wide">Custom duration</p>
         <div className="flex flex-wrap gap-3">
-          <Button size="sm" variant="ghost" onClick={() => addToast({ title: "Quick flash", description: "This disappears in 1.5s.", variant: "info", duration: 1500 })}>
+          <Button
+            size="sm"
+            variant="ghost"
+            onClick={() =>
+              addToast({
+                title: "Quick flash",
+                description: "This disappears in 1.5s.",
+                variant: "info",
+                duration: 1500,
+              })
+            }
+          >
             1.5s
           </Button>
-          <Button size="sm" variant="ghost" onClick={() => addToast({ title: "Sticky toast", description: "This stays for 10 seconds.", variant: "warning", duration: 10000 })}>
+          <Button
+            size="sm"
+            variant="ghost"
+            onClick={() =>
+              addToast({
+                title: "Sticky toast",
+                description: "This stays for 10 seconds.",
+                variant: "warning",
+                duration: 10000,
+              })
+            }
+          >
             10s
           </Button>
         </div>
@@ -147,7 +241,6 @@ export default function ComponentPreview() {
         </header>
 
         <main className="max-w-5xl mx-auto px-6 py-10 space-y-12">
-
           {/* Accordion */}
           <Section title="Accordion">
             <div className="max-w-2xl space-y-8">
@@ -157,27 +250,61 @@ export default function ComponentPreview() {
                   <AccordionItem value="item-1">
                     <AccordionTrigger>What is DesignYstem?</AccordionTrigger>
                     <AccordionContent>
-                      A custom design system library with a <span className="text-accent">soft UI / neumorphic</span> aesthetic. Built as a monorepo with tokens, a Tailwind preset, and copy-paste components — inspired by <span className="text-accent">shadcn/ui</span>.
+                      A custom design system library with a <span className="text-accent">soft UI / neumorphic</span>{" "}
+                      aesthetic. Built as a monorepo with tokens, a Tailwind preset, and copy-paste components —
+                      inspired by <span className="text-accent">shadcn/ui</span>.
                     </AccordionContent>
                   </AccordionItem>
                   <AccordionItem value="item-2">
                     <AccordionTrigger>How do I install it?</AccordionTrigger>
                     <AccordionContent>
-                      <p>Run <code className="text-xs bg-bg-elevated px-1.5 py-0.5 rounded-md text-text-primary">npx designystem init</code> to set up your project, then add individual components:</p>
-                      <p className="mt-2"><code className="text-xs bg-bg-elevated px-1.5 py-0.5 rounded-md text-text-primary">npx designystem add button card input</code></p>
-                      <p className="mt-2">Components are copied directly into your project — no runtime dependency, full control over the source.</p>
+                      <p>
+                        Run{" "}
+                        <code className="text-xs bg-bg-elevated px-1.5 py-0.5 rounded-md text-text-primary">
+                          npx designystem init
+                        </code>{" "}
+                        to set up your project, then add individual components:
+                      </p>
+                      <p className="mt-2">
+                        <code className="text-xs bg-bg-elevated px-1.5 py-0.5 rounded-md text-text-primary">
+                          npx designystem add button card input
+                        </code>
+                      </p>
+                      <p className="mt-2">
+                        Components are copied directly into your project — no runtime dependency, full control over the
+                        source.
+                      </p>
                     </AccordionContent>
                   </AccordionItem>
                   <AccordionItem value="item-3">
                     <AccordionTrigger>Which frameworks are supported?</AccordionTrigger>
                     <AccordionContent>
-                      Currently <Badge variant="default" size="sm">React</Badge> is fully supported. <Badge variant="secondary" size="sm">Svelte 5</Badge> and <Badge variant="outline" size="sm">Astro</Badge> components are planned for v0.2.
+                      Currently{" "}
+                      <Badge variant="default" size="sm">
+                        React
+                      </Badge>{" "}
+                      is fully supported.{" "}
+                      <Badge variant="secondary" size="sm">
+                        Svelte 5
+                      </Badge>{" "}
+                      and{" "}
+                      <Badge variant="outline" size="sm">
+                        Astro
+                      </Badge>{" "}
+                      components are planned for v0.2.
                     </AccordionContent>
                   </AccordionItem>
                   <AccordionItem value="item-4">
                     <AccordionTrigger>Is it customizable?</AccordionTrigger>
                     <AccordionContent>
-                      Yes! The token system uses three layers: <span className="text-success-text">primitive</span> → <span className="text-warning-text">semantic</span> → <span className="text-accent">component</span>. All tokens are CSS custom properties you can override. Dark mode is default, switch to light with <code className="text-xs bg-bg-elevated px-1.5 py-0.5 rounded-md text-text-primary">data-theme=&quot;light&quot;</code> on your root element.
+                      Yes! The token system uses three layers: <span className="text-success-text">primitive</span> →{" "}
+                      <span className="text-warning-text">semantic</span> →{" "}
+                      <span className="text-accent">component</span>. All tokens are CSS custom properties you can
+                      override. Dark mode is default, switch to light with{" "}
+                      <code className="text-xs bg-bg-elevated px-1.5 py-0.5 rounded-md text-text-primary">
+                        data-theme=&quot;light&quot;
+                      </code>{" "}
+                      on your root element.
                     </AccordionContent>
                   </AccordionItem>
                 </Accordion>
@@ -188,13 +315,19 @@ export default function ComponentPreview() {
                   <AccordionItem value="b1">
                     <AccordionTrigger>Can I use it with Tailwind v4?</AccordionTrigger>
                     <AccordionContent>
-                      Absolutely. The design system is built for <span className="text-accent">Tailwind CSS v4</span> — tokens are mapped via <code className="text-xs bg-bg-elevated px-1.5 py-0.5 rounded-md text-text-primary">@theme</code> in your CSS, no config file needed.
+                      Absolutely. The design system is built for <span className="text-accent">Tailwind CSS v4</span> —
+                      tokens are mapped via{" "}
+                      <code className="text-xs bg-bg-elevated px-1.5 py-0.5 rounded-md text-text-primary">@theme</code>{" "}
+                      in your CSS, no config file needed.
                     </AccordionContent>
                   </AccordionItem>
                   <AccordionItem value="b2">
                     <AccordionTrigger>What about accessibility?</AccordionTrigger>
                     <AccordionContent>
-                      All interactive components include proper <span className="text-accent">ARIA attributes</span>, keyboard navigation, and focus management. Buttons, dialogs, tabs, and accordions follow WAI-ARIA patterns. Color contrast meets <span className="text-success-text">WCAG AA</span> standards in both dark and light themes.
+                      All interactive components include proper <span className="text-accent">ARIA attributes</span>,
+                      keyboard navigation, and focus management. Buttons, dialogs, tabs, and accordions follow WAI-ARIA
+                      patterns. Color contrast meets <span className="text-success-text">WCAG AA</span> standards in
+                      both dark and light themes.
                     </AccordionContent>
                   </AccordionItem>
                   <AccordionItem value="b3">
@@ -253,11 +386,18 @@ export default function ComponentPreview() {
                 <AlertTriangle />
                 <AlertTitle>Breaking changes in v2.0</AlertTitle>
                 <AlertDescription className="line-clamp-2">
-                  Refer to the <a href="#" className="font-medium text-accent underline underline-offset-2">migration guide</a> for detailed instructions. The API has been completely redesigned. All existing endpoints will be deprecated on March 31st. Please migrate your application to the new endpoints before the deadline.
+                  Refer to the{" "}
+                  <a href="#" className="font-medium text-accent underline underline-offset-2">
+                    migration guide
+                  </a>{" "}
+                  for detailed instructions. The API has been completely redesigned. All existing endpoints will be
+                  deprecated on March 31st. Please migrate your application to the new endpoints before the deadline.
                 </AlertDescription>
               </Alert>
 
-              <p className="text-xs font-medium text-text-muted uppercase tracking-wide pt-4">Fit width (hug content)</p>
+              <p className="text-xs font-medium text-text-muted uppercase tracking-wide pt-4">
+                Fit width (hug content)
+              </p>
               <Alert variant="success" size="fit">
                 <CheckCircle2 />
                 <AlertTitle>Saved</AlertTitle>
@@ -273,7 +413,15 @@ export default function ComponentPreview() {
                 <CheckCircle2 />
                 <AlertTitle>Deployment complete</AlertTitle>
                 <AlertDescription>
-                  Your app is live at <code className="text-xs bg-bg-elevated px-1.5 py-0.5 rounded-md text-text-primary">production-abc123</code>. Version <Badge size="sm" variant="success">v1.4.2</Badge> is now serving traffic.
+                  Your app is live at{" "}
+                  <code className="text-xs bg-bg-elevated px-1.5 py-0.5 rounded-md text-text-primary">
+                    production-abc123
+                  </code>
+                  . Version{" "}
+                  <Badge size="sm" variant="success">
+                    v1.4.2
+                  </Badge>{" "}
+                  is now serving traffic.
                 </AlertDescription>
               </Alert>
             </div>
@@ -337,22 +485,30 @@ export default function ComponentPreview() {
                   <CardTitle>Default Card</CardTitle>
                   <CardDescription>Basic card with subtle shadow</CardDescription>
                 </CardHeader>
-                <CardContent><p className="text-sm text-text-secondary">Card content goes here.</p></CardContent>
-                <CardFooter><Button size="sm">Action</Button></CardFooter>
+                <CardContent>
+                  <p className="text-sm text-text-secondary">Card content goes here.</p>
+                </CardContent>
+                <CardFooter>
+                  <Button size="sm">Action</Button>
+                </CardFooter>
               </Card>
               <Card variant="elevated">
                 <CardHeader>
                   <CardTitle>Elevated Card</CardTitle>
                   <CardDescription>Neumorphic raised shadow</CardDescription>
                 </CardHeader>
-                <CardContent><p className="text-sm text-text-secondary">More prominent elevation.</p></CardContent>
+                <CardContent>
+                  <p className="text-sm text-text-secondary">More prominent elevation.</p>
+                </CardContent>
               </Card>
               <Card variant="interactive">
                 <CardHeader>
                   <CardTitle>Interactive Card</CardTitle>
                   <CardDescription>Hover to see floating effect</CardDescription>
                 </CardHeader>
-                <CardContent><p className="text-sm text-text-secondary">Cursor pointer, hover elevation.</p></CardContent>
+                <CardContent>
+                  <p className="text-sm text-text-secondary">Cursor pointer, hover elevation.</p>
+                </CardContent>
               </Card>
             </div>
           </Section>
@@ -383,15 +539,23 @@ export default function ComponentPreview() {
           <Section title="Dialog">
             <Row>
               <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-                <Button variant="secondary" onClick={() => setDialogOpen(true)}>Open Dialog</Button>
+                <Button variant="secondary" onClick={() => setDialogOpen(true)}>
+                  Open Dialog
+                </Button>
                 <DialogContent>
                   <DialogHeader>
                     <DialogTitle>Are you sure?</DialogTitle>
-                    <DialogDescription>This action cannot be undone. This will permanently delete your data.</DialogDescription>
+                    <DialogDescription>
+                      This action cannot be undone. This will permanently delete your data.
+                    </DialogDescription>
                   </DialogHeader>
                   <DialogFooter>
-                    <Button variant="ghost" onClick={() => setDialogOpen(false)}>Cancel</Button>
-                    <Button variant="destructive" onClick={() => setDialogOpen(false)}>Delete</Button>
+                    <Button variant="ghost" onClick={() => setDialogOpen(false)}>
+                      Cancel
+                    </Button>
+                    <Button variant="destructive" onClick={() => setDialogOpen(false)}>
+                      Delete
+                    </Button>
                   </DialogFooter>
                 </DialogContent>
               </Dialog>
@@ -457,8 +621,12 @@ export default function ComponentPreview() {
               </div>
               <Progress value={75} size="sm" />
               <div className="flex gap-2">
-                <Button size="sm" variant="ghost" onClick={() => setProgress(Math.max(0, progress - 10))}>-10</Button>
-                <Button size="sm" variant="ghost" onClick={() => setProgress(Math.min(100, progress + 10))}>+10</Button>
+                <Button size="sm" variant="ghost" onClick={() => setProgress(Math.max(0, progress - 10))}>
+                  -10
+                </Button>
+                <Button size="sm" variant="ghost" onClick={() => setProgress(Math.min(100, progress + 10))}>
+                  +10
+                </Button>
               </div>
             </div>
           </Section>
@@ -522,10 +690,14 @@ export default function ComponentPreview() {
           {/* Sheet */}
           <Section title="Sheet">
             <Row>
-              <Button variant="secondary" onClick={() => setSheetOpen(true)}>Open Sheet (Right)</Button>
+              <Button variant="secondary" onClick={() => setSheetOpen(true)}>
+                Open Sheet (Right)
+              </Button>
               <Sheet open={sheetOpen} onClose={() => setSheetOpen(false)} side="right" size="md">
                 <h3 className="text-lg font-semibold mb-4">Sheet Title</h3>
-                <p className="text-sm text-text-secondary">This is a sheet / drawer component. It slides in from the edge of the screen.</p>
+                <p className="text-sm text-text-secondary">
+                  This is a sheet / drawer component. It slides in from the edge of the screen.
+                </p>
                 <div className="mt-6">
                   <Button onClick={() => setSheetOpen(false)}>Close</Button>
                 </div>
@@ -554,9 +726,15 @@ export default function ComponentPreview() {
                   <TabsTrigger value="tab2">Settings</TabsTrigger>
                   <TabsTrigger value="tab3">Billing</TabsTrigger>
                 </TabsList>
-                <TabsContent value="tab1"><p className="text-sm text-text-secondary p-2">Account settings content.</p></TabsContent>
-                <TabsContent value="tab2"><p className="text-sm text-text-secondary p-2">General settings content.</p></TabsContent>
-                <TabsContent value="tab3"><p className="text-sm text-text-secondary p-2">Billing information.</p></TabsContent>
+                <TabsContent value="tab1">
+                  <p className="text-sm text-text-secondary p-2">Account settings content.</p>
+                </TabsContent>
+                <TabsContent value="tab2">
+                  <p className="text-sm text-text-secondary p-2">General settings content.</p>
+                </TabsContent>
+                <TabsContent value="tab3">
+                  <p className="text-sm text-text-secondary p-2">Billing information.</p>
+                </TabsContent>
               </Tabs>
             </Row>
             <Row label="Pills">
@@ -566,9 +744,15 @@ export default function ComponentPreview() {
                   <TabsTrigger value="b">Active</TabsTrigger>
                   <TabsTrigger value="c">Archived</TabsTrigger>
                 </TabsList>
-                <TabsContent value="a"><p className="text-sm text-text-secondary p-2">All items.</p></TabsContent>
-                <TabsContent value="b"><p className="text-sm text-text-secondary p-2">Active items.</p></TabsContent>
-                <TabsContent value="c"><p className="text-sm text-text-secondary p-2">Archived items.</p></TabsContent>
+                <TabsContent value="a">
+                  <p className="text-sm text-text-secondary p-2">All items.</p>
+                </TabsContent>
+                <TabsContent value="b">
+                  <p className="text-sm text-text-secondary p-2">Active items.</p>
+                </TabsContent>
+                <TabsContent value="c">
+                  <p className="text-sm text-text-secondary p-2">Archived items.</p>
+                </TabsContent>
               </Tabs>
             </Row>
             <Row label="Underline">
@@ -578,9 +762,15 @@ export default function ComponentPreview() {
                   <TabsTrigger value="y">Analytics</TabsTrigger>
                   <TabsTrigger value="z">Reports</TabsTrigger>
                 </TabsList>
-                <TabsContent value="x"><p className="text-sm text-text-secondary p-2">Overview dashboard.</p></TabsContent>
-                <TabsContent value="y"><p className="text-sm text-text-secondary p-2">Analytics data.</p></TabsContent>
-                <TabsContent value="z"><p className="text-sm text-text-secondary p-2">Generated reports.</p></TabsContent>
+                <TabsContent value="x">
+                  <p className="text-sm text-text-secondary p-2">Overview dashboard.</p>
+                </TabsContent>
+                <TabsContent value="y">
+                  <p className="text-sm text-text-secondary p-2">Analytics data.</p>
+                </TabsContent>
+                <TabsContent value="z">
+                  <p className="text-sm text-text-secondary p-2">Generated reports.</p>
+                </TabsContent>
               </Tabs>
             </Row>
           </Section>
@@ -591,9 +781,27 @@ export default function ComponentPreview() {
             <div className="space-y-2">
               <p className="text-xs font-medium text-text-muted uppercase tracking-wide">Position</p>
               <div className="flex flex-wrap gap-3">
-                <Button size="sm" variant={toastPosition === "left" ? "default" : "outline"} onClick={() => setToastPosition("left")}>Left</Button>
-                <Button size="sm" variant={toastPosition === "center" ? "default" : "outline"} onClick={() => setToastPosition("center")}>Center</Button>
-                <Button size="sm" variant={toastPosition === "right" ? "default" : "outline"} onClick={() => setToastPosition("right")}>Right</Button>
+                <Button
+                  size="sm"
+                  variant={toastPosition === "left" ? "default" : "outline"}
+                  onClick={() => setToastPosition("left")}
+                >
+                  Left
+                </Button>
+                <Button
+                  size="sm"
+                  variant={toastPosition === "center" ? "default" : "outline"}
+                  onClick={() => setToastPosition("center")}
+                >
+                  Center
+                </Button>
+                <Button
+                  size="sm"
+                  variant={toastPosition === "right" ? "default" : "outline"}
+                  onClick={() => setToastPosition("right")}
+                >
+                  Right
+                </Button>
               </div>
             </div>
           </Section>
@@ -612,20 +820,27 @@ export default function ComponentPreview() {
           <Section title="Tooltip">
             <Row>
               <Tooltip content="Top tooltip" side="top">
-                <Button variant="outline" size="sm">Hover me (top)</Button>
+                <Button variant="outline" size="sm">
+                  Hover me (top)
+                </Button>
               </Tooltip>
               <Tooltip content="Bottom tooltip" side="bottom">
-                <Button variant="outline" size="sm">Bottom</Button>
+                <Button variant="outline" size="sm">
+                  Bottom
+                </Button>
               </Tooltip>
               <Tooltip content="Left tooltip" side="left">
-                <Button variant="outline" size="sm">Left</Button>
+                <Button variant="outline" size="sm">
+                  Left
+                </Button>
               </Tooltip>
               <Tooltip content="Right tooltip" side="right">
-                <Button variant="outline" size="sm">Right</Button>
+                <Button variant="outline" size="sm">
+                  Right
+                </Button>
               </Tooltip>
             </Row>
           </Section>
-
         </main>
 
         {/* Footer */}

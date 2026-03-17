@@ -1,5 +1,5 @@
-import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
+import * as React from "react";
 import { cn } from "../../lib/utils";
 
 const progressVariants = cva("", {
@@ -14,9 +14,7 @@ const progressVariants = cva("", {
   },
 });
 
-interface ProgressProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof progressVariants> {
+interface ProgressProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof progressVariants> {
   value?: number;
   max?: number;
 }
@@ -32,11 +30,7 @@ const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
         aria-valuenow={value}
         aria-valuemin={0}
         aria-valuemax={max}
-        className={cn(
-          "w-full overflow-hidden rounded-full bg-bg-input",
-          progressVariants({ size }),
-          className
-        )}
+        className={cn("w-full overflow-hidden rounded-full bg-bg-input", progressVariants({ size }), className)}
         {...props}
       >
         <div
@@ -45,9 +39,9 @@ const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
         />
       </div>
     );
-  }
+  },
 );
 Progress.displayName = "Progress";
 
-export { Progress, progressVariants };
 export type { ProgressProps };
+export { Progress, progressVariants };

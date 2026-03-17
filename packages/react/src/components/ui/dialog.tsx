@@ -1,6 +1,6 @@
-import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { X } from "lucide-react";
+import * as React from "react";
 import { cn } from "../../lib/utils";
 
 /* --- Dialog Context --- */
@@ -34,50 +34,41 @@ function Dialog({ open: controlledOpen, defaultOpen = false, onOpenChange, child
       setInternalOpen(value);
       onOpenChange?.(value);
     },
-    [onOpenChange]
+    [onOpenChange],
   );
 
-  return (
-    <DialogContext.Provider value={{ open, setOpen }}>
-      {children}
-    </DialogContext.Provider>
-  );
+  return <DialogContext.Provider value={{ open, setOpen }}>{children}</DialogContext.Provider>;
 }
 
 /* --- DialogTrigger --- */
-const DialogTrigger = React.forwardRef<
-  HTMLButtonElement,
-  React.ButtonHTMLAttributes<HTMLButtonElement>
->(({ onClick, ...props }, ref) => {
-  const { setOpen } = useDialogContext();
-  return (
-    <button
-      ref={ref}
-      onClick={(e) => {
-        onClick?.(e);
-        setOpen(true);
-      }}
-      {...props}
-    />
-  );
-});
+const DialogTrigger = React.forwardRef<HTMLButtonElement, React.ButtonHTMLAttributes<HTMLButtonElement>>(
+  ({ onClick, ...props }, ref) => {
+    const { setOpen } = useDialogContext();
+    return (
+      <button
+        ref={ref}
+        type="button"
+        onClick={(e) => {
+          onClick?.(e);
+          setOpen(true);
+        }}
+        {...props}
+      />
+    );
+  },
+);
 DialogTrigger.displayName = "DialogTrigger";
 
 /* --- DialogOverlay --- */
-const DialogOverlay = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      "fixed inset-0 z-overlay bg-bg-overlay backdrop-blur-sm",
-      "animate-fade-up",
-      className
-    )}
-    {...props}
-  />
-));
+const DialogOverlay = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div
+      ref={ref}
+      className={cn("fixed inset-0 z-overlay bg-bg-overlay backdrop-blur-sm", "animate-fade-up", className)}
+      {...props}
+    />
+  ),
+);
 DialogOverlay.displayName = "DialogOverlay";
 
 /* --- DialogContent --- */
@@ -100,12 +91,10 @@ const dialogContentVariants = cva(
     defaultVariants: {
       size: "md",
     },
-  }
+  },
 );
 
-interface DialogContentProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof dialogContentVariants> {}
+interface DialogContentProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof dialogContentVariants> {}
 
 const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps>(
   ({ className, size, children, ...props }, ref) => {
@@ -139,6 +128,7 @@ const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps>(
         >
           {children}
           <button
+            type="button"
             onClick={() => setOpen(false)}
             className="absolute right-4 top-4 rounded-lg p-1 text-text-muted hover:text-text-primary transition-colors"
           >
@@ -147,7 +137,7 @@ const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps>(
         </div>
       </>
     );
-  }
+  },
 );
 DialogContent.displayName = "DialogContent";
 
@@ -156,20 +146,16 @@ const DialogHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivEleme
   <div className={cn("flex flex-col gap-1.5 mb-4", className)} {...props} />
 );
 
-const DialogTitle = React.forwardRef<
-  HTMLHeadingElement,
-  React.HTMLAttributes<HTMLHeadingElement>
->(({ className, ...props }, ref) => (
-  <h2 ref={ref} className={cn("text-lg font-semibold text-text-primary", className)} {...props} />
-));
+const DialogTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLHeadingElement>>(
+  ({ className, ...props }, ref) => (
+    <h2 ref={ref} className={cn("text-lg font-semibold text-text-primary", className)} {...props} />
+  ),
+);
 DialogTitle.displayName = "DialogTitle";
 
-const DialogDescription = React.forwardRef<
-  HTMLParagraphElement,
-  React.HTMLAttributes<HTMLParagraphElement>
->(({ className, ...props }, ref) => (
-  <p ref={ref} className={cn("text-sm text-text-secondary", className)} {...props} />
-));
+const DialogDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(
+  ({ className, ...props }, ref) => <p ref={ref} className={cn("text-sm text-text-secondary", className)} {...props} />,
+);
 DialogDescription.displayName = "DialogDescription";
 
 /* --- DialogFooter --- */
@@ -177,9 +163,15 @@ const DialogFooter = ({ className, ...props }: React.HTMLAttributes<HTMLDivEleme
   <div className={cn("flex items-center justify-end gap-3 mt-6", className)} {...props} />
 );
 
+export type { DialogContentProps, DialogProps };
 export {
-  Dialog, DialogTrigger, DialogContent, DialogOverlay,
-  DialogHeader, DialogTitle, DialogDescription, DialogFooter,
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogOverlay,
+  DialogTitle,
+  DialogTrigger,
   dialogContentVariants,
 };
-export type { DialogProps, DialogContentProps };

@@ -1,6 +1,6 @@
-import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { Check } from "lucide-react";
+import * as React from "react";
 import { cn } from "../../lib/utils";
 
 const checkboxVariants = cva(
@@ -27,7 +27,7 @@ const checkboxVariants = cva(
       variant: "default",
       size: "md",
     },
-  }
+  },
 );
 
 interface CheckboxProps
@@ -57,14 +57,14 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
             "pointer-events-none absolute text-white opacity-0",
             "transition-opacity duration-fast",
             props.checked || props.defaultChecked ? "opacity-100" : "",
-            size === "sm" ? "h-3 w-3" : "h-3.5 w-3.5"
+            size === "sm" ? "h-3 w-3" : "h-3.5 w-3.5",
           )}
         />
       </div>
     );
-  }
+  },
 );
 Checkbox.displayName = "Checkbox";
 
-export { Checkbox, checkboxVariants };
 export type { CheckboxProps };
+export { Checkbox, checkboxVariants };

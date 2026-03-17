@@ -1,6 +1,6 @@
-import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { ChevronDown } from "lucide-react";
+import * as React from "react";
 import { cn } from "../../lib/utils";
 
 const selectVariants = cva(
@@ -27,7 +27,7 @@ const selectVariants = cva(
       variant: "default",
       selectSize: "md",
     },
-  }
+  },
 );
 
 interface SelectProps
@@ -38,27 +38,22 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   ({ className, variant, selectSize, children, ...props }, ref) => {
     return (
       <div className="relative">
-        <select
-          ref={ref}
-          className={cn(selectVariants({ variant, selectSize, className }))}
-          {...props}
-        >
+        <select ref={ref} className={cn(selectVariants({ variant, selectSize, className }))} {...props}>
           {children}
         </select>
         <ChevronDown className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-text-muted" />
       </div>
     );
-  }
+  },
 );
 Select.displayName = "Select";
 
-const SelectOption = React.forwardRef<
-  HTMLOptionElement,
-  React.OptionHTMLAttributes<HTMLOptionElement>
->(({ className, ...props }, ref) => (
-  <option ref={ref} className={cn("bg-bg-elevated text-text-primary", className)} {...props} />
-));
+const SelectOption = React.forwardRef<HTMLOptionElement, React.OptionHTMLAttributes<HTMLOptionElement>>(
+  ({ className, ...props }, ref) => (
+    <option ref={ref} className={cn("bg-bg-elevated text-text-primary", className)} {...props} />
+  ),
+);
 SelectOption.displayName = "SelectOption";
 
-export { Select, SelectOption, selectVariants };
 export type { SelectProps };
+export { Select, SelectOption, selectVariants };

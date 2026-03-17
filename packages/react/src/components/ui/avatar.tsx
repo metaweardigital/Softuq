@@ -1,5 +1,5 @@
-import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
+import * as React from "react";
 import { cn } from "../../lib/utils";
 
 const avatarVariants = cva(
@@ -15,12 +15,10 @@ const avatarVariants = cva(
     defaultVariants: {
       size: "md",
     },
-  }
+  },
 );
 
-interface AvatarProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof avatarVariants> {
+interface AvatarProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof avatarVariants> {
   src?: string;
   alt?: string;
   fallback?: string;
@@ -31,11 +29,7 @@ const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
     const [hasError, setHasError] = React.useState(false);
 
     return (
-      <div
-        ref={ref}
-        className={cn(avatarVariants({ size, className }))}
-        {...props}
-      >
+      <div ref={ref} className={cn(avatarVariants({ size, className }))} {...props}>
         {src && !hasError ? (
           <img
             src={src}
@@ -50,9 +44,9 @@ const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
         )}
       </div>
     );
-  }
+  },
 );
 Avatar.displayName = "Avatar";
 
-export { Avatar, avatarVariants };
 export type { AvatarProps };
+export { Avatar, avatarVariants };

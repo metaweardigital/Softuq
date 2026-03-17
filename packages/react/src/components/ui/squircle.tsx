@@ -5,12 +5,7 @@ import { cn } from "../../lib/utils";
  * Generate a quintic superellipse path (n=5) for given dimensions and corner radius.
  * The equation: |x/a|^5 + |y/b|^5 = 1
  */
-function generateSquirclePath(
-  width: number,
-  height: number,
-  radius: number,
-  steps = 64
-): string {
+function generateSquirclePath(width: number, height: number, radius: number, steps = 64): string {
   const r = Math.min(radius, width / 2, height / 2);
   const n = 5; // quintic
 
@@ -28,8 +23,8 @@ function generateSquirclePath(
       const sin = Math.sin(t);
       // Superellipse: x = r * sign(cos) * |cos|^(2/n), y = r * sign(sin) * |sin|^(2/n)
       const exp = 2 / n;
-      const sx = Math.sign(cos) * Math.pow(Math.abs(cos), exp) * r;
-      const sy = Math.sign(sin) * Math.pow(Math.abs(sin), exp) * r;
+      const sx = Math.sign(cos) * Math.abs(cos) ** exp * r;
+      const sy = Math.sign(sin) * Math.abs(sin) ** exp * r;
 
       let x: number, y: number;
       switch (quadrant) {
@@ -72,11 +67,9 @@ function generateSquirclePath(
 
   if (points.length === 0) return "";
 
-  const path = points
-    .map((p, i) => `${i === 0 ? "M" : "L"}${p[0].toFixed(2)},${p[1].toFixed(2)}`)
-    .join(" ");
+  const path = points.map((p, i) => `${i === 0 ? "M" : "L"}${p[0].toFixed(2)},${p[1].toFixed(2)}`).join(" ");
 
-  return path + " Z";
+  return `${path} Z`;
 }
 
 /* --------------------------------------------------------- */
@@ -115,7 +108,7 @@ const Squircle = React.forwardRef<HTMLDivElement, SquircleProps>(
       style,
       ...props
     },
-    ref
+    ref,
   ) => {
     const containerRef = React.useRef<HTMLDivElement>(null);
     const [size, setSize] = React.useState<{ w: number; h: number }>({ w: 0, h: 0 });
@@ -127,7 +120,7 @@ const Squircle = React.forwardRef<HTMLDivElement, SquircleProps>(
         if (typeof ref === "function") ref(node);
         else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
       },
-      [ref]
+      [ref],
     );
 
     // Auto-detect size
@@ -149,17 +142,11 @@ const Squircle = React.forwardRef<HTMLDivElement, SquircleProps>(
     const hasSize = w > 0 && h > 0;
 
     const clipPath = hasSize ? generateSquirclePath(w, h, radius, smoothness) : "";
-    const borderPath = hasSize && borderWidth > 0
-      ? generateSquirclePath(w, h, radius, smoothness)
-      : "";
-    const innerClipPath = hasSize && borderWidth > 0
-      ? generateSquirclePath(
-          w - borderWidth * 2,
-          h - borderWidth * 2,
-          Math.max(0, radius - borderWidth),
-          smoothness
-        )
-      : "";
+    const borderPath = hasSize && borderWidth > 0 ? generateSquirclePath(w, h, radius, smoothness) : "";
+    const innerClipPath =
+      hasSize && borderWidth > 0
+        ? generateSquirclePath(w - borderWidth * 2, h - borderWidth * 2, Math.max(0, radius - borderWidth), smoothness)
+        : "";
 
     return (
       <div
@@ -184,18 +171,9 @@ const Squircle = React.forwardRef<HTMLDivElement, SquircleProps>(
             aria-hidden="true"
           >
             {/* Fill shape */}
-            {fill !== "transparent" && (
-              <path d={clipPath} fill={fill} />
-            )}
+            {fill !== "transparent" && <path d={clipPath} fill={fill} />}
             {/* Border */}
-            {borderWidth > 0 && (
-              <path
-                d={borderPath}
-                fill={borderColor}
-                clipRule="evenodd"
-                fillRule="evenodd"
-              />
-            )}
+            {borderWidth > 0 && <path d={borderPath} fill={borderColor} clipRule="evenodd" fillRule="evenodd" />}
             {borderWidth > 0 && (
               <path
                 d={innerClipPath}
@@ -223,24 +201,19 @@ const Squircle = React.forwardRef<HTMLDivElement, SquircleProps>(
         </div>
       </div>
     );
-  }
+  },
 );
 Squircle.displayName = "Squircle";
 
 /* --------------------------------------------------------- */
 /* useSquirclePath hook — for custom usage                   */
 /* --------------------------------------------------------- */
-function useSquirclePath(
-  width: number,
-  height: number,
-  radius: number,
-  smoothness = 64
-): string {
+function useSquirclePath(width: number, height: number, radius: number, smoothness = 64): string {
   return React.useMemo(
     () => generateSquirclePath(width, height, radius, smoothness),
-    [width, height, radius, smoothness]
+    [width, height, radius, smoothness],
   );
 }
 
-export { Squircle, useSquirclePath, generateSquirclePath };
 export type { SquircleProps };
+export { generateSquirclePath, Squircle, useSquirclePath };

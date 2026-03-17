@@ -1,5 +1,5 @@
-import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
+import * as React from "react";
 import { cn } from "../../lib/utils";
 
 /* --- Tabs Root --- */
@@ -32,7 +32,7 @@ const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
         setActiveTabState(tab);
         onValueChange?.(tab);
       },
-      [onValueChange]
+      [onValueChange],
     );
 
     return (
@@ -42,7 +42,7 @@ const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
         </div>
       </TabsContext.Provider>
     );
-  }
+  },
 );
 Tabs.displayName = "Tabs";
 
@@ -65,23 +65,12 @@ const tabsListVariants = cva("inline-flex items-center", {
   },
 });
 
-interface TabsListProps
-  extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof tabsListVariants> {}
+interface TabsListProps extends React.HTMLAttributes<HTMLDivElement>, VariantProps<typeof tabsListVariants> {}
 
-const TabsList = React.forwardRef<HTMLDivElement, TabsListProps>(
-  ({ className, size, ...props }, ref) => {
-    const { variant } = useTabsContext();
-    return (
-      <div
-        ref={ref}
-        role="tablist"
-        className={cn(tabsListVariants({ variant, size, className }))}
-        {...props}
-      />
-    );
-  }
-);
+const TabsList = React.forwardRef<HTMLDivElement, TabsListProps>(({ className, size, ...props }, ref) => {
+  const { variant } = useTabsContext();
+  return <div ref={ref} role="tablist" className={cn(tabsListVariants({ variant, size, className }))} {...props} />;
+});
 TabsList.displayName = "TabsList";
 
 /* --- TabsTrigger --- */
@@ -100,21 +89,19 @@ const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
     const variantClasses = {
       default: cn(
         "rounded-xl px-3 py-1.5 text-sm",
-        isActive
-          ? "bg-bg-card text-text-primary shadow-sm"
-          : "text-text-muted hover:text-text-secondary"
+        isActive ? "bg-bg-card text-text-primary shadow-sm" : "text-text-muted hover:text-text-secondary",
       ),
       pills: cn(
         "rounded-full px-4 py-1.5 text-sm border",
         isActive
           ? "bg-accent text-white border-accent"
-          : "bg-transparent text-text-muted border-border-subtle hover:text-text-secondary"
+          : "bg-transparent text-text-muted border-border-subtle hover:text-text-secondary",
       ),
       underline: cn(
         "px-4 py-2 text-sm border-b-2 -mb-px",
         isActive
           ? "border-accent text-accent-text"
-          : "border-transparent text-text-muted hover:text-text-secondary hover:border-border-default"
+          : "border-transparent text-text-muted hover:text-text-secondary hover:border-border-default",
       ),
     };
 
@@ -130,7 +117,7 @@ const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
         {children}
       </button>
     );
-  }
+  },
 );
 TabsTrigger.displayName = "TabsTrigger";
 
@@ -139,22 +126,13 @@ interface TabsContentProps extends React.HTMLAttributes<HTMLDivElement> {
   value: string;
 }
 
-const TabsContent = React.forwardRef<HTMLDivElement, TabsContentProps>(
-  ({ className, value, ...props }, ref) => {
-    const { activeTab } = useTabsContext();
-    if (activeTab !== value) return null;
+const TabsContent = React.forwardRef<HTMLDivElement, TabsContentProps>(({ className, value, ...props }, ref) => {
+  const { activeTab } = useTabsContext();
+  if (activeTab !== value) return null;
 
-    return (
-      <div
-        ref={ref}
-        role="tabpanel"
-        className={cn("animate-fade-up", className)}
-        {...props}
-      />
-    );
-  }
-);
+  return <div ref={ref} role="tabpanel" className={cn("animate-fade-up", className)} {...props} />;
+});
 TabsContent.displayName = "TabsContent";
 
-export { Tabs, TabsList, TabsTrigger, TabsContent };
-export type { TabsProps, TabsListProps, TabsTriggerProps, TabsContentProps };
+export type { TabsContentProps, TabsListProps, TabsProps, TabsTriggerProps };
+export { Tabs, TabsContent, TabsList, TabsTrigger };

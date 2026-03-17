@@ -1,31 +1,7 @@
+import { AlertCircle, AlertTriangle, CheckCircle2, Info, Terminal, X } from "lucide-react";
 import * as React from "react";
-import { cva, type VariantProps } from "class-variance-authority";
-import { X, Terminal, Info, CheckCircle2, AlertTriangle, AlertCircle } from "lucide-react";
 import { cn } from "../../lib/utils";
-import { Alert, AlertTitle, AlertDescription } from "./alert";
-
-const toastVariants = cva(
-  [
-    "pointer-events-auto w-full max-w-sm rounded-2xl border border-border-subtle bg-bg-card p-4 pl-5 shadow-neu-floating",
-    "relative before:absolute before:left-0 before:top-3 before:bottom-3 before:w-[3px] before:rounded-full",
-    "animate-slide-in-right",
-    "transition-all duration-normal ease-smooth",
-  ].join(" "),
-  {
-    variants: {
-      variant: {
-        default: "before:bg-accent",
-        info: "before:bg-accent",
-        success: "before:bg-success",
-        warning: "before:bg-warning",
-        error: "before:bg-destructive",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-    },
-  }
-);
+import { Alert, AlertDescription, AlertTitle } from "./alert";
 
 interface Toast {
   id: string;
@@ -62,7 +38,9 @@ interface ToastProviderProps {
 
 function ToastProvider({ children, position = "center" }: ToastProviderProps) {
   const [toasts, setToasts] = React.useState<(Toast & { exiting?: boolean })[]>([]);
-  const timersRef = React.useRef<Map<string, { timer: ReturnType<typeof setTimeout>; remaining: number; start: number }>>(new Map());
+  const timersRef = React.useRef<
+    Map<string, { timer: ReturnType<typeof setTimeout>; remaining: number; start: number }>
+  >(new Map());
 
   const dismissToast = React.useCallback((id: string) => {
     timersRef.current.delete(id);
@@ -79,21 +57,27 @@ function ToastProvider({ children, position = "center" }: ToastProviderProps) {
     entry.remaining -= Date.now() - entry.start;
   }, []);
 
-  const resumeToast = React.useCallback((id: string) => {
-    const entry = timersRef.current.get(id);
-    if (!entry || entry.remaining <= 0) return;
-    entry.start = Date.now();
-    entry.timer = setTimeout(() => dismissToast(id), entry.remaining);
-  }, [dismissToast]);
+  const resumeToast = React.useCallback(
+    (id: string) => {
+      const entry = timersRef.current.get(id);
+      if (!entry || entry.remaining <= 0) return;
+      entry.start = Date.now();
+      entry.timer = setTimeout(() => dismissToast(id), entry.remaining);
+    },
+    [dismissToast],
+  );
 
-  const addToast = React.useCallback((toast: Omit<Toast, "id">) => {
-    const id = Math.random().toString(36).slice(2);
-    const duration = toast.duration || 4000;
-    setToasts((prev) => [...prev, { ...toast, id }]);
+  const addToast = React.useCallback(
+    (toast: Omit<Toast, "id">) => {
+      const id = Math.random().toString(36).slice(2);
+      const duration = toast.duration || 4000;
+      setToasts((prev) => [...prev, { ...toast, id }]);
 
-    const timer = setTimeout(() => dismissToast(id), duration);
-    timersRef.current.set(id, { timer, remaining: duration, start: Date.now() });
-  }, [dismissToast]);
+      const timer = setTimeout(() => dismissToast(id), duration);
+      timersRef.current.set(id, { timer, remaining: duration, start: Date.now() });
+    },
+    [dismissToast],
+  );
 
   const removeToast = dismissToast;
 
@@ -108,7 +92,7 @@ function ToastProvider({ children, position = "center" }: ToastProviderProps) {
 }
 
 /* --- ToastItem --- */
-interface ToastItemProps extends VariantProps<typeof toastVariants> {
+interface ToastItemProps {
   toast: Toast & { exiting?: boolean };
   onClose: () => void;
 }
@@ -160,10 +144,7 @@ function ToastItem({ toast, onClose }: ToastItemProps) {
 
   return (
     <div
-      className={cn(
-        "transition-all duration-300 ease-smooth",
-        clipOverflow ? "overflow-hidden" : "overflow-visible"
-      )}
+      className={cn("transition-all duration-300 ease-smooth", clipOverflow ? "overflow-hidden" : "overflow-visible")}
       style={{
         maxHeight: toast.exiting ? 0 : (height ?? 200) + 16,
         opacity: toast.exiting ? 0 : 1,
@@ -179,13 +160,14 @@ function ToastItem({ toast, onClose }: ToastItemProps) {
           className={cn(
             "pointer-events-auto w-full max-w-sm shadow-neu-floating",
             "text-xs pr-10",
-            !toast.exiting && enterAnimationMap[position]
+            !toast.exiting && enterAnimationMap[position],
           )}
         >
           <Icon />
           {toast.title && <AlertTitle className="truncate">{toast.title}</AlertTitle>}
           {toast.description && <AlertDescription className="line-clamp-2">{toast.description}</AlertDescription>}
           <button
+            type="button"
             onClick={onClose}
             className="absolute right-3 top-1/2 -translate-y-1/2 shrink-0 rounded-lg p-0.5 text-text-muted hover:text-text-primary transition-colors"
           >
@@ -211,15 +193,11 @@ function ToastViewport() {
   return (
     <div className={cn("z-toast flex flex-col gap-2 pointer-events-none", positionClasses[position])}>
       {toasts.map((toast) => (
-        <ToastItem
-          key={toast.id}
-          toast={toast}
-          onClose={() => removeToast(toast.id)}
-        />
+        <ToastItem key={toast.id} toast={toast} onClose={() => removeToast(toast.id)} />
       ))}
     </div>
   );
 }
 
-export { ToastProvider, ToastItem, useToast, toastVariants };
-export type { Toast, ToastItemProps };
+export type { Toast, ToastItemProps, ToastPosition };
+export { ToastItem, ToastProvider, useToast };

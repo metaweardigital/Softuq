@@ -1,5 +1,5 @@
-import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
+import * as React from "react";
 import { cn } from "../../lib/utils";
 
 const radioVariants = cva(
@@ -21,7 +21,7 @@ const radioVariants = cva(
     defaultVariants: {
       size: "md",
     },
-  }
+  },
 );
 
 interface RadioGroupProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -41,17 +41,13 @@ const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
       <div
         ref={ref}
         role="radiogroup"
-        className={cn(
-          "flex",
-          orientation === "vertical" ? "flex-col gap-3" : "flex-row gap-4",
-          className
-        )}
+        className={cn("flex", orientation === "vertical" ? "flex-col gap-3" : "flex-row gap-4", className)}
         {...props}
       >
         {children}
       </div>
     </RadioGroupContext.Provider>
-  )
+  ),
 );
 RadioGroup.displayName = "RadioGroup";
 
@@ -80,14 +76,14 @@ const RadioGroupItem = React.forwardRef<HTMLInputElement, RadioGroupItemProps>(
           className={cn(
             "pointer-events-none absolute rounded-full bg-white transition-transform duration-fast ease-bounce",
             value === itemValue ? "scale-100" : "scale-0",
-            size === "sm" ? "h-1.5 w-1.5" : "h-2 w-2"
+            size === "sm" ? "h-1.5 w-1.5" : "h-2 w-2",
           )}
         />
       </div>
     );
-  }
+  },
 );
 RadioGroupItem.displayName = "RadioGroupItem";
 
+export type { RadioGroupItemProps, RadioGroupProps };
 export { RadioGroup, RadioGroupItem, radioVariants };
-export type { RadioGroupProps, RadioGroupItemProps };

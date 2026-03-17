@@ -1,5 +1,5 @@
-import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
+import * as React from "react";
 import { cn } from "../../lib/utils";
 
 const toggleVariants = cva("", {
@@ -27,9 +27,7 @@ const Toggle = React.forwardRef<HTMLButtonElement, ToggleProps>(
     const trackW = isSmall ? "w-8" : "w-11";
     const trackH = isSmall ? "h-4" : "h-6";
     const thumbSize = isSmall ? "h-3 w-3" : "h-5 w-5";
-    const thumbTranslate = checked
-      ? isSmall ? "translate-x-4" : "translate-x-5"
-      : "translate-x-0";
+    const thumbTranslate = checked ? (isSmall ? "translate-x-4" : "translate-x-5") : "translate-x-0";
 
     return (
       <button
@@ -46,7 +44,7 @@ const Toggle = React.forwardRef<HTMLButtonElement, ToggleProps>(
           trackW,
           trackH,
           checked ? "bg-accent" : "bg-bg-input",
-          className
+          className,
         )}
         onClick={() => onCheckedChange?.(!checked)}
         {...props}
@@ -56,14 +54,14 @@ const Toggle = React.forwardRef<HTMLButtonElement, ToggleProps>(
             "pointer-events-none rounded-full bg-white shadow-sm",
             "transition-transform duration-normal ease-bounce",
             thumbSize,
-            thumbTranslate
+            thumbTranslate,
           )}
         />
       </button>
     );
-  }
+  },
 );
 Toggle.displayName = "Toggle";
 
-export { Toggle, toggleVariants };
 export type { ToggleProps };
+export { Toggle, toggleVariants };
