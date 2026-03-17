@@ -1,4 +1,5 @@
 "use client";
+import { colors } from "@designystem/tokens";
 import * as React from "react";
 
 /* ============================================
@@ -14,26 +15,7 @@ type FontPreset = "system" | "inter" | "geist";
    Palette presets — gray scale tinting
    ============================================ */
 const PALETTE_PRESETS: Record<PalettePreset, Record<string, string>> = {
-  neutral: {
-    "--gray-50": "oklch(0.985 0 0)",
-    "--gray-100": "oklch(0.97 0 0)",
-    "--gray-150": "oklch(0.946 0 0)",
-    "--gray-200": "oklch(0.922 0 0)",
-    "--gray-250": "oklch(0.87 0 0)",
-    "--gray-300": "oklch(0.808 0 0)",
-    "--gray-400": "oklch(0.715 0 0)",
-    "--gray-500": "oklch(0.633 0 0)",
-    "--gray-600": "oklch(0.551 0.023 264.37)",
-    "--gray-700": "oklch(0.45 0 0)",
-    "--gray-750": "oklch(0.409 0 0)",
-    "--gray-800": "oklch(0.321 0 0)",
-    "--gray-850": "oklch(0.264 0 0)",
-    "--gray-900": "oklch(0.218 0 0)",
-    "--gray-920": "oklch(0.191 0 0)",
-    "--gray-940": "oklch(0.178 0 0)",
-    "--gray-960": "oklch(0.145 0 0)",
-    "--gray-980": "oklch(0.134 0 0)",
-  },
+  neutral: Object.fromEntries(Object.entries(colors.gray).map(([shade, value]) => [`--gray-${shade}`, value])),
   zinc: {
     "--gray-50": "oklch(0.985 0.002 240)",
     "--gray-100": "oklch(0.967 0.003 264.54)",
@@ -139,55 +121,25 @@ const PALETTE_PRESETS: Record<PalettePreset, Record<string, string>> = {
 /* ============================================
    Accent presets — brand color
    ============================================ */
+function accentFrom(palette: keyof typeof colors) {
+  const p = colors[palette];
+  return {
+    "--accent": p[500],
+    "--accent-hover": p[400],
+    "--accent-muted": p[600],
+    "--accent-text": p[400],
+  };
+}
+
 const ACCENT_PRESETS: Record<AccentPreset, Record<string, string>> = {
-  blue: {
-    "--accent": "oklch(0.623 0.188 259.82)",
-    "--accent-hover": "oklch(0.714 0.143 254.63)",
-    "--accent-muted": "oklch(0.546 0.215 262.89)",
-    "--accent-text": "oklch(0.714 0.143 254.63)",
-  },
-  violet: {
-    "--accent": "oklch(0.606 0.219 292.72)",
-    "--accent-hover": "oklch(0.709 0.159 293.53)",
-    "--accent-muted": "oklch(0.541 0.247 293.01)",
-    "--accent-text": "oklch(0.709 0.159 293.53)",
-  },
-  emerald: {
-    "--accent": "oklch(0.696 0.149 162.51)",
-    "--accent-hover": "oklch(0.773 0.153 163.25)",
-    "--accent-muted": "oklch(0.596 0.127 163.25)",
-    "--accent-text": "oklch(0.773 0.153 163.25)",
-  },
-  amber: {
-    "--accent": "oklch(0.769 0.165 70.08)",
-    "--accent-hover": "oklch(0.837 0.164 84.43)",
-    "--accent-muted": "oklch(0.666 0.157 58.31)",
-    "--accent-text": "oklch(0.837 0.164 84.43)",
-  },
-  red: {
-    "--accent": "oklch(0.637 0.208 25.32)",
-    "--accent-hover": "oklch(0.711 0.166 22.2)",
-    "--accent-muted": "oklch(0.577 0.215 27.32)",
-    "--accent-text": "oklch(0.711 0.166 22.2)",
-  },
-  rose: {
-    "--accent": "oklch(0.645 0.196 12.2)",
-    "--accent-hover": "oklch(0.72 0.15 10.5)",
-    "--accent-muted": "oklch(0.58 0.22 14)",
-    "--accent-text": "oklch(0.72 0.15 10.5)",
-  },
-  cyan: {
-    "--accent": "oklch(0.715 0.143 194.77)",
-    "--accent-hover": "oklch(0.789 0.109 194.77)",
-    "--accent-muted": "oklch(0.609 0.16 194.77)",
-    "--accent-text": "oklch(0.789 0.109 194.77)",
-  },
-  orange: {
-    "--accent": "oklch(0.705 0.175 47.6)",
-    "--accent-hover": "oklch(0.78 0.145 55)",
-    "--accent-muted": "oklch(0.63 0.19 41)",
-    "--accent-text": "oklch(0.78 0.145 55)",
-  },
+  blue: accentFrom("blue"),
+  violet: accentFrom("violet"),
+  emerald: accentFrom("emerald"),
+  amber: accentFrom("amber"),
+  red: accentFrom("red"),
+  rose: accentFrom("rose"),
+  cyan: accentFrom("cyan"),
+  orange: accentFrom("orange"),
 };
 
 /* ============================================

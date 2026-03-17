@@ -301,6 +301,160 @@ export default function ComponentPreview() {
           <ThemeSidebar theme={theme} toggleTheme={toggleTheme} />
 
           <main className="ml-48 max-w-5xl px-8 py-10 space-y-12">
+            {/* Colors */}
+            <Section title="Colors">
+              <div className="space-y-6">
+                <p className="text-sm text-text-secondary">All colors in OKLCH. Palette & accent change via sidebar.</p>
+                {[
+                  {
+                    name: "Gray",
+                    prefix: "--gray",
+                    shades: [
+                      "50",
+                      "100",
+                      "200",
+                      "300",
+                      "400",
+                      "500",
+                      "600",
+                      "700",
+                      "800",
+                      "900",
+                      "920",
+                      "940",
+                      "960",
+                      "980",
+                    ],
+                  },
+                  {
+                    name: "Blue",
+                    prefix: "--blue",
+                    shades: ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900"],
+                  },
+                  {
+                    name: "Red",
+                    prefix: "--red",
+                    shades: ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900"],
+                  },
+                  {
+                    name: "Green",
+                    prefix: "--green",
+                    shades: ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900"],
+                  },
+                  {
+                    name: "Amber",
+                    prefix: "--amber",
+                    shades: ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900"],
+                  },
+                  {
+                    name: "Emerald",
+                    prefix: "--emerald",
+                    shades: ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900"],
+                  },
+                  {
+                    name: "Violet",
+                    prefix: "--violet",
+                    shades: ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900"],
+                  },
+                ].map((palette) => (
+                  <div key={palette.name} className="space-y-1.5">
+                    <p className="text-xs font-medium text-text-muted uppercase tracking-wide">{palette.name}</p>
+                    <div className="flex gap-1">
+                      {palette.shades.map((shade) => (
+                        <div key={shade} className="flex-1 flex flex-col items-center gap-0.5">
+                          <div
+                            className="w-full aspect-square rounded-[var(--ds-radius-checkbox)] border border-border-subtle"
+                            style={{ backgroundColor: `var(${palette.prefix}-${shade})` }}
+                          />
+                          <span className="text-[9px] text-text-muted">{shade}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+                <Separator />
+                <p className="text-xs font-medium text-text-muted uppercase tracking-wide">Semantic</p>
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    { label: "accent", var: "--accent" },
+                    { label: "accent-hover", var: "--accent-hover" },
+                    { label: "accent-muted", var: "--accent-muted" },
+                    { label: "destructive", var: "--destructive" },
+                    { label: "success", var: "--success" },
+                    { label: "warning", var: "--warning" },
+                  ].map((token) => (
+                    <div key={token.label} className="flex items-center gap-2">
+                      <div
+                        className="h-6 w-6 rounded-[var(--ds-radius-checkbox)] border border-border-subtle"
+                        style={{ backgroundColor: `var(${token.var})` }}
+                      />
+                      <span className="text-xs text-text-secondary">{token.label}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Section>
+
+            {/* Theming Overview */}
+            <Section title="Theming">
+              <div className="max-w-2xl space-y-4">
+                <p className="text-sm text-text-secondary">
+                  5 theme axes controlled via sidebar. All values are CSS custom properties on{" "}
+                  <code className="text-xs bg-bg-elevated px-1.5 py-0.5 rounded-md text-text-primary">:root</code> — no
+                  re-renders.
+                </p>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                  <Card>
+                    <CardContent className="pt-4">
+                      <p className="text-xs text-text-muted uppercase tracking-wide">Palette</p>
+                      <p className="text-sm font-medium mt-1">Gray tinting</p>
+                      <p className="text-xs text-text-secondary mt-0.5">6 options</p>
+                    </CardContent>
+                  </Card>
+                  <Card>
+                    <CardContent className="pt-4">
+                      <p className="text-xs text-text-muted uppercase tracking-wide">Accent</p>
+                      <p className="text-sm font-medium mt-1">Brand color</p>
+                      <p className="text-xs text-text-secondary mt-0.5">8 options</p>
+                    </CardContent>
+                  </Card>
+                  <Card>
+                    <CardContent className="pt-4">
+                      <p className="text-xs text-text-muted uppercase tracking-wide">Radius</p>
+                      <p className="text-sm font-medium mt-1">Border radius</p>
+                      <p className="text-xs text-text-secondary mt-0.5">5 options</p>
+                    </CardContent>
+                  </Card>
+                  <Card>
+                    <CardContent className="pt-4">
+                      <p className="text-xs text-text-muted uppercase tracking-wide">Spacing</p>
+                      <p className="text-sm font-medium mt-1">Density</p>
+                      <p className="text-xs text-text-secondary mt-0.5">3 options</p>
+                    </CardContent>
+                  </Card>
+                  <Card>
+                    <CardContent className="pt-4">
+                      <p className="text-xs text-text-muted uppercase tracking-wide">Font</p>
+                      <p className="text-sm font-medium mt-1">Typeface</p>
+                      <p className="text-xs text-text-secondary mt-0.5">3 options</p>
+                    </CardContent>
+                  </Card>
+                  <Card>
+                    <CardContent className="pt-4">
+                      <p className="text-xs text-text-muted uppercase tracking-wide">Mode</p>
+                      <p className="text-sm font-medium mt-1">Dark / Light</p>
+                      <p className="text-xs text-text-secondary mt-0.5">data-theme</p>
+                    </CardContent>
+                  </Card>
+                </div>
+                <div className="bg-bg-elevated border border-border-subtle rounded-[var(--ds-radius-card)] p-4">
+                  <p className="text-xs font-mono text-text-secondary">
+                    {'<DesignYstemProvider palette="zinc" accent="violet" radius="lg" spacing="md" font="geist">'}
+                  </p>
+                </div>
+              </div>
+            </Section>
+
             {/* Accordion */}
             <Section title="Accordion">
               <div className="max-w-2xl space-y-8">
@@ -659,6 +813,33 @@ export default function ComponentPreview() {
               <div className="max-w-2xl space-y-2">
                 <Label>Textarea (Error)</Label>
                 <Textarea variant="error" placeholder="Invalid content..." />
+              </div>
+            </Section>
+
+            {/* Typography */}
+            <Section title="Typography">
+              <div className="max-w-2xl space-y-4">
+                <p className="text-xs font-medium text-text-muted uppercase tracking-wide">Font scale</p>
+                <div className="space-y-2">
+                  <p className="text-4xl font-bold tracking-tight">Heading 4XL</p>
+                  <p className="text-3xl font-bold tracking-tight">Heading 3XL</p>
+                  <p className="text-2xl font-semibold tracking-tight">Heading 2XL</p>
+                  <p className="text-xl font-semibold">Heading XL</p>
+                  <p className="text-lg font-medium">Text Large</p>
+                  <p className="text-base">Text Base — The quick brown fox jumps over the lazy dog.</p>
+                  <p className="text-sm text-text-secondary">
+                    Text Small — Secondary body text for descriptions and labels.
+                  </p>
+                  <p className="text-xs text-text-muted">Text XS — Fine print, captions, and metadata.</p>
+                </div>
+                <Separator />
+                <p className="text-xs font-medium text-text-muted uppercase tracking-wide">Monospace</p>
+                <div className="space-y-1">
+                  <p className="font-mono text-sm">const theme = useDesignYstem();</p>
+                  <p className="font-mono text-xs text-text-secondary">
+                    {'<DesignYstemProvider font="geist" accent="violet">'}
+                  </p>
+                </div>
               </div>
             </Section>
 
