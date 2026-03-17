@@ -36,7 +36,7 @@ function Tooltip({ content, side = "top", delay = 300, children, className }: To
           role="tooltip"
           className={cn(
             "absolute z-popover whitespace-nowrap animate-fade-up",
-            "rounded-lg bg-bg-elevated border border-border-subtle px-3 py-1.5",
+            "rounded-[var(--ds-radius-tooltip)] bg-bg-elevated border border-border-subtle px-3 py-1.5",
             "text-xs text-text-primary shadow-md",
             positionClasses[side],
             className,

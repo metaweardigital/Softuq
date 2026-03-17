@@ -6,7 +6,8 @@ const accordionVariants = cva("w-full", {
   variants: {
     variant: {
       default: "divide-y divide-border-subtle",
-      bordered: "divide-y divide-border-subtle border border-border-subtle rounded-2xl overflow-hidden",
+      bordered:
+        "divide-y divide-border-subtle border border-border-subtle rounded-[var(--ds-radius-card)] overflow-hidden",
     },
   },
   defaultVariants: {
@@ -138,16 +139,15 @@ const AccordionContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<H
       isOpen ? "expanded" : "collapsed",
     );
 
+    // biome-ignore lint/correctness/useExhaustiveDependencies: animState intentionally excluded to prevent infinite loop
     React.useEffect(() => {
       if (isOpen) {
-        // Mount first, then animate open in next frames
         setShouldRender(true);
         setAnimState("expanding");
       } else if (animState === "expanded" || animState === "expanding") {
-        // Start closing — set explicit height first, then collapse to 0
         setAnimState("collapsing");
       }
-    }, [isOpen, animState]);
+    }, [isOpen]);
 
     // Handle expanding: measure → set height 0 → next frame set real height
     React.useEffect(() => {

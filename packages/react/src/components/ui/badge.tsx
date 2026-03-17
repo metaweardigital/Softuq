@@ -13,8 +13,8 @@ const badgeVariants = cva("inline-flex items-center font-medium transition-color
       warning: "bg-warning-muted text-warning-text",
     },
     size: {
-      sm: "px-2 py-0.5 text-xs rounded-md",
-      md: "px-2.5 py-0.5 text-xs rounded-lg",
+      sm: "px-2 py-0.5 text-xs rounded-[var(--ds-radius-button)]",
+      md: "px-2.5 py-0.5 text-xs rounded-[var(--ds-radius-button)]",
     },
   },
   defaultVariants: {

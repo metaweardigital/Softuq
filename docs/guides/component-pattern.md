@@ -54,3 +54,31 @@ export type { ComponentProps };
 - Spacing on 4px grid
 - All interactive elements need focus-visible ring
 - Disabled state: `disabled:pointer-events-none disabled:opacity-50`
+
+## Theming: Radius & Spacing
+
+Components use CSS custom properties for radius and spacing, controlled globally via `<DesignYstemProvider>`:
+
+```tsx
+<DesignYstemProvider radius="lg" spacing="default">
+  <App />
+</DesignYstemProvider>
+```
+
+**Radius presets:** `none` | `sm` | `md` | `lg` | `full`
+**Spacing presets:** `compact` | `default` | `spacious`
+
+Components reference variables like `rounded-[var(--ds-radius-card)]` and `p-[var(--ds-spacing-card)]` instead of hardcoded values.
+
+### Per-component override
+
+Don't add extra `radius`/`spacing` props. Use `className` override instead — `cn()` with `tailwind-merge` handles conflicts:
+
+```tsx
+{/* Global preset is lg, but this alert uses sm radius + compact padding */}
+<Alert className="rounded-lg p-3">
+  ...
+</Alert>
+```
+
+This is the shadcn/ui convention: global theming via provider, local override via className.

@@ -79,6 +79,23 @@
   /* Focus ring */
   --ring-color: var(--blue-500);
   --ring-offset: var(--gray-980);
+
+  /* Component radius (defaults = lg preset) */
+  --ds-radius-button: 16px;
+  --ds-radius-input: 16px;
+  --ds-radius-card: 16px;
+  --ds-radius-checkbox: 8px;
+  --ds-radius-tooltip: 12px;
+  --ds-radius-avatar: 9999px;
+
+  /* Component spacing (defaults = default preset) */
+  --ds-spacing-card: 24px;
+  --ds-spacing-card-sm: 16px;
+  --ds-spacing-input-x: 16px;
+  --ds-spacing-input-y: 12px;
+  --ds-spacing-button-sm: 12px;
+  --ds-spacing-button-md: 16px;
+  --ds-spacing-button-lg: 24px;
 }
 
 /* --- Light Mode --- */

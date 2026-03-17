@@ -5,7 +5,7 @@ import { cn } from "../../lib/utils";
 const inputVariants = cva(
   [
     "flex w-full bg-bg-input text-text-primary placeholder:text-text-muted",
-    "border border-border-subtle rounded-2xl",
+    "border border-border-subtle rounded-[var(--ds-radius-input)]",
     "transition-all duration-normal ease-soft",
     "focus:outline-none focus:ring-2 focus:ring-ring/20 focus:border-accent",
     "disabled:cursor-not-allowed disabled:opacity-50",
@@ -19,8 +19,8 @@ const inputVariants = cva(
         success: "border-success focus:ring-success/20 focus:border-success",
       },
       inputSize: {
-        sm: "h-8 px-3 text-xs",
-        md: "h-10 px-4 text-sm",
+        sm: "h-8 px-[var(--ds-spacing-button-sm)] text-xs",
+        md: "h-10 px-[var(--ds-spacing-input-x)] text-sm",
       },
     },
     defaultVariants: {

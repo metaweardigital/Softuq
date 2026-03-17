@@ -169,7 +169,7 @@ function ToastItem({ toast, onClose }: ToastItemProps) {
           <button
             type="button"
             onClick={onClose}
-            className="absolute right-3 top-1/2 -translate-y-1/2 shrink-0 rounded-lg p-0.5 text-text-muted hover:text-text-primary transition-colors"
+            className="absolute right-3 top-1/2 -translate-y-1/2 shrink-0 rounded-[var(--ds-radius-tooltip)] p-0.5 text-text-muted hover:text-text-primary transition-colors"
           >
             <X className="h-4 w-4" />
           </button>

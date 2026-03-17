@@ -75,15 +75,15 @@ DialogOverlay.displayName = "DialogOverlay";
 const dialogContentVariants = cva(
   [
     "fixed left-1/2 top-1/2 z-modal -translate-x-1/2 -translate-y-1/2",
-    "w-full bg-bg-card border border-border-subtle rounded-3xl shadow-neu-floating",
+    "w-full bg-bg-card border border-border-subtle rounded-[var(--ds-radius-card)] shadow-neu-floating",
     "animate-scale-in",
     "focus:outline-none",
   ].join(" "),
   {
     variants: {
       size: {
-        sm: "max-w-sm p-6",
-        md: "max-w-lg p-6",
+        sm: "max-w-sm p-[var(--ds-spacing-card)]",
+        md: "max-w-lg p-[var(--ds-spacing-card)]",
         lg: "max-w-2xl p-8",
         fullscreen: "max-w-none h-screen w-screen rounded-none p-8",
       },
@@ -130,7 +130,7 @@ const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps>(
           <button
             type="button"
             onClick={() => setOpen(false)}
-            className="absolute right-4 top-4 rounded-lg p-1 text-text-muted hover:text-text-primary transition-colors"
+            className="absolute right-4 top-4 rounded-[var(--ds-radius-tooltip)] p-1 text-text-muted hover:text-text-primary transition-colors"
           >
             <X className="h-4 w-4" />
           </button>

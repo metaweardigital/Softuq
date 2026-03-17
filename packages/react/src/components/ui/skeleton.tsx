@@ -7,9 +7,9 @@ const skeletonVariants = cva(
   {
     variants: {
       variant: {
-        default: "rounded-xl",
+        default: "rounded-[var(--ds-radius-input)]",
         circle: "rounded-full",
-        text: "rounded-md h-4",
+        text: "rounded-[var(--ds-radius-checkbox)] h-4",
       },
     },
     defaultVariants: {
