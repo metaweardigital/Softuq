@@ -1,5 +1,6 @@
-// Components
+// Provider
 
+// Components — Navigation
 export {
   Accordion,
   AccordionContent,
@@ -9,9 +10,12 @@ export {
   AccordionTrigger,
   accordionVariants,
 } from "./components/ui/accordion";
+// Components — Feedback
 export { Alert, AlertDescription, type AlertProps, AlertTitle, alertVariants } from "./components/ui/alert";
+// Components — Display
 export { Avatar, type AvatarProps, avatarVariants } from "./components/ui/avatar";
 export { Badge, type BadgeProps, badgeVariants } from "./components/ui/badge";
+// Components — Form
 export { Button, type ButtonProps, buttonVariants } from "./components/ui/button";
 export {
   Card,
@@ -24,6 +28,7 @@ export {
   cardVariants,
 } from "./components/ui/card";
 export { Checkbox, type CheckboxProps, checkboxVariants } from "./components/ui/checkbox";
+// Components — Overlay
 export {
   Dialog,
   DialogContent,
@@ -51,6 +56,7 @@ export { Select, SelectOption, type SelectProps, selectVariants } from "./compon
 export { Separator, type SeparatorProps } from "./components/ui/separator";
 export { Sheet, type SheetProps, sheetVariants } from "./components/ui/sheet";
 export { Skeleton, type SkeletonProps, skeletonVariants } from "./components/ui/skeleton";
+// Components — Misc
 export { generateSquirclePath, Squircle, type SquircleProps, useSquirclePath } from "./components/ui/squircle";
 export {
   Tabs,
@@ -63,11 +69,18 @@ export {
   type TabsTriggerProps,
 } from "./components/ui/tabs";
 export { Textarea, type TextareaProps, textareaVariants } from "./components/ui/textarea";
-export { type Toast, ToastItem, type ToastPosition, ToastProvider, useToast } from "./components/ui/toast";
+export {
+  type Toast,
+  ToastItem,
+  type ToastItemProps,
+  type ToastPosition,
+  ToastProvider,
+  useToast,
+} from "./components/ui/toast";
 export { Toggle, type ToggleProps, toggleVariants } from "./components/ui/toggle";
 export { Tooltip, type TooltipProps } from "./components/ui/tooltip";
-// Provider
 export {
+  type AccentPreset,
   DesignYstemProvider,
   type DesignYstemProviderProps,
   type PalettePreset,
@@ -76,6 +89,5 @@ export {
   useDesignYstem,
 } from "./designystem-provider";
 export { generateSquirclePath as squirclePath, useSquircleClip } from "./lib/squircle";
-
 // Utilities
 export { cn } from "./lib/utils";

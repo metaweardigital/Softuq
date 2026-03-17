@@ -1,12 +1,17 @@
 "use client";
 import * as React from "react";
 
+/* ============================================
+   Types
+   ============================================ */
+type PalettePreset = "neutral" | "zinc" | "stone" | "slate" | "mauve" | "olive";
+type AccentPreset = "blue" | "violet" | "emerald" | "amber" | "red" | "rose" | "cyan" | "orange";
 type RadiusPreset = "none" | "sm" | "md" | "lg" | "full";
 type SpacingPreset = "sm" | "md" | "lg";
-type PalettePreset = "neutral" | "zinc" | "stone" | "slate" | "mauve" | "olive";
 
-/* ---- Palette preset maps ---- */
-/* Each palette overrides the gray scale + accent hue to change the overall feel */
+/* ============================================
+   Palette presets — gray scale tinting
+   ============================================ */
 const PALETTE_PRESETS: Record<PalettePreset, Record<string, string>> = {
   neutral: {
     "--gray-50": "oklch(0.985 0 0)",
@@ -130,7 +135,63 @@ const PALETTE_PRESETS: Record<PalettePreset, Record<string, string>> = {
   },
 };
 
-/* ---- Radius preset maps ---- */
+/* ============================================
+   Accent presets — brand color
+   ============================================ */
+const ACCENT_PRESETS: Record<AccentPreset, Record<string, string>> = {
+  blue: {
+    "--accent": "oklch(0.623 0.188 259.82)",
+    "--accent-hover": "oklch(0.714 0.143 254.63)",
+    "--accent-muted": "oklch(0.546 0.215 262.89)",
+    "--accent-text": "oklch(0.714 0.143 254.63)",
+  },
+  violet: {
+    "--accent": "oklch(0.606 0.219 292.72)",
+    "--accent-hover": "oklch(0.709 0.159 293.53)",
+    "--accent-muted": "oklch(0.541 0.247 293.01)",
+    "--accent-text": "oklch(0.709 0.159 293.53)",
+  },
+  emerald: {
+    "--accent": "oklch(0.696 0.149 162.51)",
+    "--accent-hover": "oklch(0.773 0.153 163.25)",
+    "--accent-muted": "oklch(0.596 0.127 163.25)",
+    "--accent-text": "oklch(0.773 0.153 163.25)",
+  },
+  amber: {
+    "--accent": "oklch(0.769 0.165 70.08)",
+    "--accent-hover": "oklch(0.837 0.164 84.43)",
+    "--accent-muted": "oklch(0.666 0.157 58.31)",
+    "--accent-text": "oklch(0.837 0.164 84.43)",
+  },
+  red: {
+    "--accent": "oklch(0.637 0.208 25.32)",
+    "--accent-hover": "oklch(0.711 0.166 22.2)",
+    "--accent-muted": "oklch(0.577 0.215 27.32)",
+    "--accent-text": "oklch(0.711 0.166 22.2)",
+  },
+  rose: {
+    "--accent": "oklch(0.645 0.196 12.2)",
+    "--accent-hover": "oklch(0.72 0.15 10.5)",
+    "--accent-muted": "oklch(0.58 0.22 14)",
+    "--accent-text": "oklch(0.72 0.15 10.5)",
+  },
+  cyan: {
+    "--accent": "oklch(0.715 0.143 194.77)",
+    "--accent-hover": "oklch(0.789 0.109 194.77)",
+    "--accent-muted": "oklch(0.609 0.16 194.77)",
+    "--accent-text": "oklch(0.789 0.109 194.77)",
+  },
+  orange: {
+    "--accent": "oklch(0.705 0.175 47.6)",
+    "--accent-hover": "oklch(0.78 0.145 55)",
+    "--accent-muted": "oklch(0.63 0.19 41)",
+    "--accent-text": "oklch(0.78 0.145 55)",
+  },
+};
+
+/* ============================================
+   Radius presets — border radius per component
+   ============================================ */
 const RADIUS_PRESETS: Record<RadiusPreset, Record<string, string>> = {
   none: {
     "--ds-radius-button": "0px",
@@ -174,7 +235,9 @@ const RADIUS_PRESETS: Record<RadiusPreset, Record<string, string>> = {
   },
 };
 
-/* ---- Spacing preset maps ---- */
+/* ============================================
+   Spacing presets — padding & gaps
+   ============================================ */
 const SPACING_PRESETS: Record<SpacingPreset, Record<string, string>> = {
   sm: {
     "--ds-space-card": "16px",
@@ -205,62 +268,81 @@ const SPACING_PRESETS: Record<SpacingPreset, Record<string, string>> = {
   },
 };
 
-/* ---- Context ---- */
+/* ============================================
+   Context & Hook
+   ============================================ */
 interface DesignYstemContextValue {
+  palette: PalettePreset;
+  setPalette: (p: PalettePreset) => void;
+  accent: AccentPreset;
+  setAccent: (a: AccentPreset) => void;
   radius: RadiusPreset;
   setRadius: (r: RadiusPreset) => void;
   spacing: SpacingPreset;
   setSpacing: (s: SpacingPreset) => void;
-  palette: PalettePreset;
-  setPalette: (p: PalettePreset) => void;
 }
 
 const DesignYstemContext = React.createContext<DesignYstemContextValue>({
+  palette: "neutral",
+  setPalette: () => {},
+  accent: "blue",
+  setAccent: () => {},
   radius: "lg",
   setRadius: () => {},
   spacing: "md",
   setSpacing: () => {},
-  palette: "neutral",
-  setPalette: () => {},
 });
 
 function useDesignYstem() {
   return React.useContext(DesignYstemContext);
 }
 
-/* ---- Provider ---- */
+/* ============================================
+   Provider
+   ============================================ */
 interface DesignYstemProviderProps {
+  palette?: PalettePreset;
+  accent?: AccentPreset;
   radius?: RadiusPreset;
   spacing?: SpacingPreset;
-  palette?: PalettePreset;
   children: React.ReactNode;
 }
 
 function DesignYstemProvider({
+  palette: initialPalette = "neutral",
+  accent: initialAccent = "blue",
   radius: initialRadius = "lg",
   spacing: initialSpacing = "md",
-  palette: initialPalette = "neutral",
   children,
 }: DesignYstemProviderProps) {
+  const [palette, setPalette] = React.useState<PalettePreset>(initialPalette);
+  const [accent, setAccent] = React.useState<AccentPreset>(initialAccent);
   const [radius, setRadius] = React.useState<RadiusPreset>(initialRadius);
   const [spacing, setSpacing] = React.useState<SpacingPreset>(initialSpacing);
-  const [palette, setPalette] = React.useState<PalettePreset>(initialPalette);
 
   React.useEffect(() => {
     const root = document.documentElement;
-    const vars = { ...PALETTE_PRESETS[palette], ...RADIUS_PRESETS[radius], ...SPACING_PRESETS[spacing] };
+    const vars = {
+      ...PALETTE_PRESETS[palette],
+      ...ACCENT_PRESETS[accent],
+      ...RADIUS_PRESETS[radius],
+      ...SPACING_PRESETS[spacing],
+    };
     for (const [key, value] of Object.entries(vars)) {
       root.style.setProperty(key, value);
     }
-  }, [radius, spacing, palette]);
+  }, [palette, accent, radius, spacing]);
 
   const value = React.useMemo(
-    () => ({ radius, setRadius, spacing, setSpacing, palette, setPalette }),
-    [radius, spacing, palette],
+    () => ({ palette, setPalette, accent, setAccent, radius, setRadius, spacing, setSpacing }),
+    [palette, accent, radius, spacing],
   );
 
   return <DesignYstemContext.Provider value={value}>{children}</DesignYstemContext.Provider>;
 }
 
-export type { DesignYstemProviderProps, PalettePreset, RadiusPreset, SpacingPreset };
-export { DesignYstemProvider, PALETTE_PRESETS, RADIUS_PRESETS, SPACING_PRESETS, useDesignYstem };
+/* ============================================
+   Exports
+   ============================================ */
+export type { AccentPreset, DesignYstemProviderProps, PalettePreset, RadiusPreset, SpacingPreset };
+export { ACCENT_PRESETS, DesignYstemProvider, PALETTE_PRESETS, RADIUS_PRESETS, SPACING_PRESETS, useDesignYstem };

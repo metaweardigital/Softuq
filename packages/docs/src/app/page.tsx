@@ -1,6 +1,6 @@
 "use client";
 
-import type { PalettePreset, RadiusPreset, SpacingPreset } from "@designystem/react";
+import type { AccentPreset, PalettePreset, RadiusPreset, SpacingPreset } from "@designystem/react";
 import {
   Accordion,
   AccordionContent,
@@ -56,59 +56,62 @@ import React from "react";
 const RADIUS_OPTIONS: RadiusPreset[] = ["none", "sm", "md", "lg", "full"];
 const SPACING_OPTIONS: SpacingPreset[] = ["sm", "md", "lg"];
 const PALETTE_OPTIONS: PalettePreset[] = ["neutral", "zinc", "stone", "slate", "mauve", "olive"];
+const ACCENT_OPTIONS: AccentPreset[] = ["blue", "violet", "emerald", "amber", "red", "rose", "cyan", "orange"];
 
-function ThemeSwitcher() {
-  const { radius, setRadius, spacing, setSpacing, palette, setPalette } = useDesignYstem();
+function SwitcherGroup({
+  label,
+  options,
+  value,
+  onChange,
+}: {
+  label: string;
+  options: string[];
+  value: string;
+  onChange: (v: any) => void;
+}) {
   return (
-    <div className="flex flex-wrap items-center gap-3">
-      <div className="flex items-center gap-1.5">
-        <span className="text-xs text-text-muted">Palette</span>
-        <div className="flex gap-0.5">
-          {PALETTE_OPTIONS.map((p) => (
-            <button
-              key={p}
-              type="button"
-              onClick={() => setPalette(p)}
-              className={`px-2 py-0.5 text-xs rounded-md transition-colors ${palette === p ? "bg-accent text-white" : "text-text-muted hover:text-text-primary"}`}
-            >
-              {p}
-            </button>
-          ))}
-        </div>
-      </div>
-      <Separator orientation="vertical" className="h-4" />
-      <div className="flex items-center gap-1.5">
-        <span className="text-xs text-text-muted">Radius</span>
-        <div className="flex gap-0.5">
-          {RADIUS_OPTIONS.map((r) => (
-            <button
-              key={r}
-              type="button"
-              onClick={() => setRadius(r)}
-              className={`px-2 py-0.5 text-xs rounded-md transition-colors ${radius === r ? "bg-accent text-white" : "text-text-muted hover:text-text-primary"}`}
-            >
-              {r}
-            </button>
-          ))}
-        </div>
-      </div>
-      <Separator orientation="vertical" className="h-4" />
-      <div className="flex items-center gap-1.5">
-        <span className="text-xs text-text-muted">Spacing</span>
-        <div className="flex gap-0.5">
-          {SPACING_OPTIONS.map((s) => (
-            <button
-              key={s}
-              type="button"
-              onClick={() => setSpacing(s)}
-              className={`px-2 py-0.5 text-xs rounded-md transition-colors ${spacing === s ? "bg-accent text-white" : "text-text-muted hover:text-text-primary"}`}
-            >
-              {s}
-            </button>
-          ))}
-        </div>
+    <div className="space-y-1.5">
+      <span className="text-xs font-medium text-text-muted uppercase tracking-wide">{label}</span>
+      <div className="flex flex-col gap-0.5">
+        {options.map((o) => (
+          <button
+            key={o}
+            type="button"
+            onClick={() => onChange(o)}
+            className={`px-2.5 py-1 text-xs text-left rounded-md transition-colors ${value === o ? "bg-accent text-white" : "text-text-secondary hover:text-text-primary hover:bg-bg-hover"}`}
+          >
+            {o}
+          </button>
+        ))}
       </div>
     </div>
+  );
+}
+
+function ThemeSidebar({ theme, toggleTheme }: { theme: string; toggleTheme: () => void }) {
+  const { radius, setRadius, spacing, setSpacing, palette, setPalette, accent, setAccent } = useDesignYstem();
+  return (
+    <aside className="fixed left-0 top-0 bottom-0 w-48 border-r border-border-subtle bg-bg-base/80 backdrop-blur-glass overflow-y-auto z-sticky">
+      <div className="p-4 space-y-5">
+        <div>
+          <h1 className="text-lg font-bold tracking-tight">DesignYstem</h1>
+          <p className="text-xs text-text-muted">Component Preview</p>
+        </div>
+        <Separator />
+        <SwitcherGroup label="Accent" options={ACCENT_OPTIONS} value={accent} onChange={setAccent} />
+        <SwitcherGroup label="Palette" options={PALETTE_OPTIONS} value={palette} onChange={setPalette} />
+        <SwitcherGroup label="Radius" options={RADIUS_OPTIONS} value={radius} onChange={setRadius} />
+        <SwitcherGroup label="Spacing" options={SPACING_OPTIONS} value={spacing} onChange={setSpacing} />
+        <Separator />
+        <div className="space-y-1.5">
+          <span className="text-xs font-medium text-text-muted uppercase tracking-wide">Mode</span>
+          <div className="flex items-center gap-2">
+            <Toggle checked={theme === "light"} onCheckedChange={toggleTheme} size="sm" />
+            <span className="text-xs text-text-secondary">{theme}</span>
+          </div>
+        </div>
+      </div>
+    </aside>
   );
 }
 
@@ -292,24 +295,9 @@ export default function ComponentPreview() {
     <DesignYstemProvider>
       <ToastProvider position={toastPosition}>
         <div className="min-h-screen bg-bg-base">
-          {/* Header */}
-          <header className="sticky top-0 z-sticky backdrop-blur-glass bg-bg-base/80 border-b border-border-subtle">
-            <div className="max-w-5xl mx-auto px-6 py-3 flex items-center justify-between">
-              <div>
-                <h1 className="text-2xl font-bold tracking-tight">DesignYstem</h1>
-                <p className="text-sm text-text-secondary">Component Preview</p>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <span className="text-xs text-text-muted">{theme}</span>
-                <Toggle checked={theme === "light"} onCheckedChange={toggleTheme} size="sm" />
-              </div>
-            </div>
-            <div className="max-w-5xl mx-auto px-6 pb-3">
-              <ThemeSwitcher />
-            </div>
-          </header>
+          <ThemeSidebar theme={theme} toggleTheme={toggleTheme} />
 
-          <main className="max-w-5xl mx-auto px-6 py-10 space-y-12">
+          <main className="ml-48 max-w-5xl px-8 py-10 space-y-12">
             {/* Accordion */}
             <Section title="Accordion">
               <div className="max-w-2xl space-y-8">
@@ -320,8 +308,8 @@ export default function ComponentPreview() {
                       <AccordionTrigger>What is DesignYstem?</AccordionTrigger>
                       <AccordionContent>
                         A custom design system library with a <span className="text-accent">soft UI / neumorphic</span>{" "}
-                        aesthetic. Built as a monorepo with tokens, a Tailwind preset, and copy-paste components —
-                        inspired by <span className="text-accent">shadcn/ui</span>.
+                        aesthetic. Built as a monorepo with tokens, a Tailwind preset, and copy-paste components you
+                        fully own.
                       </AccordionContent>
                     </AccordionItem>
                     <AccordionItem value="item-2">

@@ -3,6 +3,11 @@ import * as React from "react";
 import { cn } from "../../lib/utils";
 import { Alert, AlertDescription, AlertTitle } from "./alert";
 
+/* ============================================
+   Types
+   ============================================ */
+type ToastPosition = "left" | "center" | "right";
+
 interface Toast {
   id: string;
   title?: string;
@@ -19,7 +24,52 @@ interface ToastContextValue {
   resumeToast: (id: string) => void;
 }
 
+interface ToastProviderProps {
+  children: React.ReactNode;
+  position?: ToastPosition;
+}
+
+interface ToastItemProps {
+  toast: Toast & { exiting?: boolean };
+  onClose: () => void;
+}
+
+/* ============================================
+   Constants
+   ============================================ */
+const toastIconMap: Record<string, React.ElementType> = {
+  default: Terminal,
+  info: Info,
+  success: CheckCircle2,
+  warning: AlertTriangle,
+  error: AlertCircle,
+};
+
+const toastToAlertVariant: Record<string, "default" | "info" | "success" | "warning" | "destructive"> = {
+  default: "default",
+  info: "info",
+  success: "success",
+  warning: "warning",
+  error: "destructive",
+};
+
+const enterAnimationMap: Record<ToastPosition, string> = {
+  left: "animate-slide-in-left",
+  center: "animate-fade-up",
+  right: "animate-slide-in-right",
+};
+
+const positionClasses: Record<ToastPosition, string> = {
+  left: "fixed bottom-4 left-4 items-start",
+  center: "fixed bottom-4 left-1/2 -translate-x-1/2 items-center",
+  right: "fixed bottom-4 right-4 items-end",
+};
+
+/* ============================================
+   Context & Hook
+   ============================================ */
 const ToastContext = React.createContext<ToastContextValue | null>(null);
+const ToastPositionContext = React.createContext<ToastPosition>("center");
 
 function useToast() {
   const ctx = React.useContext(ToastContext);
@@ -27,15 +77,9 @@ function useToast() {
   return ctx;
 }
 
-type ToastPosition = "left" | "center" | "right";
-
-const ToastPositionContext = React.createContext<ToastPosition>("right");
-
-interface ToastProviderProps {
-  children: React.ReactNode;
-  position?: ToastPosition;
-}
-
+/* ============================================
+   Components
+   ============================================ */
 function ToastProvider({ children, position = "center" }: ToastProviderProps) {
   const [toasts, setToasts] = React.useState<(Toast & { exiting?: boolean })[]>([]);
   const timersRef = React.useRef<
@@ -90,34 +134,6 @@ function ToastProvider({ children, position = "center" }: ToastProviderProps) {
     </ToastContext.Provider>
   );
 }
-
-/* --- ToastItem --- */
-interface ToastItemProps {
-  toast: Toast & { exiting?: boolean };
-  onClose: () => void;
-}
-
-const toastIconMap: Record<string, React.ElementType> = {
-  default: Terminal,
-  info: Info,
-  success: CheckCircle2,
-  warning: AlertTriangle,
-  error: AlertCircle,
-};
-
-const toastToAlertVariant: Record<string, "default" | "info" | "success" | "warning" | "destructive"> = {
-  default: "default",
-  info: "info",
-  success: "success",
-  warning: "warning",
-  error: "destructive",
-};
-
-const enterAnimationMap: Record<ToastPosition, string> = {
-  left: "animate-slide-in-left",
-  center: "animate-fade-up",
-  right: "animate-slide-in-right",
-};
 
 function ToastItem({ toast, onClose }: ToastItemProps) {
   const Icon = toastIconMap[toast.variant || "default"];
@@ -179,13 +195,6 @@ function ToastItem({ toast, onClose }: ToastItemProps) {
   );
 }
 
-/* --- ToastViewport --- */
-const positionClasses: Record<ToastPosition, string> = {
-  left: "fixed bottom-4 left-4 items-start",
-  center: "fixed bottom-4 left-1/2 -translate-x-1/2 items-center",
-  right: "fixed bottom-4 right-4 items-end",
-};
-
 function ToastViewport() {
   const { toasts, removeToast } = useToast();
   const position = React.useContext(ToastPositionContext);
@@ -199,5 +208,8 @@ function ToastViewport() {
   );
 }
 
+/* ============================================
+   Exports
+   ============================================ */
 export type { Toast, ToastItemProps, ToastPosition };
 export { ToastItem, ToastProvider, useToast };

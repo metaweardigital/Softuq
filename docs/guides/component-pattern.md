@@ -81,4 +81,4 @@ Don't add extra `radius`/`spacing` props. Use `className` override instead — `
 </Alert>
 ```
 
-This is the shadcn/ui convention: global theming via provider, local override via className.
+Global theming via provider, local override via className.
