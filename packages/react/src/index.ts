@@ -70,6 +70,7 @@ export { Tooltip, type TooltipProps } from "./components/ui/tooltip";
 export {
   DesignYstemProvider,
   type DesignYstemProviderProps,
+  type PalettePreset,
   type RadiusPreset,
   type SpacingPreset,
   useDesignYstem,

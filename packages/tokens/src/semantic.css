@@ -11,9 +11,9 @@
   --bg-elevated: var(--gray-940);
   --bg-card: var(--gray-920);
   --bg-input: var(--gray-960);
-  --bg-hover: rgba(255, 255, 255, 0.04);
+  --bg-hover: oklch(1 0 0 / 0.04);
   --bg-selected: var(--gray-850);
-  --bg-overlay: rgba(0, 0, 0, 0.6);
+  --bg-overlay: oklch(0 0 0 / 0.6);
 
   /* Text */
   --text-primary: var(--gray-100);
@@ -47,15 +47,15 @@
   --warning-text: var(--amber-400);
 
   /* Borders */
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-default: rgba(255, 255, 255, 0.12);
+  --border-subtle: oklch(1 0 0 / 0.08);
+  --border-default: oklch(1 0 0 / 0.12);
   --border-strong: var(--gray-800);
   --border-accent: var(--blue-500);
 
   /* Shadows — Neumorphic */
-  --shadow-light: rgba(255, 255, 255, 0.03);
-  --shadow-dark: rgba(0, 0, 0, 0.4);
-  --shadow-darker: rgba(0, 0, 0, 0.5);
+  --shadow-light: oklch(1 0 0 / 0.03);
+  --shadow-dark: oklch(0 0 0 / 0.4);
+  --shadow-darker: oklch(0 0 0 / 0.5);
 
   --shadow-sm: 0 1px 2px var(--shadow-dark);
   --shadow-md: 0 4px 12px var(--shadow-dark);
@@ -69,11 +69,11 @@
     inset -2px -2px 6px var(--shadow-light);
   --shadow-neu-floating:
     0 20px 40px var(--shadow-darker),
-    0 0 1px rgba(255, 255, 255, 0.1);
+    0 0 1px oklch(1 0 0 / 0.1);
 
   /* Glass */
-  --glass-bg: rgba(30, 30, 30, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-bg: oklch(0.218 0 0 / 0.7);
+  --glass-border: oklch(1 0 0 / 0.08);
   --glass-blur: 20px;
 
   /* Focus ring */
@@ -88,7 +88,7 @@
   --ds-radius-tooltip: 12px;
   --ds-radius-avatar: 9999px;
 
-  /* Component spacing (defaults = default preset) */
+  /* Component spacing (defaults = md preset) */
   --ds-space-card: 24px;
   --ds-space-card-sm: 16px;
   --ds-space-input-x: 16px;
@@ -102,12 +102,12 @@
 [data-theme="light"] {
   /* Backgrounds */
   --bg-base: var(--gray-50);
-  --bg-elevated: white;
-  --bg-card: white;
+  --bg-elevated: oklch(1 0 0);
+  --bg-card: oklch(1 0 0);
   --bg-input: var(--gray-100);
-  --bg-hover: rgba(0, 0, 0, 0.04);
+  --bg-hover: oklch(0 0 0 / 0.04);
   --bg-selected: var(--gray-150);
-  --bg-overlay: rgba(0, 0, 0, 0.4);
+  --bg-overlay: oklch(0 0 0 / 0.4);
 
   /* Text */
   --text-primary: var(--gray-980);
@@ -141,15 +141,15 @@
   --warning-text: var(--amber-600);
 
   /* Borders */
-  --border-subtle: rgba(0, 0, 0, 0.06);
-  --border-default: rgba(0, 0, 0, 0.1);
+  --border-subtle: oklch(0 0 0 / 0.06);
+  --border-default: oklch(0 0 0 / 0.1);
   --border-strong: var(--gray-250);
   --border-accent: var(--blue-600);
 
   /* Shadows — Soft */
-  --shadow-light: rgba(255, 255, 255, 0.7);
-  --shadow-dark: rgba(0, 0, 0, 0.08);
-  --shadow-darker: rgba(0, 0, 0, 0.12);
+  --shadow-light: oklch(1 0 0 / 0.7);
+  --shadow-dark: oklch(0 0 0 / 0.08);
+  --shadow-darker: oklch(0 0 0 / 0.12);
 
   --shadow-sm: 0 1px 2px var(--shadow-dark);
   --shadow-md: 0 4px 12px var(--shadow-dark);
@@ -163,14 +163,14 @@
     inset -2px -2px 6px var(--shadow-light);
   --shadow-neu-floating:
     0 16px 32px var(--shadow-darker),
-    0 0 1px rgba(0, 0, 0, 0.1);
+    0 0 1px oklch(0 0 0 / 0.1);
 
   /* Glass */
-  --glass-bg: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(0, 0, 0, 0.08);
+  --glass-bg: oklch(1 0 0 / 0.7);
+  --glass-border: oklch(0 0 0 / 0.08);
   --glass-blur: 20px;
 
   /* Focus ring */
   --ring-color: var(--blue-600);
-  --ring-offset: white;
+  --ring-offset: oklch(1 0 0);
 }

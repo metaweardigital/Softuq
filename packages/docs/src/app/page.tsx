@@ -1,6 +1,6 @@
 "use client";
 
-import type { RadiusPreset, SpacingPreset } from "@designystem/react";
+import type { PalettePreset, RadiusPreset, SpacingPreset } from "@designystem/react";
 import {
   Accordion,
   AccordionContent,
@@ -55,11 +55,28 @@ import React from "react";
 /* --------------------------------------------------------- */
 const RADIUS_OPTIONS: RadiusPreset[] = ["none", "sm", "md", "lg", "full"];
 const SPACING_OPTIONS: SpacingPreset[] = ["sm", "md", "lg"];
+const PALETTE_OPTIONS: PalettePreset[] = ["neutral", "zinc", "stone", "slate", "mauve", "olive"];
 
-function ThemeSwitcher({ theme, toggleTheme }: { theme: string; toggleTheme: () => void }) {
-  const { radius, setRadius, spacing, setSpacing } = useDesignYstem();
+function ThemeSwitcher() {
+  const { radius, setRadius, spacing, setSpacing, palette, setPalette } = useDesignYstem();
   return (
-    <div className="flex items-center gap-4">
+    <div className="flex flex-wrap items-center gap-3">
+      <div className="flex items-center gap-1.5">
+        <span className="text-xs text-text-muted">Palette</span>
+        <div className="flex gap-0.5">
+          {PALETTE_OPTIONS.map((p) => (
+            <button
+              key={p}
+              type="button"
+              onClick={() => setPalette(p)}
+              className={`px-2 py-0.5 text-xs rounded-md transition-colors ${palette === p ? "bg-accent text-white" : "text-text-muted hover:text-text-primary"}`}
+            >
+              {p}
+            </button>
+          ))}
+        </div>
+      </div>
+      <Separator orientation="vertical" className="h-4" />
       <div className="flex items-center gap-1.5">
         <span className="text-xs text-text-muted">Radius</span>
         <div className="flex gap-0.5">
@@ -75,7 +92,7 @@ function ThemeSwitcher({ theme, toggleTheme }: { theme: string; toggleTheme: () 
           ))}
         </div>
       </div>
-      <Separator orientation="vertical" className="h-5" />
+      <Separator orientation="vertical" className="h-4" />
       <div className="flex items-center gap-1.5">
         <span className="text-xs text-text-muted">Spacing</span>
         <div className="flex gap-0.5">
@@ -90,11 +107,6 @@ function ThemeSwitcher({ theme, toggleTheme }: { theme: string; toggleTheme: () 
             </button>
           ))}
         </div>
-      </div>
-      <Separator orientation="vertical" className="h-5" />
-      <div className="flex items-center gap-1.5">
-        <span className="text-xs text-text-muted">{theme}</span>
-        <Toggle checked={theme === "light"} onCheckedChange={toggleTheme} size="sm" />
       </div>
     </div>
   );
@@ -282,14 +294,18 @@ export default function ComponentPreview() {
         <div className="min-h-screen bg-bg-base">
           {/* Header */}
           <header className="sticky top-0 z-sticky backdrop-blur-glass bg-bg-base/80 border-b border-border-subtle">
-            <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div className="max-w-5xl mx-auto px-6 py-3 flex items-center justify-between">
               <div>
                 <h1 className="text-2xl font-bold tracking-tight">DesignYstem</h1>
                 <p className="text-sm text-text-secondary">Component Preview</p>
               </div>
-              <div className="flex items-center gap-3">
-                <ThemeSwitcher theme={theme} toggleTheme={toggleTheme} />
+              <div className="flex items-center gap-1.5">
+                <span className="text-xs text-text-muted">{theme}</span>
+                <Toggle checked={theme === "light"} onCheckedChange={toggleTheme} size="sm" />
               </div>
+            </div>
+            <div className="max-w-5xl mx-auto px-6 pb-3">
+              <ThemeSwitcher />
             </div>
           </header>
 

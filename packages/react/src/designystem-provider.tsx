@@ -3,6 +3,132 @@ import * as React from "react";
 
 type RadiusPreset = "none" | "sm" | "md" | "lg" | "full";
 type SpacingPreset = "sm" | "md" | "lg";
+type PalettePreset = "neutral" | "zinc" | "stone" | "slate" | "mauve" | "olive";
+
+/* ---- Palette preset maps ---- */
+/* Each palette overrides the gray scale + accent hue to change the overall feel */
+const PALETTE_PRESETS: Record<PalettePreset, Record<string, string>> = {
+  neutral: {
+    "--gray-50": "oklch(0.985 0 0)",
+    "--gray-100": "oklch(0.97 0 0)",
+    "--gray-150": "oklch(0.946 0 0)",
+    "--gray-200": "oklch(0.922 0 0)",
+    "--gray-250": "oklch(0.87 0 0)",
+    "--gray-300": "oklch(0.808 0 0)",
+    "--gray-400": "oklch(0.715 0 0)",
+    "--gray-500": "oklch(0.633 0 0)",
+    "--gray-600": "oklch(0.551 0.023 264.37)",
+    "--gray-700": "oklch(0.45 0 0)",
+    "--gray-750": "oklch(0.409 0 0)",
+    "--gray-800": "oklch(0.321 0 0)",
+    "--gray-850": "oklch(0.264 0 0)",
+    "--gray-900": "oklch(0.218 0 0)",
+    "--gray-920": "oklch(0.191 0 0)",
+    "--gray-940": "oklch(0.178 0 0)",
+    "--gray-960": "oklch(0.145 0 0)",
+    "--gray-980": "oklch(0.134 0 0)",
+  },
+  zinc: {
+    "--gray-50": "oklch(0.985 0.002 240)",
+    "--gray-100": "oklch(0.967 0.003 264.54)",
+    "--gray-150": "oklch(0.946 0.004 264.54)",
+    "--gray-200": "oklch(0.92 0.004 264.54)",
+    "--gray-250": "oklch(0.871 0.006 264.54)",
+    "--gray-300": "oklch(0.81 0.007 264.54)",
+    "--gray-400": "oklch(0.705 0.012 264.54)",
+    "--gray-500": "oklch(0.609 0.014 264.54)",
+    "--gray-600": "oklch(0.552 0.016 264.54)",
+    "--gray-700": "oklch(0.442 0.017 264.54)",
+    "--gray-750": "oklch(0.395 0.017 264.54)",
+    "--gray-800": "oklch(0.316 0.015 264.54)",
+    "--gray-850": "oklch(0.258 0.012 264.54)",
+    "--gray-900": "oklch(0.21 0.012 264.54)",
+    "--gray-920": "oklch(0.18 0.01 264.54)",
+    "--gray-940": "oklch(0.16 0.009 264.54)",
+    "--gray-960": "oklch(0.13 0.007 264.54)",
+    "--gray-980": "oklch(0.12 0.006 264.54)",
+  },
+  stone: {
+    "--gray-50": "oklch(0.985 0.002 75)",
+    "--gray-100": "oklch(0.97 0.003 75)",
+    "--gray-150": "oklch(0.946 0.004 75)",
+    "--gray-200": "oklch(0.923 0.005 75)",
+    "--gray-250": "oklch(0.869 0.007 75)",
+    "--gray-300": "oklch(0.813 0.008 75)",
+    "--gray-400": "oklch(0.709 0.01 56)",
+    "--gray-500": "oklch(0.617 0.013 56)",
+    "--gray-600": "oklch(0.553 0.013 58)",
+    "--gray-700": "oklch(0.444 0.011 73)",
+    "--gray-750": "oklch(0.4 0.01 73)",
+    "--gray-800": "oklch(0.322 0.009 75)",
+    "--gray-850": "oklch(0.266 0.008 75)",
+    "--gray-900": "oklch(0.216 0.006 56)",
+    "--gray-920": "oklch(0.186 0.005 56)",
+    "--gray-940": "oklch(0.166 0.004 56)",
+    "--gray-960": "oklch(0.136 0.003 56)",
+    "--gray-980": "oklch(0.126 0.003 56)",
+  },
+  slate: {
+    "--gray-50": "oklch(0.984 0.003 247.86)",
+    "--gray-100": "oklch(0.968 0.007 247.86)",
+    "--gray-150": "oklch(0.946 0.01 247.86)",
+    "--gray-200": "oklch(0.929 0.013 255.51)",
+    "--gray-250": "oklch(0.869 0.022 252.89)",
+    "--gray-300": "oklch(0.809 0.026 256.85)",
+    "--gray-400": "oklch(0.704 0.032 261.26)",
+    "--gray-500": "oklch(0.606 0.036 264.05)",
+    "--gray-600": "oklch(0.554 0.033 264.36)",
+    "--gray-700": "oklch(0.446 0.03 256.8)",
+    "--gray-750": "oklch(0.398 0.026 256.8)",
+    "--gray-800": "oklch(0.324 0.022 264.18)",
+    "--gray-850": "oklch(0.262 0.018 264.18)",
+    "--gray-900": "oklch(0.208 0.042 265.75)",
+    "--gray-920": "oklch(0.178 0.036 265.75)",
+    "--gray-940": "oklch(0.158 0.03 265.75)",
+    "--gray-960": "oklch(0.128 0.024 265.75)",
+    "--gray-980": "oklch(0.118 0.022 265.75)",
+  },
+  mauve: {
+    "--gray-50": "oklch(0.985 0.004 310)",
+    "--gray-100": "oklch(0.968 0.007 310)",
+    "--gray-150": "oklch(0.946 0.009 310)",
+    "--gray-200": "oklch(0.923 0.011 310)",
+    "--gray-250": "oklch(0.869 0.014 310)",
+    "--gray-300": "oklch(0.813 0.016 310)",
+    "--gray-400": "oklch(0.706 0.019 310)",
+    "--gray-500": "oklch(0.611 0.02 310)",
+    "--gray-600": "oklch(0.553 0.02 310)",
+    "--gray-700": "oklch(0.444 0.018 310)",
+    "--gray-750": "oklch(0.4 0.016 310)",
+    "--gray-800": "oklch(0.322 0.013 310)",
+    "--gray-850": "oklch(0.266 0.011 310)",
+    "--gray-900": "oklch(0.216 0.009 310)",
+    "--gray-920": "oklch(0.186 0.008 310)",
+    "--gray-940": "oklch(0.166 0.007 310)",
+    "--gray-960": "oklch(0.136 0.005 310)",
+    "--gray-980": "oklch(0.126 0.005 310)",
+  },
+  olive: {
+    "--gray-50": "oklch(0.985 0.004 128)",
+    "--gray-100": "oklch(0.968 0.007 128)",
+    "--gray-150": "oklch(0.946 0.009 128)",
+    "--gray-200": "oklch(0.923 0.011 128)",
+    "--gray-250": "oklch(0.869 0.014 128)",
+    "--gray-300": "oklch(0.813 0.016 128)",
+    "--gray-400": "oklch(0.706 0.019 128)",
+    "--gray-500": "oklch(0.611 0.02 128)",
+    "--gray-600": "oklch(0.553 0.02 128)",
+    "--gray-700": "oklch(0.444 0.018 128)",
+    "--gray-750": "oklch(0.4 0.016 128)",
+    "--gray-800": "oklch(0.322 0.013 128)",
+    "--gray-850": "oklch(0.266 0.011 128)",
+    "--gray-900": "oklch(0.216 0.009 128)",
+    "--gray-920": "oklch(0.186 0.008 128)",
+    "--gray-940": "oklch(0.166 0.007 128)",
+    "--gray-960": "oklch(0.136 0.005 128)",
+    "--gray-980": "oklch(0.126 0.005 128)",
+  },
+};
 
 /* ---- Radius preset maps ---- */
 const RADIUS_PRESETS: Record<RadiusPreset, Record<string, string>> = {
@@ -85,6 +211,8 @@ interface DesignYstemContextValue {
   setRadius: (r: RadiusPreset) => void;
   spacing: SpacingPreset;
   setSpacing: (s: SpacingPreset) => void;
+  palette: PalettePreset;
+  setPalette: (p: PalettePreset) => void;
 }
 
 const DesignYstemContext = React.createContext<DesignYstemContextValue>({
@@ -92,6 +220,8 @@ const DesignYstemContext = React.createContext<DesignYstemContextValue>({
   setRadius: () => {},
   spacing: "md",
   setSpacing: () => {},
+  palette: "neutral",
+  setPalette: () => {},
 });
 
 function useDesignYstem() {
@@ -102,29 +232,35 @@ function useDesignYstem() {
 interface DesignYstemProviderProps {
   radius?: RadiusPreset;
   spacing?: SpacingPreset;
+  palette?: PalettePreset;
   children: React.ReactNode;
 }
 
 function DesignYstemProvider({
   radius: initialRadius = "lg",
   spacing: initialSpacing = "md",
+  palette: initialPalette = "neutral",
   children,
 }: DesignYstemProviderProps) {
   const [radius, setRadius] = React.useState<RadiusPreset>(initialRadius);
   const [spacing, setSpacing] = React.useState<SpacingPreset>(initialSpacing);
+  const [palette, setPalette] = React.useState<PalettePreset>(initialPalette);
 
   React.useEffect(() => {
     const root = document.documentElement;
-    const vars = { ...RADIUS_PRESETS[radius], ...SPACING_PRESETS[spacing] };
+    const vars = { ...PALETTE_PRESETS[palette], ...RADIUS_PRESETS[radius], ...SPACING_PRESETS[spacing] };
     for (const [key, value] of Object.entries(vars)) {
       root.style.setProperty(key, value);
     }
-  }, [radius, spacing]);
+  }, [radius, spacing, palette]);
 
-  const value = React.useMemo(() => ({ radius, setRadius, spacing, setSpacing }), [radius, spacing]);
+  const value = React.useMemo(
+    () => ({ radius, setRadius, spacing, setSpacing, palette, setPalette }),
+    [radius, spacing, palette],
+  );
 
   return <DesignYstemContext.Provider value={value}>{children}</DesignYstemContext.Provider>;
 }
 
-export type { DesignYstemProviderProps, RadiusPreset, SpacingPreset };
-export { DesignYstemProvider, RADIUS_PRESETS, SPACING_PRESETS, useDesignYstem };
+export type { DesignYstemProviderProps, PalettePreset, RadiusPreset, SpacingPreset };
+export { DesignYstemProvider, PALETTE_PRESETS, RADIUS_PRESETS, SPACING_PRESETS, useDesignYstem };
