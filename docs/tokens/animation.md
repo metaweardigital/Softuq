@@ -27,6 +27,7 @@
 | `slide-in-left` | X -100%→0 | 300ms ease-smooth |
 | `slide-in-up` | Y 100%→0 | 300ms ease-smooth |
 | `slide-in-down` | Y -100%→0 | 300ms ease-smooth |
+| `fade-out` | Opacity 1→0, scale 1→0.95, Y 0→8 | 300ms ease-smooth forwards |
 | `shimmer` | Gradient sweep for skeleton loading | 1.5s infinite linear |
 | `pulse` | Opacity 1→0.5→1 | 2s infinite ease-soft |
 

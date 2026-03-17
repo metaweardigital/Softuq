@@ -83,6 +83,7 @@ export {
   type AccentPreset,
   DesignYstemProvider,
   type DesignYstemProviderProps,
+  type FontPreset,
   type PalettePreset,
   type RadiusPreset,
   type SpacingPreset,

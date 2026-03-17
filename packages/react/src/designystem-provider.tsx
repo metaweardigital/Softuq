@@ -8,6 +8,7 @@ type PalettePreset = "neutral" | "zinc" | "stone" | "slate" | "mauve" | "olive";
 type AccentPreset = "blue" | "violet" | "emerald" | "amber" | "red" | "rose" | "cyan" | "orange";
 type RadiusPreset = "none" | "sm" | "md" | "lg" | "full";
 type SpacingPreset = "sm" | "md" | "lg";
+type FontPreset = "system" | "inter" | "geist";
 
 /* ============================================
    Palette presets — gray scale tinting
@@ -274,6 +275,24 @@ const SPACING_PRESETS: Record<SpacingPreset, Record<string, string>> = {
 };
 
 /* ============================================
+   Font presets — typeface
+   ============================================ */
+const FONT_PRESETS: Record<FontPreset, Record<string, string>> = {
+  system: {
+    "--font-sans": "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif",
+    "--font-mono": "'SF Mono', ui-monospace, SFMono-Regular, 'Cascadia Code', monospace",
+  },
+  inter: {
+    "--font-sans": "var(--font-inter), 'Inter', ui-sans-serif, system-ui, sans-serif",
+    "--font-mono": "'SF Mono', ui-monospace, SFMono-Regular, 'Cascadia Code', monospace",
+  },
+  geist: {
+    "--font-sans": "var(--font-geist-sans), 'Geist', ui-sans-serif, system-ui, sans-serif",
+    "--font-mono": "var(--font-geist-mono), 'Geist Mono', ui-monospace, monospace",
+  },
+};
+
+/* ============================================
    Context & Hook
    ============================================ */
 interface DesignYstemContextValue {
@@ -285,6 +304,8 @@ interface DesignYstemContextValue {
   setRadius: (r: RadiusPreset) => void;
   spacing: SpacingPreset;
   setSpacing: (s: SpacingPreset) => void;
+  font: FontPreset;
+  setFont: (f: FontPreset) => void;
 }
 
 const DesignYstemContext = React.createContext<DesignYstemContextValue>({
@@ -296,6 +317,8 @@ const DesignYstemContext = React.createContext<DesignYstemContextValue>({
   setRadius: () => {},
   spacing: "md",
   setSpacing: () => {},
+  font: "system",
+  setFont: () => {},
 });
 
 function useDesignYstem() {
@@ -310,6 +333,7 @@ interface DesignYstemProviderProps {
   accent?: AccentPreset;
   radius?: RadiusPreset;
   spacing?: SpacingPreset;
+  font?: FontPreset;
   children: React.ReactNode;
 }
 
@@ -318,12 +342,14 @@ function DesignYstemProvider({
   accent: initialAccent = "blue",
   radius: initialRadius = "lg",
   spacing: initialSpacing = "md",
+  font: initialFont = "system",
   children,
 }: DesignYstemProviderProps) {
   const [palette, setPalette] = React.useState<PalettePreset>(initialPalette);
   const [accent, setAccent] = React.useState<AccentPreset>(initialAccent);
   const [radius, setRadius] = React.useState<RadiusPreset>(initialRadius);
   const [spacing, setSpacing] = React.useState<SpacingPreset>(initialSpacing);
+  const [font, setFont] = React.useState<FontPreset>(initialFont);
 
   React.useEffect(() => {
     const root = document.documentElement;
@@ -332,15 +358,16 @@ function DesignYstemProvider({
       ...ACCENT_PRESETS[accent],
       ...RADIUS_PRESETS[radius],
       ...SPACING_PRESETS[spacing],
+      ...FONT_PRESETS[font],
     };
     for (const [key, value] of Object.entries(vars)) {
       root.style.setProperty(key, value);
     }
-  }, [palette, accent, radius, spacing]);
+  }, [palette, accent, radius, spacing, font]);
 
   const value = React.useMemo(
-    () => ({ palette, setPalette, accent, setAccent, radius, setRadius, spacing, setSpacing }),
-    [palette, accent, radius, spacing],
+    () => ({ palette, setPalette, accent, setAccent, radius, setRadius, spacing, setSpacing, font, setFont }),
+    [palette, accent, radius, spacing, font],
   );
 
   return <DesignYstemContext.Provider value={value}>{children}</DesignYstemContext.Provider>;
@@ -349,5 +376,13 @@ function DesignYstemProvider({
 /* ============================================
    Exports
    ============================================ */
-export type { AccentPreset, DesignYstemProviderProps, PalettePreset, RadiusPreset, SpacingPreset };
-export { ACCENT_PRESETS, DesignYstemProvider, PALETTE_PRESETS, RADIUS_PRESETS, SPACING_PRESETS, useDesignYstem };
+export type { AccentPreset, DesignYstemProviderProps, FontPreset, PalettePreset, RadiusPreset, SpacingPreset };
+export {
+  ACCENT_PRESETS,
+  DesignYstemProvider,
+  FONT_PRESETS,
+  PALETTE_PRESETS,
+  RADIUS_PRESETS,
+  SPACING_PRESETS,
+  useDesignYstem,
+};

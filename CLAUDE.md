@@ -30,6 +30,7 @@ Custom design system. Soft UI / neumorphic aesthetic. Copy-paste component distr
 2. **Accent** (brand color): blue / violet / emerald / amber / red / rose / cyan / orange
 3. **Radius** (border radius): none / sm / md / lg / full
 4. **Spacing** (density): sm / md / lg
+5. **Font** (typeface): system / inter / geist
 
 Per-component override via `className` — not extra props.
 
@@ -87,6 +88,7 @@ Always order from most global → most specific:
 - [Animation](docs/tokens/animation.md) — easing, duration, keyframes, z-index
 - [Tailwind v4 Guide](docs/guides/tailwind-v4.md) — @theme, @source
 - [Component Pattern](docs/guides/component-pattern.md) — CVA template, theming override
+- [Theming Guide](docs/guides/theming.md) — DesignYstemProvider, palette/accent/radius/spacing presets
 
 ## Dev
 

@@ -17,14 +17,30 @@ All sizes use fluid `clamp()` — scales smoothly between mobile and desktop.
 | `--text-3xl` | 28px | 36px | ×1.29 |
 | `--text-4xl` | 34px | 48px | ×1.33 |
 
-## Font stack
+## Font presets
+
+Controlled via `<DesignYstemProvider font="...">`. Overrides `--font-sans` and `--font-mono`.
+
+| Preset | Sans | Mono |
+|---|---|---|
+| `system` (default) | SF Pro, system-ui | SF Mono, ui-monospace |
+| `inter` | Inter | SF Mono, ui-monospace |
+| `geist` | Geist | Geist Mono |
+
+### Default font stack (system preset)
 
 ```css
 --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
 --font-mono: 'SF Mono', ui-monospace, SFMono-Regular, 'Cascadia Code', monospace;
 ```
 
-Apple-native stack. SF Pro on macOS/iOS, system-ui fallback on other platforms.
+### Loading custom fonts
+
+Inter is loaded via `next/font/google`. Geist and Geist Mono are local `.woff2` files. The provider references CSS variables set by `next/font`:
+
+- `--font-inter` — set by `next/font/google` Inter loader
+- `--font-geist-sans` — set by local font loader for GeistVF.woff2
+- `--font-geist-mono` — set by local font loader for GeistMonoVF.woff2
 
 ## Line height
 

@@ -60,15 +60,17 @@ export type { ComponentProps };
 Components use CSS custom properties for radius and spacing, controlled globally via `<DesignYstemProvider>`:
 
 ```tsx
-<DesignYstemProvider radius="lg" spacing="default">
+<DesignYstemProvider palette="zinc" accent="violet" radius="lg" spacing="md">
   <App />
 </DesignYstemProvider>
 ```
 
+**Palette presets:** `neutral` | `zinc` | `stone` | `slate` | `mauve` | `olive`
+**Accent presets:** `blue` | `violet` | `emerald` | `amber` | `red` | `rose` | `cyan` | `orange`
 **Radius presets:** `none` | `sm` | `md` | `lg` | `full`
 **Spacing presets:** `sm` | `md` | `lg`
 
-Components reference variables like `rounded-[var(--ds-radius-card)]` and `p-[var(--ds-spacing-card)]` instead of hardcoded values.
+Components reference variables like `rounded-[var(--ds-radius-card)]` and `p-[var(--ds-space-card)]` instead of hardcoded values.
 
 ### Per-component override
 

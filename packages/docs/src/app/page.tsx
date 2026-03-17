@@ -1,6 +1,6 @@
 "use client";
 
-import type { AccentPreset, PalettePreset, RadiusPreset, SpacingPreset } from "@designystem/react";
+import type { AccentPreset, FontPreset, PalettePreset, RadiusPreset, SpacingPreset } from "@designystem/react";
 import {
   Accordion,
   AccordionContent,
@@ -57,6 +57,7 @@ const RADIUS_OPTIONS: RadiusPreset[] = ["none", "sm", "md", "lg", "full"];
 const SPACING_OPTIONS: SpacingPreset[] = ["sm", "md", "lg"];
 const PALETTE_OPTIONS: PalettePreset[] = ["neutral", "zinc", "stone", "slate", "mauve", "olive"];
 const ACCENT_OPTIONS: AccentPreset[] = ["blue", "violet", "emerald", "amber", "red", "rose", "cyan", "orange"];
+const FONT_OPTIONS: FontPreset[] = ["system", "inter", "geist"];
 
 function SwitcherGroup({
   label,
@@ -89,7 +90,8 @@ function SwitcherGroup({
 }
 
 function ThemeSidebar({ theme, toggleTheme }: { theme: string; toggleTheme: () => void }) {
-  const { radius, setRadius, spacing, setSpacing, palette, setPalette, accent, setAccent } = useDesignYstem();
+  const { radius, setRadius, spacing, setSpacing, palette, setPalette, accent, setAccent, font, setFont } =
+    useDesignYstem();
   return (
     <aside className="fixed left-0 top-0 bottom-0 w-48 border-r border-border-subtle bg-bg-base/80 backdrop-blur-glass overflow-y-auto z-sticky">
       <div className="p-4 space-y-5">
@@ -98,6 +100,7 @@ function ThemeSidebar({ theme, toggleTheme }: { theme: string; toggleTheme: () =
           <p className="text-xs text-text-muted">Component Preview</p>
         </div>
         <Separator />
+        <SwitcherGroup label="Font" options={FONT_OPTIONS} value={font} onChange={setFont} />
         <SwitcherGroup label="Accent" options={ACCENT_OPTIONS} value={accent} onChange={setAccent} />
         <SwitcherGroup label="Palette" options={PALETTE_OPTIONS} value={palette} onChange={setPalette} />
         <SwitcherGroup label="Radius" options={RADIUS_OPTIONS} value={radius} onChange={setRadius} />
