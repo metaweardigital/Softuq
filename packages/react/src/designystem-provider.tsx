@@ -196,6 +196,7 @@ const RADIUS_PRESETS: Record<RadiusPreset, Record<string, string>> = {
   none: {
     "--ds-radius-button": "0px",
     "--ds-radius-input": "0px",
+    "--ds-radius-textarea": "0px",
     "--ds-radius-card": "0px",
     "--ds-radius-checkbox": "0px",
     "--ds-radius-tooltip": "0px",
@@ -204,6 +205,7 @@ const RADIUS_PRESETS: Record<RadiusPreset, Record<string, string>> = {
   sm: {
     "--ds-radius-button": "8px",
     "--ds-radius-input": "8px",
+    "--ds-radius-textarea": "8px",
     "--ds-radius-card": "8px",
     "--ds-radius-checkbox": "4px",
     "--ds-radius-tooltip": "4px",
@@ -212,6 +214,7 @@ const RADIUS_PRESETS: Record<RadiusPreset, Record<string, string>> = {
   md: {
     "--ds-radius-button": "12px",
     "--ds-radius-input": "12px",
+    "--ds-radius-textarea": "12px",
     "--ds-radius-card": "12px",
     "--ds-radius-checkbox": "8px",
     "--ds-radius-tooltip": "8px",
@@ -220,6 +223,7 @@ const RADIUS_PRESETS: Record<RadiusPreset, Record<string, string>> = {
   lg: {
     "--ds-radius-button": "16px",
     "--ds-radius-input": "16px",
+    "--ds-radius-textarea": "16px",
     "--ds-radius-card": "16px",
     "--ds-radius-checkbox": "8px",
     "--ds-radius-tooltip": "12px",
@@ -228,6 +232,7 @@ const RADIUS_PRESETS: Record<RadiusPreset, Record<string, string>> = {
   full: {
     "--ds-radius-button": "9999px",
     "--ds-radius-input": "9999px",
+    "--ds-radius-textarea": "24px",
     "--ds-radius-card": "24px",
     "--ds-radius-checkbox": "8px",
     "--ds-radius-tooltip": "16px",
