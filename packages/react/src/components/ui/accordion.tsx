@@ -1,6 +1,5 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
-import { ChevronDown } from "lucide-react";
 import { cn } from "../../lib/utils";
 
 const accordionVariants = cva("w-full", {
@@ -24,7 +23,8 @@ interface AccordionProps
 const AccordionContext = React.createContext<{
   openItems: Set<string>;
   toggle: (value: string) => void;
-}>({ openItems: new Set(), toggle: () => {} });
+  variant: "default" | "bordered";
+}>({ openItems: new Set(), toggle: () => {}, variant: "default" });
 
 const AccordionItemContext = React.createContext<{
   value: string;
@@ -32,7 +32,7 @@ const AccordionItemContext = React.createContext<{
 }>({ value: "", isOpen: false });
 
 const Accordion = React.forwardRef<HTMLDivElement, AccordionProps>(
-  ({ className, variant, type = "single", children, ...props }, ref) => {
+  ({ className, variant = "default", type = "single", children, ...props }, ref) => {
     const [openItems, setOpenItems] = React.useState<Set<string>>(new Set());
 
     const toggle = React.useCallback(
@@ -52,7 +52,7 @@ const Accordion = React.forwardRef<HTMLDivElement, AccordionProps>(
     );
 
     return (
-      <AccordionContext.Provider value={{ openItems, toggle }}>
+      <AccordionContext.Provider value={{ openItems, toggle, variant: variant ?? "default" }}>
         <div
           ref={ref}
           className={cn(accordionVariants({ variant, className }))}
@@ -73,12 +73,21 @@ interface AccordionItemProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const AccordionItem = React.forwardRef<HTMLDivElement, AccordionItemProps>(
   ({ className, value, children, ...props }, ref) => {
-    const { openItems } = React.useContext(AccordionContext);
+    const { openItems, variant } = React.useContext(AccordionContext);
     const isOpen = openItems.has(value);
 
     return (
       <AccordionItemContext.Provider value={{ value, isOpen }}>
-        <div ref={ref} className={cn("group", className)} data-state={isOpen ? "open" : "closed"} {...props}>
+        <div
+          ref={ref}
+          className={cn(
+            "group py-1",
+            variant === "bordered" && "px-4",
+            className
+          )}
+          data-state={isOpen ? "open" : "closed"}
+          {...props}
+        >
           {children}
         </div>
       </AccordionItemContext.Provider>
@@ -102,19 +111,31 @@ const AccordionTrigger = React.forwardRef<
       onClick={() => toggle(value)}
       aria-expanded={isOpen}
       className={cn(
-        "flex w-full items-center justify-between py-4 px-4 text-sm font-medium text-text-primary",
-        "transition-all duration-normal ease-soft hover:bg-bg-hover",
+        "flex w-full items-center justify-between gap-4 py-3 cursor-pointer select-none",
+        "text-sm font-medium text-text-primary",
+        "transition-colors duration-normal ease-soft",
+        "hover:text-accent",
+        "outline-none focus-visible:text-accent",
         className
       )}
       {...props}
     >
       {children}
-      <ChevronDown
-        className={cn(
-          "h-4 w-4 shrink-0 text-text-muted transition-transform duration-normal ease-smooth",
-          isOpen && "rotate-180"
-        )}
-      />
+      <span className="shrink-0 w-5 h-5 flex items-center justify-center text-accent">
+        <svg
+          className={cn(
+            "w-4 h-4 transition-transform duration-normal ease-smooth",
+            isOpen && "rotate-45"
+          )}
+          viewBox="0 0 16 16"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+        >
+          <line x1="8" y1="3" x2="8" y2="13" />
+          <line x1="3" y1="8" x2="13" y2="8" />
+        </svg>
+      </span>
     </button>
   );
 });
@@ -126,15 +147,103 @@ const AccordionContent = React.forwardRef<
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, children, ...props }, ref) => {
   const { isOpen } = React.useContext(AccordionItemContext);
+  const contentRef = React.useRef<HTMLDivElement>(null);
+  const wrapperRef = React.useRef<HTMLDivElement>(null);
+  const [shouldRender, setShouldRender] = React.useState(isOpen);
+  const [animState, setAnimState] = React.useState<"collapsed" | "expanding" | "expanded" | "collapsing">(
+    isOpen ? "expanded" : "collapsed"
+  );
 
-  if (!isOpen) return null;
+  React.useEffect(() => {
+    if (isOpen) {
+      // Mount first, then animate open in next frames
+      setShouldRender(true);
+      setAnimState("expanding");
+    } else if (animState === "expanded" || animState === "expanding") {
+      // Start closing — set explicit height first, then collapse to 0
+      setAnimState("collapsing");
+    }
+  }, [isOpen]);
+
+  // Handle expanding: measure → set height 0 → next frame set real height
+  React.useEffect(() => {
+    if (animState === "expanding" && wrapperRef.current && contentRef.current) {
+      const h = contentRef.current.scrollHeight;
+      // Force height: 0 so the transition has a starting point
+      wrapperRef.current.style.height = "0px";
+      // Double rAF to ensure browser has painted height: 0
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          if (wrapperRef.current) {
+            wrapperRef.current.style.height = `${h}px`;
+          }
+        });
+      });
+    }
+
+    if (animState === "collapsing" && wrapperRef.current && contentRef.current) {
+      const h = contentRef.current.scrollHeight;
+      // Set current height explicitly so transition works from a real value
+      wrapperRef.current.style.height = `${h}px`;
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          if (wrapperRef.current) {
+            wrapperRef.current.style.height = "0px";
+          }
+        });
+      });
+    }
+  }, [animState]);
+
+  const handleTransitionEnd = (e: React.TransitionEvent) => {
+    // Only react to height transitions on the wrapper
+    if (e.propertyName !== "height") return;
+
+    if (animState === "expanding") {
+      setAnimState("expanded");
+      // Remove fixed height so content can reflow naturally
+      if (wrapperRef.current) {
+        wrapperRef.current.style.height = "auto";
+      }
+    }
+
+    if (animState === "collapsing") {
+      setAnimState("collapsed");
+      setShouldRender(false);
+    }
+  };
+
+  if (!shouldRender) return null;
+
+  const isVisible = animState === "expanding" || animState === "expanded";
+
   return (
     <div
-      ref={ref}
-      className={cn("px-4 pb-4 text-sm text-text-secondary animate-fade-up", className)}
-      {...props}
+      ref={wrapperRef}
+      style={{
+        overflow: "hidden",
+        transition: "height 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+      }}
+      onTransitionEnd={handleTransitionEnd}
     >
-      {children}
+      <div
+        ref={(node) => {
+          (contentRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
+          if (typeof ref === "function") ref(node);
+          else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
+        }}
+        className={cn(
+          "pb-3 text-sm text-text-secondary",
+          "transition-[opacity,translate] ease-smooth",
+          isVisible
+            ? "opacity-100 translate-y-0 duration-[350ms] delay-100"
+            : "opacity-0 -translate-y-1 duration-[250ms]",
+          className
+        )}
+        {...props}
+      >
+        {children}
+      </div>
     </div>
   );
 });

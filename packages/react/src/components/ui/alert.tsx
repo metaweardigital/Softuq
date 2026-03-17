@@ -3,18 +3,24 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../../lib/utils";
 
 const alertVariants = cva(
-  "relative w-full rounded-2xl border p-4 text-sm transition-all duration-normal",
+  "relative rounded-2xl border p-4 text-sm [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-1/2 [&>svg]:-translate-y-1/2 [&>svg]:h-4 [&>svg]:w-4 [&:has(svg)]:pl-11",
   {
     variants: {
       variant: {
-        info: "bg-accent-muted/10 border-accent/20 text-accent-text",
-        success: "bg-success-muted/10 border-success/20 text-success-text",
-        warning: "bg-warning-muted/10 border-warning/20 text-warning-text",
-        error: "bg-destructive-muted/10 border-destructive/20 text-destructive-text",
+        default: "bg-bg-card border-border-subtle text-text-primary [&>svg]:text-text-secondary",
+        info: "bg-bg-card border-border-subtle text-text-primary [&>svg]:text-accent",
+        success: "bg-bg-card border-border-subtle text-text-primary [&>svg]:text-success",
+        warning: "bg-bg-card border-border-subtle text-text-primary [&>svg]:text-warning",
+        destructive: "bg-bg-card border-border-subtle text-text-primary [&>svg]:text-destructive",
+      },
+      size: {
+        full: "w-full",
+        fit: "w-fit",
       },
     },
     defaultVariants: {
-      variant: "info",
+      variant: "default",
+      size: "full",
     },
   }
 );
@@ -24,11 +30,11 @@ interface AlertProps
     VariantProps<typeof alertVariants> {}
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
-  ({ className, variant, ...props }, ref) => (
+  ({ className, variant, size, ...props }, ref) => (
     <div
       ref={ref}
       role="alert"
-      className={cn(alertVariants({ variant, className }))}
+      className={cn(alertVariants({ variant, size, className }))}
       {...props}
     />
   )
@@ -41,7 +47,7 @@ const AlertTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <h5
     ref={ref}
-    className={cn("mb-1 font-semibold leading-none", className)}
+    className={cn("font-semibold leading-tight tracking-tight [&:has(~p)]:mb-1", className)}
     {...props}
   />
 ));
@@ -51,7 +57,7 @@ const AlertDescription = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, ...props }, ref) => (
-  <p ref={ref} className={cn("text-sm opacity-80", className)} {...props} />
+  <p ref={ref} className={cn("text-sm text-text-secondary [&_p]:leading-relaxed", className)} {...props} />
 ));
 AlertDescription.displayName = "AlertDescription";
 

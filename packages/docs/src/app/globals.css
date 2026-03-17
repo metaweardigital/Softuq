@@ -89,6 +89,7 @@
   --animate-slide-in-left: slide-in-left 0.3s var(--ease-smooth);
   --animate-slide-in-up: slide-in-up 0.3s var(--ease-smooth);
   --animate-slide-in-down: slide-in-down 0.3s var(--ease-smooth);
+  --animate-fade-out: fade-out 0.3s var(--ease-smooth) forwards;
   --animate-shimmer: shimmer 1.5s infinite linear;
   --animate-pulse: pulse 2s infinite var(--ease-soft);
 
@@ -136,6 +137,10 @@
 @keyframes slide-in-down {
   0% { transform: translateY(-100%); }
   100% { transform: translateY(0); }
+}
+@keyframes fade-out {
+  0% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.95) translateY(8px); }
 }
 @keyframes shimmer {
   0% { background-position: -200% 0; }

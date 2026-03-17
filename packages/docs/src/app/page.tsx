@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Plus } from "lucide-react";
+import { Plus, Terminal, Info, CheckCircle2, AlertTriangle, AlertCircle } from "lucide-react";
 import {
   Button,
   Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter,
@@ -55,19 +55,57 @@ function Row({ label, children }: { label?: string; children: React.ReactNode })
 function ToastDemo() {
   const { addToast } = useToast();
   return (
-    <div className="flex flex-wrap gap-3">
-      <Button size="sm" variant="secondary" onClick={() => addToast({ title: "Default toast", description: "Something happened" })}>
-        Default
-      </Button>
-      <Button size="sm" variant="secondary" onClick={() => addToast({ title: "Success!", description: "Action completed", variant: "success" })}>
-        Success
-      </Button>
-      <Button size="sm" variant="secondary" onClick={() => addToast({ title: "Error", description: "Something went wrong", variant: "error" })}>
-        Error
-      </Button>
-      <Button size="sm" variant="secondary" onClick={() => addToast({ title: "Warning", description: "Be careful", variant: "warning" })}>
-        Warning
-      </Button>
+    <div className="space-y-4">
+      <div className="space-y-2">
+        <p className="text-xs font-medium text-text-muted uppercase tracking-wide">Variants</p>
+        <div className="flex flex-wrap gap-3">
+          <Button size="sm" variant="secondary" onClick={() => addToast({ title: "Heads up!", description: "You can add components to your app using the CLI." })}>
+            Default
+          </Button>
+          <Button size="sm" variant="secondary" onClick={() => addToast({ title: "Information", description: "This is an informational alert message.", variant: "info" })}>
+            Info
+          </Button>
+          <Button size="sm" variant="secondary" onClick={() => addToast({ title: "Success", description: "Your changes have been saved successfully.", variant: "success" })}>
+            Success
+          </Button>
+          <Button size="sm" variant="secondary" onClick={() => addToast({ title: "Warning", description: "Please review your settings before proceeding.", variant: "warning" })}>
+            Warning
+          </Button>
+          <Button size="sm" variant="secondary" onClick={() => addToast({ title: "Error", description: "Something went wrong. Please try again.", variant: "error" })}>
+            Error
+          </Button>
+        </div>
+      </div>
+      <div className="space-y-2">
+        <p className="text-xs font-medium text-text-muted uppercase tracking-wide">Title only</p>
+        <div className="flex flex-wrap gap-3">
+          <Button size="sm" variant="ghost" onClick={() => addToast({ title: "Saved", variant: "success" })}>
+            Short
+          </Button>
+          <Button size="sm" variant="ghost" onClick={() => addToast({ title: "Connection lost", variant: "error" })}>
+            Error title
+          </Button>
+        </div>
+      </div>
+      <div className="space-y-2">
+        <p className="text-xs font-medium text-text-muted uppercase tracking-wide">Long content (truncated)</p>
+        <div className="flex flex-wrap gap-3">
+          <Button size="sm" variant="ghost" onClick={() => addToast({ title: "Breaking changes in v2.0", description: "The API has been completely redesigned. All existing endpoints will be deprecated on March 31st. Please migrate your application to the new endpoints before the deadline.", variant: "warning" })}>
+            Long text
+          </Button>
+        </div>
+      </div>
+      <div className="space-y-2">
+        <p className="text-xs font-medium text-text-muted uppercase tracking-wide">Custom duration</p>
+        <div className="flex flex-wrap gap-3">
+          <Button size="sm" variant="ghost" onClick={() => addToast({ title: "Quick flash", description: "This disappears in 1.5s.", variant: "info", duration: 1500 })}>
+            1.5s
+          </Button>
+          <Button size="sm" variant="ghost" onClick={() => addToast({ title: "Sticky toast", description: "This stays for 10 seconds.", variant: "warning", duration: 10000 })}>
+            10s
+          </Button>
+        </div>
+      </div>
     </div>
   );
 }
@@ -83,6 +121,7 @@ export default function ComponentPreview() {
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [sheetOpen, setSheetOpen] = React.useState(false);
   const [progress, setProgress] = React.useState(45);
+  const [toastPosition, setToastPosition] = React.useState<"left" | "center" | "right">("center");
 
   const toggleTheme = () => {
     const next = theme === "dark" ? "light" : "dark";
@@ -91,7 +130,7 @@ export default function ComponentPreview() {
   };
 
   return (
-    <ToastProvider>
+    <ToastProvider position={toastPosition}>
       <div className="min-h-screen bg-bg-base">
         {/* Header */}
         <header className="sticky top-0 z-sticky backdrop-blur-glass bg-bg-base/80 border-b border-border-subtle">
@@ -108,6 +147,164 @@ export default function ComponentPreview() {
         </header>
 
         <main className="max-w-5xl mx-auto px-6 py-10 space-y-12">
+
+          {/* Accordion */}
+          <Section title="Accordion">
+            <div className="max-w-2xl space-y-8">
+              <div className="space-y-2">
+                <p className="text-xs font-medium text-text-muted uppercase tracking-wide">Default</p>
+                <Accordion variant="default">
+                  <AccordionItem value="item-1">
+                    <AccordionTrigger>What is DesignYstem?</AccordionTrigger>
+                    <AccordionContent>
+                      A custom design system library with a <span className="text-accent">soft UI / neumorphic</span> aesthetic. Built as a monorepo with tokens, a Tailwind preset, and copy-paste components — inspired by <span className="text-accent">shadcn/ui</span>.
+                    </AccordionContent>
+                  </AccordionItem>
+                  <AccordionItem value="item-2">
+                    <AccordionTrigger>How do I install it?</AccordionTrigger>
+                    <AccordionContent>
+                      <p>Run <code className="text-xs bg-bg-elevated px-1.5 py-0.5 rounded-md text-text-primary">npx designystem init</code> to set up your project, then add individual components:</p>
+                      <p className="mt-2"><code className="text-xs bg-bg-elevated px-1.5 py-0.5 rounded-md text-text-primary">npx designystem add button card input</code></p>
+                      <p className="mt-2">Components are copied directly into your project — no runtime dependency, full control over the source.</p>
+                    </AccordionContent>
+                  </AccordionItem>
+                  <AccordionItem value="item-3">
+                    <AccordionTrigger>Which frameworks are supported?</AccordionTrigger>
+                    <AccordionContent>
+                      Currently <Badge variant="default" size="sm">React</Badge> is fully supported. <Badge variant="secondary" size="sm">Svelte 5</Badge> and <Badge variant="outline" size="sm">Astro</Badge> components are planned for v0.2.
+                    </AccordionContent>
+                  </AccordionItem>
+                  <AccordionItem value="item-4">
+                    <AccordionTrigger>Is it customizable?</AccordionTrigger>
+                    <AccordionContent>
+                      Yes! The token system uses three layers: <span className="text-success-text">primitive</span> → <span className="text-warning-text">semantic</span> → <span className="text-accent">component</span>. All tokens are CSS custom properties you can override. Dark mode is default, switch to light with <code className="text-xs bg-bg-elevated px-1.5 py-0.5 rounded-md text-text-primary">data-theme=&quot;light&quot;</code> on your root element.
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+              </div>
+              <div className="space-y-2">
+                <p className="text-xs font-medium text-text-muted uppercase tracking-wide">Bordered</p>
+                <Accordion variant="bordered" type="multiple">
+                  <AccordionItem value="b1">
+                    <AccordionTrigger>Can I use it with Tailwind v4?</AccordionTrigger>
+                    <AccordionContent>
+                      Absolutely. The design system is built for <span className="text-accent">Tailwind CSS v4</span> — tokens are mapped via <code className="text-xs bg-bg-elevated px-1.5 py-0.5 rounded-md text-text-primary">@theme</code> in your CSS, no config file needed.
+                    </AccordionContent>
+                  </AccordionItem>
+                  <AccordionItem value="b2">
+                    <AccordionTrigger>What about accessibility?</AccordionTrigger>
+                    <AccordionContent>
+                      All interactive components include proper <span className="text-accent">ARIA attributes</span>, keyboard navigation, and focus management. Buttons, dialogs, tabs, and accordions follow WAI-ARIA patterns. Color contrast meets <span className="text-success-text">WCAG AA</span> standards in both dark and light themes.
+                    </AccordionContent>
+                  </AccordionItem>
+                  <AccordionItem value="b3">
+                    <AccordionTrigger>Where can I report bugs?</AccordionTrigger>
+                    <AccordionContent>Short answer: GitHub Issues.</AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+              </div>
+            </div>
+          </Section>
+
+          {/* Alert */}
+          <Section title="Alert">
+            <div className="space-y-3 max-w-2xl">
+              <p className="text-xs font-medium text-text-muted uppercase tracking-wide">Variants</p>
+              <Alert>
+                <Terminal />
+                <AlertTitle>Heads up!</AlertTitle>
+                <AlertDescription>You can add components to your app using the CLI.</AlertDescription>
+              </Alert>
+              <Alert variant="info">
+                <Info />
+                <AlertTitle>Information</AlertTitle>
+                <AlertDescription>This is an informational alert message.</AlertDescription>
+              </Alert>
+              <Alert variant="success">
+                <CheckCircle2 />
+                <AlertTitle>Success</AlertTitle>
+                <AlertDescription>Your changes have been saved successfully.</AlertDescription>
+              </Alert>
+              <Alert variant="warning">
+                <AlertTriangle />
+                <AlertTitle>Warning</AlertTitle>
+                <AlertDescription>Please review your settings before proceeding.</AlertDescription>
+              </Alert>
+              <Alert variant="destructive">
+                <AlertCircle />
+                <AlertTitle>Error</AlertTitle>
+                <AlertDescription>Something went wrong. Please try again.</AlertDescription>
+              </Alert>
+
+              <p className="text-xs font-medium text-text-muted uppercase tracking-wide pt-4">Without icon</p>
+              <Alert>
+                <AlertTitle>No icon alert</AlertTitle>
+                <AlertDescription>This alert has no icon, just title and description.</AlertDescription>
+              </Alert>
+
+              <p className="text-xs font-medium text-text-muted uppercase tracking-wide pt-4">Title only</p>
+              <Alert variant="info">
+                <Info />
+                <AlertTitle>Quick note — no description needed.</AlertTitle>
+              </Alert>
+
+              <p className="text-xs font-medium text-text-muted uppercase tracking-wide pt-4">Long content</p>
+              <Alert variant="warning">
+                <AlertTriangle />
+                <AlertTitle>Breaking changes in v2.0</AlertTitle>
+                <AlertDescription className="line-clamp-2">
+                  Refer to the <a href="#" className="font-medium text-accent underline underline-offset-2">migration guide</a> for detailed instructions. The API has been completely redesigned. All existing endpoints will be deprecated on March 31st. Please migrate your application to the new endpoints before the deadline.
+                </AlertDescription>
+              </Alert>
+
+              <p className="text-xs font-medium text-text-muted uppercase tracking-wide pt-4">Fit width (hug content)</p>
+              <Alert variant="success" size="fit">
+                <CheckCircle2 />
+                <AlertTitle>Saved</AlertTitle>
+              </Alert>
+              <Alert variant="info" size="fit">
+                <Info />
+                <AlertTitle>3 items selected</AlertTitle>
+                <AlertDescription>Click to manage selection.</AlertDescription>
+              </Alert>
+
+              <p className="text-xs font-medium text-text-muted uppercase tracking-wide pt-4">Rich content</p>
+              <Alert variant="success">
+                <CheckCircle2 />
+                <AlertTitle>Deployment complete</AlertTitle>
+                <AlertDescription>
+                  Your app is live at <code className="text-xs bg-bg-elevated px-1.5 py-0.5 rounded-md text-text-primary">production-abc123</code>. Version <Badge size="sm" variant="success">v1.4.2</Badge> is now serving traffic.
+                </AlertDescription>
+              </Alert>
+            </div>
+          </Section>
+
+          {/* Avatar */}
+          <Section title="Avatar">
+            <Row label="Sizes & Fallback">
+              <Avatar size="sm" fallback="SM" />
+              <Avatar size="md" fallback="MD" />
+              <Avatar size="lg" fallback="LG" />
+              <Avatar size="md" alt="John Doe" />
+              <Avatar size="md" src="https://i.pravatar.cc/100?u=demo" alt="User" />
+            </Row>
+          </Section>
+
+          {/* Badge */}
+          <Section title="Badge">
+            <Row label="Variants">
+              <Badge variant="default">Default</Badge>
+              <Badge variant="secondary">Secondary</Badge>
+              <Badge variant="outline">Outline</Badge>
+              <Badge variant="destructive">Destructive</Badge>
+              <Badge variant="success">Success</Badge>
+              <Badge variant="warning">Warning</Badge>
+            </Row>
+            <Row label="Sizes">
+              <Badge size="sm">Small</Badge>
+              <Badge size="md">Medium</Badge>
+            </Row>
+          </Section>
 
           {/* Button */}
           <Section title="Button">
@@ -160,6 +357,47 @@ export default function ComponentPreview() {
             </div>
           </Section>
 
+          {/* Checkbox */}
+          <Section title="Checkbox">
+            <Row>
+              <div className="flex items-center gap-2">
+                <Checkbox defaultChecked />
+                <Label size="sm">Checked</Label>
+              </div>
+              <div className="flex items-center gap-2">
+                <Checkbox />
+                <Label size="sm">Unchecked</Label>
+              </div>
+              <div className="flex items-center gap-2">
+                <Checkbox size="sm" defaultChecked />
+                <Label size="sm">Small</Label>
+              </div>
+              <div className="flex items-center gap-2">
+                <Checkbox disabled />
+                <Label size="sm">Disabled</Label>
+              </div>
+            </Row>
+          </Section>
+
+          {/* Dialog */}
+          <Section title="Dialog">
+            <Row>
+              <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+                <Button variant="secondary" onClick={() => setDialogOpen(true)}>Open Dialog</Button>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle>Are you sure?</DialogTitle>
+                    <DialogDescription>This action cannot be undone. This will permanently delete your data.</DialogDescription>
+                  </DialogHeader>
+                  <DialogFooter>
+                    <Button variant="ghost" onClick={() => setDialogOpen(false)}>Cancel</Button>
+                    <Button variant="destructive" onClick={() => setDialogOpen(false)}>Delete</Button>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
+            </Row>
+          </Section>
+
           {/* Input & Textarea */}
           <Section title="Input & Textarea">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl">
@@ -198,6 +436,53 @@ export default function ComponentPreview() {
             </div>
           </Section>
 
+          {/* Label */}
+          <Section title="Label">
+            <Row>
+              <Label>Default Label</Label>
+              <Label variant="required">Required Label</Label>
+              <Label size="sm">Small Label</Label>
+            </Row>
+          </Section>
+
+          {/* Progress */}
+          <Section title="Progress">
+            <div className="space-y-4 max-w-md">
+              <div className="space-y-2">
+                <div className="flex justify-between text-xs text-text-muted">
+                  <span>Progress</span>
+                  <span>{progress}%</span>
+                </div>
+                <Progress value={progress} size="md" />
+              </div>
+              <Progress value={75} size="sm" />
+              <div className="flex gap-2">
+                <Button size="sm" variant="ghost" onClick={() => setProgress(Math.max(0, progress - 10))}>-10</Button>
+                <Button size="sm" variant="ghost" onClick={() => setProgress(Math.min(100, progress + 10))}>+10</Button>
+              </div>
+            </div>
+          </Section>
+
+          {/* Radio */}
+          <Section title="Radio">
+            <Row>
+              <RadioGroup value={radioValue} onValueChange={setRadioValue}>
+                <div className="flex items-center gap-2">
+                  <RadioGroupItem value="option1" />
+                  <Label size="sm">Option 1</Label>
+                </div>
+                <div className="flex items-center gap-2">
+                  <RadioGroupItem value="option2" />
+                  <Label size="sm">Option 2</Label>
+                </div>
+                <div className="flex items-center gap-2">
+                  <RadioGroupItem value="option3" />
+                  <Label size="sm">Option 3</Label>
+                </div>
+              </RadioGroup>
+            </Row>
+          </Section>
+
           {/* Select */}
           <Section title="Select">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl">
@@ -220,77 +505,6 @@ export default function ComponentPreview() {
             </div>
           </Section>
 
-          {/* Toggle, Checkbox, Radio */}
-          <Section title="Toggle / Checkbox / Radio">
-            <Row label="Toggle">
-              <Toggle checked={toggleChecked} onCheckedChange={setToggleChecked} />
-              <Toggle checked={toggleChecked2} onCheckedChange={setToggleChecked2} />
-              <Toggle size="sm" checked={toggleChecked} onCheckedChange={setToggleChecked} />
-              <Toggle disabled checked={false} onCheckedChange={() => {}} />
-            </Row>
-            <Row label="Checkbox">
-              <div className="flex items-center gap-2">
-                <Checkbox defaultChecked />
-                <Label size="sm">Checked</Label>
-              </div>
-              <div className="flex items-center gap-2">
-                <Checkbox />
-                <Label size="sm">Unchecked</Label>
-              </div>
-              <div className="flex items-center gap-2">
-                <Checkbox size="sm" defaultChecked />
-                <Label size="sm">Small</Label>
-              </div>
-              <div className="flex items-center gap-2">
-                <Checkbox disabled />
-                <Label size="sm">Disabled</Label>
-              </div>
-            </Row>
-            <Row label="Radio Group">
-              <RadioGroup value={radioValue} onValueChange={setRadioValue}>
-                <div className="flex items-center gap-2">
-                  <RadioGroupItem value="option1" />
-                  <Label size="sm">Option 1</Label>
-                </div>
-                <div className="flex items-center gap-2">
-                  <RadioGroupItem value="option2" />
-                  <Label size="sm">Option 2</Label>
-                </div>
-                <div className="flex items-center gap-2">
-                  <RadioGroupItem value="option3" />
-                  <Label size="sm">Option 3</Label>
-                </div>
-              </RadioGroup>
-            </Row>
-          </Section>
-
-          {/* Badge */}
-          <Section title="Badge">
-            <Row label="Variants">
-              <Badge variant="default">Default</Badge>
-              <Badge variant="secondary">Secondary</Badge>
-              <Badge variant="outline">Outline</Badge>
-              <Badge variant="destructive">Destructive</Badge>
-              <Badge variant="success">Success</Badge>
-              <Badge variant="warning">Warning</Badge>
-            </Row>
-            <Row label="Sizes">
-              <Badge size="sm">Small</Badge>
-              <Badge size="md">Medium</Badge>
-            </Row>
-          </Section>
-
-          {/* Avatar */}
-          <Section title="Avatar">
-            <Row label="Sizes & Fallback">
-              <Avatar size="sm" fallback="SM" />
-              <Avatar size="md" fallback="MD" />
-              <Avatar size="lg" fallback="LG" />
-              <Avatar size="md" alt="John Doe" />
-              <Avatar size="md" src="https://i.pravatar.cc/100?u=demo" alt="User" />
-            </Row>
-          </Section>
-
           {/* Separator */}
           <Section title="Separator">
             <div className="space-y-2">
@@ -305,44 +519,18 @@ export default function ComponentPreview() {
             </div>
           </Section>
 
-          {/* Alert */}
-          <Section title="Alert">
-            <div className="space-y-3 max-w-2xl">
-              <Alert variant="info">
-                <AlertTitle>Information</AlertTitle>
-                <AlertDescription>This is an informational alert message.</AlertDescription>
-              </Alert>
-              <Alert variant="success">
-                <AlertTitle>Success</AlertTitle>
-                <AlertDescription>Your changes have been saved successfully.</AlertDescription>
-              </Alert>
-              <Alert variant="warning">
-                <AlertTitle>Warning</AlertTitle>
-                <AlertDescription>Please review your settings before proceeding.</AlertDescription>
-              </Alert>
-              <Alert variant="error">
-                <AlertTitle>Error</AlertTitle>
-                <AlertDescription>Something went wrong. Please try again.</AlertDescription>
-              </Alert>
-            </div>
-          </Section>
-
-          {/* Progress */}
-          <Section title="Progress">
-            <div className="space-y-4 max-w-md">
-              <div className="space-y-2">
-                <div className="flex justify-between text-xs text-text-muted">
-                  <span>Progress</span>
-                  <span>{progress}%</span>
+          {/* Sheet */}
+          <Section title="Sheet">
+            <Row>
+              <Button variant="secondary" onClick={() => setSheetOpen(true)}>Open Sheet (Right)</Button>
+              <Sheet open={sheetOpen} onClose={() => setSheetOpen(false)} side="right" size="md">
+                <h3 className="text-lg font-semibold mb-4">Sheet Title</h3>
+                <p className="text-sm text-text-secondary">This is a sheet / drawer component. It slides in from the edge of the screen.</p>
+                <div className="mt-6">
+                  <Button onClick={() => setSheetOpen(false)}>Close</Button>
                 </div>
-                <Progress value={progress} size="md" />
-              </div>
-              <Progress value={75} size="sm" />
-              <div className="flex gap-2">
-                <Button size="sm" variant="ghost" onClick={() => setProgress(Math.max(0, progress - 10))}>-10</Button>
-                <Button size="sm" variant="ghost" onClick={() => setProgress(Math.min(100, progress + 10))}>+10</Button>
-              </div>
-            </div>
+              </Sheet>
+            </Row>
           </Section>
 
           {/* Skeleton */}
@@ -397,70 +585,26 @@ export default function ComponentPreview() {
             </Row>
           </Section>
 
-          {/* Accordion */}
-          <Section title="Accordion">
-            <div className="max-w-2xl">
-              <Row label="Default">
-                <Accordion variant="default" className="w-full">
-                  <AccordionItem value="item-1">
-                    <AccordionTrigger>What is DesignYstem?</AccordionTrigger>
-                    <AccordionContent>A modern design system with neumorphic aesthetics, built for React, Svelte, and Astro.</AccordionContent>
-                  </AccordionItem>
-                  <AccordionItem value="item-2">
-                    <AccordionTrigger>How do I install it?</AccordionTrigger>
-                    <AccordionContent>Run npx designystem init to set up your project, then npx designystem add button to add components.</AccordionContent>
-                  </AccordionItem>
-                  <AccordionItem value="item-3">
-                    <AccordionTrigger>Is it customizable?</AccordionTrigger>
-                    <AccordionContent>Yes! Components are copied to your project so you have full control. Tokens are CSS variables you can override.</AccordionContent>
-                  </AccordionItem>
-                </Accordion>
-              </Row>
-              <Row label="Bordered">
-                <Accordion variant="bordered" type="multiple" className="w-full">
-                  <AccordionItem value="b1">
-                    <AccordionTrigger>First item</AccordionTrigger>
-                    <AccordionContent>Content for first item.</AccordionContent>
-                  </AccordionItem>
-                  <AccordionItem value="b2">
-                    <AccordionTrigger>Second item</AccordionTrigger>
-                    <AccordionContent>Content for second item.</AccordionContent>
-                  </AccordionItem>
-                </Accordion>
-              </Row>
+          {/* Toast */}
+          <Section title="Toast">
+            <ToastDemo />
+            <div className="space-y-2">
+              <p className="text-xs font-medium text-text-muted uppercase tracking-wide">Position</p>
+              <div className="flex flex-wrap gap-3">
+                <Button size="sm" variant={toastPosition === "left" ? "default" : "outline"} onClick={() => setToastPosition("left")}>Left</Button>
+                <Button size="sm" variant={toastPosition === "center" ? "default" : "outline"} onClick={() => setToastPosition("center")}>Center</Button>
+                <Button size="sm" variant={toastPosition === "right" ? "default" : "outline"} onClick={() => setToastPosition("right")}>Right</Button>
+              </div>
             </div>
           </Section>
 
-          {/* Dialog */}
-          <Section title="Dialog">
+          {/* Toggle */}
+          <Section title="Toggle">
             <Row>
-              <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-                <Button variant="secondary" onClick={() => setDialogOpen(true)}>Open Dialog</Button>
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>Are you sure?</DialogTitle>
-                    <DialogDescription>This action cannot be undone. This will permanently delete your data.</DialogDescription>
-                  </DialogHeader>
-                  <DialogFooter>
-                    <Button variant="ghost" onClick={() => setDialogOpen(false)}>Cancel</Button>
-                    <Button variant="destructive" onClick={() => setDialogOpen(false)}>Delete</Button>
-                  </DialogFooter>
-                </DialogContent>
-              </Dialog>
-            </Row>
-          </Section>
-
-          {/* Sheet */}
-          <Section title="Sheet / Drawer">
-            <Row>
-              <Button variant="secondary" onClick={() => setSheetOpen(true)}>Open Sheet (Right)</Button>
-              <Sheet open={sheetOpen} onClose={() => setSheetOpen(false)} side="right" size="md">
-                <h3 className="text-lg font-semibold mb-4">Sheet Title</h3>
-                <p className="text-sm text-text-secondary">This is a sheet / drawer component. It slides in from the edge of the screen.</p>
-                <div className="mt-6">
-                  <Button onClick={() => setSheetOpen(false)}>Close</Button>
-                </div>
-              </Sheet>
+              <Toggle checked={toggleChecked} onCheckedChange={setToggleChecked} />
+              <Toggle checked={toggleChecked2} onCheckedChange={setToggleChecked2} />
+              <Toggle size="sm" checked={toggleChecked} onCheckedChange={setToggleChecked} />
+              <Toggle disabled checked={false} onCheckedChange={() => {}} />
             </Row>
           </Section>
 
@@ -481,12 +625,6 @@ export default function ComponentPreview() {
               </Tooltip>
             </Row>
           </Section>
-
-          {/* Toast */}
-          <Section title="Toast">
-            <ToastDemo />
-          </Section>
-
 
         </main>
 

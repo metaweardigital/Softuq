@@ -17,7 +17,7 @@ export { Progress, progressVariants, type ProgressProps } from "./components/ui/
 export { Tabs, TabsList, TabsTrigger, TabsContent, type TabsProps, type TabsListProps, type TabsTriggerProps, type TabsContentProps } from "./components/ui/tabs";
 export { Dialog, DialogTrigger, DialogContent, DialogOverlay, DialogHeader, DialogTitle, DialogDescription, DialogFooter, dialogContentVariants, type DialogProps, type DialogContentProps } from "./components/ui/dialog";
 export { Tooltip, type TooltipProps } from "./components/ui/tooltip";
-export { ToastProvider, useToast, toastVariants } from "./components/ui/toast";
+export { ToastProvider, ToastItem, useToast, toastVariants, type Toast } from "./components/ui/toast";
 export { Accordion, AccordionItem, AccordionTrigger, AccordionContent, accordionVariants, type AccordionProps, type AccordionItemProps } from "./components/ui/accordion";
 export { Sheet, sheetVariants, type SheetProps } from "./components/ui/sheet";
 
