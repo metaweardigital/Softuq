@@ -77,7 +77,7 @@ function Sheet({ open, onClose, side, size, children, className }: SheetProps) {
         >
           <X className="h-4 w-4" />
         </button>
-        <div className="p-[var(--ds-space-card)] h-full overflow-y-auto">{children}</div>
+        <div className="p-[var(--ds-space-card)] h-full overflow-y-auto scrollbar-thin">{children}</div>
       </div>
     </>
   );

@@ -1,6 +1,7 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 import { cn } from "../../lib/utils";
+import { useFormFieldSize } from "./form-text";
 
 const labelVariants = cva("font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-50", {
   variants: {
@@ -21,9 +22,11 @@ const labelVariants = cva("font-medium leading-none peer-disabled:cursor-not-all
 
 interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement>, VariantProps<typeof labelVariants> {}
 
-const Label = React.forwardRef<HTMLLabelElement, LabelProps>(({ className, variant, size, ...props }, ref) => (
-  <label ref={ref} className={cn(labelVariants({ variant, size, className }))} {...props} />
-));
+const Label = React.forwardRef<HTMLLabelElement, LabelProps>(({ className, variant, size, ...props }, ref) => {
+  const fieldSize = useFormFieldSize();
+  const resolvedSize = size ?? fieldSize;
+  return <label ref={ref} className={cn(labelVariants({ variant, size: resolvedSize, className }))} {...props} />;
+});
 Label.displayName = "Label";
 
 export type { LabelProps };

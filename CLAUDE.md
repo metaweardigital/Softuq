@@ -75,6 +75,11 @@ Always order from most global → most specific:
 - `type="button"` on all `<button>` elements
 - Export: component, variants, props type
 - Hardcoded `rounded-full` stays for: Avatar (lg/full preset), Radio, Toggle, Progress
+- Badge = static indicator (status, count) — never interactive
+- Tag = interactive label (dismissible, hover/focus states) — used in multi-select
+- Select: composable API (Select, SelectTrigger, SelectContent, SelectItem, SelectGroup, SelectLabel, SelectSeparator), supports single + multi (`multiple` prop), auto-flip positioning
+- FormField wraps Label + Input/Select/Textarea + FormDescription + FormMessage; `size` prop cascades to children
+- Scrollbar utilities: `.scrollbar-thin` (4px styled), `.scrollbar-hidden` (no scrollbar)
 - See [Component Pattern](docs/guides/component-pattern.md) for full template
 
 ## Docs

@@ -42,6 +42,16 @@ export {
   DialogTrigger,
   dialogContentVariants,
 } from "./components/ui/dialog";
+export {
+  FormDescription,
+  FormField,
+  type FormFieldProps,
+  type FormFieldSize,
+  FormMessage,
+  type FormMessageProps,
+  formMessageVariants,
+  useFormFieldSize,
+} from "./components/ui/form-text";
 export { Input, type InputProps, inputVariants } from "./components/ui/input";
 export { Label, type LabelProps, labelVariants } from "./components/ui/label";
 export { Progress, type ProgressProps, progressVariants } from "./components/ui/progress";
@@ -52,7 +62,20 @@ export {
   type RadioGroupProps,
   radioVariants,
 } from "./components/ui/radio";
-export { Select, SelectOption, type SelectProps, selectVariants } from "./components/ui/select";
+export {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  type SelectItemProps,
+  SelectLabel,
+  type SelectProps,
+  SelectSeparator,
+  SelectTrigger,
+  type SelectTriggerProps,
+  SelectValue,
+  selectTriggerVariants,
+} from "./components/ui/select";
 export { Separator, type SeparatorProps } from "./components/ui/separator";
 export { Sheet, type SheetProps, sheetVariants } from "./components/ui/sheet";
 export { Skeleton, type SkeletonProps, skeletonVariants } from "./components/ui/skeleton";
@@ -68,6 +91,7 @@ export {
   TabsTrigger,
   type TabsTriggerProps,
 } from "./components/ui/tabs";
+export { Tag, type TagProps, tagVariants } from "./components/ui/tag";
 export { Textarea, type TextareaProps, textareaVariants } from "./components/ui/textarea";
 export {
   type Toast,
