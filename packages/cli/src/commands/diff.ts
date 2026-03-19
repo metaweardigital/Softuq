@@ -82,6 +82,41 @@ export async function diff(options: DiffOptions) {
     }
   }
 
+  // Check tokens.ts
+  const tokensJsLocal = path.join(cwd, config.libDir, "tokens.ts");
+  const tokensJsSource = path.resolve(sourceDir, "../../tokens/src/index.ts");
+  if ((await fs.pathExists(tokensJsLocal)) && (await fs.pathExists(tokensJsSource))) {
+    const l = await fs.readFile(tokensJsLocal, "utf-8");
+    const s = await fs.readFile(tokensJsSource, "utf-8");
+    if (l !== s) {
+      console.log(pc.yellow("  ↻ tokens.ts") + pc.dim(" — updated upstream"));
+      changed++;
+    }
+  }
+
+  // Check CSS token/theme files (safe to overwrite — user code is in globals.css)
+  const cssDir = detected.cssFile ? path.dirname(path.join(cwd, detected.cssFile)) : path.join(cwd, "src/app");
+  const tokensDir = path.resolve(sourceDir, "../../tokens/src");
+  const cssFiles = [
+    { local: "designystem-tokens.css", source: ["primitives.css", "semantic.css"], label: "tokens CSS" },
+    { local: "designystem-theme.css", source: ["tailwind-theme.css"], label: "theme CSS" },
+  ];
+  for (const { local, source, label } of cssFiles) {
+    const localPath = path.join(cssDir, local);
+    if (!(await fs.pathExists(localPath))) continue;
+    const localContent = await fs.readFile(localPath, "utf-8");
+    let sourceContent = "";
+    for (const f of source) {
+      const fp = path.join(tokensDir, f);
+      if (await fs.pathExists(fp)) sourceContent += `${await fs.readFile(fp, "utf-8")}\n\n`;
+    }
+    if (local === "designystem-tokens.css") sourceContent = `/* DesignYstem */\n${sourceContent}`;
+    if (localContent.trim() !== sourceContent.trim()) {
+      console.log(pc.yellow(`  ↻ ${local}`) + pc.dim(` — ${label} updated upstream`));
+      changed++;
+    }
+  }
+
   if (changed === 0 && missing === 0) {
     console.log(pc.green("  ✓ Everything up to date"));
   }

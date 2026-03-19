@@ -55,23 +55,11 @@
   --color-glass-bg: var(--glass-bg);
   --color-glass-border: var(--glass-border);
 
-  /* Font families */
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-mono);
+  /* Font families — use --ds- prefix to avoid circular ref with Tailwind built-ins */
+  --font-ds-sans: var(--font-sans);
+  --font-ds-mono: var(--font-mono);
 
-  /* Border radius */
-  --radius-xs: var(--radius-xs);
-  --radius-sm: var(--radius-sm);
-  --radius-md: var(--radius-md);
-  --radius-lg: var(--radius-lg);
-  --radius-xl: var(--radius-xl);
-  --radius-2xl: var(--radius-2xl);
-  --radius-3xl: var(--radius-3xl);
-
-  /* Shadows */
-  --shadow-sm: var(--shadow-sm);
-  --shadow-md: var(--shadow-md);
-  --shadow-lg: var(--shadow-lg);
+  /* Shadows — neu-* don't collide, but sm/md/lg do */
   --shadow-neu-raised: var(--shadow-neu-raised);
   --shadow-neu-pressed: var(--shadow-neu-pressed);
   --shadow-neu-floating: var(--shadow-neu-floating);
