@@ -97,6 +97,23 @@ Always order from most global → most specific:
 - [Component Pattern](docs/guides/component-pattern.md) — CVA template, theming override
 - [Theming Guide](docs/guides/theming.md) — DesignYstemProvider, palette/accent/radius/spacing presets
 
+## CLI
+
+CLI tool for adding DesignYstem to any project. Located in `packages/cli/`.
+
+```bash
+npx designystem init          # setup tokens, utils, provider, globals.css
+npx designystem add button    # copy component files + install deps
+npx designystem add --all     # add all components
+npx designystem list          # show available components
+```
+
+- `init` detects framework (React/Svelte), package manager, and project structure
+- `init` writes tokens + @theme to separate CSS files imported via `@import` (avoids circular var() refs in Tailwind v4)
+- `add` resolves transitive registry deps (e.g. select → tag)
+- `add` rewrites import paths (`../../lib/utils` → `@/lib/utils`)
+- Registry: `packages/cli/src/registry/react.json` — maps components to files, npm deps, internal deps
+
 ## Dev
 
 ```bash

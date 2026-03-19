@@ -60,6 +60,96 @@ import { AlertCircle, AlertTriangle, CheckCircle2, Info, Plus, Terminal } from "
 import React from "react";
 
 /* --------------------------------------------------------- */
+/* ASCII Gradient Canvas                                     */
+/* --------------------------------------------------------- */
+function AsciiGradientCanvas() {
+  const canvasRef = React.useRef<HTMLCanvasElement>(null);
+
+  React.useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const CELL = 7;
+    const CHARS = " .,·:;!|+=oxOX$#%&@█";
+    let cols = 0;
+    let rows = 0;
+    let animId = 0;
+
+    const chrR = (t: number) => 0.5 + 0.5 * Math.cos(6.28318 * (t + 0.0));
+    const chrG = (t: number) => 0.5 + 0.5 * Math.cos(6.28318 * (t + 0.1));
+    const chrB = (t: number) => 0.5 + 0.5 * Math.cos(6.28318 * (t + 0.2));
+
+    function resize() {
+      if (!canvas || !ctx) return;
+      const dpr = window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      ctx.scale(dpr, dpr);
+      cols = Math.ceil(rect.width / CELL);
+      rows = Math.ceil(rect.height / (CELL * 1.6));
+    }
+
+    resize();
+    window.addEventListener("resize", resize);
+    const start = performance.now();
+
+    function frame() {
+      if (!canvas || !ctx) return;
+      const t = (performance.now() - start) / 1000;
+      const dpr = window.devicePixelRatio || 1;
+      const w = canvas.width / dpr;
+      const lineH = CELL * 1.6;
+
+      ctx.clearRect(0, 0, w, canvas.height / dpr);
+      ctx.font = `${CELL}px "JetBrains Mono", ui-monospace, monospace`;
+      ctx.textBaseline = "top";
+
+      for (let y = 0; y < rows; y++) {
+        for (let x = 0; x < cols; x++) {
+          const nx = x / cols;
+          const ny = y / rows;
+          const w1 = Math.sin(nx * 6.0 + t * 0.08) * Math.cos(ny * 4.0 + t * 0.06);
+          const w2 = Math.sin(nx * 3.0 - t * 0.12 + ny * 5.0) * 0.5;
+          const w3 = Math.cos(nx * 8.0 + ny * 3.0 + t * 0.04) * 0.3;
+          const w4 = Math.sin(nx * 12.0 + ny * 8.0 - t * 0.1) * 0.2;
+          const w5 = Math.cos(nx * 4.0 - ny * 6.0 + t * 0.07) * 0.35;
+          const cx = nx - 0.5;
+          const cy = ny - 0.5;
+          const dist = Math.sqrt(cx * cx + cy * cy);
+          const pulse = Math.sin(dist * 12.0 - t * 0.2) * 0.4;
+
+          const raw = (w1 + w2 + w3 + w4 + w5 + pulse) * 0.4 + 0.5;
+          const val = raw * raw * (3 - 2 * raw);
+          const idx = Math.floor(val * (CHARS.length - 1));
+          const ch = CHARS[idx];
+
+          const colorT = nx * 0.6 + ny * 0.4 + t * 0.025 + val * 0.3;
+          const r = Math.floor(chrR(colorT) * 255);
+          const g = Math.floor(chrG(colorT) * 255);
+          const b = Math.floor(chrB(colorT) * 255);
+          const alpha = 0.15 + val * 0.85;
+
+          ctx.fillStyle = `rgba(${r},${g},${b},${alpha})`;
+          ctx.fillText(ch, x * CELL, y * lineH);
+        }
+      }
+      animId = requestAnimationFrame(frame);
+    }
+
+    animId = requestAnimationFrame(frame);
+    return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener("resize", resize);
+    };
+  }, []);
+
+  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />;
+}
+
+/* --------------------------------------------------------- */
 /* Theme switcher                                            */
 /* --------------------------------------------------------- */
 const RADIUS_OPTIONS: RadiusPreset[] = ["none", "sm", "md", "lg", "full"];
@@ -317,6 +407,18 @@ export default function ComponentPreview() {
       <ToastProvider position={toastPosition}>
         <div className="min-h-screen bg-bg-base">
           <ThemeSidebar theme={theme} toggleTheme={toggleTheme} />
+
+          {/* Brand Banner */}
+          <div className="ml-48 relative flex items-center justify-center h-56 overflow-hidden">
+            <AsciiGradientCanvas />
+            <div className="relative text-center z-10">
+              <h1 className="text-4xl font-bold tracking-tight text-text-primary">DesignYstem</h1>
+              <Badge variant="default" className="mt-3">
+                UI Component System
+              </Badge>
+            </div>
+            <div className="fade-edge-b absolute inset-x-0 bottom-0" style={{ backgroundColor: "var(--bg-base)" }} />
+          </div>
 
           <main className="ml-48 max-w-5xl px-8 py-10 space-y-12">
             <SectionGroup title="Foundations">

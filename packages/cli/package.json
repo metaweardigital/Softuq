@@ -1,0 +1,25 @@
+{
+  "name": "designystem",
+  "version": "0.1.0",
+  "description": "CLI for DesignYstem — add UI components to your project",
+  "type": "module",
+  "bin": {
+    "designystem": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts",
+    "dev": "tsup src/index.ts --format esm --watch"
+  },
+  "dependencies": {
+    "commander": "^13.0.0",
+    "prompts": "^2.4.2",
+    "picocolors": "^1.1.0",
+    "fs-extra": "^11.2.0"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/prompts": "^2.4.9",
+    "tsup": "^8.0.0",
+    "typescript": "^5.7.0"
+  }
+}

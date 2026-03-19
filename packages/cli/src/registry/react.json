@@ -1,0 +1,135 @@
+{
+  "framework": "react",
+  "utils": {
+    "cn": {
+      "file": "lib/utils.ts",
+      "dependencies": ["clsx", "tailwind-merge"]
+    }
+  },
+  "provider": {
+    "file": "designystem-provider.tsx",
+    "dependencies": []
+  },
+  "components": {
+    "accordion": {
+      "files": ["components/ui/accordion.tsx"],
+      "dependencies": ["class-variance-authority", "lucide-react"],
+      "registryDeps": []
+    },
+    "alert": {
+      "files": ["components/ui/alert.tsx"],
+      "dependencies": ["class-variance-authority", "lucide-react"],
+      "registryDeps": []
+    },
+    "avatar": {
+      "files": ["components/ui/avatar.tsx"],
+      "dependencies": ["class-variance-authority"],
+      "registryDeps": []
+    },
+    "badge": {
+      "files": ["components/ui/badge.tsx"],
+      "dependencies": ["class-variance-authority"],
+      "registryDeps": []
+    },
+    "button": {
+      "files": ["components/ui/button.tsx"],
+      "dependencies": ["class-variance-authority"],
+      "registryDeps": []
+    },
+    "card": {
+      "files": ["components/ui/card.tsx"],
+      "dependencies": ["class-variance-authority"],
+      "registryDeps": []
+    },
+    "checkbox": {
+      "files": ["components/ui/checkbox.tsx"],
+      "dependencies": ["class-variance-authority", "lucide-react"],
+      "registryDeps": []
+    },
+    "dialog": {
+      "files": ["components/ui/dialog.tsx"],
+      "dependencies": ["class-variance-authority", "lucide-react"],
+      "registryDeps": []
+    },
+    "form-text": {
+      "files": ["components/ui/form-text.tsx"],
+      "dependencies": ["class-variance-authority"],
+      "registryDeps": []
+    },
+    "input": {
+      "files": ["components/ui/input.tsx"],
+      "dependencies": ["class-variance-authority"],
+      "registryDeps": []
+    },
+    "label": {
+      "files": ["components/ui/label.tsx"],
+      "dependencies": ["class-variance-authority"],
+      "registryDeps": []
+    },
+    "progress": {
+      "files": ["components/ui/progress.tsx"],
+      "dependencies": ["class-variance-authority"],
+      "registryDeps": []
+    },
+    "radio": {
+      "files": ["components/ui/radio.tsx"],
+      "dependencies": ["class-variance-authority"],
+      "registryDeps": []
+    },
+    "select": {
+      "files": ["components/ui/select.tsx"],
+      "dependencies": ["class-variance-authority", "lucide-react"],
+      "registryDeps": ["tag"]
+    },
+    "separator": {
+      "files": ["components/ui/separator.tsx"],
+      "dependencies": [],
+      "registryDeps": []
+    },
+    "sheet": {
+      "files": ["components/ui/sheet.tsx"],
+      "dependencies": ["class-variance-authority", "lucide-react"],
+      "registryDeps": []
+    },
+    "skeleton": {
+      "files": ["components/ui/skeleton.tsx"],
+      "dependencies": ["class-variance-authority"],
+      "registryDeps": []
+    },
+    "squircle": {
+      "files": ["components/ui/squircle.tsx", "lib/squircle.ts"],
+      "dependencies": [],
+      "registryDeps": []
+    },
+    "tabs": {
+      "files": ["components/ui/tabs.tsx"],
+      "dependencies": [],
+      "registryDeps": []
+    },
+    "tag": {
+      "files": ["components/ui/tag.tsx"],
+      "dependencies": ["class-variance-authority", "lucide-react"],
+      "registryDeps": []
+    },
+    "textarea": {
+      "files": ["components/ui/textarea.tsx"],
+      "dependencies": ["class-variance-authority"],
+      "registryDeps": []
+    },
+    "toast": {
+      "files": ["components/ui/toast.tsx"],
+      "dependencies": ["lucide-react"],
+      "registryDeps": []
+    },
+    "toggle": {
+      "files": ["components/ui/toggle.tsx"],
+      "dependencies": ["class-variance-authority"],
+      "registryDeps": []
+    },
+    "tooltip": {
+      "files": ["components/ui/tooltip.tsx"],
+      "dependencies": [],
+      "registryDeps": []
+    }
+  }
+}
