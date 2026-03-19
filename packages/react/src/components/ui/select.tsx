@@ -172,11 +172,23 @@ const selectTriggerVariants = cva(
 
 interface SelectTriggerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   placeholder?: string;
+  maxTags?: number;
 }
 
 const SelectTrigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>(
-  ({ className, placeholder, children, ...props }, ref) => {
+  ({ className, placeholder, maxTags = 2, children, ...props }, ref) => {
     const ctx = useSelectContext();
+    const [triggerWidth, setTriggerWidth] = React.useState(Infinity);
+
+    React.useEffect(() => {
+      const el = ctx.triggerRef.current;
+      if (!el || !ctx.multiple) return;
+      const observer = new ResizeObserver(([entry]) => {
+        setTriggerWidth(entry.contentRect.width);
+      });
+      observer.observe(el);
+      return () => observer.disconnect();
+    }, [ctx.triggerRef, ctx.multiple]);
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
       if (e.key === "Enter" || e.key === " " || e.key === "ArrowDown") {
@@ -192,13 +204,22 @@ const SelectTrigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>(
       if (children) return children;
       if (ctx.multiple) {
         if (ctx.values.length === 0) return placeholder || "Select...";
+        if (triggerWidth < 250) return `${ctx.values.length} selected`;
+        const effectiveMax = triggerWidth >= 400 ? maxTags + 1 : maxTags;
+        const visible = ctx.values.slice(0, effectiveMax);
+        const remaining = ctx.values.length - visible.length;
         return (
-          <span className="flex flex-wrap gap-1 py-0.5">
-            {ctx.values.map((v) => (
+          <span className="flex flex-nowrap items-center gap-1 py-0.5">
+            {visible.map((v) => (
               <Tag key={v} variant="default" size="sm" onDismiss={() => ctx.onDeselect(v)}>
                 {ctx.valueLabels.get(v) ?? v}
               </Tag>
             ))}
+            {remaining > 0 && (
+              <Tag variant="default" size="sm">
+                +{remaining}
+              </Tag>
+            )}
           </span>
         );
       }
@@ -224,8 +245,15 @@ const SelectTrigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>(
         className={cn(selectTriggerVariants({ variant: ctx.variant, size: ctx.size, className }))}
         {...props}
       >
-        <span className={cn("truncate capitalize", !hasValue && "text-text-muted", ctx.multiple && "truncate-none")}>
+        <span
+          className={cn(
+            "relative truncate capitalize text-left",
+            !hasValue && "text-text-muted",
+            ctx.multiple && "min-w-0 flex-1 overflow-hidden",
+          )}
+        >
           {renderDisplay()}
+          {ctx.multiple && hasValue && <span className="fade-edge-r" style={{ backgroundColor: "var(--bg-input)" }} />}
         </span>
         <ChevronDown
           className={cn(
@@ -433,7 +461,7 @@ const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
         )}
         {...props}
       >
-        {children}
+        <span className="truncate">{children}</span>
         {isSelected && <Check className="ml-auto h-4 w-4 shrink-0" />}
       </div>
     );

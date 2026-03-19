@@ -78,8 +78,10 @@ Always order from most global → most specific:
 - Badge = static indicator (status, count) — never interactive
 - Tag = interactive label (dismissible, hover/focus states) — used in multi-select
 - Select: composable API (Select, SelectTrigger, SelectContent, SelectItem, SelectGroup, SelectLabel, SelectSeparator), supports single + multi (`multiple` prop), auto-flip positioning
+- Select multi-select: responsive tags with `maxTags` prop (default 2), `+N` counter, width-based breakpoints (<250px → "N selected" text, 250-400px → maxTags, >400px → maxTags+1), fade-edge overlay
 - FormField wraps Label + Input/Select/Textarea + FormDescription + FormMessage; `size` prop cascades to children
 - Scrollbar utilities: `.scrollbar-thin` (4px styled), `.scrollbar-hidden` (no scrollbar)
+- Fade-edge utilities: `.fade-edge-r/l/t/b` — mask-based gradient fade with theme-transitioning `background-color` (not `background-image` which can't transition)
 - See [Component Pattern](docs/guides/component-pattern.md) for full template
 
 ## Docs

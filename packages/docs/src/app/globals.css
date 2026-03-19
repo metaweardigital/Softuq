@@ -151,6 +151,36 @@
   50% { opacity: 0.5; }
 }
 
+/* Fade-edge utilities — theme-transitioning gradient masks */
+.fade-edge-r,
+.fade-edge-l,
+.fade-edge-t,
+.fade-edge-b {
+  pointer-events: none;
+  position: absolute;
+  transition: background-color var(--duration-normal) var(--ease-soft);
+}
+.fade-edge-r {
+  inset: 0 0 0 auto;
+  width: 2rem;
+  mask-image: linear-gradient(to right, transparent, black);
+}
+.fade-edge-l {
+  inset: 0 auto 0 0;
+  width: 2rem;
+  mask-image: linear-gradient(to left, transparent, black);
+}
+.fade-edge-t {
+  inset: 0 0 auto 0;
+  height: 2rem;
+  mask-image: linear-gradient(to top, transparent, black);
+}
+.fade-edge-b {
+  inset: auto 0 0 0;
+  height: 2rem;
+  mask-image: linear-gradient(to bottom, transparent, black);
+}
+
 /* Scrollbar utilities */
 .scrollbar-thin {
   scrollbar-width: thin;

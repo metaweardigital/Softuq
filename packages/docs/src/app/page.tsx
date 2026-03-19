@@ -975,6 +975,18 @@ export default function ComponentPreview() {
                     </Select>
                   </FormField>
                   <FormField>
+                    <Label>Long labels</Label>
+                    <Select>
+                      <SelectTrigger placeholder="Choose a technology..." />
+                      <SelectContent>
+                        <SelectItem value="next">Next.js App Router with Server Components and Streaming</SelectItem>
+                        <SelectItem value="react-query">TanStack React Query v5 with Suspense Integration</SelectItem>
+                        <SelectItem value="prisma">Prisma ORM with PostgreSQL and Edge Runtime Support</SelectItem>
+                        <SelectItem value="playwright">Playwright End-to-End Testing with Visual Regression</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </FormField>
+                  <FormField>
                     <Label>Grouped</Label>
                     <Select>
                       <SelectTrigger placeholder="Choose a fruit..." />
