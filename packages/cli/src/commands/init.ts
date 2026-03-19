@@ -70,11 +70,19 @@ export async function init(options: InitOptions) {
   await fs.copy(utilsSrc, utilsDest);
   console.log(pc.green("  ✓ ") + pc.dim(`${libDir}/utils.ts`));
 
-  // 2. Copy provider
+  // 2. Copy JS tokens (used by provider at runtime)
+  const tokensSrc = path.resolve(sourceDir, "../../tokens/src/index.ts");
+  const tokensDest = path.join(cwd, libDir, "tokens.ts");
+  await fs.copy(tokensSrc, tokensDest);
+  console.log(pc.green("  ✓ ") + pc.dim(`${libDir}/tokens.ts`));
+
+  // 3. Copy provider (rewrite token import)
   const providerSrc = path.join(sourceDir, registry.provider.file);
   const providerDest = path.join(cwd, componentDir, "../designystem-provider.tsx");
   await fs.ensureDir(path.dirname(providerDest));
-  await fs.copy(providerSrc, providerDest);
+  let providerContent = await fs.readFile(providerSrc, "utf-8");
+  providerContent = providerContent.replace(/from\s+["']@designystem\/tokens["']/g, `from "@/lib/tokens"`);
+  await fs.writeFile(providerDest, providerContent);
   console.log(pc.green("  ✓ ") + pc.dim("designystem-provider.tsx"));
 
   // 3. Append tokens + theme to globals.css (like shadcn does)

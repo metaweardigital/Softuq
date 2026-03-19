@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 import { Command } from "commander";
 import { add } from "./commands/add.js";
+import { diff } from "./commands/diff.js";
 import { init } from "./commands/init.js";
 import { list } from "./commands/list.js";
+import { update } from "./commands/update.js";
 
 const program = new Command();
 
@@ -30,5 +32,19 @@ program
   .description("List all available components")
   .option("-f, --framework <framework>", "Framework (default: auto-detect)")
   .action(list);
+
+program
+  .command("diff")
+  .description("Show which components have upstream updates")
+  .option("-f, --framework <framework>", "Framework override")
+  .action(diff);
+
+program
+  .command("update")
+  .description("Update components to latest version")
+  .argument("[components...]", "Components to update (default: all changed)")
+  .option("--all", "Update all changed components")
+  .option("-y, --yes", "Skip confirmation")
+  .action(update);
 
 program.parse();

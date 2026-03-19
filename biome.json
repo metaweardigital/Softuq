@@ -26,6 +26,9 @@
       "suspicious": {
         "noExplicitAny": "off"
       },
+      "security": {
+        "noDangerouslySetInnerHtml": "off"
+      },
       "a11y": {
         "noLabelWithoutControl": "off",
         "noStaticElementInteractions": "off",

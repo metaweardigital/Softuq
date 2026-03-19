@@ -82,6 +82,7 @@ Always order from most global → most specific:
 - FormField wraps Label + Input/Select/Textarea + FormDescription + FormMessage; `size` prop cascades to children
 - Scrollbar utilities: `.scrollbar-thin` (4px styled), `.scrollbar-hidden` (no scrollbar)
 - Fade-edge utilities: `.fade-edge-r/l/t/b` — mask-based gradient fade with theme-transitioning `background-color` (not `background-image` which can't transition)
+- DialogTrigger supports `asChild` prop — pass `<Button>` as child instead of nesting `<button>` in `<button>`
 - See [Component Pattern](docs/guides/component-pattern.md) for full template
 
 ## Docs
@@ -106,13 +107,19 @@ npx designystem init          # setup tokens, utils, provider, globals.css
 npx designystem add button    # copy component files + install deps
 npx designystem add --all     # add all components
 npx designystem list          # show available components
+npx designystem diff          # show which components have upstream updates
+npx designystem update        # pull updated components (with confirmation)
 ```
 
 - `init` detects framework (React/Svelte), package manager, and project structure
+- `init` copies `lib/tokens.ts` (JS token values) + rewrites provider import (`@designystem/tokens` → `@/lib/tokens`)
 - `init` writes tokens + @theme to separate CSS files imported via `@import` (avoids circular var() refs in Tailwind v4)
 - `add` resolves transitive registry deps (e.g. select → tag)
 - `add` rewrites import paths (`../../lib/utils` → `@/lib/utils`)
+- `diff` compares local component files against upstream source (normalizes import paths for comparison)
+- `update` pulls changed components with confirmation prompt, installs new deps if needed
 - Registry: `packages/cli/src/registry/react.json` — maps components to files, npm deps, internal deps
+- Getting started tutorial: `/getting-started` page in docs app
 
 ## Dev
 

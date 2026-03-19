@@ -413,9 +413,9 @@ export default function ComponentPreview() {
             <AsciiGradientCanvas />
             <div className="relative text-center z-10">
               <h1 className="text-4xl font-bold tracking-tight text-text-primary">DesignYstem</h1>
-              <Badge variant="default" className="mt-3">
-                UI Component System
-              </Badge>
+              <Button size="sm" className="mt-4" onClick={() => (window.location.href = "/getting-started")}>
+                Getting Started →
+              </Button>
             </div>
             <div className="fade-edge-b absolute inset-x-0 bottom-0" style={{ backgroundColor: "var(--bg-base)" }} />
           </div>
