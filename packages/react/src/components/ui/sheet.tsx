@@ -44,44 +44,47 @@ interface SheetProps extends VariantProps<typeof sheetVariants> {
   className?: string;
 }
 
-function Sheet({ open, onClose, side, size, children, className }: SheetProps) {
-  React.useEffect(() => {
-    const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    if (open) {
-      document.addEventListener("keydown", handleEsc);
-      document.body.style.overflow = "hidden";
-    }
-    return () => {
-      document.removeEventListener("keydown", handleEsc);
-      document.body.style.overflow = "";
-    };
-  }, [open, onClose]);
+const Sheet = React.forwardRef<HTMLDivElement, SheetProps>(
+  ({ open, onClose, side, size, children, className }, ref) => {
+    React.useEffect(() => {
+      const handleEsc = (e: KeyboardEvent) => {
+        if (e.key === "Escape") onClose();
+      };
+      if (open) {
+        document.addEventListener("keydown", handleEsc);
+        document.body.style.overflow = "hidden";
+      }
+      return () => {
+        document.removeEventListener("keydown", handleEsc);
+        document.body.style.overflow = "";
+      };
+    }, [open, onClose]);
 
-  if (!open) return null;
+    if (!open) return null;
 
-  return (
-    <>
-      <div
-        className="fixed inset-0 z-overlay bg-bg-overlay backdrop-blur-sm animate-fade-up"
-        role="presentation"
-        onClick={onClose}
-        onKeyDown={(e) => e.key === "Escape" && onClose()}
-      />
-      <div role="dialog" aria-modal="true" className={cn(sheetVariants({ side, size, className }))}>
-        <button
-          type="button"
+    return (
+      <>
+        <div
+          className="fixed inset-0 z-overlay bg-bg-overlay backdrop-blur-sm animate-fade-up"
+          role="presentation"
           onClick={onClose}
-          className="absolute right-4 top-4 rounded-lg p-1 text-text-muted hover:text-text-primary transition-colors"
-        >
-          <X className="h-4 w-4" />
-        </button>
-        <div className="p-[var(--ds-space-card)] h-full overflow-y-auto scrollbar-thin">{children}</div>
-      </div>
-    </>
-  );
-}
+          onKeyDown={(e) => e.key === "Escape" && onClose()}
+        />
+        <div ref={ref} role="dialog" aria-modal="true" className={cn(sheetVariants({ side, size, className }))}>
+          <button
+            type="button"
+            onClick={onClose}
+            className="absolute right-4 top-4 rounded-lg p-1 text-text-muted hover:text-text-primary transition-colors"
+          >
+            <X className="h-4 w-4" />
+          </button>
+          <div className="p-[var(--ds-space-card)] h-full overflow-y-auto scrollbar-thin">{children}</div>
+        </div>
+      </>
+    );
+  },
+);
+Sheet.displayName = "Sheet";
 
 export type { SheetProps };
 export { Sheet, sheetVariants };

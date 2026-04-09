@@ -19,6 +19,7 @@ import {
   CardHeader,
   CardTitle,
   Checkbox,
+  Code,
   DesignYstemProvider,
   Dialog,
   DialogContent,
@@ -383,6 +384,34 @@ function ToastDemo() {
   );
 }
 
+function ColorSwatch({ prefix, shade }: { prefix: string; shade: string }) {
+  const { addToast } = useToast();
+  const cssVar = `${prefix}-${shade}`;
+  return (
+    <Tooltip content={`var(${cssVar})`} delay={100} wrapperClassName="flex-1 min-w-[48px]">
+      <button
+        type="button"
+        className="w-full flex flex-col items-center gap-0.5 cursor-pointer"
+        onClick={() => {
+          const el = document.createElement("span");
+          el.style.color = `var(${cssVar})`;
+          document.body.appendChild(el);
+          const computed = getComputedStyle(el).color;
+          document.body.removeChild(el);
+          navigator.clipboard.writeText(computed);
+          addToast({ title: `Copied ${computed}`, variant: "success", duration: 1500 });
+        }}
+      >
+        <div
+          className="w-full h-8 rounded-[var(--ds-radius-checkbox)] border border-border-subtle transition-shadow hover:shadow-neu-floating"
+          style={{ backgroundColor: `var(${cssVar})` }}
+        />
+        <span className="text-[9px] text-text-muted">{shade}</span>
+      </button>
+    </Tooltip>
+  );
+}
+
 /* --------------------------------------------------------- */
 /* Main page                                                 */
 /* --------------------------------------------------------- */
@@ -420,7 +449,7 @@ export default function ComponentPreview() {
             <div className="fade-edge-b absolute inset-x-0 bottom-0" style={{ backgroundColor: "var(--bg-base)" }} />
           </div>
 
-          <main className="ml-48 max-w-5xl px-8 py-10 space-y-12">
+          <main className="ml-48 px-8 py-10 space-y-12">
             <SectionGroup title="Foundations">
               {/* Colors */}
               <Section title="Colors">
@@ -482,15 +511,9 @@ export default function ComponentPreview() {
                   ].map((palette) => (
                     <div key={palette.name} className="space-y-1.5">
                       <p className="text-xs font-medium text-text-muted uppercase tracking-wide">{palette.name}</p>
-                      <div className="flex gap-1">
+                      <div className="flex flex-wrap gap-1">
                         {palette.shades.map((shade) => (
-                          <div key={shade} className="flex-1 flex flex-col items-center gap-0.5">
-                            <div
-                              className="w-full h-8 rounded-[var(--ds-radius-checkbox)] border border-border-subtle"
-                              style={{ backgroundColor: `var(${palette.prefix}-${shade})` }}
-                            />
-                            <span className="text-[9px] text-text-muted">{shade}</span>
-                          </div>
+                          <ColorSwatch key={shade} prefix={palette.prefix} shade={shade} />
                         ))}
                       </div>
                     </div>
@@ -520,11 +543,10 @@ export default function ComponentPreview() {
 
               {/* Theming Overview */}
               <Section title="Theming">
-                <div className="max-w-2xl space-y-4">
+                <div className="space-y-4">
                   <p className="text-sm text-text-secondary">
-                    5 theme axes controlled via sidebar. All values are CSS custom properties on{" "}
-                    <code className="text-xs bg-bg-elevated px-1.5 py-0.5 rounded-md text-text-primary">:root</code> —
-                    no re-renders.
+                    5 theme axes controlled via sidebar. All values are CSS custom properties on <Code>:root</Code> — no
+                    re-renders.
                   </p>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                     <Card>
@@ -580,7 +602,7 @@ export default function ComponentPreview() {
 
               {/* Typography */}
               <Section title="Typography">
-                <div className="max-w-2xl space-y-4">
+                <div className="space-y-4">
                   <p className="text-xs font-medium text-text-muted uppercase tracking-wide">Font scale</p>
                   <div className="space-y-2">
                     <p className="text-4xl font-bold tracking-tight">Heading 4XL</p>
@@ -609,7 +631,7 @@ export default function ComponentPreview() {
             <SectionGroup title="Components">
               {/* Accordion */}
               <Section title="Accordion">
-                <div className="max-w-2xl space-y-8">
+                <div className="space-y-8">
                   <div className="space-y-2">
                     <p className="text-xs font-medium text-text-muted uppercase tracking-wide">Default</p>
                     <Accordion variant="default">
@@ -625,16 +647,11 @@ export default function ComponentPreview() {
                         <AccordionTrigger>How do I install it?</AccordionTrigger>
                         <AccordionContent>
                           <p>
-                            Run{" "}
-                            <code className="text-xs bg-bg-elevated px-1.5 py-0.5 rounded-md text-text-primary">
-                              npx designystem init
-                            </code>{" "}
-                            to set up your project, then add individual components:
+                            Run <Code>npx designystem init</Code> to set up your project, then add individual
+                            components:
                           </p>
                           <p className="mt-2">
-                            <code className="text-xs bg-bg-elevated px-1.5 py-0.5 rounded-md text-text-primary">
-                              npx designystem add button card input
-                            </code>
+                            <Code>npx designystem add button card input</Code>
                           </p>
                           <p className="mt-2">
                             Components are copied directly into your project — no runtime dependency, full control over
@@ -666,10 +683,7 @@ export default function ComponentPreview() {
                           Yes! The token system uses three layers: <span className="text-success-text">primitive</span>{" "}
                           → <span className="text-warning-text">semantic</span> →{" "}
                           <span className="text-accent">component</span>. All tokens are CSS custom properties you can
-                          override. Dark mode is default, switch to light with{" "}
-                          <code className="text-xs bg-bg-elevated px-1.5 py-0.5 rounded-md text-text-primary">
-                            data-theme=&quot;light&quot;
-                          </code>{" "}
+                          override. Dark mode is default, switch to light with <Code>data-theme=&quot;light&quot;</Code>{" "}
                           on your root element.
                         </AccordionContent>
                       </AccordionItem>
@@ -683,10 +697,7 @@ export default function ComponentPreview() {
                         <AccordionContent>
                           Absolutely. The design system is built for{" "}
                           <span className="text-accent">Tailwind CSS v4</span> — tokens are mapped via{" "}
-                          <code className="text-xs bg-bg-elevated px-1.5 py-0.5 rounded-md text-text-primary">
-                            @theme
-                          </code>{" "}
-                          in your CSS, no config file needed.
+                          <Code>@theme</Code> in your CSS, no config file needed.
                         </AccordionContent>
                       </AccordionItem>
                       <AccordionItem value="b2">
@@ -709,7 +720,7 @@ export default function ComponentPreview() {
 
               {/* Alert */}
               <Section title="Alert">
-                <div className="space-y-3 max-w-2xl">
+                <div className="space-y-3">
                   <p className="text-xs font-medium text-text-muted uppercase tracking-wide">Variants</p>
                   <Alert>
                     <Terminal />
@@ -782,11 +793,7 @@ export default function ComponentPreview() {
                     <CheckCircle2 />
                     <AlertTitle>Deployment complete</AlertTitle>
                     <AlertDescription>
-                      Your app is live at{" "}
-                      <code className="text-xs bg-bg-elevated px-1.5 py-0.5 rounded-md text-text-primary">
-                        production-abc123
-                      </code>
-                      . Version{" "}
+                      Your app is live at <Code>production-abc123</Code>. Version{" "}
                       <Badge size="sm" variant="success">
                         v1.4.2
                       </Badge>{" "}
@@ -843,6 +850,27 @@ export default function ComponentPreview() {
                 </Row>
                 <Row label="States">
                   <Button disabled>Disabled</Button>
+                </Row>
+              </Section>
+
+              {/* Code */}
+              <Section title="Code">
+                <Row label="Inline code">
+                  <p className="text-sm text-text-secondary">
+                    Run <Code>npx designystem init</Code> to set up your project.
+                  </p>
+                </Row>
+                <Row label="In context">
+                  <p className="text-sm text-text-secondary">
+                    Set <Code>data-theme=&quot;light&quot;</Code> on <Code>&lt;html&gt;</Code> to enable light mode. All
+                    tokens use <Code>oklch()</Code> color space.
+                  </p>
+                </Row>
+                <Row label="Command">
+                  <p className="text-sm text-text-secondary">
+                    Install dependencies with <Code>pnpm install</Code> then run <Code>pnpm dev</Code> to start the dev
+                    server.
+                  </p>
                 </Row>
               </Section>
 
@@ -933,7 +961,7 @@ export default function ComponentPreview() {
 
               {/* Input & Textarea */}
               <Section title="Input & Textarea">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <FormField>
                     <Label>Default Input</Label>
                     <Input placeholder="Type something..." />
@@ -962,11 +990,11 @@ export default function ComponentPreview() {
                     <Input disabled placeholder="Disabled input" />
                   </FormField>
                 </div>
-                <FormField className="max-w-2xl">
+                <FormField>
                   <Label>Textarea</Label>
                   <Textarea placeholder="Write your message here..." />
                 </FormField>
-                <FormField className="max-w-2xl">
+                <FormField>
                   <Label>Textarea (Error)</Label>
                   <Textarea variant="error" placeholder="Invalid content..." />
                   <FormMessage>Content must be at least 10 characters.</FormMessage>
@@ -984,7 +1012,7 @@ export default function ComponentPreview() {
 
               {/* Form Text */}
               <Section title="Form Text">
-                <div className="max-w-md space-y-4">
+                <div className="space-y-4">
                   <FormField>
                     <Label>FormDescription</Label>
                     <Input placeholder="you@example.com" />
@@ -1010,7 +1038,7 @@ export default function ComponentPreview() {
 
               {/* Progress */}
               <Section title="Progress">
-                <div className="space-y-4 max-w-md">
+                <div className="space-y-4">
                   <div className="space-y-2">
                     <div className="flex justify-between text-xs text-text-muted">
                       <span>Progress</span>
@@ -1052,7 +1080,7 @@ export default function ComponentPreview() {
 
               {/* Select */}
               <Section title="Select">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <FormField>
                     <Label>Default</Label>
                     <Select>
@@ -1177,7 +1205,7 @@ export default function ComponentPreview() {
                     <Skeleton variant="text" className="w-1/2" />
                   </div>
                 </div>
-                <Skeleton variant="default" className="h-32 w-full max-w-md" />
+                <Skeleton variant="default" className="h-32 w-full" />
               </Section>
 
               {/* Tabs */}

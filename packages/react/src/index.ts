@@ -28,6 +28,8 @@ export {
   cardVariants,
 } from "./components/ui/card";
 export { Checkbox, type CheckboxProps, checkboxVariants } from "./components/ui/checkbox";
+// Components — Typography
+export { Code, type CodeProps } from "./components/ui/code";
 // Components — Overlay
 export {
   Dialog,

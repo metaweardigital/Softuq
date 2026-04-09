@@ -2,17 +2,49 @@ import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 import { cn } from "../../lib/utils";
 
-const toggleVariants = cva("", {
-  variants: {
-    size: {
-      sm: "",
-      md: "",
+const toggleVariants = cva(
+  [
+    "relative inline-flex shrink-0 cursor-pointer items-center rounded-full",
+    "border border-border-subtle transition-colors duration-normal ease-soft",
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg-base",
+    "disabled:cursor-not-allowed disabled:opacity-50",
+  ].join(" "),
+  {
+    variants: {
+      size: {
+        sm: "w-8 h-4",
+        md: "w-11 h-6",
+      },
+    },
+    defaultVariants: {
+      size: "md",
     },
   },
-  defaultVariants: {
-    size: "md",
+);
+
+const thumbVariants = cva(
+  "pointer-events-none rounded-full bg-white shadow-sm transition-transform duration-normal ease-bounce",
+  {
+    variants: {
+      size: {
+        sm: "h-3 w-3",
+        md: "h-5 w-5",
+      },
+      checked: {
+        true: "",
+        false: "translate-x-0",
+      },
+    },
+    compoundVariants: [
+      { size: "sm", checked: true, className: "translate-x-4" },
+      { size: "md", checked: true, className: "translate-x-5" },
+    ],
+    defaultVariants: {
+      size: "md",
+      checked: false,
+    },
   },
-});
+);
 
 interface ToggleProps
   extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "size">,
@@ -22,41 +54,18 @@ interface ToggleProps
 }
 
 const Toggle = React.forwardRef<HTMLButtonElement, ToggleProps>(
-  ({ className, size, checked = false, onCheckedChange, disabled, ...props }, ref) => {
-    const isSmall = size === "sm";
-    const trackW = isSmall ? "w-8" : "w-11";
-    const trackH = isSmall ? "h-4" : "h-6";
-    const thumbSize = isSmall ? "h-3 w-3" : "h-5 w-5";
-    const thumbTranslate = checked ? (isSmall ? "translate-x-4" : "translate-x-5") : "translate-x-0";
-
+  ({ className, size, checked = false, onCheckedChange, ...props }, ref) => {
     return (
       <button
         type="button"
         role="switch"
         aria-checked={checked}
-        disabled={disabled}
         ref={ref}
-        className={cn(
-          "relative inline-flex shrink-0 cursor-pointer items-center rounded-full",
-          "border border-border-subtle transition-colors duration-normal ease-soft",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg-base",
-          "disabled:cursor-not-allowed disabled:opacity-50",
-          trackW,
-          trackH,
-          checked ? "bg-accent" : "bg-bg-input",
-          className,
-        )}
+        className={cn(toggleVariants({ size }), checked ? "bg-accent" : "bg-bg-input", className)}
         onClick={() => onCheckedChange?.(!checked)}
         {...props}
       >
-        <span
-          className={cn(
-            "pointer-events-none rounded-full bg-white shadow-sm",
-            "transition-transform duration-normal ease-bounce",
-            thumbSize,
-            thumbTranslate,
-          )}
-        />
+        <span className={cn(thumbVariants({ size, checked }))} />
       </button>
     );
   },
