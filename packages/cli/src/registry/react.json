@@ -46,6 +46,11 @@
       "dependencies": ["class-variance-authority", "lucide-react"],
       "registryDeps": []
     },
+    "code": {
+      "files": ["components/ui/code.tsx"],
+      "dependencies": [],
+      "registryDeps": []
+    },
     "dialog": {
       "files": ["components/ui/dialog.tsx"],
       "dependencies": ["class-variance-authority", "lucide-react"],

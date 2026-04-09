@@ -233,6 +233,7 @@ npx designystem update button card`}
                 "button",
                 "card",
                 "checkbox",
+                "code",
                 "dialog",
                 "form-text",
                 "input",
