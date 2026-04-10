@@ -64,6 +64,9 @@ Always order from most global → most specific:
 - All colors in OKLCH: `oklch(L C H)` or `oklch(L C H / alpha)`
 - Never use hex or rgba in token files
 - Gray scale: lightness 0.12–0.985, chroma 0 (neutral) or 0.002–0.042 (tinted)
+- Muted variants use `color-mix(in oklch, var(--color) N%, transparent)` — auto-derives from base color
+- Background elevation order (dark): `bg-base → bg-input → bg-card → bg-elevated → bg-popover`
+- Light mode shadows: palette-tinted via `color-mix` with `var(--gray-500)`, dark mode: plain black high opacity
 
 ### Spacing
 - All values on 4px grid
@@ -91,7 +94,7 @@ Always order from most global → most specific:
 - [Spacing](docs/tokens/spacing.md) — 4px grid
 - [Typography](docs/tokens/typography.md) — Major Third scale, fluid clamp()
 - [Colors](docs/tokens/colors.md) — palettes, semantic dark/light mapping
-- [Shadows](docs/tokens/shadows.md) — neumorphic + glass
+- [Shadows](docs/tokens/shadows.md) — sm/md/lg/inset, palette-tinted light mode, glass
 - [Border Radius](docs/tokens/radius.md) — scale + nested rule
 - [Animation](docs/tokens/animation.md) — easing, duration, keyframes, z-index
 - [Tailwind v4 Guide](docs/guides/tailwind-v4.md) — @theme, @source

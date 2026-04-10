@@ -17,7 +17,10 @@ Tailwind v4 uses CSS-based configuration instead of `tailwind.config.js`.
 @theme {
   --color-bg-base: var(--bg-base);
   --color-accent: var(--accent);
-  --shadow-neu-raised: var(--shadow-neu-raised);
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-inset: var(--shadow-inset);
   --animate-fade-up: fade-up 0.3s var(--ease-smooth);
   /* ... */
 }

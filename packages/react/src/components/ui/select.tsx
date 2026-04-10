@@ -380,8 +380,8 @@ const SelectContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTML
         className={cn(
           "absolute z-dropdown w-full",
           placement === "bottom" ? "top-full mt-1 origin-top" : "bottom-full mb-1 origin-bottom",
-          "bg-bg-elevated border border-border-subtle rounded-[var(--ds-radius-card)]",
-          "shadow-neu-floating",
+          "bg-bg-popover border border-border-subtle rounded-[var(--ds-radius-card)]",
+          "shadow-lg",
           "max-h-60 overflow-y-auto scrollbar-thin",
           "py-1",
           "animate-scale-in",
@@ -455,7 +455,7 @@ const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
           "flex items-center gap-2 px-3 py-1.5 text-sm capitalize cursor-pointer select-none",
           "transition-colors duration-fast ease-soft",
           isActive && "bg-bg-hover",
-          isSelected && "text-accent font-medium",
+          isSelected && "bg-bg-selected text-accent font-medium",
           disabled && "opacity-50 cursor-not-allowed",
           className,
         )}

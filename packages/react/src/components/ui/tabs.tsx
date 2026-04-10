@@ -50,7 +50,7 @@ Tabs.displayName = "Tabs";
 const tabsListVariants = cva("inline-flex items-center", {
   variants: {
     variant: {
-      default: "gap-1 rounded-[var(--ds-radius-card)] bg-bg-elevated p-1 border border-border-subtle",
+      default: "gap-1 rounded-[var(--ds-radius-card)] bg-bg-input p-1 border border-border-subtle",
       pills: "gap-2",
       underline: "gap-0 border-b border-border-subtle",
     },
@@ -88,8 +88,8 @@ const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
 
     const variantClasses = {
       default: cn(
-        "rounded-[var(--ds-radius-input)] px-3 py-1.5 text-sm",
-        isActive ? "bg-bg-card text-text-primary shadow-sm" : "text-text-muted hover:text-text-secondary",
+        "rounded-[calc(var(--ds-radius-card)-4px)] px-3 py-1.5 text-sm",
+        isActive ? "bg-bg-elevated text-text-primary shadow-sm" : "text-text-muted hover:text-text-secondary",
       ),
       pills: cn(
         "rounded-full px-4 py-1.5 text-sm border",

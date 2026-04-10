@@ -174,7 +174,7 @@ function ToastItem({ toast, onClose }: ToastItemProps) {
         <Alert
           variant={alertVariant}
           className={cn(
-            "pointer-events-auto w-full max-w-sm shadow-neu-floating",
+            "pointer-events-auto w-full max-w-sm bg-bg-popover shadow-lg",
             "text-xs pr-10",
             !toast.exiting && enterAnimationMap[position],
           )}

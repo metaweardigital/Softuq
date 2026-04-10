@@ -6,11 +6,12 @@
 /* --- Dark Mode (default) --- */
 :root,
 [data-theme="dark"] {
-  /* Backgrounds */
+  /* Backgrounds — lightness rises with elevation */
   --bg-base: var(--gray-980);
-  --bg-elevated: var(--gray-940);
-  --bg-card: var(--gray-920);
   --bg-input: var(--gray-960);
+  --bg-card: var(--gray-940);
+  --bg-elevated: var(--gray-920);
+  --bg-popover: var(--gray-900);
   --bg-hover: oklch(1 0 0 / 0.04);
   --bg-selected: var(--gray-850);
   --bg-overlay: oklch(0 0 0 / 0.6);
@@ -25,25 +26,25 @@
   /* Accent */
   --accent: var(--blue-500);
   --accent-hover: var(--blue-400);
-  --accent-muted: var(--blue-600);
+  --accent-muted: color-mix(in oklch, var(--accent) 12%, transparent);
   --accent-text: var(--blue-400);
 
   /* Destructive */
   --destructive: var(--red-500);
   --destructive-hover: var(--red-400);
-  --destructive-muted: var(--red-900);
+  --destructive-muted: color-mix(in oklch, var(--destructive) 12%, transparent);
   --destructive-text: var(--red-400);
 
   /* Success */
   --success: var(--emerald-500);
   --success-hover: var(--emerald-400);
-  --success-muted: var(--emerald-900);
+  --success-muted: color-mix(in oklch, var(--success) 12%, transparent);
   --success-text: var(--emerald-400);
 
   /* Warning */
   --warning: var(--amber-500);
   --warning-hover: var(--amber-400);
-  --warning-muted: var(--amber-900);
+  --warning-muted: color-mix(in oklch, var(--warning) 12%, transparent);
   --warning-text: var(--amber-400);
 
   /* Borders */
@@ -52,24 +53,11 @@
   --border-strong: var(--gray-800);
   --border-accent: var(--blue-500);
 
-  /* Shadows — Neumorphic */
-  --shadow-light: oklch(1 0 0 / 0.03);
-  --shadow-dark: oklch(0 0 0 / 0.4);
-  --shadow-darker: oklch(0 0 0 / 0.5);
-
-  --shadow-sm: 0 1px 2px var(--shadow-dark);
-  --shadow-md: 0 4px 12px var(--shadow-dark);
-  --shadow-lg: 0 12px 24px var(--shadow-darker);
-
-  --shadow-neu-raised:
-    -2px -2px 8px var(--shadow-light),
-    6px 6px 12px var(--shadow-dark);
-  --shadow-neu-pressed:
-    inset 4px 4px 8px var(--shadow-dark),
-    inset -2px -2px 6px var(--shadow-light);
-  --shadow-neu-floating:
-    0 20px 40px var(--shadow-darker),
-    0 0 1px oklch(1 0 0 / 0.1);
+  /* Shadows — dark: high opacity black (tint invisible on dark bg) */
+  --shadow-sm: 0 1px 2px oklch(0 0 0 / 0.5);
+  --shadow-md: 0 4px 12px oklch(0 0 0 / 0.6);
+  --shadow-lg: 0 12px 32px oklch(0 0 0 / 0.7);
+  --shadow-inset: inset 0 2px 6px oklch(0 0 0 / 0.5);
 
   /* Glass */
   --glass-bg: oklch(0.218 0 0 / 0.7);
@@ -101,11 +89,12 @@
 
 /* --- Light Mode --- */
 [data-theme="light"] {
-  /* Backgrounds */
+  /* Backgrounds — shadows handle elevation in light mode */
   --bg-base: var(--gray-50);
-  --bg-elevated: oklch(1 0 0);
-  --bg-card: oklch(1 0 0);
   --bg-input: var(--gray-100);
+  --bg-card: oklch(1 0 0);
+  --bg-elevated: oklch(1 0 0);
+  --bg-popover: oklch(1 0 0);
   --bg-hover: oklch(0 0 0 / 0.04);
   --bg-selected: var(--gray-150);
   --bg-overlay: oklch(0 0 0 / 0.4);
@@ -120,25 +109,25 @@
   /* Accent */
   --accent: var(--blue-600);
   --accent-hover: var(--blue-700);
-  --accent-muted: var(--blue-100);
+  --accent-muted: color-mix(in oklch, var(--accent) 8%, transparent);
   --accent-text: var(--blue-600);
 
   /* Destructive */
   --destructive: var(--red-600);
   --destructive-hover: var(--red-700);
-  --destructive-muted: var(--red-50);
+  --destructive-muted: color-mix(in oklch, var(--destructive) 8%, transparent);
   --destructive-text: var(--red-600);
 
   /* Success */
   --success: var(--emerald-600);
   --success-hover: var(--emerald-700);
-  --success-muted: var(--emerald-50);
+  --success-muted: color-mix(in oklch, var(--success) 8%, transparent);
   --success-text: var(--emerald-600);
 
   /* Warning */
   --warning: var(--amber-600);
   --warning-hover: var(--amber-700);
-  --warning-muted: var(--amber-50);
+  --warning-muted: color-mix(in oklch, var(--warning) 8%, transparent);
   --warning-text: var(--amber-600);
 
   /* Borders */
@@ -147,24 +136,11 @@
   --border-strong: var(--gray-250);
   --border-accent: var(--blue-600);
 
-  /* Shadows — Soft */
-  --shadow-light: oklch(1 0 0 / 0.7);
-  --shadow-dark: oklch(0 0 0 / 0.08);
-  --shadow-darker: oklch(0 0 0 / 0.12);
-
-  --shadow-sm: 0 1px 2px var(--shadow-dark);
-  --shadow-md: 0 4px 12px var(--shadow-dark);
-  --shadow-lg: 0 12px 24px var(--shadow-darker);
-
-  --shadow-neu-raised:
-    -2px -2px 8px var(--shadow-light),
-    4px 4px 10px var(--shadow-dark);
-  --shadow-neu-pressed:
-    inset 2px 2px 6px var(--shadow-dark),
-    inset -2px -2px 6px var(--shadow-light);
-  --shadow-neu-floating:
-    0 16px 32px var(--shadow-darker),
-    0 0 1px oklch(0 0 0 / 0.1);
+  /* Shadows — palette-tinted via gray-500 */
+  --shadow-sm: 0 2px 6px color-mix(in oklch, var(--gray-500) 8%, transparent);
+  --shadow-md: 0 4px 12px color-mix(in oklch, var(--gray-500) 12%, transparent);
+  --shadow-lg: 0 12px 32px color-mix(in oklch, var(--gray-500) 18%, transparent);
+  --shadow-inset: inset 0 2px 6px color-mix(in oklch, var(--gray-500) 8%, transparent);
 
   /* Glass */
   --glass-bg: oklch(1 0 0 / 0.7);

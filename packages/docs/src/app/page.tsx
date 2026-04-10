@@ -384,11 +384,15 @@ function ToastDemo() {
   );
 }
 
-function ColorSwatch({ prefix, shade }: { prefix: string; shade: string }) {
+function ColorSwatch({ prefix, shade, label }: { prefix: string; shade: string; label?: string }) {
   const { addToast } = useToast();
   const cssVar = `${prefix}-${shade}`;
   return (
-    <Tooltip content={`var(${cssVar})`} delay={100} wrapperClassName="flex-1 min-w-[48px]">
+    <Tooltip
+      content={label ? `var(${label}-${shade})` : `var(${cssVar})`}
+      delay={100}
+      wrapperClassName="flex-1 min-w-[48px]"
+    >
       <button
         type="button"
         className="w-full flex flex-col items-center gap-0.5 cursor-pointer"
@@ -403,12 +407,28 @@ function ColorSwatch({ prefix, shade }: { prefix: string; shade: string }) {
         }}
       >
         <div
-          className="w-full h-8 rounded-[var(--ds-radius-checkbox)] border border-border-subtle transition-shadow hover:shadow-neu-floating"
+          className="w-full h-8 rounded-[var(--ds-radius-checkbox)] border border-border-subtle transition-shadow hover:shadow-lg"
           style={{ backgroundColor: `var(${cssVar})` }}
         />
         <span className="text-[9px] text-text-muted">{shade}</span>
       </button>
     </Tooltip>
+  );
+}
+
+function ActivePaletteLabel() {
+  const { palette } = useDesignYstem();
+  return <>{palette.charAt(0).toUpperCase() + palette.slice(1)}</>;
+}
+
+function GraySwatches({ shades }: { shades: string[] }) {
+  const { palette } = useDesignYstem();
+  return (
+    <>
+      {shades.map((shade) => (
+        <ColorSwatch key={shade} prefix="--gray" shade={shade} label={`--${palette}`} />
+      ))}
+    </>
   );
 }
 
@@ -508,13 +528,17 @@ export default function ComponentPreview() {
                       prefix: "--violet",
                       shades: ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900"],
                     },
-                  ].map((palette) => (
-                    <div key={palette.name} className="space-y-1.5">
-                      <p className="text-xs font-medium text-text-muted uppercase tracking-wide">{palette.name}</p>
+                  ].map((group) => (
+                    <div key={group.name} className="space-y-1.5">
+                      <p className="text-xs font-medium text-text-muted uppercase tracking-wide">
+                        {group.prefix === "--gray" ? <ActivePaletteLabel /> : group.name}
+                      </p>
                       <div className="flex flex-wrap gap-1">
-                        {palette.shades.map((shade) => (
-                          <ColorSwatch key={shade} prefix={palette.prefix} shade={shade} />
-                        ))}
+                        {group.prefix === "--gray" ? (
+                          <GraySwatches shades={group.shades} />
+                        ) : (
+                          group.shades.map((shade) => <ColorSwatch key={shade} prefix={group.prefix} shade={shade} />)
+                        )}
                       </div>
                     </div>
                   ))}

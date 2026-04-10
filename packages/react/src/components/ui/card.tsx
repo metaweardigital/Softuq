@@ -8,8 +8,8 @@ const cardVariants = cva(
     variants: {
       variant: {
         default: "bg-bg-card shadow-sm",
-        elevated: "bg-bg-card shadow-neu-raised",
-        interactive: "bg-bg-card shadow-neu-raised hover:shadow-neu-floating cursor-pointer",
+        elevated: "bg-bg-card shadow-md",
+        interactive: "bg-bg-card shadow-md hover:shadow-lg cursor-pointer",
       },
     },
     defaultVariants: {

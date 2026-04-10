@@ -85,7 +85,7 @@ DialogOverlay.displayName = "DialogOverlay";
 const dialogContentVariants = cva(
   [
     "fixed left-1/2 top-1/2 z-modal -translate-x-1/2 -translate-y-1/2",
-    "w-full bg-bg-card border border-border-subtle rounded-[var(--ds-radius-card)] shadow-neu-floating",
+    "w-full bg-bg-elevated border border-border-subtle rounded-[var(--ds-radius-card)] shadow-lg",
     "animate-scale-in",
     "focus:outline-none",
   ].join(" "),

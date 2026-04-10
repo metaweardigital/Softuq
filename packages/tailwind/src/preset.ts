@@ -82,9 +82,7 @@ const designystemPreset: Partial<Config> = {
         sm: "var(--shadow-sm)",
         md: "var(--shadow-md)",
         lg: "var(--shadow-lg)",
-        "neu-raised": "var(--shadow-neu-raised)",
-        "neu-pressed": "var(--shadow-neu-pressed)",
-        "neu-floating": "var(--shadow-neu-floating)",
+        inset: "var(--shadow-inset)",
       },
       transitionTimingFunction: {
         soft: "var(--ease-soft)",

@@ -1,54 +1,40 @@
 # Shadows
 
-## Standard
+## Tokens
 
 | Token | Use |
 |---|---|
-| `--shadow-sm` | Subtle depth (cards default) |
-| `--shadow-md` | Medium depth (dropdowns) |
-| `--shadow-lg` | High depth (floating elements) |
+| `--shadow-sm` | Subtle depth (cards default, buttons) |
+| `--shadow-md` | Medium depth (elevated cards, dropdowns) |
+| `--shadow-lg` | High depth (modals, popovers, sheets) |
+| `--shadow-inset` | Inset depth (pressed/sunken states) |
 
-## Neumorphic
+## Dark mode
 
-Three elevation levels. Both dark and light mode variants defined in semantic tokens.
-
-### Raised (default elevation)
-
-Light highlight top-left + dark shadow bottom-right. Used on cards, buttons.
+High opacity black — palette tinting is invisible on dark backgrounds.
 
 ```css
-/* Dark */
--2px -2px 8px rgba(255,255,255,0.03), 6px 6px 12px rgba(0,0,0,0.4)
-/* Light */
--2px -2px 8px rgba(255,255,255,0.7), 4px 4px 10px rgba(0,0,0,0.08)
+--shadow-sm: 0 1px 2px oklch(0 0 0 / 0.5);
+--shadow-md: 0 4px 12px oklch(0 0 0 / 0.6);
+--shadow-lg: 0 12px 32px oklch(0 0 0 / 0.7);
+--shadow-inset: inset 0 2px 6px oklch(0 0 0 / 0.5);
 ```
 
-### Pressed (inset)
+## Light mode
 
-Inset variant for active/pressed states.
-
-```css
-/* Dark */
-inset 4px 4px 8px rgba(0,0,0,0.4), inset -2px -2px 6px rgba(255,255,255,0.02)
-/* Light */
-inset 2px 2px 6px rgba(0,0,0,0.08), inset -2px -2px 6px rgba(255,255,255,0.7)
-```
-
-### Floating (high elevation)
-
-For modals, popovers, sheets.
+Palette-tinted via `color-mix` with `--gray-500` — shadow hue shifts with palette (slate → blue tint, stone → warm tint, mauve → purple tint).
 
 ```css
-/* Dark */
-0 20px 40px rgba(0,0,0,0.5), 0 0 1px rgba(255,255,255,0.1)
-/* Light */
-0 16px 32px rgba(0,0,0,0.12), 0 0 1px rgba(0,0,0,0.1)
+--shadow-sm: 0 2px 6px color-mix(in oklch, var(--gray-500) 8%, transparent);
+--shadow-md: 0 4px 12px color-mix(in oklch, var(--gray-500) 12%, transparent);
+--shadow-lg: 0 12px 32px color-mix(in oklch, var(--gray-500) 18%, transparent);
+--shadow-inset: inset 0 2px 6px color-mix(in oklch, var(--gray-500) 8%, transparent);
 ```
 
 ## Glassmorphism
 
 ```css
---glass-bg: rgba(30,30,30,0.7)    /* dark */ | rgba(255,255,255,0.7)    /* light */
---glass-border: rgba(255,255,255,0.08) | rgba(0,0,0,0.08)
+--glass-bg: oklch(0.218 0 0 / 0.7)   /* dark */  | oklch(1 0 0 / 0.7)       /* light */
+--glass-border: oklch(1 0 0 / 0.08)   /* dark */  | oklch(0 0 0 / 0.08)      /* light */
 --glass-blur: 20px
 ```

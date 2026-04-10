@@ -14,6 +14,7 @@
   /* Colors */
   --color-bg-base: var(--bg-base);
   --color-bg-elevated: var(--bg-elevated);
+  --color-bg-popover: var(--bg-popover);
   --color-bg-card: var(--bg-card);
   --color-bg-input: var(--bg-input);
   --color-bg-hover: var(--bg-hover);
@@ -59,10 +60,11 @@
   --font-ds-sans: var(--font-sans);
   --font-ds-mono: var(--font-mono);
 
-  /* Shadows — neu-* don't collide, but sm/md/lg do */
-  --shadow-neu-raised: var(--shadow-neu-raised);
-  --shadow-neu-pressed: var(--shadow-neu-pressed);
-  --shadow-neu-floating: var(--shadow-neu-floating);
+  /* Shadows */
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-inset: var(--shadow-inset);
 
   /* Transitions (easing) */
   --transition-timing-function-soft: cubic-bezier(0.4, 0, 0.2, 1);

@@ -3,7 +3,7 @@ import { X } from "lucide-react";
 import * as React from "react";
 import { cn } from "../../lib/utils";
 
-const sheetVariants = cva("fixed z-modal bg-bg-card border-border-subtle shadow-neu-floating focus:outline-none", {
+const sheetVariants = cva("fixed z-modal bg-bg-elevated border-border-subtle shadow-lg focus:outline-none", {
   variants: {
     side: {
       left: "inset-y-0 left-0 border-r animate-slide-in-left",
