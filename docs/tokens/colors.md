@@ -205,7 +205,7 @@ Theme switching via `data-theme="dark"` (default) or `data-theme="light"` on `<h
 | `--bg-elevated` | gray-940 | `oklch(1 0 0)` |
 | `--bg-card` | gray-920 | `oklch(1 0 0)` |
 | `--bg-input` | gray-960 | gray-100 |
-| `--bg-hover` | `oklch(1 0 0 / 0.04)` | `oklch(0 0 0 / 0.04)` |
+| `--bg-hover` | `oklch(1 0 0 / 0.04)` | `color-mix(in oklch, var(--gray-500) 8%, transparent)` |
 | `--bg-selected` | gray-850 | gray-150 |
 | `--bg-overlay` | `oklch(0 0 0 / 0.6)` | `oklch(0 0 0 / 0.4)` |
 

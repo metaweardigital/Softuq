@@ -54,6 +54,7 @@ export type { ComponentProps };
 - Spacing on 4px grid
 - All interactive elements need focus-visible ring
 - Disabled state: `disabled:pointer-events-none disabled:opacity-50`
+- Label wrapping for Checkbox/Radio: use native `<label>` with `<span>` for text — not `<Label>` component (renders its own `<label>`, nesting is invalid HTML). Add `select-none` and `cursor-pointer` (or `cursor-not-allowed` for disabled) on the wrapper.
 
 ## Theming: Radius & Spacing
 

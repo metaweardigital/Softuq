@@ -95,7 +95,7 @@
   --bg-card: oklch(1 0 0);
   --bg-elevated: oklch(1 0 0);
   --bg-popover: oklch(1 0 0);
-  --bg-hover: oklch(0 0 0 / 0.04);
+  --bg-hover: color-mix(in oklch, var(--gray-500) 8%, transparent);
   --bg-selected: var(--gray-150);
   --bg-overlay: oklch(0 0 0 / 0.4);
 

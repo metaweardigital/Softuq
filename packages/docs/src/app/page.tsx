@@ -937,22 +937,56 @@ export default function ComponentPreview() {
               {/* Checkbox */}
               <Section title="Checkbox">
                 <Row>
-                  <div className="flex items-center gap-2">
+                  <label className="flex items-center gap-2 cursor-pointer select-none">
                     <Checkbox defaultChecked />
-                    <Label size="sm">Checked</Label>
-                  </div>
-                  <div className="flex items-center gap-2">
+                    <span className="text-xs text-text-secondary">Checked</span>
+                  </label>
+                  <label className="flex items-center gap-2 cursor-pointer select-none">
                     <Checkbox />
-                    <Label size="sm">Unchecked</Label>
-                  </div>
-                  <div className="flex items-center gap-2">
+                    <span className="text-xs text-text-secondary">Unchecked</span>
+                  </label>
+                  <label className="flex items-center gap-2 cursor-pointer select-none">
                     <Checkbox size="sm" defaultChecked />
-                    <Label size="sm">Small</Label>
-                  </div>
-                  <div className="flex items-center gap-2">
+                    <span className="text-xs text-text-secondary">Small</span>
+                  </label>
+                  <label className="flex items-center gap-2 cursor-not-allowed select-none">
                     <Checkbox disabled />
-                    <Label size="sm">Disabled</Label>
-                  </div>
+                    <span className="text-xs text-text-secondary">Disabled</span>
+                  </label>
+                  <label className="flex items-center gap-2 cursor-not-allowed select-none">
+                    <Checkbox defaultChecked disabled />
+                    <span className="text-xs text-text-secondary">Locked</span>
+                  </label>
+                </Row>
+              </Section>
+
+              {/* Radio */}
+              <Section title="Radio">
+                <Row>
+                  <RadioGroup value={radioValue} onValueChange={setRadioValue} orientation="horizontal">
+                    <label className="flex items-center gap-2 cursor-pointer select-none">
+                      <RadioGroupItem value="option1" />
+                      <span className="text-xs text-text-secondary">Option 1</span>
+                    </label>
+                    <label className="flex items-center gap-2 cursor-pointer select-none">
+                      <RadioGroupItem value="option2" />
+                      <span className="text-xs text-text-secondary">Option 2</span>
+                    </label>
+                    <label className="flex items-center gap-2 cursor-pointer select-none">
+                      <RadioGroupItem value="option3" />
+                      <span className="text-xs text-text-secondary">Option 3</span>
+                    </label>
+                  </RadioGroup>
+                  <label className="flex items-center gap-2 cursor-not-allowed select-none">
+                    <RadioGroupItem value="disabled" disabled />
+                    <span className="text-xs text-text-secondary">Disabled</span>
+                  </label>
+                  <RadioGroup value="locked">
+                    <label className="flex items-center gap-2 cursor-not-allowed select-none">
+                      <RadioGroupItem value="locked" disabled />
+                      <span className="text-xs text-text-secondary">Locked</span>
+                    </label>
+                  </RadioGroup>
                 </Row>
               </Section>
 
@@ -1080,26 +1114,6 @@ export default function ComponentPreview() {
                     </Button>
                   </div>
                 </div>
-              </Section>
-
-              {/* Radio */}
-              <Section title="Radio">
-                <Row>
-                  <RadioGroup value={radioValue} onValueChange={setRadioValue}>
-                    <div className="flex items-center gap-2">
-                      <RadioGroupItem value="option1" />
-                      <Label size="sm">Option 1</Label>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <RadioGroupItem value="option2" />
-                      <Label size="sm">Option 2</Label>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <RadioGroupItem value="option3" />
-                      <Label size="sm">Option 3</Label>
-                    </div>
-                  </RadioGroup>
-                </Row>
               </Section>
 
               {/* Select */}

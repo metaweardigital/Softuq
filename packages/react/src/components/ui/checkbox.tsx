@@ -38,7 +38,12 @@ interface CheckboxProps
 
 const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
   ({ className, variant, size, onCheckedChange, onChange, ...props }, ref) => {
+    const isControlled = props.checked !== undefined;
+    const [internalChecked, setInternalChecked] = React.useState(props.defaultChecked ?? false);
+    const isChecked = isControlled ? props.checked : internalChecked;
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (!isControlled) setInternalChecked(e.target.checked);
       onChange?.(e);
       onCheckedChange?.(e.target.checked);
     };
@@ -53,10 +58,11 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
           {...props}
         />
         <Check
+          strokeWidth={3}
           className={cn(
             "pointer-events-none absolute text-white opacity-0",
             "transition-opacity duration-fast",
-            props.checked || props.defaultChecked ? "opacity-100" : "",
+            isChecked ? "opacity-100" : "",
             size === "sm" ? "h-3 w-3" : "h-3.5 w-3.5",
           )}
         />
