@@ -27,7 +27,7 @@ export default function Settings01() {
   const [marketing, setMarketing] = React.useState(false);
   return (
     <div className="min-h-screen bg-bg-base p-[var(--ds-space-section-x)]">
-      <div className="mx-auto max-w-3xl space-y-[var(--ds-space-stack)]">
+      <div className="mx-auto max-w-6xl space-y-[var(--ds-space-stack)]">
         <header>
           <h1 className="text-2xl font-semibold tracking-tight text-text-primary">Settings</h1>
           <p className="text-sm text-text-muted">Manage your account, preferences, and billing.</p>

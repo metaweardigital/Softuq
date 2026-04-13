@@ -159,3 +159,24 @@
   --ring-color: var(--blue-600);
   --ring-offset: oklch(1 0 0);
 }
+
+/* --- Fixed alpha scales (never flip with theme) --- */
+:root {
+  /* Always dark — gray-980 with alpha. Use on light content, imagery, or as chip/backdrop. */
+  --dark-5: color-mix(in oklch, var(--gray-980) 5%, transparent);
+  --dark-10: color-mix(in oklch, var(--gray-980) 10%, transparent);
+  --dark-20: color-mix(in oklch, var(--gray-980) 20%, transparent);
+  --dark-40: color-mix(in oklch, var(--gray-980) 40%, transparent);
+  --dark-70: color-mix(in oklch, var(--gray-980) 70%, transparent);
+  --dark-90: color-mix(in oklch, var(--gray-980) 90%, transparent);
+  --dark-100: var(--gray-980);
+
+  /* Always light — gray-50 with alpha. Use on dark content or imagery. */
+  --light-5: color-mix(in oklch, var(--gray-50) 5%, transparent);
+  --light-10: color-mix(in oklch, var(--gray-50) 10%, transparent);
+  --light-20: color-mix(in oklch, var(--gray-50) 20%, transparent);
+  --light-40: color-mix(in oklch, var(--gray-50) 40%, transparent);
+  --light-70: color-mix(in oklch, var(--gray-50) 70%, transparent);
+  --light-90: color-mix(in oklch, var(--gray-50) 90%, transparent);
+  --light-100: var(--gray-50);
+}

@@ -1,16 +1,24 @@
 import type { ComponentType } from "react";
-import Dashboard01 from "./app/dashboard/dashboard-01";
-import Empty01 from "./app/empty-states/empty-01";
-import Settings01 from "./app/settings/settings-01";
-import Sidebar01 from "./app/sidebar/sidebar-01";
-import Cta01 from "./web/cta/cta-01";
-import Faq01 from "./web/faq/faq-01";
-import Features01 from "./web/features/features-01";
-import Footer01 from "./web/footer/footer-01";
-import Hero01 from "./web/hero/hero-01";
-import Logos01 from "./web/logos/logos-01";
-import Pricing01 from "./web/pricing/pricing-01";
-import Testimonials01 from "./web/testimonials/testimonials-01";
+import BillingPlans from "./app/billing/billing-plans";
+import DashboardStats from "./app/dashboard/dashboard-stats";
+import EmptyProjects from "./app/empty-states/empty-projects";
+import InboxSplit from "./app/inbox/inbox-split";
+import NotificationsCenter from "./app/notifications/notifications-center";
+import ProjectsGrid from "./app/projects/projects-grid";
+import SettingsProfile from "./app/settings/settings-profile";
+import SidebarNav from "./app/sidebar/sidebar-nav";
+import TeamList from "./app/user-management/team-list";
+import CtaCentered from "./web/cta/cta-centered";
+import FaqAccordion from "./web/faq/faq-accordion";
+import FeaturesGrid from "./web/features/features-grid";
+import FooterColumns from "./web/footer/footer-columns";
+import NavbarMega from "./web/header/navbar-mega";
+import NavbarSearch from "./web/header/navbar-search";
+import NavbarSimple from "./web/header/navbar-simple";
+import HeroCentered from "./web/hero/hero-centered";
+import LogosCloud from "./web/logos/logos-cloud";
+import PricingTiers from "./web/pricing/pricing-tiers";
+import TestimonialsGrid from "./web/testimonials/testimonials-grid";
 
 export type BlockType = "web" | "app";
 
@@ -57,6 +65,18 @@ export const APP_CATEGORIES: BlockCategory[] = [
     slug: "sidebar",
     name: "Sidebar",
     description: "Navigation sidebars with collapsible sections, icons, and user menus",
+  },
+  {
+    type: "app",
+    slug: "inbox",
+    name: "Inbox",
+    description: "Email-style split views with message list and preview pane",
+  },
+  {
+    type: "app",
+    slug: "projects",
+    name: "Projects",
+    description: "Project cards with status, progress, and member assignments",
   },
   {
     type: "app",
@@ -159,87 +179,143 @@ export const APP_CATEGORIES: BlockCategory[] = [
 export const BLOCKS: BlockMeta[] = [
   {
     type: "web",
+    category: "header",
+    slug: "navbar-simple",
+    name: "Simple navbar with center nav and CTAs",
+    component: NavbarSimple,
+  },
+  {
+    type: "web",
+    category: "header",
+    slug: "navbar-mega",
+    name: "Navbar with mega menu dropdowns",
+    component: NavbarMega,
+  },
+  {
+    type: "web",
+    category: "header",
+    slug: "navbar-search",
+    name: "Navbar with inline search and command hint",
+    component: NavbarSearch,
+  },
+  {
+    type: "web",
     category: "hero",
-    slug: "hero-01",
+    slug: "hero-centered",
     name: "Centered hero with dual CTA",
-    component: Hero01,
+    component: HeroCentered,
   },
   {
     type: "web",
     category: "features",
-    slug: "features-01",
+    slug: "features-grid",
     name: "Three-column feature grid",
-    component: Features01,
+    component: FeaturesGrid,
   },
   {
     type: "web",
     category: "cta",
-    slug: "cta-01",
+    slug: "cta-centered",
     name: "Centered CTA with accent glow",
-    component: Cta01,
+    component: CtaCentered,
   },
   {
     type: "web",
     category: "pricing",
-    slug: "pricing-01",
+    slug: "pricing-tiers",
     name: "Three-tier pricing with featured plan",
-    component: Pricing01,
+    component: PricingTiers,
   },
   {
     type: "web",
     category: "testimonials",
-    slug: "testimonials-01",
+    slug: "testimonials-grid",
     name: "Three-column quote grid",
-    component: Testimonials01,
+    component: TestimonialsGrid,
   },
   {
     type: "web",
     category: "faq",
-    slug: "faq-01",
+    slug: "faq-accordion",
     name: "Single-open accordion FAQ",
-    component: Faq01,
+    component: FaqAccordion,
   },
   {
     type: "web",
     category: "logos",
-    slug: "logos-01",
+    slug: "logos-cloud",
     name: "Six-column wordmark cloud",
-    component: Logos01,
+    component: LogosCloud,
   },
   {
     type: "web",
     category: "footer",
-    slug: "footer-01",
+    slug: "footer-columns",
     name: "Four-column footer with socials",
-    component: Footer01,
+    component: FooterColumns,
   },
   {
     type: "app",
     category: "sidebar",
-    slug: "sidebar-01",
+    slug: "sidebar-nav",
     name: "Sidebar nav with search and user card",
-    component: Sidebar01,
+    component: SidebarNav,
   },
   {
     type: "app",
     category: "dashboard",
-    slug: "dashboard-01",
+    slug: "dashboard-stats",
     name: "Stats with activity feed",
-    component: Dashboard01,
+    component: DashboardStats,
+  },
+  {
+    type: "app",
+    category: "inbox",
+    slug: "inbox-split",
+    name: "Inbox with split message list and preview",
+    component: InboxSplit,
+  },
+  {
+    type: "app",
+    category: "projects",
+    slug: "projects-grid",
+    name: "Project cards with status and progress",
+    component: ProjectsGrid,
+  },
+  {
+    type: "app",
+    category: "user-management",
+    slug: "team-list",
+    name: "Team table with roles and invites",
+    component: TeamList,
+  },
+  {
+    type: "app",
+    category: "notifications",
+    slug: "notifications-center",
+    name: "Notification center with tabbed filters",
+    component: NotificationsCenter,
+  },
+  {
+    type: "app",
+    category: "billing",
+    slug: "billing-plans",
+    name: "Subscription plans with invoice history",
+    component: BillingPlans,
   },
   {
     type: "app",
     category: "settings",
-    slug: "settings-01",
+    slug: "settings-profile",
     name: "Profile, preferences, and danger zone",
-    component: Settings01,
+    component: SettingsProfile,
   },
   {
     type: "app",
     category: "empty-states",
-    slug: "empty-01",
+    slug: "empty-projects",
     name: "No projects with dual action",
-    component: Empty01,
+    component: EmptyProjects,
   },
 ];
 

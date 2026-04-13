@@ -249,3 +249,49 @@ Neutral borders for chrome, dividers, inputs.
 | `--border-accent` | blue-500 | blue-600 |
 
 Status-tinted borders (`--accent-border`, `--destructive-border`, `--success-border`, `--warning-border`) live alongside the base colors above.
+
+## Non-changing scales
+
+Fixed-alpha scales that **never flip with theme** — always render as dark or light regardless of `data-theme`. Defined in a separate `:root {}` block in `semantic.css`, outside the theme blocks.
+
+Use them for overlays, scrims, hover states on imagery, or any UI that must keep a consistent dark/light tint across both themes.
+
+### Dark scale
+
+Based on `--gray-980` (always the darkest gray in the active palette).
+
+| Token | Value |
+|---|---|
+| `--dark-5` | `color-mix(in oklch, var(--gray-980) 5%, transparent)` |
+| `--dark-10` | `color-mix(in oklch, var(--gray-980) 10%, transparent)` |
+| `--dark-20` | `color-mix(in oklch, var(--gray-980) 20%, transparent)` |
+| `--dark-40` | `color-mix(in oklch, var(--gray-980) 40%, transparent)` |
+| `--dark-70` | `color-mix(in oklch, var(--gray-980) 70%, transparent)` |
+| `--dark-90` | `color-mix(in oklch, var(--gray-980) 90%, transparent)` |
+| `--dark-100` | `var(--gray-980)` — solid |
+
+### Light scale
+
+Based on `--gray-50` (always the lightest gray in the active palette).
+
+| Token | Value |
+|---|---|
+| `--light-5` | `color-mix(in oklch, var(--gray-50) 5%, transparent)` |
+| `--light-10` | `color-mix(in oklch, var(--gray-50) 10%, transparent)` |
+| `--light-20` | `color-mix(in oklch, var(--gray-50) 20%, transparent)` |
+| `--light-40` | `color-mix(in oklch, var(--gray-50) 40%, transparent)` |
+| `--light-70` | `color-mix(in oklch, var(--gray-50) 70%, transparent)` |
+| `--light-90` | `color-mix(in oklch, var(--gray-50) 90%, transparent)` |
+| `--light-100` | `var(--gray-50)` — solid |
+
+### Tailwind utilities
+
+Mapped via `@theme` in `packages/docs/src/app/globals.css` as `--color-dark-*` / `--color-light-*`:
+
+```tsx
+<div className="bg-dark-70 text-white">Overlay chip</div>
+<div className="border border-light-20">Muted divider on dark imagery</div>
+<span className="bg-dark-100">Solid dark background</span>
+```
+
+Note: the scales are palette-aware (they track the selected tinted gray) but **not theme-aware** — they stay dark/light whichever theme is active.

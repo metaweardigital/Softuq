@@ -2,6 +2,7 @@
 
 import { notFound, useParams } from "next/navigation";
 import { isBlockType } from "@/blocks/registry";
+import { AppShellPreview } from "@/templates/app-shell-preview";
 import { blockRefToString, getTemplate, resolveBlockRef } from "@/templates/registry";
 
 export default function TemplatePreviewPage() {
@@ -16,6 +17,10 @@ export default function TemplatePreviewPage() {
     notFound();
   }
 
+  if (template.layout === "app-shell" && template.pages && template.pages.length > 0) {
+    return <AppShellPreview type={params.type} template={template} activePage={template.pages[0]} />;
+  }
+
   const resolved = template.blocks.flatMap((ref) => {
     const meta = resolveBlockRef(ref);
     return meta ? [{ ref, key: blockRefToString(ref), meta }] : [];
@@ -28,29 +33,12 @@ export default function TemplatePreviewPage() {
     );
   }
 
-  if (template.layout === "app-shell") {
-    const [sidebar, ...rest] = resolved;
-    const Sidebar = sidebar.meta.component;
-    return (
-      <Sidebar>
-        {rest.map((r) => {
-          const Block = r.meta.component;
-          return (
-            <div key={r.key} data-block-ref={r.key}>
-              <Block />
-            </div>
-          );
-        })}
-      </Sidebar>
-    );
-  }
-
   return (
     <>
       {resolved.map((r) => {
         const Block = r.meta.component;
         return (
-          <div key={r.key} data-block-ref={r.key}>
+          <div key={r.key} data-block-ref={r.key} style={{ display: "contents" }}>
             <Block />
           </div>
         );

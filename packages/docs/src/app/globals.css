@@ -51,6 +51,22 @@
   --color-warning-border: var(--warning-border);
   --color-warning-text: var(--warning-text);
 
+  --color-dark-5: var(--dark-5);
+  --color-dark-10: var(--dark-10);
+  --color-dark-20: var(--dark-20);
+  --color-dark-40: var(--dark-40);
+  --color-dark-70: var(--dark-70);
+  --color-dark-90: var(--dark-90);
+  --color-dark-100: var(--dark-100);
+
+  --color-light-5: var(--light-5);
+  --color-light-10: var(--light-10);
+  --color-light-20: var(--light-20);
+  --color-light-40: var(--light-40);
+  --color-light-70: var(--light-70);
+  --color-light-90: var(--light-90);
+  --color-light-100: var(--light-100);
+
   --color-border-subtle: var(--border-subtle);
   --color-border-default: var(--border-default);
   --color-border-strong: var(--border-strong);

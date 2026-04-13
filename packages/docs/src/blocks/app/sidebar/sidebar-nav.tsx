@@ -2,36 +2,38 @@
 
 import { Avatar, Badge, Button, cn, Input, Separator } from "@designystem/react";
 import { Bell, CreditCard, FolderKanban, Home, Inbox, Plus, Search, Settings, Sparkles, Users } from "lucide-react";
+import Link from "next/link";
 import type * as React from "react";
 
 type NavItem = {
   icon: React.ComponentType<{ className?: string }>;
   label: string;
+  href: string;
   badge?: string;
 };
 
 const PRIMARY: NavItem[] = [
-  { icon: Home, label: "Home" },
-  { icon: Inbox, label: "Inbox", badge: "4" },
-  { icon: FolderKanban, label: "Projects" },
-  { icon: Users, label: "Team" },
+  { icon: Home, label: "Home", href: "#home" },
+  { icon: Inbox, label: "Inbox", href: "#inbox", badge: "4" },
+  { icon: FolderKanban, label: "Projects", href: "#projects" },
+  { icon: Users, label: "Team", href: "#team" },
 ];
 
 const SECONDARY: NavItem[] = [
-  { icon: Bell, label: "Notifications" },
-  { icon: CreditCard, label: "Billing" },
-  { icon: Settings, label: "Settings" },
+  { icon: Bell, label: "Notifications", href: "#notifications" },
+  { icon: CreditCard, label: "Billing", href: "#billing" },
+  { icon: Settings, label: "Settings", href: "#settings" },
 ];
 
-function NavButton({ item, active }: { item: NavItem; active?: boolean }) {
+function NavLinkItem({ item, active }: { item: NavItem; active?: boolean }) {
   const Icon = item.icon;
   return (
-    <button
-      type="button"
+    <Link
+      href={item.href}
       className={cn(
         "w-full flex items-center gap-2.5 px-2.5 h-8 rounded-[var(--ds-radius-button)] text-sm transition-colors",
         active
-          ? "bg-[color-mix(in_oklch,var(--accent)_14%,transparent)] text-accent-text"
+          ? "bg-[color-mix(in_oklch,var(--accent)_14%,transparent)] text-accent-text font-medium"
           : "text-text-secondary hover:bg-bg-hover hover:text-text-primary",
       )}
     >
@@ -42,11 +44,25 @@ function NavButton({ item, active }: { item: NavItem; active?: boolean }) {
           {item.badge}
         </Badge>
       )}
-    </button>
+    </Link>
   );
 }
 
-export default function Sidebar01({ children }: { children?: React.ReactNode }) {
+type SidebarNavProps = {
+  children?: React.ReactNode;
+  primaryItems?: NavItem[];
+  secondaryItems?: NavItem[];
+  activeHref?: string;
+};
+
+export default function SidebarNav({
+  children,
+  primaryItems = PRIMARY,
+  secondaryItems = SECONDARY,
+  activeHref,
+}: SidebarNavProps) {
+  const effectiveActive = activeHref ?? primaryItems[0]?.href;
+
   return (
     <div className="min-h-screen bg-bg-base flex">
       <aside className="w-60 shrink-0 border-r border-border-subtle flex flex-col p-[var(--ds-space-gap)] gap-[var(--ds-space-gap)]">
@@ -63,16 +79,16 @@ export default function Sidebar01({ children }: { children?: React.ReactNode }) 
         </div>
 
         <nav className="flex flex-col gap-0.5">
-          {PRIMARY.map((item, i) => (
-            <NavButton key={item.label} item={item} active={i === 0} />
+          {primaryItems.map((item) => (
+            <NavLinkItem key={item.label} item={item} active={item.href === effectiveActive} />
           ))}
         </nav>
 
         <Separator />
 
         <nav className="flex flex-col gap-0.5">
-          {SECONDARY.map((item) => (
-            <NavButton key={item.label} item={item} />
+          {secondaryItems.map((item) => (
+            <NavLinkItem key={item.label} item={item} active={item.href === effectiveActive} />
           ))}
         </nav>
 
@@ -88,7 +104,7 @@ export default function Sidebar01({ children }: { children?: React.ReactNode }) 
       <main className="flex-1 min-w-0">
         {children ?? (
           <div className="p-[var(--ds-space-section-x)]">
-            <div className="mx-auto max-w-4xl space-y-[var(--ds-space-stack)]">
+            <div className="mx-auto max-w-6xl space-y-[var(--ds-space-stack)]">
               <header className="flex items-start justify-between gap-[var(--ds-space-gap)]">
                 <div>
                   <h1 className="text-2xl font-semibold tracking-tight text-text-primary">Home</h1>

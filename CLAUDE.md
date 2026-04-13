@@ -67,6 +67,7 @@ Always order from most global → most specific:
 - Muted variants use `color-mix(in oklch, var(--color) N%, transparent)` — auto-derives from base color
 - Background elevation order (dark): `bg-base → bg-input → bg-card → bg-elevated → bg-popover`
 - Light mode shadows: palette-tinted via `color-mix` with `var(--gray-500)`, dark mode: plain black high opacity
+- Non-changing scales `--dark-{5..90,100}` (gray-980 alpha) and `--light-{5..90,100}` (gray-50 alpha) live in a separate `:root {}` block in `semantic.css` — palette-aware, never flip with theme. Use for overlays, imagery scrims, theme-independent chips (e.g. block hover badges in template previews). `-100` = solid.
 
 ### Spacing
 - All values on 4px grid
@@ -133,6 +134,22 @@ pnpm lint       # biome check
 pnpm lint:fix   # biome auto-fix
 pnpm format     # biome format
 ```
+
+## Versioning
+
+Bump package versions whenever the package has meaningful changes — before committing, review which packages were touched and bump `version` in their `package.json`. Follow semver:
+
+- **patch** (`0.1.0 → 0.1.1`): bug fixes, token tweaks, doc-only changes that don't alter API
+- **minor** (`0.1.0 → 0.2.0`): new tokens, new components, new CLI commands — backwards-compatible additions
+- **major** (`0.1.0 → 1.0.0`): renames, removed tokens/components, breaking API changes
+
+Bump only the packages actually changed — do not touch versions of untouched packages. Typical impact map:
+
+- `packages/tokens` — new/renamed tokens, `primitives.css` / `semantic.css` edits
+- `packages/react` — component changes, provider API
+- `packages/cli` — CLI command or registry changes
+- `packages/tailwind` — exported preset changes
+- `packages/docs` — docs site (can skip version bump; it's not published)
 
 ## Origin
 

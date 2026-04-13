@@ -56,11 +56,16 @@ export default function TemplateDetailPage() {
       const win = iframe.contentWindow;
       if (!doc || !win) return;
       const nodes = doc.querySelectorAll<HTMLElement>("[data-block-ref]");
-      const rects: Region[] = Array.from(nodes).map((el) => ({
-        ref: el.dataset.blockRef ?? "",
-        top: el.offsetTop,
-        height: el.offsetHeight,
-      }));
+      const rects: Region[] = Array.from(nodes).flatMap((el) => {
+        // Wrapper uses display:contents so sticky inside blocks can anchor to the page.
+        // Measure via children's offset so the region still reflects the block bounds.
+        const first = el.firstElementChild as HTMLElement | null;
+        const last = el.lastElementChild as HTMLElement | null;
+        if (!first || !last) return [];
+        const top = first.offsetTop;
+        const height = last.offsetTop + last.offsetHeight - top;
+        return [{ ref: el.dataset.blockRef ?? "", top, height }];
+      });
       setRegions(rects);
       setScrollTop(win.scrollY || 0);
     };
@@ -98,11 +103,14 @@ export default function TemplateDetailPage() {
       if (!doc) return;
       const nodes = doc.querySelectorAll<HTMLElement>("[data-block-ref]");
       setRegions(
-        Array.from(nodes).map((el) => ({
-          ref: el.dataset.blockRef ?? "",
-          top: el.offsetTop,
-          height: el.offsetHeight,
-        })),
+        Array.from(nodes).flatMap((el) => {
+          const first = el.firstElementChild as HTMLElement | null;
+          const last = el.lastElementChild as HTMLElement | null;
+          if (!first || !last) return [];
+          const top = first.offsetTop;
+          const height = last.offsetTop + last.offsetHeight - top;
+          return [{ ref: el.dataset.blockRef ?? "", top, height }];
+        }),
       );
     }, 350);
     return () => clearTimeout(t);
@@ -198,7 +206,7 @@ export default function TemplateDetailPage() {
                     key={r.ref}
                     className={cn(
                       "absolute inset-x-0 border-2 transition-colors",
-                      isHovered ? "border-accent" : "border-transparent",
+                      isHovered ? "border-dark-70" : "border-transparent",
                     )}
                     style={{ top, height: r.height }}
                   >
@@ -206,7 +214,7 @@ export default function TemplateDetailPage() {
                       <Link
                         href={`/blocks/${r.ref}`}
                         target="_blank"
-                        className="pointer-events-auto absolute top-2 right-2 inline-flex items-center gap-1.5 px-2.5 h-7 rounded-[var(--ds-radius-button)] bg-accent text-white text-xs font-medium shadow-md hover:bg-accent-hover"
+                        className="pointer-events-auto absolute top-2 right-2 inline-flex items-center gap-1.5 px-2.5 h-7 rounded-[var(--ds-radius-button)] bg-dark-70 text-white text-xs font-medium shadow-md hover:bg-dark-90"
                       >
                         {r.ref}
                         <ExternalLink className="size-3" />
