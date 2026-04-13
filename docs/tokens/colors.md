@@ -221,16 +221,25 @@ Theme switching via `data-theme="dark"` (default) or `data-theme="light"` on `<h
 
 ### Accent & status
 
-Each status color has 4 variants: base, hover, muted (background tint), text.
+Each status color has 5 variants: `base`, `-hover`, `-muted` (background tint), `-border` (tinted border), `-text`.
 
-| Token | Dark | Light |
+| Base token | Dark | Light |
 |---|---|---|
 | `--accent` | blue-500 | blue-600 |
 | `--destructive` | red-500 | red-600 |
 | `--success` | emerald-500 | emerald-600 |
 | `--warning` | amber-500 | amber-600 |
 
+Muted and border variants derive from the base via `color-mix`:
+
+- `-muted`: base at 12% (dark) / 8% (light) — for tinted backgrounds (badges, alerts).
+- `-border`: base at 30% (dark) / 25% (light) — for tinted borders on muted surfaces.
+
+Example: `bg-destructive-muted text-destructive-text border border-destructive-border` for a tinted error badge.
+
 ### Borders
+
+Neutral borders for chrome, dividers, inputs.
 
 | Token | Dark | Light |
 |---|---|---|
@@ -238,3 +247,5 @@ Each status color has 4 variants: base, hover, muted (background tint), text.
 | `--border-default` | `oklch(1 0 0 / 0.12)` | `oklch(0 0 0 / 0.1)` |
 | `--border-strong` | gray-800 | gray-250 |
 | `--border-accent` | blue-500 | blue-600 |
+
+Status-tinted borders (`--accent-border`, `--destructive-border`, `--success-border`, `--warning-border`) live alongside the base colors above.

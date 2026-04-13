@@ -11,6 +11,13 @@ import {
   AlertTitle,
   Avatar,
   Badge,
+  Breadcrumb,
+  BreadcrumbEllipsis,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
   Button,
   Card,
   CardContent,
@@ -27,11 +34,29 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+  Empty,
+  EmptyActions,
+  EmptyContent,
+  EmptyDescription,
+  EmptyIcon,
+  EmptyTitle,
   FormDescription,
   FormField,
   FormMessage,
   Input,
+  Kbd,
   Label,
+  Pagination,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
   Progress,
   RadioGroup,
   RadioGroupItem,
@@ -45,6 +70,16 @@ import {
   Separator,
   Sheet,
   Skeleton,
+  Slider,
+  Spinner,
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
   Tabs,
   TabsContent,
   TabsList,
@@ -53,106 +88,37 @@ import {
   Textarea,
   ToastProvider,
   Toggle,
+  ToggleGroup,
+  ToggleGroupItem,
   Tooltip,
   useDesignYstem,
   useToast,
 } from "@designystem/react";
-import { AlertCircle, AlertTriangle, CheckCircle2, Info, Plus, Terminal } from "lucide-react";
+import {
+  AlertCircle,
+  AlertTriangle,
+  AlignCenter,
+  AlignLeft,
+  AlignRight,
+  ArrowRight,
+  Bold,
+  CheckCircle2,
+  CreditCard,
+  Download,
+  Inbox,
+  Info,
+  Italic,
+  LogOut,
+  MoreHorizontal,
+  Plus,
+  Settings,
+  Terminal,
+  Trash2,
+  Underline,
+  User,
+} from "lucide-react";
 import React from "react";
 
-/* --------------------------------------------------------- */
-/* ASCII Gradient Canvas                                     */
-/* --------------------------------------------------------- */
-function AsciiGradientCanvas() {
-  const canvasRef = React.useRef<HTMLCanvasElement>(null);
-
-  React.useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    const CELL = 7;
-    const CHARS = " .,·:;!|+=oxOX$#%&@█";
-    let cols = 0;
-    let rows = 0;
-    let animId = 0;
-
-    const chrR = (t: number) => 0.5 + 0.5 * Math.cos(6.28318 * (t + 0.0));
-    const chrG = (t: number) => 0.5 + 0.5 * Math.cos(6.28318 * (t + 0.1));
-    const chrB = (t: number) => 0.5 + 0.5 * Math.cos(6.28318 * (t + 0.2));
-
-    function resize() {
-      if (!canvas || !ctx) return;
-      const dpr = window.devicePixelRatio || 1;
-      const rect = canvas.getBoundingClientRect();
-      canvas.width = rect.width * dpr;
-      canvas.height = rect.height * dpr;
-      ctx.scale(dpr, dpr);
-      cols = Math.ceil(rect.width / CELL);
-      rows = Math.ceil(rect.height / (CELL * 1.6));
-    }
-
-    resize();
-    window.addEventListener("resize", resize);
-    const start = performance.now();
-
-    function frame() {
-      if (!canvas || !ctx) return;
-      const t = (performance.now() - start) / 1000;
-      const dpr = window.devicePixelRatio || 1;
-      const w = canvas.width / dpr;
-      const lineH = CELL * 1.6;
-
-      ctx.clearRect(0, 0, w, canvas.height / dpr);
-      ctx.font = `${CELL}px "JetBrains Mono", ui-monospace, monospace`;
-      ctx.textBaseline = "top";
-
-      for (let y = 0; y < rows; y++) {
-        for (let x = 0; x < cols; x++) {
-          const nx = x / cols;
-          const ny = y / rows;
-          const w1 = Math.sin(nx * 6.0 + t * 0.08) * Math.cos(ny * 4.0 + t * 0.06);
-          const w2 = Math.sin(nx * 3.0 - t * 0.12 + ny * 5.0) * 0.5;
-          const w3 = Math.cos(nx * 8.0 + ny * 3.0 + t * 0.04) * 0.3;
-          const w4 = Math.sin(nx * 12.0 + ny * 8.0 - t * 0.1) * 0.2;
-          const w5 = Math.cos(nx * 4.0 - ny * 6.0 + t * 0.07) * 0.35;
-          const cx = nx - 0.5;
-          const cy = ny - 0.5;
-          const dist = Math.sqrt(cx * cx + cy * cy);
-          const pulse = Math.sin(dist * 12.0 - t * 0.2) * 0.4;
-
-          const raw = (w1 + w2 + w3 + w4 + w5 + pulse) * 0.4 + 0.5;
-          const val = raw * raw * (3 - 2 * raw);
-          const idx = Math.floor(val * (CHARS.length - 1));
-          const ch = CHARS[idx];
-
-          const colorT = nx * 0.6 + ny * 0.4 + t * 0.025 + val * 0.3;
-          const r = Math.floor(chrR(colorT) * 255);
-          const g = Math.floor(chrG(colorT) * 255);
-          const b = Math.floor(chrB(colorT) * 255);
-          const alpha = 0.15 + val * 0.85;
-
-          ctx.fillStyle = `rgba(${r},${g},${b},${alpha})`;
-          ctx.fillText(ch, x * CELL, y * lineH);
-        }
-      }
-      animId = requestAnimationFrame(frame);
-    }
-
-    animId = requestAnimationFrame(frame);
-    return () => {
-      cancelAnimationFrame(animId);
-      window.removeEventListener("resize", resize);
-    };
-  }, []);
-
-  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />;
-}
-
-/* --------------------------------------------------------- */
-/* Theme switcher                                            */
-/* --------------------------------------------------------- */
 const RADIUS_OPTIONS: RadiusPreset[] = ["none", "sm", "md", "lg", "full"];
 const SPACING_OPTIONS: SpacingPreset[] = ["sm", "md", "lg"];
 const PALETTE_OPTIONS: PalettePreset[] = ["neutral", "zinc", "stone", "slate", "mauve", "olive"];
@@ -197,6 +163,9 @@ function ThemeSidebar({ theme, toggleTheme }: { theme: string; toggleTheme: () =
           <h1 className="text-lg font-bold tracking-tight">DesignYstem</h1>
           <p className="text-xs text-text-muted">Component Preview</p>
         </div>
+        <Button size="sm" className="w-full" onClick={() => (window.location.href = "/getting-started")}>
+          Getting Started →
+        </Button>
         <Separator />
         <SidebarSelect label="Font" options={FONT_OPTIONS} value={font} onChange={setFont} />
         <SidebarSelect label="Accent" options={ACCENT_OPTIONS} value={accent} onChange={setAccent} />
@@ -444,6 +413,13 @@ export default function ComponentPreview() {
   const [sheetOpen, setSheetOpen] = React.useState(false);
   const [progress, setProgress] = React.useState(45);
   const [toastPosition, setToastPosition] = React.useState<"left" | "center" | "right">("center");
+  const [page, setPage] = React.useState(1);
+  const [showStatusBar, setShowStatusBar] = React.useState(true);
+  const [showActivityBar, setShowActivityBar] = React.useState(false);
+  const [sliderValue, setSliderValue] = React.useState<number>(40);
+  const [rangeValue, setRangeValue] = React.useState<[number, number]>([25, 75]);
+  const [alignValue, setAlignValue] = React.useState<string>("center");
+  const [styleValues, setStyleValues] = React.useState<string[]>(["bold"]);
 
   const toggleTheme = () => {
     const next = theme === "dark" ? "light" : "dark";
@@ -456,18 +432,6 @@ export default function ComponentPreview() {
       <ToastProvider position={toastPosition}>
         <div className="min-h-screen bg-bg-base">
           <ThemeSidebar theme={theme} toggleTheme={toggleTheme} />
-
-          {/* Brand Banner */}
-          <div className="ml-48 relative flex items-center justify-center h-56 overflow-hidden">
-            <AsciiGradientCanvas />
-            <div className="relative text-center z-10">
-              <h1 className="text-4xl font-bold tracking-tight text-text-primary">DesignYstem</h1>
-              <Button size="sm" className="mt-4" onClick={() => (window.location.href = "/getting-started")}>
-                Getting Started →
-              </Button>
-            </div>
-            <div className="fade-edge-b absolute inset-x-0 bottom-0" style={{ backgroundColor: "var(--bg-base)" }} />
-          </div>
 
           <main className="ml-48 px-8 py-10 space-y-12">
             <SectionGroup title="Foundations">
@@ -854,6 +818,48 @@ export default function ComponentPreview() {
                 </Row>
               </Section>
 
+              {/* Breadcrumb */}
+              <Section title="Breadcrumb">
+                <Row label="Default">
+                  <Breadcrumb>
+                    <BreadcrumbList>
+                      <BreadcrumbItem>
+                        <BreadcrumbLink href="#">Home</BreadcrumbLink>
+                      </BreadcrumbItem>
+                      <BreadcrumbSeparator />
+                      <BreadcrumbItem>
+                        <BreadcrumbLink href="#">Components</BreadcrumbLink>
+                      </BreadcrumbItem>
+                      <BreadcrumbSeparator />
+                      <BreadcrumbItem>
+                        <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+                      </BreadcrumbItem>
+                    </BreadcrumbList>
+                  </Breadcrumb>
+                </Row>
+                <Row label="With ellipsis">
+                  <Breadcrumb>
+                    <BreadcrumbList>
+                      <BreadcrumbItem>
+                        <BreadcrumbLink href="#">Home</BreadcrumbLink>
+                      </BreadcrumbItem>
+                      <BreadcrumbSeparator />
+                      <BreadcrumbItem>
+                        <BreadcrumbEllipsis />
+                      </BreadcrumbItem>
+                      <BreadcrumbSeparator />
+                      <BreadcrumbItem>
+                        <BreadcrumbLink href="#">Settings</BreadcrumbLink>
+                      </BreadcrumbItem>
+                      <BreadcrumbSeparator />
+                      <BreadcrumbItem>
+                        <BreadcrumbPage>Account</BreadcrumbPage>
+                      </BreadcrumbItem>
+                    </BreadcrumbList>
+                  </Breadcrumb>
+                </Row>
+              </Section>
+
               {/* Button */}
               <Section title="Button">
                 <Row label="Variants">
@@ -868,8 +874,42 @@ export default function ComponentPreview() {
                   <Button size="sm">Small</Button>
                   <Button size="md">Medium</Button>
                   <Button size="lg">Large</Button>
+                  <Button size="icon-sm">
+                    <Plus />
+                  </Button>
                   <Button size="icon">
-                    <Plus className="h-4 w-4" />
+                    <Plus />
+                  </Button>
+                  <Button size="icon-lg">
+                    <Plus />
+                  </Button>
+                </Row>
+                <Row label="With icon">
+                  <Button>
+                    <Plus />
+                    Create
+                  </Button>
+                  <Button variant="secondary">
+                    <Download />
+                    Download
+                  </Button>
+                  <Button variant="destructive">
+                    <Trash2 />
+                    Delete
+                  </Button>
+                  <Button variant="outline">
+                    Next
+                    <ArrowRight />
+                  </Button>
+                </Row>
+                <Row label="Loading">
+                  <Button disabled>
+                    <Spinner size="sm" />
+                    Saving...
+                  </Button>
+                  <Button variant="secondary" disabled>
+                    <Spinner size="sm" />
+                    Loading
                   </Button>
                 </Row>
                 <Row label="States">
@@ -1017,6 +1057,100 @@ export default function ComponentPreview() {
                 </Row>
               </Section>
 
+              {/* Dropdown Menu */}
+              <Section title="Dropdown Menu">
+                <Row>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="secondary">Open menu</Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem>
+                        <User />
+                        Profile
+                        <Kbd size="sm" className="ml-auto">
+                          ⇧⌘P
+                        </Kbd>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem>
+                        <CreditCard />
+                        Billing
+                        <Kbd size="sm" className="ml-auto">
+                          ⌘B
+                        </Kbd>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem>
+                        <Settings />
+                        Settings
+                        <Kbd size="sm" className="ml-auto">
+                          ⌘,
+                        </Kbd>
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem>
+                        <LogOut />
+                        Log out
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="ghost" size="icon" aria-label="More">
+                        <MoreHorizontal />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="start">
+                      <DropdownMenuItem>Edit</DropdownMenuItem>
+                      <DropdownMenuItem>Duplicate</DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem disabled>Archive</DropdownMenuItem>
+                      <DropdownMenuItem className="text-destructive">Delete</DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="secondary">View</Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuLabel>Appearance</DropdownMenuLabel>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuCheckboxItem checked={showStatusBar} onCheckedChange={setShowStatusBar}>
+                        Status Bar
+                      </DropdownMenuCheckboxItem>
+                      <DropdownMenuCheckboxItem checked={showActivityBar} onCheckedChange={setShowActivityBar}>
+                        Activity Bar
+                      </DropdownMenuCheckboxItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </Row>
+              </Section>
+
+              {/* Empty */}
+              <Section title="Empty">
+                <Empty>
+                  <EmptyIcon>
+                    <Inbox />
+                  </EmptyIcon>
+                  <EmptyContent>
+                    <EmptyTitle>No messages</EmptyTitle>
+                    <EmptyDescription>You're all caught up. New messages will appear here.</EmptyDescription>
+                  </EmptyContent>
+                  <EmptyActions>
+                    <Button size="sm" variant="secondary">
+                      Refresh
+                    </Button>
+                    <Button size="sm">
+                      <Plus />
+                      New message
+                    </Button>
+                  </EmptyActions>
+                </Empty>
+              </Section>
+
               {/* Input & Textarea */}
               <Section title="Input & Textarea">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1059,6 +1193,33 @@ export default function ComponentPreview() {
                 </FormField>
               </Section>
 
+              {/* Kbd */}
+              <Section title="Kbd">
+                <Row label="Sizes">
+                  <Kbd size="sm">⌘</Kbd>
+                  <Kbd size="md">⌘</Kbd>
+                  <Kbd size="lg">⌘</Kbd>
+                </Row>
+                <Row label="Combos">
+                  <span className="inline-flex items-center gap-1">
+                    <Kbd>⌘</Kbd>
+                    <span className="text-text-muted text-xs">+</span>
+                    <Kbd>K</Kbd>
+                  </span>
+                  <span className="inline-flex items-center gap-1">
+                    <Kbd>Ctrl</Kbd>
+                    <span className="text-text-muted text-xs">+</span>
+                    <Kbd>Shift</Kbd>
+                    <span className="text-text-muted text-xs">+</span>
+                    <Kbd>P</Kbd>
+                  </span>
+                  <span className="inline-flex items-center gap-1">
+                    <Kbd size="sm">Esc</Kbd>
+                    <span className="text-text-muted text-xs">to close</span>
+                  </span>
+                </Row>
+              </Section>
+
               {/* Label */}
               <Section title="Label">
                 <Row>
@@ -1092,6 +1253,60 @@ export default function ComponentPreview() {
                     <FormMessage variant="warning">Password is weak.</FormMessage>
                   </FormField>
                 </div>
+              </Section>
+
+              {/* Pagination */}
+              <Section title="Pagination">
+                <Row label="Sizes">
+                  <Pagination page={page} pageCount={10} onPageChange={setPage} size="sm" />
+                  <Pagination page={page} pageCount={10} onPageChange={setPage} size="md" />
+                  <Pagination page={page} pageCount={10} onPageChange={setPage} size="lg" />
+                </Row>
+                <Row label="Few pages">
+                  <Pagination page={page > 3 ? 3 : page} pageCount={3} onPageChange={setPage} />
+                </Row>
+              </Section>
+
+              {/* Popover */}
+              <Section title="Popover">
+                <Row>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button variant="secondary">Open popover</Button>
+                    </PopoverTrigger>
+                    <PopoverContent>
+                      <div className="space-y-3">
+                        <div>
+                          <h4 className="text-sm font-semibold text-text-primary">Dimensions</h4>
+                          <p className="text-xs text-text-muted">Set the dimensions for the layer.</p>
+                        </div>
+                        <div className="space-y-2">
+                          <FormField size="sm">
+                            <Label>Width</Label>
+                            <Input defaultValue="100%" />
+                          </FormField>
+                          <FormField size="sm">
+                            <Label>Height</Label>
+                            <Input defaultValue="25px" />
+                          </FormField>
+                        </div>
+                      </div>
+                    </PopoverContent>
+                  </Popover>
+
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button variant="ghost" size="icon" aria-label="Info">
+                        <Info />
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent align="start">
+                      <p className="text-sm text-text-secondary">
+                        Popovers are richer than tooltips — they can contain forms, buttons, or any interactive content.
+                      </p>
+                    </PopoverContent>
+                  </Popover>
+                </Row>
               </Section>
 
               {/* Progress */}
@@ -1246,6 +1461,115 @@ export default function ComponentPreview() {
                 <Skeleton variant="default" className="h-32 w-full" />
               </Section>
 
+              {/* Slider */}
+              <Section title="Slider">
+                <Row label="Single">
+                  <div className="flex-1 max-w-md flex items-center gap-4">
+                    <Slider value={sliderValue} onValueChange={(v) => setSliderValue(v as number)} />
+                    <span className="w-8 text-xs text-text-muted tabular-nums">{sliderValue}</span>
+                  </div>
+                </Row>
+                <Row label="Range">
+                  <div className="flex-1 max-w-md flex items-center gap-4">
+                    <Slider value={rangeValue} onValueChange={(v) => setRangeValue(v as [number, number])} />
+                    <span className="w-14 text-xs text-text-muted tabular-nums whitespace-nowrap">
+                      {String(rangeValue[0]).padStart(2, "0")}–{String(rangeValue[1]).padStart(2, "0")}
+                    </span>
+                  </div>
+                </Row>
+                <Row label="Sizes">
+                  <div className="flex-1 max-w-md space-y-4">
+                    <Slider defaultValue={30} size="sm" />
+                    <Slider defaultValue={50} size="md" />
+                    <Slider defaultValue={70} size="lg" />
+                  </div>
+                </Row>
+                <Row label="Disabled">
+                  <div className="flex-1 max-w-md">
+                    <Slider defaultValue={40} disabled />
+                  </div>
+                </Row>
+              </Section>
+
+              {/* Spinner */}
+              <Section title="Spinner">
+                <Row label="Sizes">
+                  <Spinner size="sm" />
+                  <Spinner size="md" />
+                  <Spinner size="lg" />
+                  <Spinner size="xl" />
+                </Row>
+                <Row label="With color">
+                  <Spinner className="text-accent" />
+                  <Spinner className="text-text-muted" />
+                  <Spinner className="text-destructive" />
+                  <Spinner className="text-success" />
+                </Row>
+                <Row label="In context">
+                  <Button disabled>
+                    <Spinner size="sm" /> Loading
+                  </Button>
+                  <span className="inline-flex items-center gap-2 text-sm text-text-secondary">
+                    <Spinner size="sm" /> Fetching data...
+                  </span>
+                </Row>
+              </Section>
+
+              {/* Table */}
+              <Section title="Table">
+                <Table>
+                  <TableCaption>A list of recent invoices.</TableCaption>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Invoice</TableHead>
+                      <TableHead>Status</TableHead>
+                      <TableHead>Method</TableHead>
+                      <TableHead className="text-right">Amount</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell className="font-medium">INV001</TableCell>
+                      <TableCell>
+                        <Badge variant="success">Paid</Badge>
+                      </TableCell>
+                      <TableCell>Credit Card</TableCell>
+                      <TableCell className="text-right tabular-nums">$250.00</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium">INV002</TableCell>
+                      <TableCell>
+                        <Badge variant="warning">Pending</Badge>
+                      </TableCell>
+                      <TableCell>PayPal</TableCell>
+                      <TableCell className="text-right tabular-nums">$150.00</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium">INV003</TableCell>
+                      <TableCell>
+                        <Badge variant="destructive">Unpaid</Badge>
+                      </TableCell>
+                      <TableCell>Bank Transfer</TableCell>
+                      <TableCell className="text-right tabular-nums">$350.00</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell className="font-medium">INV004</TableCell>
+                      <TableCell>
+                        <Badge variant="success">Paid</Badge>
+                      </TableCell>
+                      <TableCell>Credit Card</TableCell>
+                      <TableCell className="text-right tabular-nums">$450.00</TableCell>
+                    </TableRow>
+                  </TableBody>
+                  <TableFooter>
+                    <TableRow>
+                      <TableCell colSpan={3}>Total</TableCell>
+                      <TableCell className="text-right tabular-nums">$1,200.00</TableCell>
+                    </TableRow>
+                  </TableFooter>
+                </Table>
+              </Section>
+
               {/* Tabs */}
               <Section title="Tabs">
                 <Row label="Default">
@@ -1379,6 +1703,74 @@ export default function ComponentPreview() {
                   <Toggle checked={toggleChecked2} onCheckedChange={setToggleChecked2} />
                   <Toggle size="sm" checked={toggleChecked} onCheckedChange={setToggleChecked} />
                   <Toggle disabled checked={false} onCheckedChange={() => {}} />
+                </Row>
+                <Row label="With label">
+                  <Toggle label="Airplane mode" checked={toggleChecked} onCheckedChange={setToggleChecked} />
+                  <Toggle
+                    label="Notifications"
+                    description="Receive push alerts on this device."
+                    checked={toggleChecked2}
+                    onCheckedChange={setToggleChecked2}
+                  />
+                  <Toggle size="sm" label="Compact" checked={toggleChecked} onCheckedChange={setToggleChecked} />
+                  <Toggle
+                    label="Label on left"
+                    labelPosition="left"
+                    checked={toggleChecked2}
+                    onCheckedChange={setToggleChecked2}
+                  />
+                </Row>
+              </Section>
+
+              {/* Toggle Group */}
+              <Section title="Toggle Group">
+                <Row label="Single (alignment)">
+                  <ToggleGroup type="single" value={alignValue} onValueChange={(v) => setAlignValue(v)}>
+                    <ToggleGroupItem value="left" aria-label="Align left">
+                      <AlignLeft />
+                    </ToggleGroupItem>
+                    <ToggleGroupItem value="center" aria-label="Align center">
+                      <AlignCenter />
+                    </ToggleGroupItem>
+                    <ToggleGroupItem value="right" aria-label="Align right">
+                      <AlignRight />
+                    </ToggleGroupItem>
+                  </ToggleGroup>
+                </Row>
+                <Row label="Multiple (text style)">
+                  <ToggleGroup type="multiple" value={styleValues} onValueChange={(v) => setStyleValues(v)}>
+                    <ToggleGroupItem value="bold" aria-label="Bold">
+                      <Bold />
+                    </ToggleGroupItem>
+                    <ToggleGroupItem value="italic" aria-label="Italic">
+                      <Italic />
+                    </ToggleGroupItem>
+                    <ToggleGroupItem value="underline" aria-label="Underline">
+                      <Underline />
+                    </ToggleGroupItem>
+                  </ToggleGroup>
+                </Row>
+                <Row label="Outline variant">
+                  <ToggleGroup type="single" variant="outline" defaultValue="day">
+                    <ToggleGroupItem value="day">Day</ToggleGroupItem>
+                    <ToggleGroupItem value="week">Week</ToggleGroupItem>
+                    <ToggleGroupItem value="month">Month</ToggleGroupItem>
+                    <ToggleGroupItem value="year">Year</ToggleGroupItem>
+                  </ToggleGroup>
+                </Row>
+                <Row label="Sizes">
+                  <ToggleGroup type="single" variant="outline" size="sm" defaultValue="a">
+                    <ToggleGroupItem value="a">Sm</ToggleGroupItem>
+                    <ToggleGroupItem value="b">Sm</ToggleGroupItem>
+                  </ToggleGroup>
+                  <ToggleGroup type="single" variant="outline" size="md" defaultValue="a">
+                    <ToggleGroupItem value="a">Md</ToggleGroupItem>
+                    <ToggleGroupItem value="b">Md</ToggleGroupItem>
+                  </ToggleGroup>
+                  <ToggleGroup type="single" variant="outline" size="lg" defaultValue="a">
+                    <ToggleGroupItem value="a">Lg</ToggleGroupItem>
+                    <ToggleGroupItem value="b">Lg</ToggleGroupItem>
+                  </ToggleGroup>
                 </Row>
               </Section>
 

@@ -85,3 +85,19 @@ Don't add extra `radius`/`spacing` props. Use `className` override instead — `
 ```
 
 Global theming via provider, local override via className.
+
+### Nested radius
+
+When an inner element sits inside a rounded container with padding, its radius should equal `outerRadius - padding` so the corners stay visually concentric. Used in **Tabs (default variant)** and **ToggleGroup (outline variant)**:
+
+```tsx
+{/* Outer: card radius, p-1 (4px) */}
+<div className="rounded-[var(--ds-radius-card)] p-1 bg-bg-input">
+  {/* Inner active item: card radius - 4px */}
+  <button className="rounded-[calc(var(--ds-radius-card)-4px)] bg-bg-elevated shadow-sm">
+    Active
+  </button>
+</div>
+```
+
+Rule: inner radius = `calc(outer - inset)`, where inset matches wrapper's padding.

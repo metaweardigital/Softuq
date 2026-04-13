@@ -4,7 +4,7 @@ import { cn } from "../../lib/utils";
 
 const toggleVariants = cva(
   [
-    "relative inline-flex shrink-0 cursor-pointer items-center rounded-full",
+    "relative inline-flex shrink-0 cursor-pointer items-center rounded-full p-px",
     "border border-border-subtle transition-colors duration-normal ease-soft",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg-base",
     "disabled:cursor-not-allowed disabled:opacity-50",
@@ -12,8 +12,8 @@ const toggleVariants = cva(
   {
     variants: {
       size: {
-        sm: "w-8 h-4",
-        md: "w-11 h-6",
+        sm: "h-5 w-9",
+        md: "h-6 w-11",
       },
     },
     defaultVariants: {
@@ -27,7 +27,7 @@ const thumbVariants = cva(
   {
     variants: {
       size: {
-        sm: "h-3 w-3",
+        sm: "h-4 w-4",
         md: "h-5 w-5",
       },
       checked: {
@@ -51,15 +51,25 @@ interface ToggleProps
     VariantProps<typeof toggleVariants> {
   checked?: boolean;
   onCheckedChange?: (checked: boolean) => void;
+  label?: React.ReactNode;
+  description?: React.ReactNode;
+  labelPosition?: "left" | "right";
 }
 
 const Toggle = React.forwardRef<HTMLButtonElement, ToggleProps>(
-  ({ className, size, checked = false, onCheckedChange, ...props }, ref) => {
-    return (
+  (
+    { className, size, checked = false, onCheckedChange, label, description, labelPosition = "right", id, ...props },
+    ref,
+  ) => {
+    const generatedId = React.useId();
+    const toggleId = id ?? generatedId;
+
+    const toggle = (
       <button
         type="button"
         role="switch"
         aria-checked={checked}
+        id={toggleId}
         ref={ref}
         className={cn(toggleVariants({ size }), checked ? "bg-accent" : "bg-bg-input", className)}
         onClick={() => onCheckedChange?.(!checked)}
@@ -67,6 +77,36 @@ const Toggle = React.forwardRef<HTMLButtonElement, ToggleProps>(
       >
         <span className={cn(thumbVariants({ size, checked }))} />
       </button>
+    );
+
+    if (!label && !description) return toggle;
+
+    const textBlock = (
+      <div className="flex flex-col gap-0.5 select-none">
+        {label && (
+          <label
+            htmlFor={toggleId}
+            className={cn(
+              "cursor-pointer text-text-primary leading-none",
+              size === "sm" ? "text-xs" : "text-sm",
+              props.disabled && "cursor-not-allowed opacity-50",
+            )}
+          >
+            {label}
+          </label>
+        )}
+        {description && (
+          <p className={cn("text-text-muted leading-snug", size === "sm" ? "text-[11px]" : "text-xs")}>{description}</p>
+        )}
+      </div>
+    );
+
+    return (
+      <div className="inline-flex items-center gap-3">
+        {labelPosition === "left" && textBlock}
+        {toggle}
+        {labelPosition === "right" && textBlock}
+      </div>
     );
   },
 );

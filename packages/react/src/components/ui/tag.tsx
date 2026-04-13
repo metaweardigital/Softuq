@@ -15,9 +15,9 @@ const tagVariants = cva(
       variant: {
         default: "bg-bg-elevated text-text-primary hover:bg-bg-hover",
         accent: "bg-accent text-white hover:bg-accent-hover",
-        success: "bg-success-muted text-success-text border-success/20 hover:bg-success/20",
-        warning: "bg-warning-muted text-warning-text border-warning/20 hover:bg-warning/20",
-        destructive: "bg-destructive-muted text-destructive-text border-destructive/20 hover:bg-destructive/20",
+        success: "bg-success-muted text-success-text border-success-border hover:bg-success/20",
+        warning: "bg-warning-muted text-warning-text border-warning-border hover:bg-warning/20",
+        destructive: "bg-destructive-muted text-destructive-text border-destructive-border hover:bg-destructive/20",
       },
       size: {
         sm: "h-6 px-2 text-xs rounded-[var(--ds-radius-checkbox)]",

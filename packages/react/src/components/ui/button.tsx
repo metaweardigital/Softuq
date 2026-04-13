@@ -9,6 +9,7 @@ const buttonVariants = cva(
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg-base",
     "disabled:pointer-events-none disabled:opacity-50",
     "active:scale-[0.98]",
+    "[&_svg]:shrink-0",
   ].join(" "),
   {
     variants: {
@@ -21,10 +22,12 @@ const buttonVariants = cva(
         link: "text-accent-text underline-offset-4 hover:underline",
       },
       size: {
-        sm: "h-8 rounded-[var(--ds-radius-button)] px-[var(--ds-space-button-sm)] text-xs",
-        md: "h-10 rounded-[var(--ds-radius-button)] px-[var(--ds-space-button-md)] text-sm",
-        lg: "h-12 rounded-[var(--ds-radius-button)] px-[var(--ds-space-button-lg)] text-base",
-        icon: "h-10 w-10 rounded-[var(--ds-radius-button)]",
+        sm: "h-8 rounded-[var(--ds-radius-button)] px-[var(--ds-space-button-sm)] text-xs [&_svg]:size-3.5",
+        md: "h-10 rounded-[var(--ds-radius-button)] px-[var(--ds-space-button-md)] text-sm [&_svg]:size-4",
+        lg: "h-12 rounded-[var(--ds-radius-button)] px-[var(--ds-space-button-lg)] text-base [&_svg]:size-5",
+        "icon-sm": "h-8 w-8 rounded-[var(--ds-radius-button)] [&_svg]:size-3.5",
+        icon: "h-10 w-10 rounded-[var(--ds-radius-button)] [&_svg]:size-4",
+        "icon-lg": "h-12 w-12 rounded-[var(--ds-radius-button)] [&_svg]:size-5",
       },
     },
     defaultVariants: {

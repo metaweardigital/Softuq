@@ -9,9 +9,9 @@ const badgeVariants = cva("inline-flex items-center font-medium transition-color
       secondary: "bg-bg-elevated text-text-secondary border border-border-subtle",
       outline: "border border-border-default text-text-primary bg-transparent",
       ghost: "bg-transparent text-text-secondary",
-      destructive: "bg-destructive-muted text-destructive-text",
-      success: "bg-success-muted text-success-text",
-      warning: "bg-warning-muted text-warning-text",
+      destructive: "bg-destructive-muted text-destructive-text border border-destructive-border",
+      success: "bg-success-muted text-success-text border border-success-border",
+      warning: "bg-warning-muted text-warning-text border border-warning-border",
     },
     size: {
       sm: "px-2 py-0.5 text-xs rounded-[var(--ds-radius-button)]",

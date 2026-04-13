@@ -31,6 +31,11 @@
       "dependencies": ["class-variance-authority"],
       "registryDeps": []
     },
+    "breadcrumb": {
+      "files": ["components/ui/breadcrumb.tsx"],
+      "dependencies": ["lucide-react"],
+      "registryDeps": []
+    },
     "button": {
       "files": ["components/ui/button.tsx"],
       "dependencies": ["class-variance-authority"],
@@ -56,6 +61,16 @@
       "dependencies": ["class-variance-authority", "lucide-react"],
       "registryDeps": []
     },
+    "dropdown-menu": {
+      "files": ["components/ui/dropdown-menu.tsx"],
+      "dependencies": ["lucide-react"],
+      "registryDeps": []
+    },
+    "empty": {
+      "files": ["components/ui/empty.tsx"],
+      "dependencies": [],
+      "registryDeps": []
+    },
     "form-text": {
       "files": ["components/ui/form-text.tsx"],
       "dependencies": ["class-variance-authority"],
@@ -66,9 +81,24 @@
       "dependencies": ["class-variance-authority"],
       "registryDeps": []
     },
+    "kbd": {
+      "files": ["components/ui/kbd.tsx"],
+      "dependencies": ["class-variance-authority"],
+      "registryDeps": []
+    },
     "label": {
       "files": ["components/ui/label.tsx"],
       "dependencies": ["class-variance-authority"],
+      "registryDeps": []
+    },
+    "pagination": {
+      "files": ["components/ui/pagination.tsx"],
+      "dependencies": ["class-variance-authority", "lucide-react"],
+      "registryDeps": []
+    },
+    "popover": {
+      "files": ["components/ui/popover.tsx"],
+      "dependencies": [],
       "registryDeps": []
     },
     "progress": {
@@ -101,8 +131,23 @@
       "dependencies": ["class-variance-authority"],
       "registryDeps": []
     },
+    "slider": {
+      "files": ["components/ui/slider.tsx"],
+      "dependencies": ["class-variance-authority"],
+      "registryDeps": []
+    },
+    "spinner": {
+      "files": ["components/ui/spinner.tsx"],
+      "dependencies": ["class-variance-authority", "lucide-react"],
+      "registryDeps": []
+    },
     "squircle": {
       "files": ["components/ui/squircle.tsx", "lib/squircle.ts"],
+      "dependencies": [],
+      "registryDeps": []
+    },
+    "table": {
+      "files": ["components/ui/table.tsx"],
       "dependencies": [],
       "registryDeps": []
     },
@@ -128,6 +173,11 @@
     },
     "toggle": {
       "files": ["components/ui/toggle.tsx"],
+      "dependencies": ["class-variance-authority"],
+      "registryDeps": []
+    },
+    "toggle-group": {
+      "files": ["components/ui/toggle-group.tsx"],
       "dependencies": ["class-variance-authority"],
       "registryDeps": []
     },

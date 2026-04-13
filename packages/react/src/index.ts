@@ -15,6 +15,16 @@ export { Alert, AlertDescription, type AlertProps, AlertTitle, alertVariants } f
 // Components — Display
 export { Avatar, type AvatarProps, avatarVariants } from "./components/ui/avatar";
 export { Badge, type BadgeProps, badgeVariants } from "./components/ui/badge";
+export {
+  Breadcrumb,
+  BreadcrumbEllipsis,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  type BreadcrumbLinkProps,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "./components/ui/breadcrumb";
 // Components — Form
 export { Button, type ButtonProps, buttonVariants } from "./components/ui/button";
 export {
@@ -45,6 +55,31 @@ export {
   dialogContentVariants,
 } from "./components/ui/dialog";
 export {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  type DropdownMenuCheckboxItemProps,
+  DropdownMenuContent,
+  type DropdownMenuContentProps,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  type DropdownMenuItemProps,
+  DropdownMenuLabel,
+  type DropdownMenuLabelProps,
+  type DropdownMenuProps,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+  type DropdownMenuTriggerProps,
+} from "./components/ui/dropdown-menu";
+export {
+  Empty,
+  EmptyActions,
+  EmptyContent,
+  EmptyDescription,
+  EmptyIcon,
+  type EmptyProps,
+  EmptyTitle,
+} from "./components/ui/empty";
+export {
   FormDescription,
   FormField,
   type FormFieldProps,
@@ -55,7 +90,17 @@ export {
   useFormFieldSize,
 } from "./components/ui/form-text";
 export { Input, type InputProps, inputVariants } from "./components/ui/input";
+export { Kbd, type KbdProps, kbdVariants } from "./components/ui/kbd";
 export { Label, type LabelProps, labelVariants } from "./components/ui/label";
+export { Pagination, type PaginationProps } from "./components/ui/pagination";
+export {
+  Popover,
+  PopoverContent,
+  type PopoverContentProps,
+  type PopoverProps,
+  PopoverTrigger,
+  type PopoverTriggerProps,
+} from "./components/ui/popover";
 export { Progress, type ProgressProps, progressVariants } from "./components/ui/progress";
 export {
   RadioGroup,
@@ -81,8 +126,20 @@ export {
 export { Separator, type SeparatorProps } from "./components/ui/separator";
 export { Sheet, type SheetProps, sheetVariants } from "./components/ui/sheet";
 export { Skeleton, type SkeletonProps, skeletonVariants } from "./components/ui/skeleton";
+export { Slider, type SliderProps, sliderThumbVariants, sliderTrackVariants } from "./components/ui/slider";
+export { Spinner, type SpinnerProps, spinnerVariants } from "./components/ui/spinner";
 // Components — Misc
 export { generateSquirclePath, Squircle, type SquircleProps, useSquirclePath } from "./components/ui/squircle";
+export {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "./components/ui/table";
 export {
   Tabs,
   TabsContent,
@@ -104,6 +161,13 @@ export {
   useToast,
 } from "./components/ui/toast";
 export { Toggle, type ToggleProps, toggleVariants } from "./components/ui/toggle";
+export {
+  ToggleGroup,
+  ToggleGroupItem,
+  type ToggleGroupItemProps,
+  type ToggleGroupProps,
+  toggleGroupItemVariants,
+} from "./components/ui/toggle-group";
 export { Tooltip, type TooltipProps } from "./components/ui/tooltip";
 export {
   type AccentPreset,

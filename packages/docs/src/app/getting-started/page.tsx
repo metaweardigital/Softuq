@@ -61,7 +61,7 @@ function Step({ n, title, children }: { n: number; title: string; children: Reac
   return (
     <div className="flex gap-5">
       <div className="flex flex-col items-center">
-        <div className="flex items-center justify-center w-8 h-8 rounded-full bg-accent text-text-inverse text-sm font-bold shrink-0">
+        <div className="flex items-center justify-center w-8 h-8 rounded-full bg-accent text-white text-sm font-bold shrink-0">
           {n}
         </div>
         <div className="w-px flex-1 bg-border-subtle mt-2" />
@@ -230,26 +230,36 @@ npx designystem update button card`}
                 "alert",
                 "avatar",
                 "badge",
+                "breadcrumb",
                 "button",
                 "card",
                 "checkbox",
                 "code",
                 "dialog",
+                "dropdown-menu",
+                "empty",
                 "form-text",
                 "input",
+                "kbd",
                 "label",
+                "pagination",
+                "popover",
                 "progress",
                 "radio",
                 "select",
                 "separator",
                 "sheet",
                 "skeleton",
+                "slider",
+                "spinner",
                 "squircle",
+                "table",
                 "tabs",
                 "tag",
                 "textarea",
                 "toast",
                 "toggle",
+                "toggle-group",
                 "tooltip",
               ].map((c) => (
                 <div key={c} className="flex items-center gap-2">
