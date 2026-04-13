@@ -1,6 +1,16 @@
 import type { ComponentType } from "react";
 import Dashboard01 from "./app/dashboard/dashboard-01";
+import Empty01 from "./app/empty-states/empty-01";
+import Settings01 from "./app/settings/settings-01";
+import Sidebar01 from "./app/sidebar/sidebar-01";
+import Cta01 from "./web/cta/cta-01";
+import Faq01 from "./web/faq/faq-01";
+import Features01 from "./web/features/features-01";
+import Footer01 from "./web/footer/footer-01";
 import Hero01 from "./web/hero/hero-01";
+import Logos01 from "./web/logos/logos-01";
+import Pricing01 from "./web/pricing/pricing-01";
+import Testimonials01 from "./web/testimonials/testimonials-01";
 
 export type BlockType = "web" | "app";
 
@@ -155,11 +165,81 @@ export const BLOCKS: BlockMeta[] = [
     component: Hero01,
   },
   {
+    type: "web",
+    category: "features",
+    slug: "features-01",
+    name: "Three-column feature grid",
+    component: Features01,
+  },
+  {
+    type: "web",
+    category: "cta",
+    slug: "cta-01",
+    name: "Centered CTA with accent glow",
+    component: Cta01,
+  },
+  {
+    type: "web",
+    category: "pricing",
+    slug: "pricing-01",
+    name: "Three-tier pricing with featured plan",
+    component: Pricing01,
+  },
+  {
+    type: "web",
+    category: "testimonials",
+    slug: "testimonials-01",
+    name: "Three-column quote grid",
+    component: Testimonials01,
+  },
+  {
+    type: "web",
+    category: "faq",
+    slug: "faq-01",
+    name: "Single-open accordion FAQ",
+    component: Faq01,
+  },
+  {
+    type: "web",
+    category: "logos",
+    slug: "logos-01",
+    name: "Six-column wordmark cloud",
+    component: Logos01,
+  },
+  {
+    type: "web",
+    category: "footer",
+    slug: "footer-01",
+    name: "Four-column footer with socials",
+    component: Footer01,
+  },
+  {
+    type: "app",
+    category: "sidebar",
+    slug: "sidebar-01",
+    name: "Sidebar nav with search and user card",
+    component: Sidebar01,
+  },
+  {
     type: "app",
     category: "dashboard",
     slug: "dashboard-01",
     name: "Stats with activity feed",
     component: Dashboard01,
+  },
+  {
+    type: "app",
+    category: "settings",
+    slug: "settings-01",
+    name: "Profile, preferences, and danger zone",
+    component: Settings01,
+  },
+  {
+    type: "app",
+    category: "empty-states",
+    slug: "empty-01",
+    name: "No projects with dual action",
+    component: Empty01,
   },
 ];
 

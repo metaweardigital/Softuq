@@ -68,7 +68,7 @@ function StatCard({ stat }: { stat: Stat }) {
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between">
           <CardDescription>{stat.label}</CardDescription>
-          <div className="size-8 rounded-md bg-bg-elevated border border-border-subtle flex items-center justify-center text-text-muted">
+          <div className="size-8 rounded-[var(--ds-radius-button)] bg-bg-elevated border border-border-subtle flex items-center justify-center text-text-muted">
             <Icon className="size-4" />
           </div>
         </div>
@@ -89,31 +89,31 @@ function StatCard({ stat }: { stat: Stat }) {
 
 export default function Dashboard01() {
   return (
-    <div className="min-h-screen bg-bg-base p-6 md:p-8">
-      <div className="mx-auto max-w-6xl space-y-6">
-        <header className="flex items-start justify-between gap-4">
+    <div className="min-h-screen bg-bg-base p-[var(--ds-space-section-x)]">
+      <div className="mx-auto max-w-6xl space-y-[var(--ds-space-stack)]">
+        <header className="flex items-start justify-between gap-[var(--ds-space-gap)]">
           <div>
             <h1 className="text-2xl font-semibold tracking-tight text-text-primary">Overview</h1>
             <p className="text-sm text-text-muted">Snapshot of your workspace for the last 30 days.</p>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-[var(--ds-space-gap)]">
             <Button variant="outline" size="sm">
               Export
             </Button>
             <Button size="sm">
-              <Plus className="size-4" />
+              <Plus />
               New project
             </Button>
           </div>
         </header>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[var(--ds-space-gap)]">
           {STATS.map((s) => (
             <StatCard key={s.label} stat={s} />
           ))}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-[var(--ds-space-gap)]">
           <Card className="lg:col-span-2">
             <CardHeader>
               <div className="flex items-center justify-between">
@@ -125,11 +125,11 @@ export default function Dashboard01() {
               </div>
             </CardHeader>
             <CardContent>
-              <div className="h-48 flex items-end gap-2">
+              <div className="h-48 flex items-end gap-[var(--ds-space-gap)]">
                 {REVENUE_WEEKS.map((w, i) => (
                   <div
                     key={w.label}
-                    className="flex-1 rounded-sm"
+                    className="flex-1 rounded-[var(--ds-radius-button)]"
                     style={{
                       height: `${w.height}%`,
                       background: `color-mix(in oklch, var(--accent) ${40 + i * 4}%, transparent)`,
@@ -149,14 +149,14 @@ export default function Dashboard01() {
                   <CardDescription>Recent team events</CardDescription>
                 </div>
                 <Button variant="ghost" size="icon-sm">
-                  <MoreHorizontal className="size-4" />
+                  <MoreHorizontal />
                 </Button>
               </div>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-[var(--ds-space-gap)]">
               {ACTIVITY.map((a, i) => (
                 <div key={a.name}>
-                  <div className="flex items-start gap-3">
+                  <div className="flex items-start gap-[var(--ds-space-gap)]">
                     <Avatar size="sm" fallback={a.initials} />
                     <div className="min-w-0 flex-1">
                       <p className="text-sm text-text-primary">

@@ -112,6 +112,10 @@ export const SPACING_PRESETS: Record<SpacingPreset, Record<string, string>> = {
     "--ds-space-button-sm": spacing[2],
     "--ds-space-button-md": spacing[3],
     "--ds-space-button-lg": spacing[4],
+    "--ds-space-section-x": spacing[6],
+    "--ds-space-section-y": spacing[16],
+    "--ds-space-stack": spacing[4],
+    "--ds-space-gap": spacing[3],
   },
   md: {
     "--ds-space-card": spacing[6],
@@ -121,6 +125,10 @@ export const SPACING_PRESETS: Record<SpacingPreset, Record<string, string>> = {
     "--ds-space-button-sm": spacing[3],
     "--ds-space-button-md": spacing[4],
     "--ds-space-button-lg": spacing[6],
+    "--ds-space-section-x": spacing[8],
+    "--ds-space-section-y": "96px",
+    "--ds-space-stack": spacing[6],
+    "--ds-space-gap": spacing[4],
   },
   lg: {
     "--ds-space-card": spacing[8],
@@ -130,6 +138,10 @@ export const SPACING_PRESETS: Record<SpacingPreset, Record<string, string>> = {
     "--ds-space-button-sm": spacing[4],
     "--ds-space-button-md": spacing[5],
     "--ds-space-button-lg": spacing[8],
+    "--ds-space-section-x": spacing[12],
+    "--ds-space-section-y": "128px",
+    "--ds-space-stack": spacing[8],
+    "--ds-space-gap": spacing[6],
   },
 };
 

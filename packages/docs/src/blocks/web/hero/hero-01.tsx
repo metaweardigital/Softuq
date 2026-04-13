@@ -5,7 +5,7 @@ import { ArrowRight, Sparkles } from "lucide-react";
 
 export default function Hero01() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-6 py-24">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-[var(--ds-space-section-x)] py-[var(--ds-space-section-y)]">
       <div
         aria-hidden
         className="absolute inset-0 -z-10"
@@ -15,20 +15,20 @@ export default function Hero01() {
         }}
       />
       <div className="relative z-10 mx-auto max-w-3xl text-center">
-        <Badge variant="outline" className="mb-6 gap-1.5">
+        <Badge variant="outline" className="mb-[var(--ds-space-stack)] gap-1.5">
           <Sparkles className="size-3" />
           New — v1.0 is live
         </Badge>
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-text-primary">
           Build interfaces that feel crafted, not configured
         </h1>
-        <p className="mt-6 text-base sm:text-lg text-text-muted max-w-2xl mx-auto">
+        <p className="mt-[var(--ds-space-stack)] text-base sm:text-lg text-text-muted max-w-2xl mx-auto">
           A soft, tactile design system with tokens, components, and a CLI. Copy what you need, own what you ship.
         </p>
-        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3">
+        <div className="mt-[var(--ds-space-stack)] flex flex-col sm:flex-row items-center justify-center gap-[var(--ds-space-gap)]">
           <Button size="lg">
             Get started
-            <ArrowRight className="size-4" />
+            <ArrowRight />
           </Button>
           <Button size="lg" variant="outline">
             View components

@@ -1,0 +1,105 @@
+"use client";
+
+import {
+  Badge,
+  Button,
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@designystem/react";
+import { Check } from "lucide-react";
+
+type Tier = {
+  name: string;
+  price: string;
+  cadence: string;
+  description: string;
+  features: string[];
+  cta: string;
+  featured?: boolean;
+};
+
+const TIERS: Tier[] = [
+  {
+    name: "Starter",
+    price: "$0",
+    cadence: "forever",
+    description: "Everything you need to try the system.",
+    features: ["All primitives", "Dark & light", "Copy-paste CLI", "MIT licensed"],
+    cta: "Get started",
+  },
+  {
+    name: "Pro",
+    price: "$19",
+    cadence: "per month",
+    description: "For solo devs shipping production apps.",
+    features: ["Everything in Starter", "All blocks", "Priority updates", "Email support"],
+    cta: "Upgrade to Pro",
+    featured: true,
+  },
+  {
+    name: "Team",
+    price: "$49",
+    cadence: "per month",
+    description: "For teams that need shared tokens and theming.",
+    features: ["Everything in Pro", "5 seats included", "Custom tokens", "Slack support"],
+    cta: "Start free trial",
+  },
+];
+
+export default function Pricing01() {
+  return (
+    <section className="px-[var(--ds-space-section-x)] py-[var(--ds-space-section-y)]">
+      <div className="mx-auto max-w-5xl">
+        <div className="text-center max-w-2xl mx-auto">
+          <Badge variant="outline" className="mb-[var(--ds-space-stack)]">
+            Pricing
+          </Badge>
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-text-primary">
+            Simple pricing. No surprises.
+          </h2>
+          <p className="mt-[var(--ds-space-stack)] text-text-muted">
+            Start free, scale when you need to. Cancel anytime — no questions asked.
+          </p>
+        </div>
+        <div className="mt-[var(--ds-space-stack)] grid grid-cols-1 md:grid-cols-3 gap-[var(--ds-space-gap)]">
+          {TIERS.map((tier) => (
+            <Card key={tier.name} className={tier.featured ? "relative border-border-accent" : undefined}>
+              {tier.featured && (
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                  <Badge>Most popular</Badge>
+                </div>
+              )}
+              <CardHeader>
+                <CardTitle>{tier.name}</CardTitle>
+                <CardDescription>{tier.description}</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-[var(--ds-space-gap)]">
+                <div className="flex items-baseline gap-1">
+                  <span className="text-4xl font-bold tracking-tight text-text-primary">{tier.price}</span>
+                  <span className="text-sm text-text-muted">/ {tier.cadence}</span>
+                </div>
+                <ul className="space-y-2">
+                  {tier.features.map((f) => (
+                    <li key={f} className="flex items-start gap-2 text-sm text-text-secondary">
+                      <Check className="size-4 mt-0.5 shrink-0 text-accent-text" />
+                      <span>{f}</span>
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+              <CardFooter>
+                <Button className="w-full" variant={tier.featured ? "default" : "outline"}>
+                  {tier.cta}
+                </Button>
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
