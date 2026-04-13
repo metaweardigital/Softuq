@@ -2,11 +2,54 @@
 
 import { ExternalLink } from "lucide-react";
 import { notFound, useParams } from "next/navigation";
+import * as React from "react";
 import { type BlockMeta, type BlockType, getBlocksForCategory, getCategory, isBlockType } from "@/blocks/registry";
-import { BlocksShell } from "../../_components/blocks-shell";
+import { PageShell } from "../../../_components/page-shell";
+
+const MIN_HEIGHT = 280;
+const MAX_HEIGHT = 960;
 
 function BlockPreview({ block }: { block: BlockMeta }) {
   const previewHref = `/blocks-preview/${block.type}/${block.category}/${block.slug}`;
+  const iframeRef = React.useRef<HTMLIFrameElement>(null);
+  const [height, setHeight] = React.useState(MIN_HEIGHT);
+
+  React.useEffect(() => {
+    const iframe = iframeRef.current;
+    if (!iframe) return;
+
+    const measure = () => {
+      const doc = iframe.contentDocument;
+      if (!doc?.body) return;
+      const h = doc.body.scrollHeight;
+      setHeight(Math.min(MAX_HEIGHT, Math.max(MIN_HEIGHT, h)));
+    };
+
+    const onLoad = () => {
+      measure();
+      const win = iframe.contentWindow;
+      const doc = iframe.contentDocument;
+      if (!win || !doc?.body) return;
+      win.addEventListener("resize", measure);
+      const ro = new ResizeObserver(measure);
+      ro.observe(doc.body);
+      iframe.dataset.cleanup = "1";
+      (iframe as HTMLIFrameElement & { _cleanup?: () => void })._cleanup = () => {
+        win.removeEventListener("resize", measure);
+        ro.disconnect();
+      };
+    };
+
+    iframe.addEventListener("load", onLoad);
+    if (iframe.contentDocument?.readyState === "complete") onLoad();
+
+    return () => {
+      iframe.removeEventListener("load", onLoad);
+      const withCleanup = iframe as HTMLIFrameElement & { _cleanup?: () => void };
+      withCleanup._cleanup?.();
+    };
+  }, []);
+
   return (
     <section className="rounded-[var(--ds-radius-card)] border border-border-subtle bg-bg-card overflow-hidden">
       <header className="flex items-center justify-between px-5 py-3 border-b border-border-subtle">
@@ -25,11 +68,11 @@ function BlockPreview({ block }: { block: BlockMeta }) {
         </a>
       </header>
       <iframe
+        ref={iframeRef}
         src={previewHref}
         title={block.name}
-        className="w-full block bg-bg-base"
-        style={{ height: "720px", border: "0" }}
-        loading="lazy"
+        className="w-full block bg-bg-base transition-[height] duration-200"
+        style={{ height, border: "0" }}
       />
     </section>
   );
@@ -61,7 +104,7 @@ export default function BlocksCategoryPage() {
   const typeLabel = type === "web" ? "Web Blocks" : "App Blocks";
 
   return (
-    <BlocksShell
+    <PageShell
       title={category.name}
       description={category.description}
       crumbs={[
@@ -79,6 +122,6 @@ export default function BlocksCategoryPage() {
           ))}
         </div>
       )}
-    </BlocksShell>
+    </PageShell>
   );
 }

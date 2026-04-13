@@ -42,9 +42,7 @@ export default function Testimonials01() {
           <Badge variant="outline" className="mb-[var(--ds-space-stack)]">
             Loved by builders
           </Badge>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-text-primary">
-            What teams are saying
-          </h2>
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-text-primary">What teams are saying</h2>
           <p className="mt-[var(--ds-space-stack)] text-text-muted">
             Real feedback from designers and engineers shipping production apps.
           </p>

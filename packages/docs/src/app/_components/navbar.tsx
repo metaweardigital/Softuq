@@ -38,6 +38,7 @@ const NAV_LINKS: NavLink[] = [
   { href: "/", label: "Components" },
   { href: "/getting-started", label: "Getting Started", matchPrefix: "/getting-started" },
   { href: "/blocks", label: "Blocks", matchPrefix: "/blocks" },
+  { href: "/templates", label: "Templates", matchPrefix: "/templates" },
 ];
 
 function isActive(pathname: string, link: NavLink): boolean {

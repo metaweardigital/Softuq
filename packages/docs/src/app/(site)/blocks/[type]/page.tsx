@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { notFound, useParams } from "next/navigation";
 import { getBlockCount, getCategories, isBlockType } from "@/blocks/registry";
-import { BlocksShell } from "../_components/blocks-shell";
+import { PageShell } from "../../_components/page-shell";
 
 export default function BlocksTypePage() {
   const params = useParams<{ type: string }>();
@@ -22,7 +22,7 @@ export default function BlocksTypePage() {
       : "Product UI sections for dashboards, settings, and admin tools.";
 
   return (
-    <BlocksShell
+    <PageShell
       title={typeLabel}
       description={typeDescription}
       crumbs={[{ label: "Blocks", href: "/blocks" }, { label: typeLabel }]}
@@ -49,6 +49,6 @@ export default function BlocksTypePage() {
           );
         })}
       </div>
-    </BlocksShell>
+    </PageShell>
   );
 }

@@ -57,10 +57,7 @@ export default function Footer01() {
               <ul className="space-y-2">
                 {col.links.map((l) => (
                   <li key={l.label}>
-                    <a
-                      href={l.href}
-                      className="text-sm text-text-secondary hover:text-accent transition-colors"
-                    >
+                    <a href={l.href} className="text-sm text-text-secondary hover:text-accent transition-colors">
                       {l.label}
                     </a>
                   </li>
@@ -73,18 +70,10 @@ export default function Footer01() {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-[var(--ds-space-gap)]">
           <p className="text-xs text-text-muted">© 2026 DesignYstem. MIT licensed.</p>
           <div className="flex items-center gap-[var(--ds-space-gap)]">
-            <a
-              href="#"
-              aria-label="GitHub"
-              className="text-text-muted hover:text-accent transition-colors"
-            >
+            <a href="#" aria-label="GitHub" className="text-text-muted hover:text-accent transition-colors">
               <Github className="size-4" />
             </a>
-            <a
-              href="#"
-              aria-label="Twitter"
-              className="text-text-muted hover:text-accent transition-colors"
-            >
+            <a href="#" aria-label="Twitter" className="text-text-muted hover:text-accent transition-colors">
               <Twitter className="size-4" />
             </a>
           </div>

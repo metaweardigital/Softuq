@@ -6,7 +6,7 @@ import type { ReactNode } from "react";
 
 export type Crumb = { label: string; href?: string };
 
-export function BlocksShell({
+export function PageShell({
   title,
   description,
   crumbs,

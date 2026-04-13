@@ -1,19 +1,8 @@
 "use client";
 
 import { Avatar, Badge, Button, cn, Input, Separator } from "@designystem/react";
-import {
-  Bell,
-  CreditCard,
-  FolderKanban,
-  Home,
-  Inbox,
-  Plus,
-  Search,
-  Settings,
-  Sparkles,
-  Users,
-} from "lucide-react";
-import * as React from "react";
+import { Bell, CreditCard, FolderKanban, Home, Inbox, Plus, Search, Settings, Sparkles, Users } from "lucide-react";
+import type * as React from "react";
 
 type NavItem = {
   icon: React.ComponentType<{ className?: string }>;
@@ -57,7 +46,7 @@ function NavButton({ item, active }: { item: NavItem; active?: boolean }) {
   );
 }
 
-export default function Sidebar01() {
+export default function Sidebar01({ children }: { children?: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-bg-base flex">
       <aside className="w-60 shrink-0 border-r border-border-subtle flex flex-col p-[var(--ds-space-gap)] gap-[var(--ds-space-gap)]">
@@ -96,23 +85,27 @@ export default function Sidebar01() {
         </div>
       </aside>
 
-      <main className="flex-1 p-[var(--ds-space-section-x)]">
-        <div className="mx-auto max-w-4xl space-y-[var(--ds-space-stack)]">
-          <header className="flex items-start justify-between gap-[var(--ds-space-gap)]">
-            <div>
-              <h1 className="text-2xl font-semibold tracking-tight text-text-primary">Home</h1>
-              <p className="text-sm text-text-muted">Your workspace at a glance.</p>
-            </div>
-            <Button size="sm">
-              <Plus />
-              Quick add
-            </Button>
-          </header>
+      <main className="flex-1 min-w-0">
+        {children ?? (
+          <div className="p-[var(--ds-space-section-x)]">
+            <div className="mx-auto max-w-4xl space-y-[var(--ds-space-stack)]">
+              <header className="flex items-start justify-between gap-[var(--ds-space-gap)]">
+                <div>
+                  <h1 className="text-2xl font-semibold tracking-tight text-text-primary">Home</h1>
+                  <p className="text-sm text-text-muted">Your workspace at a glance.</p>
+                </div>
+                <Button size="sm">
+                  <Plus />
+                  Quick add
+                </Button>
+              </header>
 
-          <div className="rounded-[var(--ds-radius-card)] border border-dashed border-border-subtle bg-bg-card p-[var(--ds-space-section-x)] text-center">
-            <p className="text-sm text-text-muted">Your recent activity will appear here.</p>
+              <div className="rounded-[var(--ds-radius-card)] border border-dashed border-border-subtle bg-bg-card p-[var(--ds-space-section-x)] text-center">
+                <p className="text-sm text-text-muted">Your recent activity will appear here.</p>
+              </div>
+            </div>
           </div>
-        </div>
+        )}
       </main>
     </div>
   );

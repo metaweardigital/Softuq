@@ -3,7 +3,7 @@
 import { ArrowRight, LayoutDashboard, Monitor } from "lucide-react";
 import Link from "next/link";
 import { APP_CATEGORIES, BLOCKS, WEB_CATEGORIES } from "@/blocks/registry";
-import { BlocksShell } from "./_components/blocks-shell";
+import { PageShell } from "../_components/page-shell";
 
 type TypeCard = {
   href: string;
@@ -35,7 +35,7 @@ const TYPES: TypeCard[] = [
 
 export default function BlocksLandingPage() {
   return (
-    <BlocksShell
+    <PageShell
       title="Blocks"
       description="Ready-made compositions built from DesignYstem components. Preview and adapt."
       crumbs={[{ label: "Blocks" }]}
@@ -68,6 +68,6 @@ export default function BlocksLandingPage() {
           );
         })}
       </div>
-    </BlocksShell>
+    </PageShell>
   );
 }

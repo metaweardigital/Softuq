@@ -1,14 +1,6 @@
 "use client";
 
-import {
-  Button,
-  Empty,
-  EmptyActions,
-  EmptyContent,
-  EmptyDescription,
-  EmptyIcon,
-  EmptyTitle,
-} from "@designystem/react";
+import { Button, Empty, EmptyActions, EmptyContent, EmptyDescription, EmptyIcon, EmptyTitle } from "@designystem/react";
 import { FolderPlus, Plus } from "lucide-react";
 
 export default function Empty01() {
