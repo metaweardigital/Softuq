@@ -1,157 +1,22 @@
 "use client";
-import { colors, fontFamily, radius, spacing } from "@designystem/tokens";
 import * as React from "react";
-
-/* ============================================
-   Types
-   ============================================ */
-type PalettePreset = "neutral" | "zinc" | "stone" | "slate" | "mauve" | "olive";
-type AccentPreset = "blue" | "violet" | "emerald" | "amber" | "red" | "rose" | "cyan" | "orange";
-type RadiusPreset = "none" | "sm" | "md" | "lg" | "full";
-type SpacingPreset = "sm" | "md" | "lg";
-type FontPreset = "system" | "inter" | "geist";
-
-/* ============================================
-   Palette presets — gray scale tinting
-   ============================================ */
-function paletteFrom(scale: Record<string | number, string>) {
-  return Object.fromEntries(Object.entries(scale).map(([shade, value]) => [`--gray-${shade}`, value]));
-}
-
-const PALETTE_PRESETS: Record<PalettePreset, Record<string, string>> = {
-  neutral: paletteFrom(colors.gray),
-  zinc: paletteFrom(colors.zinc),
-  stone: paletteFrom(colors.stone),
-  slate: paletteFrom(colors.slate),
-  mauve: paletteFrom(colors.mauve),
-  olive: paletteFrom(colors.olive),
-};
-
-/* ============================================
-   Accent presets — brand color
-   ============================================ */
-function accentFrom(palette: keyof typeof colors) {
-  const p = colors[palette];
-  return {
-    "--accent": p[500],
-    "--accent-hover": p[400],
-    "--accent-muted": p[600],
-    "--accent-text": p[400],
-  };
-}
-
-const ACCENT_PRESETS: Record<AccentPreset, Record<string, string>> = {
-  blue: accentFrom("blue"),
-  violet: accentFrom("violet"),
-  emerald: accentFrom("emerald"),
-  amber: accentFrom("amber"),
-  red: accentFrom("red"),
-  rose: accentFrom("rose"),
-  cyan: accentFrom("cyan"),
-  orange: accentFrom("orange"),
-};
-
-/* ============================================
-   Radius presets — border radius per component
-   ============================================ */
-const RADIUS_PRESETS: Record<RadiusPreset, Record<string, string>> = {
-  none: {
-    "--ds-radius-button": "0px",
-    "--ds-radius-input": "0px",
-    "--ds-radius-textarea": "0px",
-    "--ds-radius-card": "0px",
-    "--ds-radius-checkbox": "0px",
-    "--ds-radius-tooltip": "0px",
-    "--ds-radius-avatar": "0px",
-  },
-  sm: {
-    "--ds-radius-button": radius.sm,
-    "--ds-radius-input": radius.sm,
-    "--ds-radius-textarea": radius.sm,
-    "--ds-radius-card": radius.sm,
-    "--ds-radius-checkbox": radius.xs,
-    "--ds-radius-tooltip": radius.xs,
-    "--ds-radius-avatar": radius.sm,
-  },
-  md: {
-    "--ds-radius-button": radius.md,
-    "--ds-radius-input": radius.md,
-    "--ds-radius-textarea": radius.md,
-    "--ds-radius-card": radius.md,
-    "--ds-radius-checkbox": radius.sm,
-    "--ds-radius-tooltip": radius.sm,
-    "--ds-radius-avatar": radius.lg,
-  },
-  lg: {
-    "--ds-radius-button": radius.lg,
-    "--ds-radius-input": radius.lg,
-    "--ds-radius-textarea": radius.lg,
-    "--ds-radius-card": radius.lg,
-    "--ds-radius-checkbox": radius.sm,
-    "--ds-radius-tooltip": radius.md,
-    "--ds-radius-avatar": radius.full,
-  },
-  full: {
-    "--ds-radius-button": radius.full,
-    "--ds-radius-input": radius.full,
-    "--ds-radius-textarea": radius["2xl"],
-    "--ds-radius-card": radius["2xl"],
-    "--ds-radius-checkbox": radius.sm,
-    "--ds-radius-tooltip": radius.lg,
-    "--ds-radius-avatar": radius.full,
-  },
-};
-
-/* ============================================
-   Spacing presets — padding & gaps
-   ============================================ */
-const SPACING_PRESETS: Record<SpacingPreset, Record<string, string>> = {
-  sm: {
-    "--ds-space-card": spacing[4],
-    "--ds-space-card-sm": spacing[3],
-    "--ds-space-input-x": spacing[3],
-    "--ds-space-input-y": spacing[2],
-    "--ds-space-button-sm": spacing[2],
-    "--ds-space-button-md": spacing[3],
-    "--ds-space-button-lg": spacing[4],
-  },
-  md: {
-    "--ds-space-card": spacing[6],
-    "--ds-space-card-sm": spacing[4],
-    "--ds-space-input-x": spacing[4],
-    "--ds-space-input-y": spacing[3],
-    "--ds-space-button-sm": spacing[3],
-    "--ds-space-button-md": spacing[4],
-    "--ds-space-button-lg": spacing[6],
-  },
-  lg: {
-    "--ds-space-card": spacing[8],
-    "--ds-space-card-sm": spacing[5],
-    "--ds-space-input-x": spacing[5],
-    "--ds-space-input-y": spacing[4],
-    "--ds-space-button-sm": spacing[4],
-    "--ds-space-button-md": spacing[5],
-    "--ds-space-button-lg": spacing[8],
-  },
-};
-
-/* ============================================
-   Font presets — typeface
-   ============================================ */
-const FONT_PRESETS: Record<FontPreset, Record<string, string>> = {
-  system: {
-    "--font-sans": fontFamily.sans,
-    "--font-mono": fontFamily.mono,
-  },
-  inter: {
-    "--font-sans": "var(--font-inter), 'Inter', ui-sans-serif, system-ui, sans-serif",
-    "--font-mono": fontFamily.mono,
-  },
-  geist: {
-    "--font-sans": "var(--font-geist-sans), 'Geist', ui-sans-serif, system-ui, sans-serif",
-    "--font-mono": "var(--font-geist-mono), 'Geist Mono', ui-monospace, monospace",
-  },
-};
+import {
+  ACCENT_PRESETS,
+  type AccentPreset,
+  FONT_PRESETS,
+  type FontPreset,
+  PALETTE_PRESETS,
+  type PalettePreset,
+  RADIUS_PRESETS,
+  type RadiusPreset,
+  SPACING_PRESETS,
+  type SpacingPreset,
+  VALID_ACCENTS,
+  VALID_FONTS,
+  VALID_PALETTES,
+  VALID_RADII,
+  VALID_SPACINGS,
+} from "./presets";
 
 /* ============================================
    Context & Hook
@@ -195,7 +60,34 @@ interface DesignYstemProviderProps {
   radius?: RadiusPreset;
   spacing?: SpacingPreset;
   font?: FontPreset;
+  storageKey?: string;
   children: React.ReactNode;
+}
+
+type StoredSettings = {
+  palette?: PalettePreset;
+  accent?: AccentPreset;
+  radius?: RadiusPreset;
+  spacing?: SpacingPreset;
+  font?: FontPreset;
+};
+
+function readStored(storageKey?: string): StoredSettings {
+  if (!storageKey || typeof window === "undefined") return {};
+  try {
+    const raw = window.localStorage.getItem(storageKey);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw) as StoredSettings;
+    const out: StoredSettings = {};
+    if (parsed.palette && VALID_PALETTES.includes(parsed.palette)) out.palette = parsed.palette;
+    if (parsed.accent && VALID_ACCENTS.includes(parsed.accent)) out.accent = parsed.accent;
+    if (parsed.radius && VALID_RADII.includes(parsed.radius)) out.radius = parsed.radius;
+    if (parsed.spacing && VALID_SPACINGS.includes(parsed.spacing)) out.spacing = parsed.spacing;
+    if (parsed.font && VALID_FONTS.includes(parsed.font)) out.font = parsed.font;
+    return out;
+  } catch {
+    return {};
+  }
 }
 
 function DesignYstemProvider({
@@ -204,15 +96,42 @@ function DesignYstemProvider({
   radius: initialRadius = "lg",
   spacing: initialSpacing = "md",
   font: initialFont = "system",
+  storageKey,
   children,
 }: DesignYstemProviderProps) {
+  // Init with defaults so SSR and client first render match exactly (no hydration mismatch).
+  // Stored values are read in useEffect below; CSS vars are already applied
+  // by the pre-hydration script, so there's no visual flash during this catch-up.
   const [palette, setPalette] = React.useState<PalettePreset>(initialPalette);
   const [accent, setAccent] = React.useState<AccentPreset>(initialAccent);
   const [radius, setRadius] = React.useState<RadiusPreset>(initialRadius);
   const [spacing, setSpacing] = React.useState<SpacingPreset>(initialSpacing);
   const [font, setFont] = React.useState<FontPreset>(initialFont);
+  const hydratedRef = React.useRef(false);
 
+  // One-shot: read localStorage after mount and sync state.
+  // Pre-hydration script already applied the matching CSS vars, so no flash.
   React.useEffect(() => {
+    const stored = readStored(storageKey);
+    if (stored.palette) setPalette(stored.palette);
+    if (stored.accent) setAccent(stored.accent);
+    if (stored.radius) setRadius(stored.radius);
+    if (stored.spacing) setSpacing(stored.spacing);
+    if (stored.font) setFont(stored.font);
+    hydratedRef.current = true;
+  }, [storageKey]);
+
+  // Tracks whether the pending state update was triggered by a cross-window
+  // storage event. If so, don't persist it back to localStorage — we'd just
+  // be writing the value that another window already wrote, and in rare
+  // browser timings this can produce feedback flicker.
+  const fromStorageRef = React.useRef(false);
+
+  // Write CSS vars on state change. Skip first mount — the pre-hydration script
+  // already wrote the correct (stored) values; running this with defaults would
+  // briefly overwrite them and cause a visible flash.
+  React.useEffect(() => {
+    if (!hydratedRef.current) return;
     const root = document.documentElement;
     const vars = {
       ...PALETTE_PRESETS[palette],
@@ -224,7 +143,39 @@ function DesignYstemProvider({
     for (const [key, value] of Object.entries(vars)) {
       root.style.setProperty(key, value);
     }
-  }, [palette, accent, radius, spacing, font]);
+    if (storageKey && !fromStorageRef.current) {
+      try {
+        const next = JSON.stringify({ palette, accent, radius, spacing, font });
+        if (window.localStorage.getItem(storageKey) !== next) {
+          window.localStorage.setItem(storageKey, next);
+        }
+      } catch {
+        // ignore quota / unavailable storage
+      }
+    }
+    fromStorageRef.current = false;
+  }, [storageKey, palette, accent, radius, spacing, font]);
+
+  // Sync across windows (iframe previews <-> parent navbar)
+  React.useEffect(() => {
+    if (!storageKey) return;
+    const onStorage = (e: StorageEvent) => {
+      if (e.key !== storageKey || !e.newValue) return;
+      try {
+        const s = JSON.parse(e.newValue) as StoredSettings;
+        fromStorageRef.current = true;
+        if (s.palette && VALID_PALETTES.includes(s.palette)) setPalette(s.palette);
+        if (s.accent && VALID_ACCENTS.includes(s.accent)) setAccent(s.accent);
+        if (s.radius && VALID_RADII.includes(s.radius)) setRadius(s.radius);
+        if (s.spacing && VALID_SPACINGS.includes(s.spacing)) setSpacing(s.spacing);
+        if (s.font && VALID_FONTS.includes(s.font)) setFont(s.font);
+      } catch {
+        // ignore
+      }
+    };
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
+  }, [storageKey]);
 
   const value = React.useMemo(
     () => ({ palette, setPalette, accent, setAccent, radius, setRadius, spacing, setSpacing, font, setFont }),
