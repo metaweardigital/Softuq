@@ -158,8 +158,7 @@ const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
         const items = ctx.contentRef.current?.querySelectorAll("[role='option']:not([aria-disabled='true'])");
         const count = items?.length ?? 0;
 
-        if (e.key === "Escape") {
-          e.preventDefault();
+        if (e.key === "Escape" || e.key === "Tab") {
           ctx.setOpen(false);
         } else if (e.key === "ArrowDown") {
           e.preventDefault();
@@ -203,7 +202,6 @@ const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
         role="combobox"
         aria-expanded={ctx?.open ?? false}
         aria-haspopup="listbox"
-        aria-owns={ctx?.contentId}
         className={cn(searchInputVariants({ variant, inputSize, className }))}
       >
         <SearchIcon className="h-4 w-4 shrink-0 text-text-muted" />
@@ -225,7 +223,7 @@ const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
             if (typeof ref === "function") ref(node);
             else if (ref) (ref as React.MutableRefObject<HTMLInputElement | null>).current = node;
           }}
-          aria-autocomplete="list"
+          aria-autocomplete={ctx ? "list" : undefined}
           aria-controls={ctx?.contentId}
           aria-activedescendant={activeDescendant}
           className="min-w-0 flex-1 bg-transparent outline-none placeholder:text-text-muted"
@@ -386,7 +384,7 @@ const SearchItem = React.forwardRef<HTMLDivElement, SearchItemProps>(
         {...props}
       >
         {icon && <span className="flex h-4 w-4 shrink-0 items-center justify-center text-text-muted">{icon}</span>}
-        {children}
+        <span className="truncate">{children}</span>
       </div>
     );
   },
