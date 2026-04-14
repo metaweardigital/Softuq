@@ -27,6 +27,7 @@ import {
   CardTitle,
   Checkbox,
   Code,
+  CodeBlock,
   Dialog,
   DialogContent,
   DialogDescription,
@@ -915,11 +916,28 @@ export default function ComponentPreview() {
               tokens use <Code>oklch()</Code> color space.
             </p>
           </Row>
-          <Row label="Command">
-            <p className="text-sm text-fg-secondary">
-              Install dependencies with <Code>pnpm install</Code> then run <Code>pnpm dev</Code> to start the dev
-              server.
-            </p>
+          <Row label="CodeBlock">
+            <CodeBlock title="terminal">
+              {`# Install dependencies
+pnpm install
+
+# Start dev server
+pnpm dev`}
+            </CodeBlock>
+          </Row>
+          <Row label="CodeBlock with JSX">
+            <CodeBlock title="page.tsx">
+              {`import { Button } from "@/components/ui/button";
+
+export default function Page() {
+  return (
+    <Button variant="default">Click me</Button>
+  );
+}`}
+            </CodeBlock>
+          </Row>
+          <Row label="CodeBlock without title">
+            <CodeBlock copyable={false}>{'const greeting = "Hello, world!";'}</CodeBlock>
           </Row>
         </Section>
 

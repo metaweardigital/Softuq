@@ -1,65 +1,12 @@
 "use client";
 
-function Code({ children }: { children: string }) {
-  return (
-    <code className="text-[13px] text-accent" style={{ fontFamily: "var(--font-geist-mono), ui-monospace, monospace" }}>
-      {children}
-    </code>
-  );
-}
-
-function highlightCode(code: string): string {
-  return (
-    code
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      // Comments
-      .replace(/(\/\/.*$|#.*$)/gm, '<span style="color:var(--text-dimmed)">$1</span>')
-      // Strings
-      .replace(
-        /("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|`(?:[^`\\]|\\.)*`)/g,
-        '<span style="color:var(--success)">$1</span>',
-      )
-      // Keywords
-      .replace(
-        /\b(import|export|from|const|let|var|function|return|default|if|else)\b/g,
-        '<span style="color:var(--accent)">$1</span>',
-      )
-      // JSX tags
-      .replace(/(&lt;\/?)([\w.]+)/g, '$1<span style="color:var(--destructive)">$2</span>')
-      // Attributes
-      .replace(
-        /\s(className|lang|data-theme|accent|radius|spacing|font|type|placeholder)=/g,
-        ' <span style="color:var(--warning)">$1</span>=',
-      )
-      // npx/commands
-      .replace(/\b(npx)\b/g, '<span style="color:var(--accent)">$1</span>')
-  );
-}
-
-function CodeBlock({ children, title }: { children: string; title?: string }) {
-  return (
-    <div className="rounded-lg border border-edge-subtle overflow-hidden max-w-full">
-      {title && (
-        <div className="px-4 py-2 bg-surface-elevated border-b border-edge-subtle text-xs text-fg-muted font-mono">
-          {title}
-        </div>
-      )}
-      <pre
-        className="p-4 bg-surface-card overflow-x-auto text-xs text-fg-secondary leading-relaxed"
-        style={{ fontFamily: "var(--font-geist-mono), ui-monospace, monospace" }}
-        dangerouslySetInnerHTML={{ __html: highlightCode(children) }}
-      />
-    </div>
-  );
-}
+import { Code, CodeBlock } from "@designystem/react";
 
 function Step({ n, title, children }: { n: number; title: string; children: React.ReactNode }) {
   return (
     <div className="flex gap-5">
       <div className="flex flex-col items-center">
-        <div className="flex items-center justify-center w-8 h-8 rounded-full bg-accent text-white text-sm font-bold shrink-0">
+        <div className="flex items-center justify-center w-8 h-8 rounded-full bg-accent text-fg-inverse text-sm font-bold shrink-0">
           {n}
         </div>
         <div className="w-px flex-1 bg-edge-subtle mt-2" />
@@ -187,34 +134,57 @@ npx designystem update button card`}
         <div className="grid grid-cols-2 gap-4 text-sm">
           <div>
             <p className="font-medium text-fg-primary mb-1">Accent</p>
-            <p className="text-fg-muted">blue, violet, emerald, amber, red, rose, cyan, orange</p>
+            <p className="text-fg-muted flex flex-wrap gap-1">
+              {["blue", "violet", "emerald", "amber", "red", "rose", "cyan", "orange"].map((v) => (
+                <Code key={v}>{v}</Code>
+              ))}
+            </p>
           </div>
           <div>
             <p className="font-medium text-fg-primary mb-1">Palette</p>
-            <p className="text-fg-muted">neutral, zinc, stone, slate, mauve, olive</p>
+            <p className="text-fg-muted flex flex-wrap gap-1">
+              {["neutral", "zinc", "stone", "slate", "mauve", "olive"].map((v) => (
+                <Code key={v}>{v}</Code>
+              ))}
+            </p>
           </div>
           <div>
             <p className="font-medium text-fg-primary mb-1">Radius</p>
-            <p className="text-fg-muted">none, sm, md, lg, full</p>
+            <p className="text-fg-muted flex flex-wrap gap-1">
+              {["none", "sm", "md", "lg", "full"].map((v) => (
+                <Code key={v}>{v}</Code>
+              ))}
+            </p>
           </div>
           <div>
             <p className="font-medium text-fg-primary mb-1">Spacing</p>
-            <p className="text-fg-muted">sm, md, lg</p>
+            <p className="text-fg-muted flex flex-wrap gap-1">
+              {["sm", "md", "lg"].map((v) => (
+                <Code key={v}>{v}</Code>
+              ))}
+            </p>
           </div>
           <div>
             <p className="font-medium text-fg-primary mb-1">Font</p>
-            <p className="text-fg-muted">system, inter, geist</p>
+            <p className="text-fg-muted flex flex-wrap gap-1">
+              {["system", "inter", "geist"].map((v) => (
+                <Code key={v}>{v}</Code>
+              ))}
+            </p>
           </div>
           <div>
             <p className="font-medium text-fg-primary mb-1">Mode</p>
-            <p className="text-fg-muted">data-theme="dark" / "light"</p>
+            <p className="text-fg-muted flex flex-wrap gap-1">
+              <Code>data-theme=&quot;dark&quot;</Code>
+              <Code>data-theme=&quot;light&quot;</Code>
+            </p>
           </div>
         </div>
       </div>
 
       <div className="border-t border-edge-subtle pt-8 mt-8 space-y-6">
         <h2 className="text-xl font-semibold text-fg-primary">Available components</h2>
-        <div className="grid grid-cols-3 gap-2 text-sm text-fg-secondary">
+        <div className="flex flex-wrap gap-2">
           {[
             "accordion",
             "alert",
@@ -253,10 +223,7 @@ npx designystem update button card`}
             "toggle-group",
             "tooltip",
           ].map((c) => (
-            <div key={c} className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
-              {c}
-            </div>
+            <Code key={c}>{c}</Code>
           ))}
         </div>
       </div>

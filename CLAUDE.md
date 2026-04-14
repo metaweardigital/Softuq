@@ -96,6 +96,7 @@ Always order from most global → most specific:
 - FormField wraps Label + Input/Select/Textarea + FormDescription + FormMessage; `size` prop cascades to children
 - Scrollbar utilities: `.scrollbar-thin` (4px styled), `.scrollbar-hidden` (no scrollbar)
 - Fade-edge utilities: `.fade-edge-r/l/t/b` — mask-based gradient fade with theme-transitioning `background-color` (not `background-image` which can't transition)
+- Code = inline code snippet (hover effect, border). CodeBlock = block-level with syntax highlighting, copy-to-clipboard, always-dark (`data-theme="dark"`). CodeBlock uses `style` props with semantic CSS vars (`var(--bg-card)`, `var(--text-secondary)`, etc.) for colors — Tailwind `@theme` vars don't resolve correctly on child `data-theme` elements. Radius/spacing use Tailwind arbitrary values (`var(--ds-radius-card)`, `var(--ds-space-card)`) since those aren't in `@theme`. Single-pass regex for syntax highlighting (never multi-pass — later rules corrupt HTML from earlier ones). Internal dep: lucide-react.
 - DialogTrigger supports `asChild` prop — pass `<Button>` as child instead of nesting `<button>` in `<button>`
 - See [Component Pattern](docs/guides/component-pattern.md) for full template
 

@@ -53,7 +53,7 @@
     },
     "code": {
       "files": ["components/ui/code.tsx"],
-      "dependencies": [],
+      "dependencies": ["lucide-react"],
       "registryDeps": []
     },
     "dialog": {
