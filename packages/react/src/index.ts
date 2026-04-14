@@ -110,6 +110,19 @@ export {
   radioVariants,
 } from "./components/ui/radio";
 export {
+  Search,
+  SearchContent,
+  SearchGroup,
+  type SearchGroupProps,
+  SearchInput,
+  type SearchInputProps,
+  type SearchInputTag,
+  SearchItem,
+  type SearchItemProps,
+  type SearchProps,
+  searchInputVariants,
+} from "./components/ui/search";
+export {
   Select,
   SelectContent,
   SelectGroup,

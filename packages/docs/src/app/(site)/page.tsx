@@ -58,6 +58,11 @@ import {
   Progress,
   RadioGroup,
   RadioGroupItem,
+  Search,
+  SearchContent,
+  SearchGroup,
+  SearchInput,
+  SearchItem,
   Select,
   SelectContent,
   SelectGroup,
@@ -101,6 +106,7 @@ import {
   ArrowRight,
   Bold,
   CheckCircle2,
+  Clock,
   CreditCard,
   Download,
   Inbox,
@@ -109,6 +115,7 @@ import {
   LogOut,
   MoreHorizontal,
   Plus,
+  Search as SearchLucide,
   Settings,
   Terminal,
   Trash2,
@@ -1348,6 +1355,52 @@ export default function ComponentPreview() {
                   </SelectContent>
                 </Select>
               </FormField>
+            </div>
+          </Section>
+
+          {/* Search */}
+          <Section title="Search">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <p className="text-xs font-medium text-text-muted uppercase tracking-wide">Standalone</p>
+                <SearchInput placeholder="Search..." />
+              </div>
+              <div className="space-y-2">
+                <p className="text-xs font-medium text-text-muted uppercase tracking-wide">Loading</p>
+                <SearchInput placeholder="Searching..." loading />
+              </div>
+              <div className="space-y-2">
+                <p className="text-xs font-medium text-text-muted uppercase tracking-wide">Small</p>
+                <SearchInput placeholder="Search..." inputSize="sm" />
+              </div>
+              <div className="space-y-2">
+                <p className="text-xs font-medium text-text-muted uppercase tracking-wide">With tags</p>
+                <SearchInput placeholder="Search in tag..." tags={[{ label: "Design", onDismiss: () => {} }]} />
+              </div>
+              <div className="space-y-2 md:col-span-2">
+                <p className="text-xs font-medium text-text-muted uppercase tracking-wide">With whisper</p>
+                <Search>
+                  <SearchInput placeholder="Search anything..." />
+                  <SearchContent>
+                    <SearchGroup heading="Recent">
+                      <SearchItem icon={<Clock className="h-4 w-4" />} onSelect={() => {}}>
+                        tiktok
+                      </SearchItem>
+                      <SearchItem icon={<Clock className="h-4 w-4" />} onSelect={() => {}}>
+                        bonsai
+                      </SearchItem>
+                    </SearchGroup>
+                    <SearchGroup heading="Suggestions">
+                      <SearchItem icon={<SearchLucide className="h-4 w-4" />} onSelect={() => {}}>
+                        indian food
+                      </SearchItem>
+                      <SearchItem icon={<SearchLucide className="h-4 w-4" />} onSelect={() => {}}>
+                        toktok 2025
+                      </SearchItem>
+                    </SearchGroup>
+                  </SearchContent>
+                </Search>
+              </div>
             </div>
           </Section>
 

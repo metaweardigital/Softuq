@@ -116,6 +116,11 @@
       "dependencies": ["class-variance-authority", "lucide-react"],
       "registryDeps": ["tag"]
     },
+    "search": {
+      "files": ["components/ui/search.tsx"],
+      "dependencies": ["class-variance-authority", "lucide-react"],
+      "registryDeps": ["tag"]
+    },
     "separator": {
       "files": ["components/ui/separator.tsx"],
       "dependencies": [],
