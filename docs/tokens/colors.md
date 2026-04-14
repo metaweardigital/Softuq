@@ -137,6 +137,57 @@ Hue ~293. Secondary accent.
 | `--violet-800` | `oklch(0.432 0.211 292.76)` |
 | `--violet-900` | `oklch(0.38 0.178 293.74)` |
 
+### Rose
+
+Hue ~10–17. Soft red accent.
+
+| Token | Value |
+|---|---|
+| `--rose-50` | `oklch(0.969 0.015 12.12)` |
+| `--rose-100` | `oklch(0.941 0.03 12.44)` |
+| `--rose-200` | `oklch(0.892 0.056 9.93)` |
+| `--rose-300` | `oklch(0.81 0.106 11.61)` |
+| `--rose-400` | `oklch(0.719 0.169 13.41)` |
+| `--rose-500` | `oklch(0.645 0.215 16.43)` |
+| `--rose-600` | `oklch(0.586 0.222 17.58)` |
+| `--rose-700` | `oklch(0.514 0.198 16.93)` |
+| `--rose-800` | `oklch(0.455 0.171 13.69)` |
+| `--rose-900` | `oklch(0.41 0.15 10.26)` |
+
+### Cyan
+
+Hue ~201–227. Cool blue-green accent.
+
+| Token | Value |
+|---|---|
+| `--cyan-50` | `oklch(0.984 0.019 201.11)` |
+| `--cyan-100` | `oklch(0.956 0.044 203.48)` |
+| `--cyan-200` | `oklch(0.917 0.077 205.09)` |
+| `--cyan-300` | `oklch(0.865 0.115 207.11)` |
+| `--cyan-400` | `oklch(0.797 0.134 211.56)` |
+| `--cyan-500` | `oklch(0.715 0.126 215.24)` |
+| `--cyan-600` | `oklch(0.609 0.111 221.74)` |
+| `--cyan-700` | `oklch(0.52 0.094 223.15)` |
+| `--cyan-800` | `oklch(0.45 0.077 224.3)` |
+| `--cyan-900` | `oklch(0.398 0.066 227.41)` |
+
+### Orange
+
+Hue ~38–74. Warm accent.
+
+| Token | Value |
+|---|---|
+| `--orange-50` | `oklch(0.98 0.016 73.64)` |
+| `--orange-100` | `oklch(0.954 0.037 75.15)` |
+| `--orange-200` | `oklch(0.901 0.073 70.69)` |
+| `--orange-300` | `oklch(0.837 0.116 66.28)` |
+| `--orange-400` | `oklch(0.758 0.159 55.93)` |
+| `--orange-500` | `oklch(0.705 0.187 47.6)` |
+| `--orange-600` | `oklch(0.646 0.194 41.11)` |
+| `--orange-700` | `oklch(0.553 0.174 38.39)` |
+| `--orange-800` | `oklch(0.47 0.143 37.29)` |
+| `--orange-900` | `oklch(0.408 0.116 38.16)` |
+
 ## Tinted gray palettes
 
 5 tinted variants of the gray scale, used by `<DesignYstemProvider palette="...">`. Each has the same 18 shades as gray but with added chroma and hue. Low chroma keeps them neutral-feeling while adding warmth or coolness.
@@ -202,9 +253,10 @@ Theme switching via `data-theme="dark"` (default) or `data-theme="light"` on `<h
 | Token | Dark | Light |
 |---|---|---|
 | `--bg-base` | gray-980 | gray-50 |
-| `--bg-elevated` | gray-940 | `oklch(1 0 0)` |
-| `--bg-card` | gray-920 | `oklch(1 0 0)` |
 | `--bg-input` | gray-960 | gray-100 |
+| `--bg-card` | gray-940 | `oklch(1 0 0)` |
+| `--bg-elevated` | gray-920 | `oklch(1 0 0)` |
+| `--bg-popover` | gray-900 | `oklch(1 0 0)` |
 | `--bg-hover` | `oklch(1 0 0 / 0.04)` | `color-mix(in oklch, var(--gray-500) 8%, transparent)` |
 | `--bg-selected` | gray-850 | gray-150 |
 | `--bg-overlay` | `oklch(0 0 0 / 0.6)` | `oklch(0 0 0 / 0.4)` |

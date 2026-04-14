@@ -33,6 +33,12 @@ Components use `--ds-space-*` variables instead of hardcoded values (e.g. `p-[va
 | `--ds-space-button-sm` | Button sm horizontal padding |
 | `--ds-space-button-md` | Button md horizontal padding |
 | `--ds-space-button-lg` | Button lg horizontal padding |
+| `--ds-space-page-x` | Page horizontal padding (fluid `clamp()`) |
+| `--ds-space-section-y` | Web section vertical spacing (fluid `clamp()`) |
+| `--ds-space-stack-sm` | Title ↔ description gap |
+| `--ds-space-stack` | Default group gap |
+| `--ds-space-stack-lg` | Section header → content gap |
+| `--ds-space-gap` | Grid / inline gap |
 
 ## Preset values
 

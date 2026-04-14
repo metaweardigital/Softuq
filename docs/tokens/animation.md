@@ -35,6 +35,7 @@
 
 | Token | Value | Use |
 |---|---|---|
+| base | 0 | Default stacking context |
 | dropdown | 50 | Dropdowns, selects |
 | sticky | 100 | Sticky headers, navs |
 | overlay | 200 | Backdrops |
