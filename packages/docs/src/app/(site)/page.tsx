@@ -11,6 +11,7 @@ import {
   Avatar,
   Badge,
   Breadcrumb,
+  BreadcrumbCollapsed,
   BreadcrumbEllipsis,
   BreadcrumbItem,
   BreadcrumbLink,
@@ -109,6 +110,7 @@ import {
   Clock,
   CreditCard,
   Download,
+  Home,
   Inbox,
   Info,
   Italic,
@@ -772,6 +774,25 @@ export default function ComponentPreview() {
               </BreadcrumbList>
             </Breadcrumb>
           </Row>
+          <Row label="Home icon">
+            <Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem>
+                  <BreadcrumbLink href="#">
+                    <Home className="h-4 w-4" />
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbLink href="#">Components</BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+          </Row>
           <Row label="With ellipsis">
             <Breadcrumb>
               <BreadcrumbList>
@@ -789,6 +810,35 @@ export default function ComponentPreview() {
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
                   <BreadcrumbPage>Account</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+          </Row>
+          <Row label="Collapsed dropdown">
+            <Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem>
+                  <BreadcrumbLink href="#">
+                    <Home className="h-4 w-4" />
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbCollapsed
+                    items={[
+                      { label: "Products", href: "#products" },
+                      { label: "Electronics", href: "#electronics" },
+                      { label: "Phones", href: "#phones" },
+                    ]}
+                  />
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbLink href="#">Smartphones</BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbPage>iPhone 16</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>

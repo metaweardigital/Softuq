@@ -34,7 +34,7 @@
     "breadcrumb": {
       "files": ["components/ui/breadcrumb.tsx"],
       "dependencies": ["lucide-react"],
-      "registryDeps": []
+      "registryDeps": ["dropdown-menu"]
     },
     "button": {
       "files": ["components/ui/button.tsx"],

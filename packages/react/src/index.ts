@@ -17,6 +17,9 @@ export { Avatar, type AvatarProps, avatarVariants } from "./components/ui/avatar
 export { Badge, type BadgeProps, badgeVariants } from "./components/ui/badge";
 export {
   Breadcrumb,
+  BreadcrumbCollapsed,
+  type BreadcrumbCollapsedItem,
+  type BreadcrumbCollapsedProps,
   BreadcrumbEllipsis,
   BreadcrumbItem,
   BreadcrumbLink,

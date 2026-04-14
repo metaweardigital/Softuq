@@ -1,6 +1,7 @@
 import { ChevronRight, MoreHorizontal } from "lucide-react";
 import * as React from "react";
 import { cn } from "../../lib/utils";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./dropdown-menu";
 
 const Breadcrumb = React.forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement>>(({ className, ...props }, ref) => (
   <nav ref={ref} aria-label="Breadcrumb" className={cn("text-sm", className)} {...props} />
@@ -83,9 +84,37 @@ const BreadcrumbEllipsis = ({ className, ...props }: React.HTMLAttributes<HTMLSp
 );
 BreadcrumbEllipsis.displayName = "BreadcrumbEllipsis";
 
-export type { BreadcrumbLinkProps };
+interface BreadcrumbCollapsedItem {
+  label: string;
+  href: string;
+}
+
+interface BreadcrumbCollapsedProps extends React.HTMLAttributes<HTMLSpanElement> {
+  items: BreadcrumbCollapsedItem[];
+}
+
+function BreadcrumbCollapsed({ items, className, ...props }: BreadcrumbCollapsedProps) {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <BreadcrumbEllipsis className={cn("cursor-pointer hover:text-fg-primary", className)} {...props} />
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="start" className="text-fg-secondary">
+        {items.map((item) => (
+          <DropdownMenuItem key={item.href} onSelect={() => (window.location.href = item.href)}>
+            {item.label}
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+BreadcrumbCollapsed.displayName = "BreadcrumbCollapsed";
+
+export type { BreadcrumbCollapsedItem, BreadcrumbCollapsedProps, BreadcrumbLinkProps };
 export {
   Breadcrumb,
+  BreadcrumbCollapsed,
   BreadcrumbEllipsis,
   BreadcrumbItem,
   BreadcrumbLink,

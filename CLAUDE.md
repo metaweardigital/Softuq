@@ -87,6 +87,7 @@ Always order from most global → most specific:
 - `type="button"` on all `<button>` elements
 - Export: component, variants, props type
 - Hardcoded `rounded-full` stays for: Avatar (lg/full preset), Radio, Toggle, Progress
+- Breadcrumb: composable API (Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator, BreadcrumbEllipsis). `BreadcrumbCollapsed` wraps ellipsis + DropdownMenu for collapsed middle levels. Home icon = `<Home />` as BreadcrumbLink children. BreadcrumbSeparator is `<li>` — must be sibling of BreadcrumbItem, never nested inside it. Internal dep: dropdown-menu.
 - Badge = static indicator (status, count) — never interactive
 - Tag = interactive label (dismissible, hover/focus states) — used in multi-select
 - Select: composable API (Select, SelectTrigger, SelectContent, SelectItem, SelectGroup, SelectLabel, SelectSeparator), supports single + multi (`multiple` prop), auto-flip positioning
