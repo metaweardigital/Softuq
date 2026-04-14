@@ -34,7 +34,7 @@ function NavLinkItem({ item, active }: { item: NavItem; active?: boolean }) {
         "w-full flex items-center gap-2.5 px-2.5 h-8 rounded-[var(--ds-radius-button)] text-sm transition-colors",
         active
           ? "bg-[color-mix(in_oklch,var(--accent)_14%,transparent)] text-accent-text font-medium"
-          : "text-text-secondary hover:bg-bg-hover hover:text-text-primary",
+          : "text-fg-secondary hover:bg-surface-hover hover:text-fg-primary",
       )}
     >
       <Icon className="size-4 shrink-0" />
@@ -64,13 +64,13 @@ export default function SidebarNav({
   const effectiveActive = activeHref ?? primaryItems[0]?.href;
 
   return (
-    <div className="min-h-screen bg-bg-base flex">
-      <aside className="w-60 shrink-0 border-r border-border-subtle flex flex-col p-[var(--ds-space-gap)] gap-[var(--ds-space-gap)]">
+    <div className="min-h-screen bg-surface-base flex">
+      <aside className="w-60 shrink-0 border-r border-edge-subtle flex flex-col p-[var(--ds-space-gap)] gap-[var(--ds-space-gap)]">
         <div className="flex items-center gap-2 px-1">
           <div className="size-7 rounded-[var(--ds-radius-button)] bg-[color-mix(in_oklch,var(--accent)_14%,transparent)] text-accent-text flex items-center justify-center">
             <Sparkles className="size-4" />
           </div>
-          <span className="text-sm font-semibold text-text-primary">DesignYstem</span>
+          <span className="text-sm font-semibold text-fg-primary">DesignYstem</span>
         </div>
 
         <SearchInput placeholder="Search..." inputSize="sm" />
@@ -89,11 +89,11 @@ export default function SidebarNav({
           ))}
         </nav>
 
-        <div className="mt-auto flex items-center gap-2.5 p-1.5 rounded-[var(--ds-radius-button)] hover:bg-bg-hover transition-colors">
+        <div className="mt-auto flex items-center gap-2.5 p-1.5 rounded-[var(--ds-radius-button)] hover:bg-surface-hover transition-colors">
           <Avatar size="sm" fallback="AP" />
           <div className="min-w-0 flex-1">
-            <p className="text-xs font-medium text-text-primary truncate">Ava Pollard</p>
-            <p className="text-[11px] text-text-muted truncate">ava@example.com</p>
+            <p className="text-xs font-medium text-fg-primary truncate">Ava Pollard</p>
+            <p className="text-[11px] text-fg-muted truncate">ava@example.com</p>
           </div>
         </div>
       </aside>
@@ -104,8 +104,8 @@ export default function SidebarNav({
             <div className="mx-auto max-w-6xl space-y-[var(--ds-space-stack)]">
               <header className="flex items-start justify-between gap-[var(--ds-space-gap)]">
                 <div>
-                  <h1 className="text-2xl font-semibold tracking-tight text-text-primary">Home</h1>
-                  <p className="text-sm text-text-muted">Your workspace at a glance.</p>
+                  <h1 className="text-2xl font-semibold tracking-tight text-fg-primary">Home</h1>
+                  <p className="text-sm text-fg-muted">Your workspace at a glance.</p>
                 </div>
                 <Button size="sm">
                   <Plus />
@@ -113,8 +113,8 @@ export default function SidebarNav({
                 </Button>
               </header>
 
-              <div className="rounded-[var(--ds-radius-card)] border border-dashed border-border-subtle bg-bg-card p-[var(--ds-space-section-x)] text-center">
-                <p className="text-sm text-text-muted">Your recent activity will appear here.</p>
+              <div className="rounded-[var(--ds-radius-card)] border border-dashed border-edge-subtle bg-surface-card p-[var(--ds-space-section-x)] text-center">
+                <p className="text-sm text-fg-muted">Your recent activity will appear here.</p>
               </div>
             </div>
           </div>

@@ -24,13 +24,13 @@ export default function NavbarSearch() {
 
   return (
     <>
-      <header className="sticky top-0 z-sticky border-b border-border-subtle bg-bg-base/80 backdrop-blur-glass">
-        <div className="mx-auto max-w-6xl h-16 px-[var(--ds-space-section-x)] flex items-center gap-6">
+      <header className="sticky top-0 z-sticky border-b border-edge-subtle bg-surface-base/80 backdrop-blur-glass">
+        <div className="mx-auto max-w-6xl h-16 px-4 sm:px-[var(--ds-space-section-x)] flex items-center gap-6">
           <a href="#" className="flex items-center gap-2 shrink-0">
             <div className="size-8 rounded-[var(--ds-radius-button)] bg-[color-mix(in_oklch,var(--accent)_14%,transparent)] text-accent-text flex items-center justify-center">
               <Sparkles className="size-4" />
             </div>
-            <span className="text-sm font-semibold text-text-primary">Acme</span>
+            <span className="text-sm font-semibold text-fg-primary">Acme</span>
           </a>
 
           <nav className="hidden lg:flex items-center gap-1">
@@ -38,7 +38,7 @@ export default function NavbarSearch() {
               <a
                 key={link.label}
                 href={link.href}
-                className="px-3 h-9 inline-flex items-center rounded-[var(--ds-radius-button)] text-sm text-text-secondary hover:text-text-primary hover:bg-bg-hover transition-colors"
+                className="px-3 h-9 inline-flex items-center rounded-[var(--ds-radius-button)] text-sm text-fg-secondary hover:text-fg-primary hover:bg-surface-hover transition-colors"
               >
                 {link.label}
               </a>
@@ -72,7 +72,7 @@ export default function NavbarSearch() {
             <div className="size-8 rounded-[var(--ds-radius-button)] bg-[color-mix(in_oklch,var(--accent)_14%,transparent)] text-accent-text flex items-center justify-center">
               <Sparkles className="size-4" />
             </div>
-            <span className="text-sm font-semibold text-text-primary">Acme</span>
+            <span className="text-sm font-semibold text-fg-primary">Acme</span>
           </div>
           <SearchField />
           <Separator />
@@ -82,7 +82,7 @@ export default function NavbarSearch() {
                 key={link.label}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="h-10 px-3 flex items-center rounded-[var(--ds-radius-button)] text-sm text-text-secondary hover:text-text-primary hover:bg-bg-hover transition-colors"
+                className="h-10 px-3 flex items-center rounded-[var(--ds-radius-button)] text-sm text-fg-secondary hover:text-fg-primary hover:bg-surface-hover transition-colors"
               >
                 {link.label}
               </a>

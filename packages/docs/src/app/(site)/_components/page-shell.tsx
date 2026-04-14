@@ -19,7 +19,7 @@ export function PageShell({
 }) {
   return (
     <>
-      <nav className="flex items-center gap-1.5 text-sm text-text-muted">
+      <nav className="flex items-center gap-1.5 text-sm text-fg-muted">
         {crumbs.map((c, i) => {
           const isLast = i === crumbs.length - 1;
           return (
@@ -29,16 +29,16 @@ export function PageShell({
                   {c.label}
                 </Link>
               ) : (
-                <span className={isLast ? "text-text-primary" : undefined}>{c.label}</span>
+                <span className={isLast ? "text-fg-primary" : undefined}>{c.label}</span>
               )}
-              {!isLast && <ChevronRight className="size-3.5 text-text-dimmed" />}
+              {!isLast && <ChevronRight className="size-3.5 text-fg-dimmed" />}
             </span>
           );
         })}
       </nav>
 
-      <h1 className="text-3xl font-bold text-text-primary mt-4 tracking-tight">{title}</h1>
-      {description && <p className="text-text-secondary mt-2 text-base">{description}</p>}
+      <h1 className="text-3xl font-bold text-fg-primary mt-4 tracking-tight">{title}</h1>
+      {description && <p className="text-fg-secondary mt-2 text-base">{description}</p>}
 
       <div className="mt-10">{children}</div>
     </>

@@ -5,7 +5,7 @@ import { cn } from "../../lib/utils";
 
 const checkboxVariants = cva(
   [
-    "shrink-0 rounded-[var(--ds-radius-checkbox)] border border-border-default bg-bg-input",
+    "shrink-0 rounded-[var(--ds-radius-checkbox)] border border-edge-default bg-surface-input",
     "transition-all duration-fast ease-soft",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/20",
     "disabled:cursor-not-allowed disabled:opacity-50",

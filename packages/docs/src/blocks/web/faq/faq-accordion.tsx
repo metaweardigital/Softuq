@@ -35,8 +35,8 @@ export default function Faq01() {
           <Badge variant="outline" className="mb-[var(--ds-space-stack)]">
             FAQ
           </Badge>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-text-primary">Questions, answered</h2>
-          <p className="mt-[var(--ds-space-stack)] text-text-muted">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-fg-primary">Questions, answered</h2>
+          <p className="mt-[var(--ds-space-stack)] text-fg-muted">
             Can't find what you're looking for? Reach out and we'll help.
           </p>
         </div>
@@ -46,7 +46,7 @@ export default function Faq01() {
               <AccordionItem key={f.q} value={f.q}>
                 <AccordionTrigger>{f.q}</AccordionTrigger>
                 <AccordionContent>
-                  <p className="text-sm text-text-muted leading-relaxed">{f.a}</p>
+                  <p className="text-sm text-fg-muted leading-relaxed">{f.a}</p>
                 </AccordionContent>
               </AccordionItem>
             ))}

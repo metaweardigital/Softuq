@@ -5,9 +5,8 @@ import { cn } from "../../lib/utils";
 const accordionVariants = cva("w-full", {
   variants: {
     variant: {
-      default: "divide-y divide-border-subtle",
-      bordered:
-        "divide-y divide-border-subtle border border-border-subtle rounded-[var(--ds-radius-card)] overflow-hidden",
+      default: "divide-y divide-edge-subtle",
+      bordered: "divide-y divide-edge-subtle border border-edge-subtle rounded-[var(--ds-radius-card)] overflow-hidden",
     },
   },
   defaultVariants: {
@@ -101,7 +100,7 @@ const AccordionTrigger = React.forwardRef<HTMLButtonElement, React.ButtonHTMLAtt
         aria-expanded={isOpen}
         className={cn(
           "flex w-full items-center justify-between gap-4 py-3 cursor-pointer select-none",
-          "text-sm font-medium text-text-primary",
+          "text-sm font-medium text-fg-primary",
           "transition-colors duration-normal ease-soft",
           "hover:text-accent",
           "outline-none focus-visible:text-accent",
@@ -217,7 +216,7 @@ const AccordionContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<H
             else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = node;
           }}
           className={cn(
-            "pb-3 text-sm text-text-secondary",
+            "pb-3 text-sm text-fg-secondary",
             "transition-[opacity,translate] ease-smooth",
             isVisible
               ? "opacity-100 translate-y-0 duration-[350ms] delay-100"

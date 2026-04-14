@@ -68,19 +68,19 @@ function StatCard({ stat }: { stat: Stat }) {
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between">
           <CardDescription>{stat.label}</CardDescription>
-          <div className="size-8 rounded-[var(--ds-radius-button)] bg-bg-elevated border border-border-subtle flex items-center justify-center text-text-muted">
+          <div className="size-8 rounded-[var(--ds-radius-button)] bg-surface-elevated border border-edge-subtle flex items-center justify-center text-fg-muted">
             <Icon className="size-4" />
           </div>
         </div>
       </CardHeader>
       <CardContent>
-        <div className="text-2xl font-semibold tracking-tight text-text-primary">{stat.value}</div>
+        <div className="text-2xl font-semibold tracking-tight text-fg-primary">{stat.value}</div>
         <div
           className={`mt-1 inline-flex items-center gap-1 text-xs ${stat.trend === "up" ? "text-success" : "text-destructive"}`}
         >
           <TrendIcon className="size-3" />
           {stat.delta}
-          <span className="text-text-muted">vs last month</span>
+          <span className="text-fg-muted">vs last month</span>
         </div>
       </CardContent>
     </Card>
@@ -89,12 +89,12 @@ function StatCard({ stat }: { stat: Stat }) {
 
 export default function Dashboard01() {
   return (
-    <div className="min-h-screen bg-bg-base p-[var(--ds-space-section-x)]">
+    <div className="min-h-screen bg-surface-base p-[var(--ds-space-section-x)]">
       <div className="mx-auto max-w-6xl space-y-[var(--ds-space-stack)]">
         <header className="flex items-start justify-between gap-[var(--ds-space-gap)]">
           <div>
-            <h1 className="text-2xl font-semibold tracking-tight text-text-primary">Overview</h1>
-            <p className="text-sm text-text-muted">Snapshot of your workspace for the last 30 days.</p>
+            <h1 className="text-2xl font-semibold tracking-tight text-fg-primary">Overview</h1>
+            <p className="text-sm text-fg-muted">Snapshot of your workspace for the last 30 days.</p>
           </div>
           <div className="flex items-center gap-[var(--ds-space-gap)]">
             <Button variant="outline" size="sm">
@@ -138,7 +138,7 @@ export default function Dashboard01() {
                 ))}
               </div>
             </CardContent>
-            <CardFooter className="text-xs text-text-muted">Updated 5 minutes ago</CardFooter>
+            <CardFooter className="text-xs text-fg-muted">Updated 5 minutes ago</CardFooter>
           </Card>
 
           <Card>
@@ -159,12 +159,11 @@ export default function Dashboard01() {
                   <div className="flex items-start gap-[var(--ds-space-gap)]">
                     <Avatar size="sm" fallback={a.initials} />
                     <div className="min-w-0 flex-1">
-                      <p className="text-sm text-text-primary">
-                        <span className="font-medium">{a.name}</span>{" "}
-                        <span className="text-text-muted">{a.action}</span>{" "}
+                      <p className="text-sm text-fg-primary">
+                        <span className="font-medium">{a.name}</span> <span className="text-fg-muted">{a.action}</span>{" "}
                         <span className="font-medium">{a.target}</span>
                       </p>
-                      <p className="text-xs text-text-muted mt-0.5">{a.time}</p>
+                      <p className="text-xs text-fg-muted mt-0.5">{a.time}</p>
                     </div>
                   </div>
                   {i < ACTIVITY.length - 1 && <Separator className="mt-4" />}

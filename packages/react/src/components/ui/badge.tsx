@@ -6,9 +6,9 @@ const badgeVariants = cva("inline-flex items-center font-medium transition-color
   variants: {
     variant: {
       default: "bg-accent text-white",
-      secondary: "bg-bg-elevated text-text-secondary border border-border-subtle",
-      outline: "border border-border-default text-text-primary bg-transparent",
-      ghost: "bg-transparent text-text-secondary",
+      secondary: "bg-surface-elevated text-fg-secondary border border-edge-subtle",
+      outline: "border border-edge-default text-fg-primary bg-transparent",
+      ghost: "bg-transparent text-fg-secondary",
       destructive: "bg-destructive-muted text-destructive-text border border-destructive-border",
       success: "bg-success-muted text-success-text border border-success-border",
       warning: "bg-warning-muted text-warning-text border border-warning-border",

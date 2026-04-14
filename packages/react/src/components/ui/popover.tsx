@@ -199,7 +199,7 @@ const PopoverContent = React.forwardRef<HTMLDivElement, PopoverContentProps>(
         role="dialog"
         className={cn(
           "absolute z-popover min-w-48",
-          "bg-bg-popover border border-border-subtle rounded-[var(--ds-radius-card)]",
+          "bg-surface-popover border border-edge-subtle rounded-[var(--ds-radius-card)]",
           "shadow-lg p-4",
           "animate-scale-in",
           sideClasses[resolvedSide],

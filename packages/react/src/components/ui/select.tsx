@@ -145,8 +145,8 @@ function Select(props: SelectProps) {
 const selectTriggerVariants = cva(
   [
     "flex w-full items-center justify-between gap-2",
-    "bg-bg-input text-text-primary",
-    "border border-border-subtle rounded-[var(--ds-radius-input)]",
+    "bg-surface-input text-fg-primary",
+    "border border-edge-subtle rounded-[var(--ds-radius-input)]",
     "transition-all duration-normal ease-soft",
     "focus:outline-none focus:ring-2 focus:ring-ring/20 focus:border-accent",
     "disabled:cursor-not-allowed disabled:opacity-50",
@@ -248,7 +248,7 @@ const SelectTrigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>(
         <span
           className={cn(
             "relative truncate capitalize text-left",
-            !hasValue && "text-text-muted",
+            !hasValue && "text-fg-muted",
             ctx.multiple && "min-w-0 flex-1 overflow-hidden",
           )}
         >
@@ -257,7 +257,7 @@ const SelectTrigger = React.forwardRef<HTMLButtonElement, SelectTriggerProps>(
         </span>
         <ChevronDown
           className={cn(
-            "h-4 w-4 shrink-0 text-text-muted transition-transform duration-normal ease-soft",
+            "h-4 w-4 shrink-0 text-fg-muted transition-transform duration-normal ease-soft",
             ctx.open && "rotate-180",
           )}
         />
@@ -380,7 +380,7 @@ const SelectContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTML
         className={cn(
           "absolute z-dropdown w-full",
           placement === "bottom" ? "top-full mt-1 origin-top" : "bottom-full mb-1 origin-bottom",
-          "bg-bg-popover border border-border-subtle rounded-[var(--ds-radius-card)]",
+          "bg-surface-popover border border-edge-subtle rounded-[var(--ds-radius-card)]",
           "shadow-lg",
           "max-h-60 overflow-y-auto scrollbar-thin",
           "py-1",
@@ -454,8 +454,8 @@ const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
         className={cn(
           "flex items-center gap-2 px-3 py-1.5 text-sm capitalize cursor-pointer select-none",
           "transition-colors duration-fast ease-soft",
-          isActive && "bg-bg-hover",
-          isSelected && "bg-bg-selected text-accent font-medium",
+          isActive && "bg-surface-hover",
+          isSelected && "bg-surface-selected text-accent font-medium",
           disabled && "opacity-50 cursor-not-allowed",
           className,
         )}
@@ -483,10 +483,7 @@ function SelectGroup({ className, children, ...props }: React.HTMLAttributes<HTM
 
 function SelectLabel({ className, children, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div
-      className={cn("px-3 py-1.5 text-xs font-medium text-text-muted uppercase tracking-wide", className)}
-      {...props}
-    >
+    <div className={cn("px-3 py-1.5 text-xs font-medium text-fg-muted uppercase tracking-wide", className)} {...props}>
       {children}
     </div>
   );
@@ -495,7 +492,7 @@ function SelectLabel({ className, children, ...props }: React.HTMLAttributes<HTM
 /* === SelectSeparator === */
 
 function SelectSeparator({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn("h-px mx-2 my-1 bg-border-subtle", className)} {...props} />;
+  return <div className={cn("h-px mx-2 my-1 bg-edge-subtle", className)} {...props} />;
 }
 
 export type { SelectItemProps, SelectProps, SelectTriggerProps };

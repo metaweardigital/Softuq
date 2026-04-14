@@ -9,7 +9,7 @@ const Empty = React.forwardRef<HTMLDivElement, EmptyProps>(({ className, ...prop
       ref={ref}
       className={cn(
         "flex flex-col items-center justify-center text-center",
-        "rounded-[var(--ds-radius-card)] border border-dashed border-border-subtle",
+        "rounded-[var(--ds-radius-card)] border border-dashed border-edge-subtle",
         "px-6 py-12 gap-4",
         className,
       )}
@@ -24,7 +24,7 @@ const EmptyIcon = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivE
     <div
       ref={ref}
       className={cn(
-        "flex h-12 w-12 items-center justify-center rounded-full bg-bg-elevated text-text-muted",
+        "flex h-12 w-12 items-center justify-center rounded-full bg-surface-elevated text-fg-muted",
         "[&_svg]:size-6 [&_svg]:shrink-0",
         className,
       )}
@@ -36,14 +36,14 @@ EmptyIcon.displayName = "EmptyIcon";
 
 const EmptyTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLHeadingElement>>(
   ({ className, ...props }, ref) => (
-    <h3 ref={ref} className={cn("text-base font-semibold text-text-primary", className)} {...props} />
+    <h3 ref={ref} className={cn("text-base font-semibold text-fg-primary", className)} {...props} />
   ),
 );
 EmptyTitle.displayName = "EmptyTitle";
 
 const EmptyDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(
   ({ className, ...props }, ref) => (
-    <p ref={ref} className={cn("max-w-sm text-sm text-text-muted", className)} {...props} />
+    <p ref={ref} className={cn("max-w-sm text-sm text-fg-muted", className)} {...props} />
   ),
 );
 EmptyDescription.displayName = "EmptyDescription";

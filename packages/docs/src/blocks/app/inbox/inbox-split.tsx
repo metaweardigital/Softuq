@@ -81,23 +81,23 @@ export default function InboxSplit() {
   const selected = MESSAGES.find((m) => m.id === selectedId) ?? MESSAGES[0];
 
   return (
-    <div className="min-h-screen bg-bg-base flex flex-col">
-      <header className="border-b border-border-subtle px-[var(--ds-space-section-x)] py-4 flex items-center gap-[var(--ds-space-gap)]">
+    <div className="min-h-screen bg-surface-base flex flex-col">
+      <header className="border-b border-edge-subtle px-[var(--ds-space-section-x)] py-4 flex items-center gap-[var(--ds-space-gap)]">
         <div className="flex items-center gap-2">
-          <Inbox className="size-4 text-text-muted" />
-          <h1 className="text-lg font-semibold tracking-tight text-text-primary">Inbox</h1>
+          <Inbox className="size-4 text-fg-muted" />
+          <h1 className="text-lg font-semibold tracking-tight text-fg-primary">Inbox</h1>
           <Badge variant="secondary" size="sm">
             {MESSAGES.filter((m) => m.unread).length} unread
           </Badge>
         </div>
         <div className="ml-auto relative w-64">
-          <Search className="size-3.5 absolute left-2.5 top-1/2 -translate-y-1/2 text-text-dimmed pointer-events-none" />
+          <Search className="size-3.5 absolute left-2.5 top-1/2 -translate-y-1/2 text-fg-dimmed pointer-events-none" />
           <Input placeholder="Search mail..." className="h-8 pl-8 text-xs" />
         </div>
       </header>
 
       <div className="flex-1 grid grid-cols-1 lg:grid-cols-[360px_1fr] min-h-0">
-        <aside className="border-r border-border-subtle overflow-y-auto scrollbar-thin">
+        <aside className="border-r border-edge-subtle overflow-y-auto scrollbar-thin">
           <ul>
             {MESSAGES.map((m, i) => {
               const active = m.id === selectedId;
@@ -108,7 +108,7 @@ export default function InboxSplit() {
                     onClick={() => setSelectedId(m.id)}
                     className={cn(
                       "w-full text-left px-4 py-3 transition-colors",
-                      active ? "bg-[color-mix(in_oklch,var(--accent)_10%,transparent)]" : "hover:bg-bg-hover",
+                      active ? "bg-[color-mix(in_oklch,var(--accent)_10%,transparent)]" : "hover:bg-surface-hover",
                     )}
                   >
                     <div className="flex items-start gap-3">
@@ -118,20 +118,18 @@ export default function InboxSplit() {
                           <p
                             className={cn(
                               "text-sm truncate",
-                              m.unread ? "font-semibold text-text-primary" : "text-text-secondary",
+                              m.unread ? "font-semibold text-fg-primary" : "text-fg-secondary",
                             )}
                           >
                             {m.from}
                           </p>
                           {m.starred && <Star className="size-3 shrink-0 fill-warning text-warning" />}
-                          <span className="ml-auto text-xs text-text-dimmed shrink-0">{m.time}</span>
+                          <span className="ml-auto text-xs text-fg-dimmed shrink-0">{m.time}</span>
                         </div>
-                        <p
-                          className={cn("text-sm mt-0.5 truncate", m.unread ? "text-text-primary" : "text-text-muted")}
-                        >
+                        <p className={cn("text-sm mt-0.5 truncate", m.unread ? "text-fg-primary" : "text-fg-muted")}>
                           {m.subject}
                         </p>
-                        <p className="text-xs text-text-muted mt-0.5 line-clamp-1">{m.preview}</p>
+                        <p className="text-xs text-fg-muted mt-0.5 line-clamp-1">{m.preview}</p>
                         {m.tag && (
                           <Badge variant={m.tag.variant ?? "default"} size="sm" className="mt-1.5">
                             {m.tag.label}
@@ -148,14 +146,14 @@ export default function InboxSplit() {
         </aside>
 
         <section className="flex flex-col min-w-0">
-          <header className="px-[var(--ds-space-section-x)] py-4 border-b border-border-subtle flex items-start justify-between gap-[var(--ds-space-gap)]">
+          <header className="px-[var(--ds-space-section-x)] py-4 border-b border-edge-subtle flex items-start justify-between gap-[var(--ds-space-gap)]">
             <div className="min-w-0">
-              <h2 className="text-lg font-semibold text-text-primary">{selected.subject}</h2>
+              <h2 className="text-lg font-semibold text-fg-primary">{selected.subject}</h2>
               <div className="flex items-center gap-2 mt-1">
                 <Avatar size="sm" fallback={selected.initials} />
                 <div className="text-xs">
-                  <p className="text-text-primary font-medium">{selected.from}</p>
-                  <p className="text-text-muted">to me · {selected.time} ago</p>
+                  <p className="text-fg-primary font-medium">{selected.from}</p>
+                  <p className="text-fg-muted">to me · {selected.time} ago</p>
                 </div>
               </div>
             </div>
@@ -176,7 +174,7 @@ export default function InboxSplit() {
           </header>
 
           <div className="flex-1 px-[var(--ds-space-section-x)] py-6 overflow-y-auto scrollbar-thin">
-            <div className="max-w-2xl space-y-4 text-sm text-text-secondary leading-relaxed">
+            <div className="max-w-2xl space-y-4 text-sm text-fg-secondary leading-relaxed">
               <p>Hi team,</p>
               <p>{selected.preview}</p>
               <p>
@@ -194,7 +192,7 @@ export default function InboxSplit() {
             </div>
           </div>
 
-          <footer className="px-[var(--ds-space-section-x)] py-4 border-t border-border-subtle flex items-center gap-2">
+          <footer className="px-[var(--ds-space-section-x)] py-4 border-t border-edge-subtle flex items-center gap-2">
             <Button size="sm">
               <Reply />
               Reply

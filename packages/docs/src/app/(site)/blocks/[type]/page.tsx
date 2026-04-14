@@ -35,14 +35,14 @@ export default function BlocksTypePage() {
             <Link
               key={c.slug}
               href={`/blocks/${type}/${c.slug}`}
-              className="group rounded-[var(--ds-radius-card)] border border-border-subtle bg-bg-card p-5 transition-all hover:border-accent hover:shadow-sm"
+              className="group rounded-[var(--ds-radius-card)] border border-edge-subtle bg-surface-card p-5 transition-all hover:border-accent hover:shadow-sm"
             >
               <div className="flex items-start justify-between gap-3">
-                <h3 className="font-semibold text-text-primary">{c.name}</h3>
-                <ArrowRight className="size-4 text-text-dimmed group-hover:text-accent group-hover:translate-x-0.5 transition-all shrink-0" />
+                <h3 className="font-semibold text-fg-primary">{c.name}</h3>
+                <ArrowRight className="size-4 text-fg-dimmed group-hover:text-accent group-hover:translate-x-0.5 transition-all shrink-0" />
               </div>
-              <p className="mt-1.5 text-sm text-text-muted line-clamp-2">{c.description}</p>
-              <div className="mt-4 text-xs text-text-dimmed">
+              <p className="mt-1.5 text-sm text-fg-muted line-clamp-2">{c.description}</p>
+              <div className="mt-4 text-xs text-fg-dimmed">
                 {empty ? "Coming soon" : `${count} ${count === 1 ? "block" : "blocks"}`}
               </div>
             </Link>

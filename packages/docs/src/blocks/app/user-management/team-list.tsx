@@ -135,8 +135,8 @@ function StatusBadge({ status }: { status: Status }) {
       Active
     </span>
   ) : (
-    <span className="inline-flex items-center gap-1.5 text-xs text-text-muted">
-      <span className="size-1.5 rounded-full bg-text-dimmed" />
+    <span className="inline-flex items-center gap-1.5 text-xs text-fg-muted">
+      <span className="size-1.5 rounded-full bg-fg-dimmed" />
       Pending invite
     </span>
   );
@@ -144,12 +144,12 @@ function StatusBadge({ status }: { status: Status }) {
 
 export default function TeamList() {
   return (
-    <div className="min-h-screen bg-bg-base p-[var(--ds-space-section-x)]">
+    <div className="min-h-screen bg-surface-base p-[var(--ds-space-section-x)]">
       <div className="mx-auto max-w-6xl space-y-[var(--ds-space-stack)]">
         <header className="flex items-start justify-between gap-[var(--ds-space-gap)]">
           <div>
-            <h1 className="text-2xl font-semibold tracking-tight text-text-primary">Team</h1>
-            <p className="text-sm text-text-muted">
+            <h1 className="text-2xl font-semibold tracking-tight text-fg-primary">Team</h1>
+            <p className="text-sm text-fg-muted">
               {MEMBERS.filter((m) => m.status === "active").length} active ·{" "}
               {MEMBERS.filter((m) => m.status === "pending").length} pending
             </p>
@@ -162,12 +162,12 @@ export default function TeamList() {
 
         <div className="flex items-center gap-[var(--ds-space-gap)]">
           <div className="relative w-full sm:w-64">
-            <Search className="size-3.5 absolute left-2.5 top-1/2 -translate-y-1/2 text-text-dimmed pointer-events-none" />
+            <Search className="size-3.5 absolute left-2.5 top-1/2 -translate-y-1/2 text-fg-dimmed pointer-events-none" />
             <Input placeholder="Search by name or email..." className="h-9 pl-8 text-sm" />
           </div>
         </div>
 
-        <div className="rounded-[var(--ds-radius-card)] border border-border-subtle bg-bg-card overflow-hidden">
+        <div className="rounded-[var(--ds-radius-card)] border border-edge-subtle bg-surface-card overflow-hidden">
           <Table>
             <TableHeader>
               <TableRow>
@@ -185,8 +185,8 @@ export default function TeamList() {
                     <div className="flex items-center gap-3">
                       <Avatar size="sm" fallback={m.initials} />
                       <div className="min-w-0">
-                        <p className="text-sm font-medium text-text-primary truncate">{m.name}</p>
-                        <p className="text-xs text-text-muted truncate">{m.email}</p>
+                        <p className="text-sm font-medium text-fg-primary truncate">{m.name}</p>
+                        <p className="text-xs text-fg-muted truncate">{m.email}</p>
                       </div>
                     </div>
                   </TableCell>
@@ -197,7 +197,7 @@ export default function TeamList() {
                     <StatusBadge status={m.status} />
                   </TableCell>
                   <TableCell>
-                    <span className="text-xs text-text-muted">{m.lastActive}</span>
+                    <span className="text-xs text-fg-muted">{m.lastActive}</span>
                   </TableCell>
                   <TableCell>
                     <DropdownMenu>

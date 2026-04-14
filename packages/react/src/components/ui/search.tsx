@@ -89,8 +89,8 @@ function Search({ value, defaultValue, onValueChange, open, onOpenChange, childr
 const searchInputVariants = cva(
   [
     "flex w-full items-center gap-2",
-    "bg-bg-input text-text-primary",
-    "border border-border-subtle rounded-[var(--ds-radius-input)]",
+    "bg-surface-input text-fg-primary",
+    "border border-edge-subtle rounded-[var(--ds-radius-input)]",
     "transition-all duration-normal ease-soft",
     "focus-within:outline-none focus-within:ring-2 focus-within:ring-ring/20 focus-within:border-accent",
   ].join(" "),
@@ -219,7 +219,7 @@ const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
         aria-haspopup="listbox"
         className={cn(searchInputVariants({ variant, inputSize, className }))}
       >
-        <SearchIcon className="h-4 w-4 shrink-0 text-text-muted" />
+        <SearchIcon className="h-4 w-4 shrink-0 text-fg-muted" />
         {tags && tags.length > 0 && (
           <span className="flex flex-nowrap items-center gap-1">
             {tags.map((tag) => (
@@ -241,7 +241,7 @@ const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
           aria-autocomplete={ctx ? "list" : undefined}
           aria-controls={ctx?.contentId}
           aria-activedescendant={activeDescendant}
-          className="min-w-0 flex-1 bg-transparent outline-none placeholder:text-text-muted"
+          className="min-w-0 flex-1 bg-transparent outline-none placeholder:text-fg-muted"
           value={currentValue}
           onChange={handleChange}
           onFocus={handleFocus}
@@ -257,13 +257,13 @@ const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
             ))}
           </span>
         )}
-        {loading && <Loader2 className="h-4 w-4 shrink-0 animate-spin text-text-muted" />}
+        {loading && <Loader2 className="h-4 w-4 shrink-0 animate-spin text-fg-muted" />}
         {showClear && (
           <button
             type="button"
             aria-label="Clear search"
             onClick={handleClear}
-            className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full text-text-muted transition-colors duration-fast ease-soft hover:text-text-primary"
+            className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full text-fg-muted transition-colors duration-fast ease-soft hover:text-fg-primary"
           >
             <X className="h-3 w-3" />
           </button>
@@ -329,7 +329,7 @@ const SearchContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTML
         className={cn(
           "absolute z-dropdown w-full",
           placement === "bottom" ? "top-full mt-1 origin-top" : "bottom-full mb-1 origin-bottom",
-          "bg-bg-popover border border-border-subtle rounded-[var(--ds-radius-card)]",
+          "bg-surface-popover border border-edge-subtle rounded-[var(--ds-radius-card)]",
           "shadow-lg max-h-80 overflow-y-auto scrollbar-thin",
           "py-1",
           "animate-scale-in",
@@ -401,13 +401,13 @@ const SearchItem = React.forwardRef<HTMLDivElement, SearchItemProps>(
         className={cn(
           "flex items-center gap-2 px-3 py-2 text-sm cursor-pointer select-none",
           "transition-colors duration-fast ease-soft",
-          isActive && "bg-bg-hover",
+          isActive && "bg-surface-hover",
           disabled && "opacity-50 cursor-not-allowed",
           className,
         )}
         {...props}
       >
-        {icon && <span className="flex h-4 w-4 shrink-0 items-center justify-center text-text-muted">{icon}</span>}
+        {icon && <span className="flex h-4 w-4 shrink-0 items-center justify-center text-fg-muted">{icon}</span>}
         <span className="truncate">{children}</span>
       </div>
     );
@@ -426,7 +426,7 @@ function SearchGroup({ className, heading, children, ...props }: SearchGroupProp
   return (
     <div role="group" aria-labelledby={heading ? headingId : undefined} className={cn("py-1", className)} {...props}>
       {heading && (
-        <div id={headingId} className="px-3 py-1.5 text-xs font-medium text-text-muted uppercase tracking-wide">
+        <div id={headingId} className="px-3 py-1.5 text-xs font-medium text-fg-muted uppercase tracking-wide">
           {heading}
         </div>
       )}

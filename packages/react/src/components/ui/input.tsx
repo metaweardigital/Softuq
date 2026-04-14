@@ -4,8 +4,8 @@ import { cn } from "../../lib/utils";
 
 const inputVariants = cva(
   [
-    "flex w-full bg-bg-input text-text-primary placeholder:text-text-muted",
-    "border border-border-subtle rounded-[var(--ds-radius-input)]",
+    "flex w-full bg-surface-input text-fg-primary placeholder:text-fg-muted",
+    "border border-edge-subtle rounded-[var(--ds-radius-input)]",
     "transition-all duration-normal ease-soft",
     "focus:outline-none focus:ring-2 focus:ring-ring/20 focus:border-accent",
     "disabled:cursor-not-allowed disabled:opacity-50",

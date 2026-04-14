@@ -3,7 +3,7 @@ import { X } from "lucide-react";
 import * as React from "react";
 import { cn } from "../../lib/utils";
 
-const sheetVariants = cva("fixed z-modal bg-bg-elevated border-border-subtle shadow-lg focus:outline-none", {
+const sheetVariants = cva("fixed z-modal bg-surface-elevated border-edge-subtle shadow-lg focus:outline-none", {
   variants: {
     side: {
       left: "inset-y-0 left-0 border-r animate-slide-in-left",
@@ -65,7 +65,7 @@ const Sheet = React.forwardRef<HTMLDivElement, SheetProps>(
     return (
       <>
         <div
-          className="fixed inset-0 z-overlay bg-bg-overlay backdrop-blur-sm animate-fade-up"
+          className="fixed inset-0 z-overlay bg-surface-overlay backdrop-blur-sm animate-fade-up"
           role="presentation"
           onClick={onClose}
           onKeyDown={(e) => e.key === "Escape" && onClose()}
@@ -74,7 +74,7 @@ const Sheet = React.forwardRef<HTMLDivElement, SheetProps>(
           <button
             type="button"
             onClick={onClose}
-            className="absolute right-4 top-4 rounded-lg p-1 text-text-muted hover:text-text-primary transition-colors"
+            className="absolute right-4 top-4 rounded-lg p-1 text-fg-muted hover:text-fg-primary transition-colors"
           >
             <X className="h-4 w-4" />
           </button>

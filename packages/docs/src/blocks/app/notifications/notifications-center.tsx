@@ -99,21 +99,21 @@ function NotificationRow({ n }: { n: Notification }) {
     <div
       className={cn(
         "px-4 py-3 flex items-start gap-3 transition-colors",
-        n.unread ? "bg-[color-mix(in_oklch,var(--accent)_6%,transparent)]" : "hover:bg-bg-hover",
+        n.unread ? "bg-[color-mix(in_oklch,var(--accent)_6%,transparent)]" : "hover:bg-surface-hover",
       )}
     >
       <div className="relative shrink-0">
         <Avatar size="sm" fallback={n.initials} />
-        <div className="absolute -bottom-1 -right-1 size-5 rounded-full bg-bg-card border border-border-subtle flex items-center justify-center text-text-muted">
+        <div className="absolute -bottom-1 -right-1 size-5 rounded-full bg-surface-card border border-edge-subtle flex items-center justify-center text-fg-muted">
           <Icon className="size-3" />
         </div>
       </div>
       <div className="min-w-0 flex-1">
-        <p className="text-sm text-text-primary">
-          <span className="font-medium">{n.actor}</span> <span className="text-text-muted">{n.title}</span>
+        <p className="text-sm text-fg-primary">
+          <span className="font-medium">{n.actor}</span> <span className="text-fg-muted">{n.title}</span>
         </p>
-        <p className="text-xs text-text-muted mt-0.5 line-clamp-2">{n.preview}</p>
-        <p className="text-[11px] text-text-dimmed mt-1">{n.time}</p>
+        <p className="text-xs text-fg-muted mt-0.5 line-clamp-2">{n.preview}</p>
+        <p className="text-[11px] text-fg-dimmed mt-1">{n.time}</p>
       </div>
       {n.unread && <span className="size-2 rounded-full bg-accent mt-1.5 shrink-0" aria-hidden="true" />}
     </div>
@@ -123,14 +123,14 @@ function NotificationRow({ n }: { n: Notification }) {
 function NotificationList({ items }: { items: Notification[] }) {
   if (items.length === 0) {
     return (
-      <div className="rounded-[var(--ds-radius-card)] border border-dashed border-border-subtle bg-bg-card px-6 py-12 text-center">
-        <Bell className="size-6 mx-auto text-text-dimmed" />
-        <p className="text-sm text-text-muted mt-3">You're all caught up.</p>
+      <div className="rounded-[var(--ds-radius-card)] border border-dashed border-edge-subtle bg-surface-card px-6 py-12 text-center">
+        <Bell className="size-6 mx-auto text-fg-dimmed" />
+        <p className="text-sm text-fg-muted mt-3">You're all caught up.</p>
       </div>
     );
   }
   return (
-    <div className="rounded-[var(--ds-radius-card)] border border-border-subtle bg-bg-card overflow-hidden">
+    <div className="rounded-[var(--ds-radius-card)] border border-edge-subtle bg-surface-card overflow-hidden">
       {items.map((n, i) => (
         <div key={n.id}>
           <NotificationRow n={n} />
@@ -146,12 +146,12 @@ export default function NotificationsCenter() {
   const mentions = NOTIFICATIONS.filter((n) => n.type === "mention");
 
   return (
-    <div className="min-h-screen bg-bg-base p-[var(--ds-space-section-x)]">
+    <div className="min-h-screen bg-surface-base p-[var(--ds-space-section-x)]">
       <div className="mx-auto max-w-6xl space-y-[var(--ds-space-stack)]">
         <header className="flex items-start justify-between gap-[var(--ds-space-gap)]">
           <div>
-            <h1 className="text-2xl font-semibold tracking-tight text-text-primary">Notifications</h1>
-            <p className="text-sm text-text-muted">
+            <h1 className="text-2xl font-semibold tracking-tight text-fg-primary">Notifications</h1>
+            <p className="text-sm text-fg-muted">
               {unread.length > 0 ? `${unread.length} unread` : "You're all caught up."}
             </p>
           </div>

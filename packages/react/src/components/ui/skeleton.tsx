@@ -3,7 +3,7 @@ import * as React from "react";
 import { cn } from "../../lib/utils";
 
 const skeletonVariants = cva(
-  "animate-shimmer bg-gradient-to-r from-bg-elevated via-bg-hover to-bg-elevated bg-[length:200%_100%]",
+  "animate-shimmer bg-gradient-to-r from-surface-elevated via-surface-hover to-surface-elevated bg-[length:200%_100%]",
   {
     variants: {
       variant: {

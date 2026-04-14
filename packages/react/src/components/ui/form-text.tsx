@@ -31,7 +31,7 @@ const FormDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttribu
   ({ className, ...props }, ref) => {
     const size = useFormFieldSize();
     return (
-      <p ref={ref} className={cn("text-text-muted", size === "sm" ? "text-[11px]" : "text-xs", className)} {...props} />
+      <p ref={ref} className={cn("text-fg-muted", size === "sm" ? "text-[11px]" : "text-xs", className)} {...props} />
     );
   },
 );

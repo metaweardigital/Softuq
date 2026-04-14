@@ -19,10 +19,10 @@ export default function Hero01() {
           <Sparkles className="size-3" />
           New — v1.0 is live
         </Badge>
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-text-primary">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-fg-primary">
           Build interfaces that feel crafted, not configured
         </h1>
-        <p className="mt-[var(--ds-space-stack)] text-base sm:text-lg text-text-muted max-w-2xl mx-auto">
+        <p className="mt-[var(--ds-space-stack)] text-base sm:text-lg text-fg-muted max-w-2xl mx-auto">
           A soft, tactile design system with tokens, components, and a CLI. Copy what you need, own what you ship.
         </p>
         <div className="mt-[var(--ds-space-stack)] flex flex-col sm:flex-row items-center justify-center gap-[var(--ds-space-gap)]">

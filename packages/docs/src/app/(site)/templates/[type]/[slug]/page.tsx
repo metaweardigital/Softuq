@@ -150,9 +150,9 @@ export default function TemplateDetailPage() {
         { label: template.name },
       ]}
     >
-      <section className="rounded-[var(--ds-radius-card)] border border-border-subtle bg-bg-card overflow-hidden">
-        <header className="flex items-center gap-3 px-4 py-3 border-b border-border-subtle">
-          <p className="text-xs text-text-muted">Tune theme in the top navbar — changes sync here in real time.</p>
+      <section className="rounded-[var(--ds-radius-card)] border border-edge-subtle bg-surface-card overflow-hidden">
+        <header className="flex items-center gap-3 px-4 py-3 border-b border-edge-subtle">
+          <p className="text-xs text-fg-muted">Tune theme in the top navbar — changes sync here in real time.</p>
           <div className="ml-auto flex items-center gap-2">
             <ToggleGroup
               type="single"
@@ -184,7 +184,7 @@ export default function TemplateDetailPage() {
           </div>
         </header>
 
-        <div className="bg-bg-base flex justify-center">
+        <div className="bg-surface-input flex justify-center">
           <div
             className="relative w-full transition-[max-width] duration-300 ease-out"
             style={{ maxWidth: VIEWPORT_WIDTH[viewport] }}
@@ -193,7 +193,7 @@ export default function TemplateDetailPage() {
               ref={iframeRef}
               src={previewSrc}
               title={template.name}
-              className="w-full block bg-bg-base"
+              className="w-full block bg-surface-base"
               style={{ height: FRAME_HEIGHT, border: 0 }}
             />
             <div aria-hidden className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -229,8 +229,8 @@ export default function TemplateDetailPage() {
       </section>
 
       <section className="mt-10">
-        <h2 className="text-lg font-semibold text-text-primary">Blocks in this template</h2>
-        <p className="text-sm text-text-muted mt-1">
+        <h2 className="text-lg font-semibold text-fg-primary">Blocks in this template</h2>
+        <p className="text-sm text-fg-muted mt-1">
           {blocks.length} block{blocks.length === 1 ? "" : "s"} composed in order.
         </p>
         <ul className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -238,13 +238,13 @@ export default function TemplateDetailPage() {
             <li key={b.key}>
               <Link
                 href={`/blocks/${b.key}`}
-                className="group flex items-center justify-between gap-3 rounded-[var(--ds-radius-card)] border border-border-subtle bg-bg-card px-4 py-3 transition-colors hover:border-accent"
+                className="group flex items-center justify-between gap-3 rounded-[var(--ds-radius-card)] border border-edge-subtle bg-surface-card px-4 py-3 transition-colors hover:border-accent"
               >
                 <div className="min-w-0">
-                  <div className="text-xs font-mono text-text-dimmed">{b.key}</div>
-                  <div className="text-sm font-medium text-text-primary truncate">{b.meta.name}</div>
+                  <div className="text-xs font-mono text-fg-dimmed">{b.key}</div>
+                  <div className="text-sm font-medium text-fg-primary truncate">{b.meta.name}</div>
                 </div>
-                <ExternalLink className="size-3.5 text-text-dimmed group-hover:text-accent shrink-0" />
+                <ExternalLink className="size-3.5 text-fg-dimmed group-hover:text-accent shrink-0" />
               </Link>
             </li>
           ))}

@@ -3,46 +3,68 @@
    Maps CSS token vars to Tailwind utilities
    ============================================ */
 @theme {
-  /* Colors */
-  --color-bg-base: var(--bg-base);
-  --color-bg-elevated: var(--bg-elevated);
-  --color-bg-popover: var(--bg-popover);
-  --color-bg-card: var(--bg-card);
-  --color-bg-input: var(--bg-input);
-  --color-bg-hover: var(--bg-hover);
-  --color-bg-selected: var(--bg-selected);
-  --color-bg-overlay: var(--bg-overlay);
+  /* Colors — backgrounds */
+  --color-surface-base: var(--bg-base);
+  --color-surface-elevated: var(--bg-elevated);
+  --color-surface-popover: var(--bg-popover);
+  --color-surface-card: var(--bg-card);
+  --color-surface-input: var(--bg-input);
+  --color-surface-hover: var(--bg-hover);
+  --color-surface-selected: var(--bg-selected);
+  --color-surface-overlay: var(--bg-overlay);
 
-  --color-text-primary: var(--text-primary);
-  --color-text-secondary: var(--text-secondary);
-  --color-text-muted: var(--text-muted);
-  --color-text-dimmed: var(--text-dimmed);
-  --color-text-inverse: var(--text-inverse);
+  /* Colors — foreground */
+  --color-fg-primary: var(--text-primary);
+  --color-fg-secondary: var(--text-secondary);
+  --color-fg-muted: var(--text-muted);
+  --color-fg-dimmed: var(--text-dimmed);
+  --color-fg-inverse: var(--text-inverse);
 
   --color-accent: var(--accent);
   --color-accent-hover: var(--accent-hover);
   --color-accent-muted: var(--accent-muted);
+  --color-accent-border: var(--accent-border);
   --color-accent-text: var(--accent-text);
 
   --color-destructive: var(--destructive);
   --color-destructive-hover: var(--destructive-hover);
   --color-destructive-muted: var(--destructive-muted);
+  --color-destructive-border: var(--destructive-border);
   --color-destructive-text: var(--destructive-text);
 
   --color-success: var(--success);
   --color-success-hover: var(--success-hover);
   --color-success-muted: var(--success-muted);
+  --color-success-border: var(--success-border);
   --color-success-text: var(--success-text);
 
   --color-warning: var(--warning);
   --color-warning-hover: var(--warning-hover);
   --color-warning-muted: var(--warning-muted);
+  --color-warning-border: var(--warning-border);
   --color-warning-text: var(--warning-text);
 
-  --color-border-subtle: var(--border-subtle);
-  --color-border-default: var(--border-default);
-  --color-border-strong: var(--border-strong);
-  --color-border-accent: var(--border-accent);
+  --color-dark-5: var(--dark-5);
+  --color-dark-10: var(--dark-10);
+  --color-dark-20: var(--dark-20);
+  --color-dark-40: var(--dark-40);
+  --color-dark-70: var(--dark-70);
+  --color-dark-90: var(--dark-90);
+  --color-dark-100: var(--dark-100);
+
+  --color-light-5: var(--light-5);
+  --color-light-10: var(--light-10);
+  --color-light-20: var(--light-20);
+  --color-light-40: var(--light-40);
+  --color-light-70: var(--light-70);
+  --color-light-90: var(--light-90);
+  --color-light-100: var(--light-100);
+
+  /* Colors — borders */
+  --color-edge-subtle: var(--border-subtle);
+  --color-edge-default: var(--border-default);
+  --color-edge-strong: var(--border-strong);
+  --color-edge-accent: var(--border-accent);
 
   --color-ring: var(--ring-color);
   --color-glass-bg: var(--glass-bg);

@@ -29,7 +29,7 @@ export default function TemplatePreviewPage() {
   const missingRefs = template.blocks.filter((ref) => !resolveBlockRef(ref)).map((ref) => blockRefToString(ref));
   if (missingRefs.length > 0) {
     return (
-      <div className="p-8 text-sm text-text-muted">Template references missing blocks: {missingRefs.join(", ")}</div>
+      <div className="p-8 text-sm text-fg-muted">Template references missing blocks: {missingRefs.join(", ")}</div>
     );
   }
 

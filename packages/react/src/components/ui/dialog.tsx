@@ -74,7 +74,7 @@ const DialogOverlay = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTML
   ({ className, ...props }, ref) => (
     <div
       ref={ref}
-      className={cn("fixed inset-0 z-overlay bg-bg-overlay backdrop-blur-sm", "animate-fade-up", className)}
+      className={cn("fixed inset-0 z-overlay bg-surface-overlay backdrop-blur-sm", "animate-fade-up", className)}
       {...props}
     />
   ),
@@ -85,7 +85,7 @@ DialogOverlay.displayName = "DialogOverlay";
 const dialogContentVariants = cva(
   [
     "fixed left-1/2 top-1/2 z-modal -translate-x-1/2 -translate-y-1/2",
-    "w-full bg-bg-elevated border border-border-subtle rounded-[var(--ds-radius-card)] shadow-lg",
+    "w-full bg-surface-elevated border border-edge-subtle rounded-[var(--ds-radius-card)] shadow-lg",
     "animate-scale-in",
     "focus:outline-none",
   ].join(" "),
@@ -140,7 +140,7 @@ const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps>(
           <button
             type="button"
             onClick={() => setOpen(false)}
-            className="absolute right-4 top-4 rounded-[var(--ds-radius-tooltip)] p-1 text-text-muted hover:text-text-primary transition-colors"
+            className="absolute right-4 top-4 rounded-[var(--ds-radius-tooltip)] p-1 text-fg-muted hover:text-fg-primary transition-colors"
           >
             <X className="h-4 w-4" />
           </button>
@@ -158,13 +158,13 @@ const DialogHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivEleme
 
 const DialogTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLHeadingElement>>(
   ({ className, ...props }, ref) => (
-    <h2 ref={ref} className={cn("text-lg font-semibold text-text-primary", className)} {...props} />
+    <h2 ref={ref} className={cn("text-lg font-semibold text-fg-primary", className)} {...props} />
   ),
 );
 DialogTitle.displayName = "DialogTitle";
 
 const DialogDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(
-  ({ className, ...props }, ref) => <p ref={ref} className={cn("text-sm text-text-secondary", className)} {...props} />,
+  ({ className, ...props }, ref) => <p ref={ref} className={cn("text-sm text-fg-secondary", className)} {...props} />,
 );
 DialogDescription.displayName = "DialogDescription";
 

@@ -100,14 +100,14 @@ function PlanCard({ plan }: { plan: Plan }) {
         </div>
         <CardDescription>{plan.description}</CardDescription>
         <div className="mt-3">
-          <span className="text-3xl font-bold tracking-tight text-text-primary">{plan.price}</span>
-          <span className="text-sm text-text-muted ml-1.5">/ {plan.period}</span>
+          <span className="text-3xl font-bold tracking-tight text-fg-primary">{plan.price}</span>
+          <span className="text-sm text-fg-muted ml-1.5">/ {plan.period}</span>
         </div>
       </CardHeader>
       <CardContent className="flex-1">
         <ul className="space-y-2">
           {plan.features.map((f) => (
-            <li key={f} className="flex items-start gap-2 text-sm text-text-secondary">
+            <li key={f} className="flex items-start gap-2 text-sm text-fg-secondary">
               <Check className="size-4 text-accent shrink-0 mt-0.5" />
               {f}
             </li>
@@ -155,11 +155,11 @@ function StatusBadge({ status }: { status: Invoice["status"] }) {
 
 export default function BillingPlans() {
   return (
-    <div className="min-h-screen bg-bg-base p-[var(--ds-space-section-x)]">
+    <div className="min-h-screen bg-surface-base p-[var(--ds-space-section-x)]">
       <div className="mx-auto max-w-6xl space-y-[var(--ds-space-stack)]">
         <header>
-          <h1 className="text-2xl font-semibold tracking-tight text-text-primary">Billing</h1>
-          <p className="text-sm text-text-muted">Manage your subscription, payment methods, and invoices.</p>
+          <h1 className="text-2xl font-semibold tracking-tight text-fg-primary">Billing</h1>
+          <p className="text-sm text-fg-muted">Manage your subscription, payment methods, and invoices.</p>
         </header>
 
         <Card>
@@ -179,8 +179,8 @@ export default function BillingPlans() {
 
         <section className="space-y-4">
           <div>
-            <h2 className="text-base font-semibold text-text-primary">Plans</h2>
-            <p className="text-sm text-text-muted">Upgrade or downgrade at any time.</p>
+            <h2 className="text-base font-semibold text-fg-primary">Plans</h2>
+            <p className="text-sm text-fg-muted">Upgrade or downgrade at any time.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-[var(--ds-space-gap)]">
             {PLANS.map((p) => (
@@ -192,18 +192,18 @@ export default function BillingPlans() {
         <section className="space-y-4">
           <div className="flex items-end justify-between">
             <div>
-              <h2 className="text-base font-semibold text-text-primary flex items-center gap-2">
-                <Receipt className="size-4 text-text-muted" />
+              <h2 className="text-base font-semibold text-fg-primary flex items-center gap-2">
+                <Receipt className="size-4 text-fg-muted" />
                 Invoices
               </h2>
-              <p className="text-sm text-text-muted">Download past invoices and receipts.</p>
+              <p className="text-sm text-fg-muted">Download past invoices and receipts.</p>
             </div>
             <Button variant="ghost" size="sm">
               <ExternalLink />
               Billing portal
             </Button>
           </div>
-          <div className="rounded-[var(--ds-radius-card)] border border-border-subtle bg-bg-card overflow-hidden">
+          <div className="rounded-[var(--ds-radius-card)] border border-edge-subtle bg-surface-card overflow-hidden">
             <Table>
               <TableHeader>
                 <TableRow>
@@ -218,10 +218,10 @@ export default function BillingPlans() {
               <TableBody>
                 {INVOICES.map((inv) => (
                   <TableRow key={inv.id}>
-                    <TableCell className="font-mono text-xs text-text-primary">{inv.id}</TableCell>
-                    <TableCell className="text-sm text-text-secondary">{inv.date}</TableCell>
-                    <TableCell className="text-sm text-text-muted">{inv.period}</TableCell>
-                    <TableCell className="text-sm font-medium text-text-primary">{inv.amount}</TableCell>
+                    <TableCell className="font-mono text-xs text-fg-primary">{inv.id}</TableCell>
+                    <TableCell className="text-sm text-fg-secondary">{inv.date}</TableCell>
+                    <TableCell className="text-sm text-fg-muted">{inv.period}</TableCell>
+                    <TableCell className="text-sm font-medium text-fg-primary">{inv.amount}</TableCell>
                     <TableCell>
                       <StatusBadge status={inv.status} />
                     </TableCell>

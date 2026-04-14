@@ -6,9 +6,9 @@ import { cn } from "../../lib/utils";
 const itemVariants = cva(
   [
     "inline-flex items-center justify-center rounded-[var(--ds-radius-button)] font-medium",
-    "border border-border-subtle bg-transparent text-text-secondary",
+    "border border-edge-subtle bg-transparent text-fg-secondary",
     "transition-colors duration-fast ease-soft",
-    "hover:bg-bg-hover hover:text-text-primary",
+    "hover:bg-surface-hover hover:text-fg-primary",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg-base",
     "disabled:pointer-events-none disabled:opacity-40",
     "aria-[current=page]:bg-accent aria-[current=page]:text-white aria-[current=page]:border-accent",
@@ -95,7 +95,7 @@ const Pagination = React.forwardRef<HTMLElement, PaginationProps>(
                 <span
                   aria-hidden="true"
                   className={cn(
-                    "flex items-center justify-center text-text-muted",
+                    "flex items-center justify-center text-fg-muted",
                     resolvedSize === "sm" && "h-7 w-7",
                     resolvedSize === "md" && "h-8 w-8",
                     resolvedSize === "lg" && "h-9 w-9",

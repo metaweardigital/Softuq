@@ -3,7 +3,7 @@ import * as React from "react";
 import { cn } from "../../lib/utils";
 
 const avatarVariants = cva(
-  "relative inline-flex shrink-0 overflow-hidden rounded-[var(--ds-radius-avatar)] bg-bg-elevated border border-border-subtle",
+  "relative inline-flex shrink-0 overflow-hidden rounded-[var(--ds-radius-avatar)] bg-surface-elevated border border-edge-subtle",
   {
     variants: {
       size: {
@@ -38,7 +38,7 @@ const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
             onError={() => setHasError(true)}
           />
         ) : (
-          <span className="flex h-full w-full items-center justify-center font-medium text-text-secondary">
+          <span className="flex h-full w-full items-center justify-center font-medium text-fg-secondary">
             {fallback || alt?.charAt(0)?.toUpperCase() || "?"}
           </span>
         )}

@@ -133,8 +133,8 @@ function ProjectCard({ project }: { project: Project }) {
       <CardHeader>
         <div className="flex items-start justify-between gap-[var(--ds-space-gap)]">
           <div className="min-w-0">
-            <h3 className="text-base font-semibold text-text-primary truncate">{project.name}</h3>
-            <p className="text-xs text-text-muted mt-0.5 line-clamp-2">{project.description}</p>
+            <h3 className="text-base font-semibold text-fg-primary truncate">{project.name}</h3>
+            <p className="text-xs text-fg-muted mt-0.5 line-clamp-2">{project.description}</p>
           </div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -167,20 +167,20 @@ function ProjectCard({ project }: { project: Project }) {
       <CardContent className="flex-1 space-y-3">
         <StatusBadge status={project.status} />
         <div>
-          <div className="flex items-center justify-between text-xs text-text-muted mb-1.5">
+          <div className="flex items-center justify-between text-xs text-fg-muted mb-1.5">
             <span>Progress</span>
             <span>{project.progress}%</span>
           </div>
           <Progress value={project.progress} />
         </div>
-        <div className="flex items-center justify-between text-xs text-text-muted">
+        <div className="flex items-center justify-between text-xs text-fg-muted">
           <span>
             {project.tasks.done} / {project.tasks.total} tasks
           </span>
           <span>Due {project.due}</span>
         </div>
       </CardContent>
-      <CardFooter className="border-t border-border-subtle">
+      <CardFooter className="border-t border-edge-subtle">
         <div className="flex -space-x-2">
           {project.members.map((m) => (
             <Avatar key={m} size="sm" fallback={m} className="border-2 border-bg-card" />
@@ -205,12 +205,12 @@ export default function ProjectsGrid() {
   const filtered = filter === "all" ? PROJECTS : PROJECTS.filter((p) => p.status === filter);
 
   return (
-    <div className="min-h-screen bg-bg-base p-[var(--ds-space-section-x)]">
+    <div className="min-h-screen bg-surface-base p-[var(--ds-space-section-x)]">
       <div className="mx-auto max-w-6xl space-y-[var(--ds-space-stack)]">
         <header className="flex items-start justify-between gap-[var(--ds-space-gap)]">
           <div>
-            <h1 className="text-2xl font-semibold tracking-tight text-text-primary">Projects</h1>
-            <p className="text-sm text-text-muted">{PROJECTS.length} projects across the workspace.</p>
+            <h1 className="text-2xl font-semibold tracking-tight text-fg-primary">Projects</h1>
+            <p className="text-sm text-fg-muted">{PROJECTS.length} projects across the workspace.</p>
           </div>
           <Button size="sm">
             <Plus />
@@ -220,7 +220,7 @@ export default function ProjectsGrid() {
 
         <div className="flex items-center gap-[var(--ds-space-gap)] flex-wrap">
           <div className="relative w-full sm:w-64">
-            <Search className="size-3.5 absolute left-2.5 top-1/2 -translate-y-1/2 text-text-dimmed pointer-events-none" />
+            <Search className="size-3.5 absolute left-2.5 top-1/2 -translate-y-1/2 text-fg-dimmed pointer-events-none" />
             <Input placeholder="Search projects..." className="h-9 pl-8 text-sm" />
           </div>
           <div className="flex items-center gap-1 ml-auto">
@@ -233,7 +233,7 @@ export default function ProjectsGrid() {
                   "px-3 h-8 inline-flex items-center rounded-[var(--ds-radius-button)] text-xs transition-colors",
                   filter === f.value
                     ? "bg-[color-mix(in_oklch,var(--accent)_14%,transparent)] text-accent-text"
-                    : "text-text-secondary hover:bg-bg-hover hover:text-text-primary",
+                    : "text-fg-secondary hover:bg-surface-hover hover:text-fg-primary",
                 )}
               >
                 {f.label}

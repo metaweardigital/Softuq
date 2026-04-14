@@ -5,7 +5,7 @@ import { cn } from "../../lib/utils";
 const toggleVariants = cva(
   [
     "relative inline-flex shrink-0 cursor-pointer items-center rounded-full p-px",
-    "border border-border-subtle transition-colors duration-normal ease-soft",
+    "border border-edge-subtle transition-colors duration-normal ease-soft",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg-base",
     "disabled:cursor-not-allowed disabled:opacity-50",
   ].join(" "),
@@ -71,7 +71,7 @@ const Toggle = React.forwardRef<HTMLButtonElement, ToggleProps>(
         aria-checked={checked}
         id={toggleId}
         ref={ref}
-        className={cn(toggleVariants({ size }), checked ? "bg-accent" : "bg-bg-input", className)}
+        className={cn(toggleVariants({ size }), checked ? "bg-accent" : "bg-surface-input", className)}
         onClick={() => onCheckedChange?.(!checked)}
         {...props}
       >
@@ -87,7 +87,7 @@ const Toggle = React.forwardRef<HTMLButtonElement, ToggleProps>(
           <label
             htmlFor={toggleId}
             className={cn(
-              "cursor-pointer text-text-primary leading-none",
+              "cursor-pointer text-fg-primary leading-none",
               size === "sm" ? "text-xs" : "text-sm",
               props.disabled && "cursor-not-allowed opacity-50",
             )}
@@ -96,7 +96,7 @@ const Toggle = React.forwardRef<HTMLButtonElement, ToggleProps>(
           </label>
         )}
         {description && (
-          <p className={cn("text-text-muted leading-snug", size === "sm" ? "text-[11px]" : "text-xs")}>{description}</p>
+          <p className={cn("text-fg-muted leading-snug", size === "sm" ? "text-[11px]" : "text-xs")}>{description}</p>
         )}
       </div>
     );

@@ -74,8 +74,8 @@ const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
             role="tooltip"
             className={cn(
               "absolute z-popover whitespace-nowrap animate-fade-up",
-              "rounded-[var(--ds-radius-tooltip)] bg-bg-popover border border-border-subtle px-3 py-1.5",
-              "text-xs text-text-primary shadow-md",
+              "rounded-[var(--ds-radius-tooltip)] bg-surface-popover border border-edge-subtle px-3 py-1.5",
+              "text-xs text-fg-primary shadow-md",
               positionClasses[resolvedSide],
               className,
             )}

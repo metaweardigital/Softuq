@@ -30,7 +30,7 @@ const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
         aria-valuenow={value}
         aria-valuemin={0}
         aria-valuemax={max}
-        className={cn("w-full overflow-hidden rounded-full bg-bg-input", progressVariants({ size }), className)}
+        className={cn("w-full overflow-hidden rounded-full bg-surface-input", progressVariants({ size }), className)}
         {...props}
       >
         <div

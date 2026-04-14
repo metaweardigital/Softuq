@@ -25,17 +25,17 @@ export default function TemplatesLandingPage() {
             <Link
               key={c.type}
               href={`/templates/${c.type}`}
-              className="group relative rounded-[var(--ds-radius-card)] border border-border-subtle bg-bg-card p-8 transition-all hover:border-accent hover:shadow-md"
+              className="group relative rounded-[var(--ds-radius-card)] border border-edge-subtle bg-surface-card p-8 transition-all hover:border-accent hover:shadow-md"
             >
               <div className="flex items-start justify-between">
-                <div className="size-12 rounded-lg bg-bg-elevated border border-border-subtle flex items-center justify-center text-accent">
+                <div className="size-12 rounded-lg bg-surface-elevated border border-edge-subtle flex items-center justify-center text-accent">
                   <Icon className="size-6" />
                 </div>
-                <ArrowRight className="size-5 text-text-muted group-hover:text-accent group-hover:translate-x-0.5 transition-all" />
+                <ArrowRight className="size-5 text-fg-muted group-hover:text-accent group-hover:translate-x-0.5 transition-all" />
               </div>
-              <h2 className="mt-6 text-xl font-semibold text-text-primary">{c.name}</h2>
-              <p className="mt-2 text-sm text-text-muted">{c.description}</p>
-              <div className="mt-6 text-xs text-text-dimmed">
+              <h2 className="mt-6 text-xl font-semibold text-fg-primary">{c.name}</h2>
+              <p className="mt-2 text-sm text-fg-muted">{c.description}</p>
+              <div className="mt-6 text-xs text-fg-dimmed">
                 {count} {count === 1 ? "template" : "templates"}
               </div>
             </Link>

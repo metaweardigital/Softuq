@@ -47,19 +47,19 @@ export default function BlocksLandingPage() {
             <Link
               key={t.href}
               href={t.href}
-              className="group relative rounded-[var(--ds-radius-card)] border border-border-subtle bg-bg-card p-8 transition-all hover:border-accent hover:shadow-md"
+              className="group relative rounded-[var(--ds-radius-card)] border border-edge-subtle bg-surface-card p-8 transition-all hover:border-accent hover:shadow-md"
             >
               <div className="flex items-start justify-between">
-                <div className="size-12 rounded-lg bg-bg-elevated border border-border-subtle flex items-center justify-center text-accent">
+                <div className="size-12 rounded-lg bg-surface-elevated border border-edge-subtle flex items-center justify-center text-accent">
                   <Icon className="size-6" />
                 </div>
-                <ArrowRight className="size-5 text-text-muted group-hover:text-accent group-hover:translate-x-0.5 transition-all" />
+                <ArrowRight className="size-5 text-fg-muted group-hover:text-accent group-hover:translate-x-0.5 transition-all" />
               </div>
-              <h2 className="mt-6 text-xl font-semibold text-text-primary">{t.title}</h2>
-              <p className="mt-2 text-sm text-text-muted">{t.description}</p>
-              <div className="mt-6 flex items-center gap-4 text-xs text-text-dimmed">
+              <h2 className="mt-6 text-xl font-semibold text-fg-primary">{t.title}</h2>
+              <p className="mt-2 text-sm text-fg-muted">{t.description}</p>
+              <div className="mt-6 flex items-center gap-4 text-xs text-fg-dimmed">
                 <span>{t.categoryCount} categories</span>
-                <span className="size-1 rounded-full bg-border-default" />
+                <span className="size-1 rounded-full bg-edge-default" />
                 <span>
                   {t.blockCount} {t.blockCount === 1 ? "block" : "blocks"}
                 </span>

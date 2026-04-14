@@ -75,17 +75,17 @@ export default function BlockDetailPage() {
         { label: block.slug },
       ]}
     >
-      <section className="rounded-[var(--ds-radius-card)] border border-border-subtle bg-bg-card overflow-hidden">
-        <header className="flex items-center justify-between px-5 py-3 border-b border-border-subtle">
+      <section className="rounded-[var(--ds-radius-card)] border border-edge-subtle bg-surface-card overflow-hidden">
+        <header className="flex items-center justify-between px-5 py-3 border-b border-edge-subtle">
           <div className="min-w-0">
-            <div className="text-xs font-mono text-text-dimmed">{block.slug}</div>
-            <h3 className="text-sm font-medium text-text-primary truncate">{block.name}</h3>
+            <div className="text-xs font-mono text-fg-dimmed">{block.slug}</div>
+            <h3 className="text-sm font-medium text-fg-primary truncate">{block.name}</h3>
           </div>
           <a
             href={previewHref}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-1.5 text-xs text-text-muted hover:text-accent transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs text-fg-muted hover:text-accent transition-colors"
           >
             Open
             <ExternalLink className="size-3.5" />
@@ -95,7 +95,7 @@ export default function BlockDetailPage() {
           ref={iframeRef}
           src={previewHref}
           title={block.name}
-          className="w-full block bg-bg-base transition-[height] duration-200"
+          className="w-full block bg-surface-base transition-[height] duration-200"
           style={{ height, border: "0" }}
         />
       </section>

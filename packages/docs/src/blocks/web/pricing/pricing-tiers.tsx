@@ -58,16 +58,16 @@ export default function Pricing01() {
           <Badge variant="outline" className="mb-[var(--ds-space-stack)]">
             Pricing
           </Badge>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-text-primary">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-fg-primary">
             Simple pricing. No surprises.
           </h2>
-          <p className="mt-[var(--ds-space-stack)] text-text-muted">
+          <p className="mt-[var(--ds-space-stack)] text-fg-muted">
             Start free, scale when you need to. Cancel anytime — no questions asked.
           </p>
         </div>
         <div className="mt-[var(--ds-space-stack)] grid grid-cols-1 md:grid-cols-3 gap-[var(--ds-space-gap)]">
           {TIERS.map((tier) => (
-            <Card key={tier.name} className={tier.featured ? "relative border-border-accent" : undefined}>
+            <Card key={tier.name} className={tier.featured ? "relative border-edge-accent" : undefined}>
               {tier.featured && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2">
                   <Badge>Most popular</Badge>
@@ -79,12 +79,12 @@ export default function Pricing01() {
               </CardHeader>
               <CardContent className="space-y-[var(--ds-space-gap)]">
                 <div className="flex items-baseline gap-1">
-                  <span className="text-4xl font-bold tracking-tight text-text-primary">{tier.price}</span>
-                  <span className="text-sm text-text-muted">/ {tier.cadence}</span>
+                  <span className="text-4xl font-bold tracking-tight text-fg-primary">{tier.price}</span>
+                  <span className="text-sm text-fg-muted">/ {tier.cadence}</span>
                 </div>
                 <ul className="space-y-2">
                   {tier.features.map((f) => (
-                    <li key={f} className="flex items-start gap-2 text-sm text-text-secondary">
+                    <li key={f} className="flex items-start gap-2 text-sm text-fg-secondary">
                       <Check className="size-4 mt-0.5 shrink-0 text-accent-text" />
                       <span>{f}</span>
                     </li>

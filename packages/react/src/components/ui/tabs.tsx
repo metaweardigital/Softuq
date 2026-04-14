@@ -50,9 +50,9 @@ Tabs.displayName = "Tabs";
 const tabsListVariants = cva("inline-flex items-center", {
   variants: {
     variant: {
-      default: "gap-1 rounded-[var(--ds-radius-card)] bg-bg-input p-1 border border-border-subtle",
+      default: "gap-1 rounded-[var(--ds-radius-card)] bg-surface-input p-1 border border-edge-subtle",
       pills: "gap-2",
-      underline: "gap-0 border-b border-border-subtle",
+      underline: "gap-0 border-b border-edge-subtle",
     },
     size: {
       sm: "text-xs",
@@ -89,19 +89,19 @@ const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
     const variantClasses = {
       default: cn(
         "rounded-[calc(var(--ds-radius-card)-4px)] px-3 py-1.5 text-sm",
-        isActive ? "bg-bg-elevated text-text-primary shadow-sm" : "text-text-muted hover:text-text-secondary",
+        isActive ? "bg-surface-elevated text-fg-primary shadow-sm" : "text-fg-muted hover:text-fg-secondary",
       ),
       pills: cn(
         "rounded-full px-4 py-1.5 text-sm border",
         isActive
           ? "bg-accent text-white border-accent"
-          : "bg-transparent text-text-muted border-border-subtle hover:text-text-secondary",
+          : "bg-transparent text-fg-muted border-edge-subtle hover:text-fg-secondary",
       ),
       underline: cn(
         "px-4 py-2 text-sm border-b-2 -mb-px",
         isActive
           ? "border-accent text-accent-text"
-          : "border-transparent text-text-muted hover:text-text-secondary hover:border-border-default",
+          : "border-transparent text-fg-muted hover:text-fg-secondary hover:border-edge-default",
       ),
     };
 

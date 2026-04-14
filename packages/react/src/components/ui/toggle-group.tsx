@@ -81,7 +81,8 @@ function ToggleGroup(props: ToggleGroupProps) {
         role="group"
         className={cn(
           "inline-flex items-center",
-          variant === "outline" && "gap-1 rounded-[var(--ds-radius-card)] bg-bg-input p-1 border border-border-subtle",
+          variant === "outline" &&
+            "gap-1 rounded-[var(--ds-radius-card)] bg-surface-input p-1 border border-edge-subtle",
           variant === "default" && "gap-1",
           className,
         )}
@@ -111,9 +112,9 @@ const itemVariants = cva(
       },
       variant: {
         default:
-          "rounded-[var(--ds-radius-button)] border border-border-subtle bg-bg-input text-text-secondary hover:bg-bg-hover hover:text-text-primary data-[state=on]:bg-accent data-[state=on]:text-white data-[state=on]:border-accent",
+          "rounded-[var(--ds-radius-button)] border border-edge-subtle bg-surface-input text-fg-secondary hover:bg-surface-hover hover:text-fg-primary data-[state=on]:bg-accent data-[state=on]:text-white data-[state=on]:border-accent",
         outline:
-          "rounded-[calc(var(--ds-radius-card)-4px)] border-0 text-text-secondary hover:text-text-primary data-[state=on]:bg-bg-elevated data-[state=on]:text-text-primary data-[state=on]:shadow-sm",
+          "rounded-[calc(var(--ds-radius-card)-4px)] border-0 text-fg-secondary hover:text-fg-primary data-[state=on]:bg-surface-elevated data-[state=on]:text-fg-primary data-[state=on]:shadow-sm",
       },
     },
     defaultVariants: {

@@ -50,10 +50,10 @@ export default function Features01() {
           <Badge variant="outline" className="mb-[var(--ds-space-stack)]">
             Why DesignYstem
           </Badge>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-text-primary">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-fg-primary">
             Everything you need, nothing you don't
           </h2>
-          <p className="mt-[var(--ds-space-stack)] text-text-muted">
+          <p className="mt-[var(--ds-space-stack)] text-fg-muted">
             A compact set of primitives and blocks. Tokens do the heavy lifting so your product stays consistent as it
             grows.
           </p>
@@ -68,8 +68,8 @@ export default function Features01() {
                     <Icon className="size-5" />
                   </div>
                   <div className="space-y-1">
-                    <h3 className="text-base font-semibold text-text-primary">{f.title}</h3>
-                    <p className="text-sm text-text-muted">{f.description}</p>
+                    <h3 className="text-base font-semibold text-fg-primary">{f.title}</h3>
+                    <p className="text-sm text-fg-muted">{f.description}</p>
                   </div>
                 </CardContent>
               </Card>

@@ -54,21 +54,21 @@ function MegaPanel({ group }: { group: MegaGroup }) {
           <a
             key={item.title}
             href="#"
-            className="flex items-start gap-3 p-3 rounded-[var(--ds-radius-button)] hover:bg-bg-hover transition-colors"
+            className="flex items-start gap-3 p-3 rounded-[var(--ds-radius-button)] hover:bg-surface-hover transition-colors"
           >
             <div className="size-8 shrink-0 rounded-[var(--ds-radius-button)] bg-[color-mix(in_oklch,var(--accent)_14%,transparent)] text-accent-text flex items-center justify-center">
               <Icon className="size-4" />
             </div>
             <div className="min-w-0">
               <div className="flex items-center gap-1.5">
-                <p className="text-sm font-medium text-text-primary">{item.title}</p>
+                <p className="text-sm font-medium text-fg-primary">{item.title}</p>
                 {item.badge && (
                   <Badge variant="default" size="sm">
                     {item.badge}
                   </Badge>
                 )}
               </div>
-              <p className="text-xs text-text-muted mt-0.5">{item.description}</p>
+              <p className="text-xs text-fg-muted mt-0.5">{item.description}</p>
             </div>
           </a>
         );
@@ -80,7 +80,7 @@ function MegaPanel({ group }: { group: MegaGroup }) {
 function MobileGroup({ group, onNavigate }: { group: MegaGroup; onNavigate: () => void }) {
   return (
     <div className="space-y-1">
-      <p className="text-xs font-medium text-text-muted uppercase tracking-wide px-3 pt-2">{group.label}</p>
+      <p className="text-xs font-medium text-fg-muted uppercase tracking-wide px-3 pt-2">{group.label}</p>
       {group.items.map((item) => {
         const Icon = item.icon;
         return (
@@ -88,9 +88,9 @@ function MobileGroup({ group, onNavigate }: { group: MegaGroup; onNavigate: () =
             key={item.title}
             href="#"
             onClick={onNavigate}
-            className="flex items-center gap-3 px-3 h-10 rounded-[var(--ds-radius-button)] text-sm text-text-secondary hover:text-text-primary hover:bg-bg-hover transition-colors"
+            className="flex items-center gap-3 px-3 h-10 rounded-[var(--ds-radius-button)] text-sm text-fg-secondary hover:text-fg-primary hover:bg-surface-hover transition-colors"
           >
-            <Icon className="size-4 text-text-dimmed" />
+            <Icon className="size-4 text-fg-dimmed" />
             {item.title}
           </a>
         );
@@ -104,13 +104,13 @@ export default function NavbarMega() {
 
   return (
     <>
-      <header className="sticky top-0 z-sticky border-b border-border-subtle bg-bg-base/80 backdrop-blur-glass">
-        <div className="mx-auto max-w-6xl h-16 px-[var(--ds-space-section-x)] flex items-center gap-6">
+      <header className="sticky top-0 z-sticky border-b border-edge-subtle bg-surface-base/80 backdrop-blur-glass">
+        <div className="mx-auto max-w-6xl h-16 px-4 sm:px-[var(--ds-space-section-x)] flex items-center gap-6">
           <a href="#" className="flex items-center gap-2 shrink-0">
             <div className="size-8 rounded-[var(--ds-radius-button)] bg-[color-mix(in_oklch,var(--accent)_14%,transparent)] text-accent-text flex items-center justify-center">
               <Sparkles className="size-4" />
             </div>
-            <span className="text-sm font-semibold text-text-primary">Acme</span>
+            <span className="text-sm font-semibold text-fg-primary">Acme</span>
           </a>
 
           <nav className="hidden md:flex items-center gap-1 flex-1">
@@ -138,13 +138,13 @@ export default function NavbarMega() {
             </Popover>
             <a
               href="#pricing"
-              className="px-3 h-9 inline-flex items-center rounded-[var(--ds-radius-button)] text-sm text-text-secondary hover:text-text-primary hover:bg-bg-hover transition-colors"
+              className="px-3 h-9 inline-flex items-center rounded-[var(--ds-radius-button)] text-sm text-fg-secondary hover:text-fg-primary hover:bg-surface-hover transition-colors"
             >
               Pricing
             </a>
             <a
               href="#customers"
-              className="px-3 h-9 inline-flex items-center rounded-[var(--ds-radius-button)] text-sm text-text-secondary hover:text-text-primary hover:bg-bg-hover transition-colors"
+              className="px-3 h-9 inline-flex items-center rounded-[var(--ds-radius-button)] text-sm text-fg-secondary hover:text-fg-primary hover:bg-surface-hover transition-colors"
             >
               Customers
             </a>
@@ -175,7 +175,7 @@ export default function NavbarMega() {
             <div className="size-8 rounded-[var(--ds-radius-button)] bg-[color-mix(in_oklch,var(--accent)_14%,transparent)] text-accent-text flex items-center justify-center">
               <Sparkles className="size-4" />
             </div>
-            <span className="text-sm font-semibold text-text-primary">Acme</span>
+            <span className="text-sm font-semibold text-fg-primary">Acme</span>
           </div>
           <Separator />
           <MobileGroup group={PRODUCT_GROUP} onNavigate={() => setOpen(false)} />

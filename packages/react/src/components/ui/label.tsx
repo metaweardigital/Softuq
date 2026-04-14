@@ -6,8 +6,8 @@ import { useFormFieldSize } from "./form-text";
 const labelVariants = cva("font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-50", {
   variants: {
     variant: {
-      default: "text-text-secondary",
-      required: "text-text-secondary after:content-['*'] after:ml-0.5 after:text-destructive",
+      default: "text-fg-secondary",
+      required: "text-fg-secondary after:content-['*'] after:ml-0.5 after:text-destructive",
     },
     size: {
       sm: "text-xs",

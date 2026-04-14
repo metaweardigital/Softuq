@@ -13,9 +13,9 @@ Monorepo (pnpm workspaces): `tokens`, `tailwind`, `react`, `cli` (planned), `doc
 
 Hybrid distribution: tokens as npm packages, components copied via CLI.
 
-## Components (v0.1 — 35)
+## Components (v0.1 — 36)
 
-**Form:** Button, Input, Textarea, Select (single + multi), Checkbox, Radio, Toggle, ToggleGroup, Slider, Label, FormField, FormDescription, FormMessage
+**Form:** Button, Input, Textarea, Select (single + multi), Search (with whisper dropdown), Checkbox, Radio, Toggle, ToggleGroup, Slider, Label, FormField, FormDescription, FormMessage
 **Display:** Card, Badge, Tag, Avatar, Separator, Progress, Skeleton, Spinner, Squircle, Table
 **Typography:** Code, Kbd
 **Feedback:** Alert, Toast, Tooltip, Empty

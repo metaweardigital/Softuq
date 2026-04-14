@@ -5,7 +5,7 @@ import { cn } from "../../lib/utils";
 const kbdVariants = cva(
   [
     "inline-flex items-center justify-center font-medium select-none tracking-tight",
-    "border border-border-subtle text-text-muted",
+    "border border-edge-subtle text-fg-muted",
   ].join(" "),
   {
     variants: {

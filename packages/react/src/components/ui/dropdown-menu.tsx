@@ -229,7 +229,7 @@ const DropdownMenuContent = React.forwardRef<HTMLDivElement, DropdownMenuContent
         role="menu"
         className={cn(
           "absolute z-dropdown min-w-48",
-          "bg-bg-popover border border-border-subtle rounded-[var(--ds-radius-card)]",
+          "bg-surface-popover border border-edge-subtle rounded-[var(--ds-radius-card)]",
           "shadow-lg py-1",
           "animate-scale-in",
           sideClasses[resolvedSide],
@@ -302,7 +302,7 @@ const DropdownMenuItem = React.forwardRef<HTMLDivElement, DropdownMenuItemProps>
           "transition-colors duration-fast ease-soft",
           "[&_svg]:size-4 [&_svg]:shrink-0",
           inset && "pl-8",
-          isActive && "bg-bg-hover",
+          isActive && "bg-surface-hover",
           disabled && "opacity-50 cursor-not-allowed",
           className,
         )}
@@ -354,7 +354,7 @@ function DropdownMenuLabel({ className, inset, ...props }: DropdownMenuLabelProp
   return (
     <div
       className={cn(
-        "px-3 py-1.5 text-xs font-medium text-text-muted uppercase tracking-wide",
+        "px-3 py-1.5 text-xs font-medium text-fg-muted uppercase tracking-wide",
         inset && "pl-8",
         className,
       )}
@@ -364,7 +364,7 @@ function DropdownMenuLabel({ className, inset, ...props }: DropdownMenuLabelProp
 }
 
 function DropdownMenuSeparator({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
-  return <div role="separator" className={cn("h-px mx-2 my-1 bg-border-subtle", className)} {...props} />;
+  return <div role="separator" className={cn("h-px mx-2 my-1 bg-edge-subtle", className)} {...props} />;
 }
 
 function DropdownMenuGroup({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {

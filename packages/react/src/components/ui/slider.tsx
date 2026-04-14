@@ -2,7 +2,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 import { cn } from "../../lib/utils";
 
-const trackVariants = cva("relative w-full grow overflow-hidden rounded-full bg-border-subtle", {
+const trackVariants = cva("relative w-full grow overflow-hidden rounded-full bg-edge-subtle", {
   variants: {
     size: {
       sm: "h-1",

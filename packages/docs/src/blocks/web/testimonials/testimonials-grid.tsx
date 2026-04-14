@@ -42,8 +42,8 @@ export default function Testimonials01() {
           <Badge variant="outline" className="mb-[var(--ds-space-stack)]">
             Loved by builders
           </Badge>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-text-primary">What teams are saying</h2>
-          <p className="mt-[var(--ds-space-stack)] text-text-muted">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-fg-primary">What teams are saying</h2>
+          <p className="mt-[var(--ds-space-stack)] text-fg-muted">
             Real feedback from designers and engineers shipping production apps.
           </p>
         </div>
@@ -52,12 +52,12 @@ export default function Testimonials01() {
             <Card key={t.name}>
               <CardContent className="pt-[var(--ds-space-card)] space-y-[var(--ds-space-gap)]">
                 <Quote className="size-5 text-accent-text" aria-hidden />
-                <p className="text-sm text-text-secondary leading-relaxed">"{t.quote}"</p>
-                <div className="flex items-center gap-3 pt-2 border-t border-border-subtle">
+                <p className="text-sm text-fg-secondary leading-relaxed">"{t.quote}"</p>
+                <div className="flex items-center gap-3 pt-2 border-t border-edge-subtle">
                   <Avatar size="sm" fallback={t.initials} />
                   <div className="min-w-0">
-                    <p className="text-sm font-medium text-text-primary truncate">{t.name}</p>
-                    <p className="text-xs text-text-muted truncate">{t.role}</p>
+                    <p className="text-sm font-medium text-fg-primary truncate">{t.name}</p>
+                    <p className="text-xs text-fg-muted truncate">{t.role}</p>
                   </div>
                 </div>
               </CardContent>

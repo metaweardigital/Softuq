@@ -3,9 +3,9 @@ import { Navbar } from "../_components/navbar";
 
 export default function SiteLayout({ children }: { children: ReactNode }) {
   return (
-    <>
+    <div className="flex min-h-dvh flex-col">
       <Navbar />
-      <main className="min-h-[calc(100vh-3.5rem)] bg-bg-base">{children}</main>
-    </>
+      <main className="flex-1 bg-surface-base">{children}</main>
+    </div>
   );
 }

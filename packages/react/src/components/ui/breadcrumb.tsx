@@ -11,7 +11,7 @@ const BreadcrumbList = React.forwardRef<HTMLOListElement, React.OlHTMLAttributes
   ({ className, ...props }, ref) => (
     <ol
       ref={ref}
-      className={cn("flex flex-wrap items-center gap-1.5 text-text-muted break-words", className)}
+      className={cn("flex flex-wrap items-center gap-1.5 text-fg-muted break-words", className)}
       {...props}
     />
   ),
@@ -34,11 +34,11 @@ const BreadcrumbLink = React.forwardRef<HTMLAnchorElement, BreadcrumbLinkProps>(
     if (asChild && React.isValidElement(props.children)) {
       const child = props.children as React.ReactElement<{ className?: string }>;
       return React.cloneElement(child, {
-        className: cn("transition-colors duration-fast hover:text-text-primary", child.props.className, className),
+        className: cn("transition-colors duration-fast hover:text-fg-primary", child.props.className, className),
       });
     }
     return (
-      <a ref={ref} className={cn("transition-colors duration-fast hover:text-text-primary", className)} {...props} />
+      <a ref={ref} className={cn("transition-colors duration-fast hover:text-fg-primary", className)} {...props} />
     );
   },
 );
@@ -51,7 +51,7 @@ const BreadcrumbPage = React.forwardRef<HTMLSpanElement, React.HTMLAttributes<HT
       role="link"
       aria-disabled="true"
       aria-current="page"
-      className={cn("font-medium text-text-primary", className)}
+      className={cn("font-medium text-fg-primary", className)}
       {...props}
     />
   ),
@@ -62,7 +62,7 @@ const BreadcrumbSeparator = ({ children, className, ...props }: React.HTMLAttrib
   <li
     role="presentation"
     aria-hidden="true"
-    className={cn("[&>svg]:h-3.5 [&>svg]:w-3.5 text-text-dimmed", className)}
+    className={cn("[&>svg]:h-3.5 [&>svg]:w-3.5 text-fg-dimmed", className)}
     {...props}
   >
     {children ?? <ChevronRight />}
@@ -74,7 +74,7 @@ const BreadcrumbEllipsis = ({ className, ...props }: React.HTMLAttributes<HTMLSp
   <span
     role="presentation"
     aria-hidden="true"
-    className={cn("flex h-5 w-5 items-center justify-center text-text-dimmed", className)}
+    className={cn("flex h-5 w-5 items-center justify-center text-fg-dimmed", className)}
     {...props}
   >
     <MoreHorizontal className="h-4 w-4" />

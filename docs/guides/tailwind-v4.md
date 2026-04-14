@@ -15,7 +15,7 @@ Tailwind v4 uses CSS-based configuration instead of `tailwind.config.js`.
 
 /* Map tokens to Tailwind utilities */
 @theme {
-  --color-bg-base: var(--bg-base);
+  --color-surface-base: var(--bg-base);
   --color-accent: var(--accent);
   --shadow-sm: var(--shadow-sm);
   --shadow-md: var(--shadow-md);
@@ -30,7 +30,7 @@ Tailwind v4 uses CSS-based configuration instead of `tailwind.config.js`.
 
 - No `tailwind.config.js` — use `@theme` block in CSS
 - `@source` directives required for scanning workspace packages
-- Color utilities map from `--color-*` (e.g. `--color-bg-base` → `bg-bg-base`)
+- Color utilities map from `--color-*` (e.g. `--color-surface-base` → `bg-surface-base`, `--color-fg-primary` → `text-fg-primary`, `--color-edge-subtle` → `border-edge-subtle`)
 - Shadow utilities map from `--shadow-*`
 - Animation utilities map from `--animate-*`
 - Duration: `--transition-duration-*`

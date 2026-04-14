@@ -7,11 +7,11 @@ const alertVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-bg-card border-border-subtle text-text-primary [&>svg]:text-text-secondary",
-        info: "bg-bg-card border-border-subtle text-text-primary [&>svg]:text-accent",
-        success: "bg-bg-card border-border-subtle text-text-primary [&>svg]:text-success",
-        warning: "bg-bg-card border-border-subtle text-text-primary [&>svg]:text-warning",
-        destructive: "bg-bg-card border-border-subtle text-text-primary [&>svg]:text-destructive",
+        default: "bg-surface-card border-edge-subtle text-fg-primary [&>svg]:text-fg-secondary",
+        info: "bg-surface-card border-edge-subtle text-fg-primary [&>svg]:text-accent",
+        success: "bg-surface-card border-edge-subtle text-fg-primary [&>svg]:text-success",
+        warning: "bg-surface-card border-edge-subtle text-fg-primary [&>svg]:text-warning",
+        destructive: "bg-surface-card border-edge-subtle text-fg-primary [&>svg]:text-destructive",
       },
       size: {
         full: "w-full",
@@ -41,7 +41,7 @@ AlertTitle.displayName = "AlertTitle";
 
 const AlertDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(
   ({ className, ...props }, ref) => (
-    <p ref={ref} className={cn("text-sm text-text-secondary [&_p]:leading-relaxed", className)} {...props} />
+    <p ref={ref} className={cn("text-sm text-fg-secondary [&_p]:leading-relaxed", className)} {...props} />
   ),
 );
 AlertDescription.displayName = "AlertDescription";

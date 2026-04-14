@@ -11,21 +11,22 @@
    Tailwind v4 Theme — map CSS vars to utilities
    ============================================ */
 @theme {
-  /* Colors */
-  --color-bg-base: var(--bg-base);
-  --color-bg-elevated: var(--bg-elevated);
-  --color-bg-popover: var(--bg-popover);
-  --color-bg-card: var(--bg-card);
-  --color-bg-input: var(--bg-input);
-  --color-bg-hover: var(--bg-hover);
-  --color-bg-selected: var(--bg-selected);
-  --color-bg-overlay: var(--bg-overlay);
+  /* Colors — backgrounds */
+  --color-surface-base: var(--bg-base);
+  --color-surface-elevated: var(--bg-elevated);
+  --color-surface-popover: var(--bg-popover);
+  --color-surface-card: var(--bg-card);
+  --color-surface-input: var(--bg-input);
+  --color-surface-hover: var(--bg-hover);
+  --color-surface-selected: var(--bg-selected);
+  --color-surface-overlay: var(--bg-overlay);
 
-  --color-text-primary: var(--text-primary);
-  --color-text-secondary: var(--text-secondary);
-  --color-text-muted: var(--text-muted);
-  --color-text-dimmed: var(--text-dimmed);
-  --color-text-inverse: var(--text-inverse);
+  /* Colors — foreground */
+  --color-fg-primary: var(--text-primary);
+  --color-fg-secondary: var(--text-secondary);
+  --color-fg-muted: var(--text-muted);
+  --color-fg-dimmed: var(--text-dimmed);
+  --color-fg-inverse: var(--text-inverse);
 
   --color-accent: var(--accent);
   --color-accent-hover: var(--accent-hover);
@@ -67,10 +68,11 @@
   --color-light-90: var(--light-90);
   --color-light-100: var(--light-100);
 
-  --color-border-subtle: var(--border-subtle);
-  --color-border-default: var(--border-default);
-  --color-border-strong: var(--border-strong);
-  --color-border-accent: var(--border-accent);
+  /* Colors — borders */
+  --color-edge-subtle: var(--border-subtle);
+  --color-edge-default: var(--border-default);
+  --color-edge-strong: var(--border-strong);
+  --color-edge-accent: var(--border-accent);
 
   --color-ring: var(--ring-color);
   --color-glass-bg: var(--glass-bg);

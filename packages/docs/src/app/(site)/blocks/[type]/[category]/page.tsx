@@ -1,10 +1,19 @@
 "use client";
 
-import { ExternalLink } from "lucide-react";
+import { buttonVariants, cn, ToggleGroup, ToggleGroupItem } from "@designystem/react";
+import { ExternalLink, Monitor, Smartphone, Tablet } from "lucide-react";
 import { notFound, useParams } from "next/navigation";
 import * as React from "react";
 import { type BlockMeta, type BlockType, getBlocksForCategory, getCategory, isBlockType } from "@/blocks/registry";
 import { PageShell } from "../../../_components/page-shell";
+
+type Viewport = "desktop" | "tablet" | "mobile";
+
+const VIEWPORT_WIDTH: Record<Viewport, string> = {
+  desktop: "100%",
+  tablet: "768px",
+  mobile: "390px",
+};
 
 const MIN_HEIGHT = 280;
 const MAX_HEIGHT = 960;
@@ -13,6 +22,7 @@ function BlockPreview({ block }: { block: BlockMeta }) {
   const previewHref = `/blocks-preview/${block.type}/${block.category}/${block.slug}`;
   const iframeRef = React.useRef<HTMLIFrameElement>(null);
   const [height, setHeight] = React.useState(MIN_HEIGHT);
+  const [viewport, setViewport] = React.useState<Viewport>("desktop");
 
   React.useEffect(() => {
     const iframe = iframeRef.current;
@@ -51,38 +61,65 @@ function BlockPreview({ block }: { block: BlockMeta }) {
   }, []);
 
   return (
-    <section className="rounded-[var(--ds-radius-card)] border border-border-subtle bg-bg-card overflow-hidden">
-      <header className="flex items-center justify-between px-5 py-3 border-b border-border-subtle">
+    <section className="rounded-[var(--ds-radius-card)] border border-edge-subtle bg-surface-card overflow-hidden">
+      <header className="flex items-center justify-between px-5 py-3 border-b border-edge-subtle">
         <div className="min-w-0">
-          <div className="text-xs font-mono text-text-dimmed">{block.slug}</div>
-          <h3 className="text-sm font-medium text-text-primary truncate">{block.name}</h3>
+          <div className="text-xs font-mono text-fg-dimmed">{block.slug}</div>
+          <h3 className="text-sm font-medium text-fg-primary truncate">{block.name}</h3>
         </div>
-        <a
-          href={previewHref}
-          target="_blank"
-          rel="noreferrer"
-          className="inline-flex items-center gap-1.5 text-xs text-text-muted hover:text-accent transition-colors"
-        >
-          Open
-          <ExternalLink className="size-3.5" />
-        </a>
+        <div className="flex items-center gap-2">
+          <ToggleGroup
+            type="single"
+            size="sm"
+            variant="outline"
+            value={viewport}
+            onValueChange={(v) => v && setViewport(v as Viewport)}
+            aria-label="Viewport"
+          >
+            <ToggleGroupItem value="desktop" aria-label="Desktop">
+              <Monitor className="size-3.5" />
+            </ToggleGroupItem>
+            <ToggleGroupItem value="tablet" aria-label="Tablet">
+              <Tablet className="size-3.5" />
+            </ToggleGroupItem>
+            <ToggleGroupItem value="mobile" aria-label="Mobile">
+              <Smartphone className="size-3.5" />
+            </ToggleGroupItem>
+          </ToggleGroup>
+          <a
+            href={previewHref}
+            target="_blank"
+            rel="noreferrer"
+            className={cn(buttonVariants({ variant: "ghost", size: "icon-sm" }))}
+            aria-label="Open preview in new tab"
+          >
+            <ExternalLink className="size-4" />
+          </a>
+        </div>
       </header>
-      <iframe
-        ref={iframeRef}
-        src={previewHref}
-        title={block.name}
-        className="w-full block bg-bg-base transition-[height] duration-200"
-        style={{ height, border: "0" }}
-      />
+      <div className="bg-surface-input flex justify-center">
+        <div
+          className="w-full transition-[max-width] duration-300 ease-out"
+          style={{ maxWidth: VIEWPORT_WIDTH[viewport] }}
+        >
+          <iframe
+            ref={iframeRef}
+            src={previewHref}
+            title={block.name}
+            className="w-full block bg-surface-base transition-[height] duration-200"
+            style={{ height, border: "0" }}
+          />
+        </div>
+      </div>
     </section>
   );
 }
 
 function EmptyState({ categoryName }: { categoryName: string }) {
   return (
-    <div className="rounded-[var(--ds-radius-card)] border border-dashed border-border-default bg-bg-card p-12 text-center">
-      <h3 className="text-base font-medium text-text-primary">No {categoryName} blocks yet</h3>
-      <p className="mt-1 text-sm text-text-muted">This category is on the roadmap. Check back soon.</p>
+    <div className="rounded-[var(--ds-radius-card)] border border-dashed border-edge-default bg-surface-card p-12 text-center">
+      <h3 className="text-base font-medium text-fg-primary">No {categoryName} blocks yet</h3>
+      <p className="mt-1 text-sm text-fg-muted">This category is on the roadmap. Check back soon.</p>
     </div>
   );
 }

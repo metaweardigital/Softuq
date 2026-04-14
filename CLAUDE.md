@@ -63,6 +63,7 @@ Always order from most global → most specific:
 - Primitive tokens: `--{color}-{shade}` (e.g. `--gray-500`, `--blue-600`)
 - Presets use consistent scale names: `sm / md / lg` (not compact/default/spacious)
 - Components reference vars via `rounded-[var(--ds-radius-card)]`, `p-[var(--ds-space-card)]`
+- Tailwind v4 color mapping: `--color-surface-*` (backgrounds), `--color-fg-*` (text), `--color-edge-*` (borders) → avoids `bg-bg-`, `text-text-`, `border-border-` duplication
 
 ### Color values
 
@@ -90,6 +91,7 @@ Always order from most global → most specific:
 - Tag = interactive label (dismissible, hover/focus states) — used in multi-select
 - Select: composable API (Select, SelectTrigger, SelectContent, SelectItem, SelectGroup, SelectLabel, SelectSeparator), supports single + multi (`multiple` prop), auto-flip positioning
 - Select multi-select: responsive tags with `maxTags` prop (default 2), `+N` counter, width-based breakpoints (<250px → "N selected" text, 250-400px → maxTags, >400px → maxTags+1), fade-edge overlay
+- Search: composable API (Search, SearchInput, SearchContent, SearchItem, SearchGroup), whisper dropdown with auto-flip, keyboard nav (arrows/Enter/Escape/Tab). SearchInput works standalone (no wrapper needed). Props: `loading`, `tags`, `shortcut` (Kbd hints). Internal deps: Tag, Kbd.
 - FormField wraps Label + Input/Select/Textarea + FormDescription + FormMessage; `size` prop cascades to children
 - Scrollbar utilities: `.scrollbar-thin` (4px styled), `.scrollbar-hidden` (no scrollbar)
 - Fade-edge utilities: `.fade-edge-r/l/t/b` — mask-based gradient fade with theme-transitioning `background-color` (not `background-image` which can't transition)

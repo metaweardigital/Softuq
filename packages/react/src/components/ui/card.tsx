@@ -3,13 +3,13 @@ import * as React from "react";
 import { cn } from "../../lib/utils";
 
 const cardVariants = cva(
-  "rounded-[var(--ds-radius-card)] border border-border-subtle text-text-primary transition-all duration-normal ease-soft",
+  "rounded-[var(--ds-radius-card)] border border-edge-subtle text-fg-primary transition-all duration-normal ease-soft",
   {
     variants: {
       variant: {
-        default: "bg-bg-card shadow-sm",
-        elevated: "bg-bg-card shadow-md",
-        interactive: "bg-bg-card shadow-md hover:shadow-lg cursor-pointer",
+        default: "bg-surface-card shadow-sm",
+        elevated: "bg-surface-card shadow-md",
+        interactive: "bg-surface-card shadow-md hover:shadow-lg cursor-pointer",
       },
     },
     defaultVariants: {
@@ -40,7 +40,7 @@ const CardTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTML
 CardTitle.displayName = "CardTitle";
 
 const CardDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(
-  ({ className, ...props }, ref) => <p ref={ref} className={cn("text-sm text-text-secondary", className)} {...props} />,
+  ({ className, ...props }, ref) => <p ref={ref} className={cn("text-sm text-fg-secondary", className)} {...props} />,
 );
 CardDescription.displayName = "CardDescription";
 

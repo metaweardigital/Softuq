@@ -86,8 +86,8 @@ function ThemeSettingsPopover() {
       </PopoverTrigger>
       <PopoverContent align="end" className="w-64 p-4 space-y-3">
         <div>
-          <h3 className="text-sm font-semibold text-text-primary">Theme</h3>
-          <p className="text-xs text-text-muted mt-0.5">Tune tokens in real time.</p>
+          <h3 className="text-sm font-semibold text-fg-primary">Theme</h3>
+          <p className="text-xs text-fg-muted mt-0.5">Tune tokens in real time.</p>
         </div>
         <Separator />
         <ThemeSelect label="Font" options={FONT_OPTIONS} value={font} onChange={setFont} />
@@ -118,12 +118,12 @@ function ThemeToggle() {
 export function Navbar() {
   const pathname = usePathname();
   return (
-    <header className="sticky top-0 z-sticky border-b border-border-subtle bg-bg-base/80 backdrop-blur-glass">
+    <header className="sticky top-0 z-sticky border-b border-edge-subtle bg-surface-base/80 backdrop-blur-glass">
       <div className="max-w-6xl mx-auto h-14 px-6 flex items-center gap-6">
         <Link href="/" className="flex items-center gap-2 shrink-0 font-sans">
           <div className="leading-tight">
-            <div className="text-sm font-bold tracking-tight text-text-primary">DesignYstem</div>
-            <div className="text-[10px] text-text-muted">Component Preview</div>
+            <div className="text-sm font-bold tracking-tight text-fg-primary">DesignYstem</div>
+            <div className="text-[10px] text-fg-muted">Component Preview</div>
           </div>
         </Link>
 

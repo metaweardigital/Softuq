@@ -7,13 +7,13 @@ const tagVariants = cva(
   [
     "inline-flex items-center gap-1 font-medium select-none",
     "transition-all duration-fast ease-soft",
-    "border border-border-subtle",
+    "border border-edge-subtle",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/20",
   ].join(" "),
   {
     variants: {
       variant: {
-        default: "bg-bg-elevated text-text-primary hover:bg-bg-hover",
+        default: "bg-surface-elevated text-fg-primary hover:bg-surface-hover",
         accent: "bg-accent text-white hover:bg-accent-hover",
         success: "bg-success-muted text-success-text border-success-border hover:bg-success/20",
         warning: "bg-warning-muted text-warning-text border-warning-border hover:bg-warning/20",
@@ -69,7 +69,7 @@ const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
           className={cn(
             "inline-flex items-center justify-center shrink-0 rounded-full cursor-pointer",
             "transition-colors duration-fast ease-soft",
-            "hover:bg-bg-base/20 hover:text-destructive",
+            "hover:bg-surface-base/20 hover:text-destructive",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/20",
             size === "sm" ? "h-4 w-4" : "h-5 w-5",
           )}

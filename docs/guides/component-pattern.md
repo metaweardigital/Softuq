@@ -50,7 +50,7 @@ export type { ComponentProps };
 
 - Always export the component, its variants, and its props type
 - Use `cn()` to merge className overrides — never hardcode without allowing override
-- Use semantic color tokens (`bg-bg-card`, `text-text-primary`), never raw values
+- Use semantic color tokens (`bg-surface-card`, `text-fg-primary`), never raw values
 - Spacing on 4px grid
 - All interactive elements need focus-visible ring
 - Disabled state: `disabled:pointer-events-none disabled:opacity-50`
@@ -92,9 +92,9 @@ When an inner element sits inside a rounded container with padding, its radius s
 
 ```tsx
 {/* Outer: card radius, p-1 (4px) */}
-<div className="rounded-[var(--ds-radius-card)] p-1 bg-bg-input">
+<div className="rounded-[var(--ds-radius-card)] p-1 bg-surface-input">
   {/* Inner active item: card radius - 4px */}
-  <button className="rounded-[calc(var(--ds-radius-card)-4px)] bg-bg-elevated shadow-sm">
+  <button className="rounded-[calc(var(--ds-radius-card)-4px)] bg-surface-elevated shadow-sm">
     Active
   </button>
 </div>
