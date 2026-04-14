@@ -37,16 +37,19 @@ Per-component override via `className` — not extra props.
 ## Conventions
 
 ### File organization
+
 - Provider: `packages/react/src/designystem-provider.tsx` (beside index.ts, not in components/ui/)
 - Components: `packages/react/src/components/ui/`
 - Utilities: `packages/react/src/lib/`
 
 ### Comments
+
 - Section dividers (`/* === Section === */`) only in files with 3+ logical sections (provider, toast)
 - No section comments in simple components (button, alert, card) — structure is obvious from code
 - No inline comments unless logic is non-obvious
 
 ### Ordering within files
+
 Always order from most global → most specific:
 - **Provider file**: Types → Presets (palette → accent → radius → spacing) → Context & Hook → Provider → Exports
 - **Component file**: Imports → CVA variants → Interface (extends VariantProps) → Component → Exports
@@ -54,6 +57,7 @@ Always order from most global → most specific:
 - CVA must come before interface because `VariantProps<typeof variants>` depends on it
 
 ### Naming conventions
+
 - CSS variables: `--ds-{foundation}-{property}` (e.g. `--ds-radius-button`, `--ds-space-card`)
 - Semantic tokens: no prefix (e.g. `--accent`, `--bg-card`, `--text-primary`)
 - Primitive tokens: `--{color}-{shade}` (e.g. `--gray-500`, `--blue-600`)
@@ -61,6 +65,7 @@ Always order from most global → most specific:
 - Components reference vars via `rounded-[var(--ds-radius-card)]`, `p-[var(--ds-space-card)]`
 
 ### Color values
+
 - All colors in OKLCH: `oklch(L C H)` or `oklch(L C H / alpha)`
 - Never use hex or rgba in token files
 - Gray scale: lightness 0.12–0.985, chroma 0 (neutral) or 0.002–0.042 (tinted)
@@ -70,10 +75,12 @@ Always order from most global → most specific:
 - Non-changing scales `--dark-{5..90,100}` (gray-980 alpha) and `--light-{5..90,100}` (gray-50 alpha) live in a separate `:root {}` block in `semantic.css` — palette-aware, never flip with theme. Use for overlays, imagery scrims, theme-independent chips (e.g. block hover badges in template previews). `-100` = solid.
 
 ### Spacing
+
 - All values on 4px grid
 - Base spacing scale: 0, 4, 8, 12, 16, 20, 24, 32, 40, 48, 64
 
 ### Components
+
 - CVA for variants, `cn()` for class merging
 - `React.forwardRef` on all components
 - `type="button"` on all `<button>` elements
@@ -150,7 +157,3 @@ Bump only the packages actually changed — do not touch versions of untouched p
 - `packages/cli` — CLI command or registry changes
 - `packages/tailwind` — exported preset changes
 - `packages/docs` — docs site (can skip version bump; it's not published)
-
-## Origin
-
-Design from [TaskStaq](/Users/michalmarek/Documents/Projects/TaskStaq). UX patterns from [design-patterns-mcp](/Users/michalmarek/Documents/Projects/design-patterns-mcp).
