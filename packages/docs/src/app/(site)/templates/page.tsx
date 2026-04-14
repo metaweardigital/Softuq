@@ -17,7 +17,7 @@ export default function TemplatesLandingPage() {
       description="Complete page compositions built from DesignYstem blocks. Preview, theme, and adapt."
       crumbs={[{ label: "Templates" }]}
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-[var(--ds-space-gap)]">
         {TEMPLATE_CATEGORIES.map((c) => {
           const Icon = TYPE_ICONS[c.type];
           const count = TEMPLATES.filter((t) => t.type === c.type).length;
@@ -25,10 +25,10 @@ export default function TemplatesLandingPage() {
             <Link
               key={c.type}
               href={`/templates/${c.type}`}
-              className="group relative rounded-[var(--ds-radius-card)] border border-edge-subtle bg-surface-card p-8 transition-all hover:border-accent hover:shadow-md"
+              className="group relative rounded-[var(--ds-radius-card)] border border-edge-subtle bg-surface-card p-[var(--ds-space-card)] transition-all hover:border-accent hover:shadow-md"
             >
               <div className="flex items-start justify-between">
-                <div className="size-12 rounded-lg bg-surface-elevated border border-edge-subtle flex items-center justify-center text-accent">
+                <div className="size-12 rounded-[var(--ds-radius-button)] bg-surface-elevated border border-edge-subtle flex items-center justify-center text-accent">
                   <Icon className="size-6" />
                 </div>
                 <ArrowRight className="size-5 text-fg-muted group-hover:text-accent group-hover:translate-x-0.5 transition-all" />

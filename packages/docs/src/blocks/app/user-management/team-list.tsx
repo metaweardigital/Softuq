@@ -9,7 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-  Input,
+  SearchInput,
   Table,
   TableBody,
   TableCell,
@@ -17,7 +17,7 @@ import {
   TableHeader,
   TableRow,
 } from "@designystem/react";
-import { Mail, MoreHorizontal, Search, Shield, Trash2, UserPlus } from "lucide-react";
+import { Mail, MoreHorizontal, Shield, Trash2, UserPlus } from "lucide-react";
 
 type Role = "owner" | "admin" | "member" | "billing";
 type Status = "active" | "pending";
@@ -130,23 +130,23 @@ function RoleBadge({ role }: { role: Role }) {
 
 function StatusBadge({ status }: { status: Status }) {
   return status === "active" ? (
-    <span className="inline-flex items-center gap-1.5 text-xs text-success">
-      <span className="size-1.5 rounded-full bg-success" />
+    <Badge variant="default" size="sm" className="gap-1.5">
+      <span className="size-1.5 rounded-full bg-current" />
       Active
-    </span>
+    </Badge>
   ) : (
-    <span className="inline-flex items-center gap-1.5 text-xs text-fg-muted">
-      <span className="size-1.5 rounded-full bg-fg-dimmed" />
+    <Badge variant="outline" size="sm" className="gap-1.5">
+      <span className="size-1.5 rounded-full bg-current" />
       Pending invite
-    </span>
+    </Badge>
   );
 }
 
 export default function TeamList() {
   return (
-    <div className="min-h-screen bg-surface-base p-[var(--ds-space-section-x)]">
-      <div className="mx-auto max-w-6xl space-y-[var(--ds-space-stack)]">
-        <header className="flex items-start justify-between gap-[var(--ds-space-gap)]">
+    <div className="min-h-screen bg-surface-base p-[var(--ds-space-app-page-x)]">
+      <div className="mx-auto max-w-6xl space-y-[var(--ds-space-app-stack)]">
+        <header className="flex items-start justify-between gap-[var(--ds-space-app-gap)]">
           <div>
             <h1 className="text-2xl font-semibold tracking-tight text-fg-primary">Team</h1>
             <p className="text-sm text-fg-muted">
@@ -160,11 +160,8 @@ export default function TeamList() {
           </Button>
         </header>
 
-        <div className="flex items-center gap-[var(--ds-space-gap)]">
-          <div className="relative w-full sm:w-64">
-            <Search className="size-3.5 absolute left-2.5 top-1/2 -translate-y-1/2 text-fg-dimmed pointer-events-none" />
-            <Input placeholder="Search by name or email..." className="h-9 pl-8 text-sm" />
-          </div>
+        <div className="flex items-center gap-[var(--ds-space-app-gap)]">
+          <SearchInput placeholder="Search by name or email..." inputSize="sm" className="w-full sm:w-64" />
         </div>
 
         <div className="rounded-[var(--ds-radius-card)] border border-edge-subtle bg-surface-card overflow-hidden">

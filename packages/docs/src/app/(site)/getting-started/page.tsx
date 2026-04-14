@@ -31,7 +31,7 @@ export default function GettingStartedPage() {
             Run this in your project root. Works with Next.js, Vite, or any React project.
           </p>
           <CodeBlock title="terminal">{`npx designystem init`}</CodeBlock>
-          <p className="text-fg-muted text-sm">
+          <p className="text-fg-muted text-sm leading-relaxed">
             This copies design tokens, Tailwind theme, <Code>cn()</Code> utility, and the theme provider into your
             project. It also installs <Code>clsx</Code> and <Code>tailwind-merge</Code>.
           </p>
@@ -49,14 +49,14 @@ npx designystem add --all
 # See what's available
 npx designystem list`}
           </CodeBlock>
-          <p className="text-fg-muted text-sm">
+          <p className="text-fg-muted text-sm leading-relaxed">
             Dependencies are resolved automatically — e.g. adding <Code>select</Code> also adds <Code>tag</Code> since
             it depends on it.
           </p>
         </Step>
 
         <Step n={3} title="Wrap with provider">
-          <p className="text-fg-secondary">
+          <p className="text-fg-secondary leading-relaxed">
             Add <Code>DesignYstemProvider</Code> to your layout and set <Code>data-theme</Code> on{" "}
             <Code>{"<html>"}</Code>.
           </p>

@@ -96,7 +96,6 @@ import {
   ToggleGroup,
   ToggleGroupItem,
   Tooltip,
-  useDesignYstem,
   useToast,
 } from "@designystem/react";
 import {
@@ -134,7 +133,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   return (
     <section className="space-y-4">
       <h3 className="text-base font-semibold text-fg-primary">{title}</h3>
-      <div className="rounded-[var(--ds-radius-card)] border border-edge-subtle bg-surface-card p-6 space-y-6">
+      <div className="rounded-[var(--ds-radius-card)] border border-edge-subtle bg-surface-card p-[var(--ds-space-card)] space-y-6">
         {children}
       </div>
     </section>
@@ -286,54 +285,6 @@ function ToastDemo() {
   );
 }
 
-function ColorSwatch({ prefix, shade, label }: { prefix: string; shade: string; label?: string }) {
-  const { addToast } = useToast();
-  const cssVar = `${prefix}-${shade}`;
-  return (
-    <Tooltip
-      content={label ? `var(${label}-${shade})` : `var(${cssVar})`}
-      delay={100}
-      wrapperClassName="flex-1 min-w-[48px]"
-    >
-      <button
-        type="button"
-        className="w-full flex flex-col items-center gap-0.5 cursor-pointer"
-        onClick={() => {
-          const el = document.createElement("span");
-          el.style.color = `var(${cssVar})`;
-          document.body.appendChild(el);
-          const computed = getComputedStyle(el).color;
-          document.body.removeChild(el);
-          navigator.clipboard.writeText(computed);
-          addToast({ title: `Copied ${computed}`, variant: "success", duration: 1500 });
-        }}
-      >
-        <div
-          className="w-full h-8 rounded-[var(--ds-radius-checkbox)] border border-edge-subtle transition-shadow hover:shadow-lg"
-          style={{ backgroundColor: `var(${cssVar})` }}
-        />
-        <span className="text-[9px] text-fg-muted">{shade}</span>
-      </button>
-    </Tooltip>
-  );
-}
-
-function ActivePaletteLabel() {
-  const { palette } = useDesignYstem();
-  return <>{palette.charAt(0).toUpperCase() + palette.slice(1)}</>;
-}
-
-function GraySwatches({ shades }: { shades: string[] }) {
-  const { palette } = useDesignYstem();
-  return (
-    <>
-      {shades.map((shade) => (
-        <ColorSwatch key={shade} prefix="--gray" shade={shade} label={`--${palette}`} />
-      ))}
-    </>
-  );
-}
-
 /* --------------------------------------------------------- */
 /* Main page                                                 */
 /* --------------------------------------------------------- */
@@ -355,212 +306,7 @@ export default function ComponentPreview() {
 
   return (
     <ToastProvider position={toastPosition}>
-      <div className="max-w-6xl mx-auto px-6 py-12 space-y-12">
-        {/* Colors */}
-        <Section title="Colors">
-          <div className="space-y-6">
-            <p className="text-sm text-fg-secondary">All colors in OKLCH. Palette & accent change via sidebar.</p>
-            {[
-              {
-                name: "Gray",
-                prefix: "--gray",
-                shades: [
-                  "50",
-                  "100",
-                  "200",
-                  "300",
-                  "400",
-                  "500",
-                  "600",
-                  "700",
-                  "800",
-                  "900",
-                  "920",
-                  "940",
-                  "960",
-                  "980",
-                ],
-              },
-              {
-                name: "Blue",
-                prefix: "--blue",
-                shades: ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900"],
-              },
-              {
-                name: "Red",
-                prefix: "--red",
-                shades: ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900"],
-              },
-              {
-                name: "Green",
-                prefix: "--green",
-                shades: ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900"],
-              },
-              {
-                name: "Amber",
-                prefix: "--amber",
-                shades: ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900"],
-              },
-              {
-                name: "Emerald",
-                prefix: "--emerald",
-                shades: ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900"],
-              },
-              {
-                name: "Violet",
-                prefix: "--violet",
-                shades: ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900"],
-              },
-            ].map((group) => (
-              <div key={group.name} className="space-y-1.5">
-                <p className="text-xs font-medium text-fg-muted uppercase tracking-wide">
-                  {group.prefix === "--gray" ? <ActivePaletteLabel /> : group.name}
-                </p>
-                <div className="flex flex-wrap gap-1">
-                  {group.prefix === "--gray" ? (
-                    <GraySwatches shades={group.shades} />
-                  ) : (
-                    group.shades.map((shade) => <ColorSwatch key={shade} prefix={group.prefix} shade={shade} />)
-                  )}
-                </div>
-              </div>
-            ))}
-            <Separator />
-            <p className="text-xs font-medium text-fg-muted uppercase tracking-wide">Semantic</p>
-            <div className="flex flex-wrap gap-2">
-              {[
-                { label: "accent", var: "--accent" },
-                { label: "accent-hover", var: "--accent-hover" },
-                { label: "accent-muted", var: "--accent-muted" },
-                { label: "destructive", var: "--destructive" },
-                { label: "success", var: "--success" },
-                { label: "warning", var: "--warning" },
-              ].map((token) => (
-                <div key={token.label} className="flex items-center gap-2">
-                  <div
-                    className="h-6 w-6 rounded-[var(--ds-radius-checkbox)] border border-edge-subtle"
-                    style={{ backgroundColor: `var(${token.var})` }}
-                  />
-                  <span className="text-xs text-fg-secondary">{token.label}</span>
-                </div>
-              ))}
-            </div>
-            <Separator />
-            <p className="text-xs font-medium text-fg-muted uppercase tracking-wide">
-              Non-changing{" "}
-              <span className="text-fg-dimmed font-normal normal-case">
-                — fixed scales, no theme flip (100 = solid)
-              </span>
-            </p>
-            {[
-              { name: "dark", prefix: "--dark" },
-              { name: "light", prefix: "--light" },
-            ].map((scale) => (
-              <div key={scale.name} className="flex flex-wrap items-center gap-2">
-                <span className="text-xs font-mono text-fg-muted w-10">{scale.name}</span>
-                {[5, 10, 20, 40, 70, 90, 100].map((step) => (
-                  <div key={step} className="flex items-center gap-2">
-                    <div
-                      className="h-6 w-6 rounded-[var(--ds-radius-checkbox)] border border-edge-subtle overflow-hidden"
-                      style={{
-                        backgroundImage: "repeating-conic-gradient(var(--border-default) 0% 25%, transparent 0% 50%)",
-                        backgroundSize: "6px 6px",
-                      }}
-                    >
-                      <div className="h-full w-full" style={{ backgroundColor: `var(${scale.prefix}-${step})` }} />
-                    </div>
-                    <span className="text-xs text-fg-secondary">{step}</span>
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
-        </Section>
-
-        {/* Theming Overview */}
-        <Section title="Theming">
-          <div className="space-y-4">
-            <p className="text-sm text-fg-secondary">
-              5 theme axes controlled via sidebar. All values are CSS custom properties on <Code>:root</Code> — no
-              re-renders.
-            </p>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-              <Card>
-                <CardContent className="pt-4">
-                  <p className="text-xs text-fg-muted uppercase tracking-wide">Palette</p>
-                  <p className="text-sm font-medium mt-1">Gray tinting</p>
-                  <p className="text-xs text-fg-secondary mt-0.5">6 options</p>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardContent className="pt-4">
-                  <p className="text-xs text-fg-muted uppercase tracking-wide">Accent</p>
-                  <p className="text-sm font-medium mt-1">Brand color</p>
-                  <p className="text-xs text-fg-secondary mt-0.5">8 options</p>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardContent className="pt-4">
-                  <p className="text-xs text-fg-muted uppercase tracking-wide">Radius</p>
-                  <p className="text-sm font-medium mt-1">Border radius</p>
-                  <p className="text-xs text-fg-secondary mt-0.5">5 options</p>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardContent className="pt-4">
-                  <p className="text-xs text-fg-muted uppercase tracking-wide">Spacing</p>
-                  <p className="text-sm font-medium mt-1">Density</p>
-                  <p className="text-xs text-fg-secondary mt-0.5">3 options</p>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardContent className="pt-4">
-                  <p className="text-xs text-fg-muted uppercase tracking-wide">Font</p>
-                  <p className="text-sm font-medium mt-1">Typeface</p>
-                  <p className="text-xs text-fg-secondary mt-0.5">3 options</p>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardContent className="pt-4">
-                  <p className="text-xs text-fg-muted uppercase tracking-wide">Mode</p>
-                  <p className="text-sm font-medium mt-1">Dark / Light</p>
-                  <p className="text-xs text-fg-secondary mt-0.5">data-theme</p>
-                </CardContent>
-              </Card>
-            </div>
-            <div className="bg-surface-elevated border border-edge-subtle rounded-[var(--ds-radius-card)] p-4">
-              <p className="text-xs font-mono text-fg-secondary">
-                {'<DesignYstemProvider palette="zinc" accent="violet" radius="lg" spacing="md" font="geist">'}
-              </p>
-            </div>
-          </div>
-        </Section>
-
-        {/* Typography */}
-        <Section title="Typography">
-          <div className="space-y-4">
-            <p className="text-xs font-medium text-fg-muted uppercase tracking-wide">Font scale</p>
-            <div className="space-y-2">
-              <p className="text-4xl font-bold tracking-tight">Heading 4XL</p>
-              <p className="text-3xl font-bold tracking-tight">Heading 3XL</p>
-              <p className="text-2xl font-semibold tracking-tight">Heading 2XL</p>
-              <p className="text-xl font-semibold">Heading XL</p>
-              <p className="text-lg font-medium">Text Large</p>
-              <p className="text-base">Text Base — The quick brown fox jumps over the lazy dog.</p>
-              <p className="text-sm text-fg-secondary">Text Small — Secondary body text for descriptions and labels.</p>
-              <p className="text-xs text-fg-muted">Text XS — Fine print, captions, and metadata.</p>
-            </div>
-            <Separator />
-            <p className="text-xs font-medium text-fg-muted uppercase tracking-wide">Monospace</p>
-            <div className="space-y-1">
-              <p className="font-mono text-sm">const theme = useDesignYstem();</p>
-              <p className="font-mono text-xs text-fg-secondary">
-                {'<DesignYstemProvider font="geist" accent="violet">'}
-              </p>
-            </div>
-          </div>
-        </Section>
-
+      <div className="max-w-6xl mx-auto px-[var(--ds-space-page-x)] py-12 space-y-12">
         {/* Accordion */}
         <Section title="Accordion">
           <div className="space-y-8">
@@ -578,7 +324,7 @@ export default function ComponentPreview() {
                 <AccordionItem value="item-2">
                   <AccordionTrigger>How do I install it?</AccordionTrigger>
                   <AccordionContent>
-                    <p>
+                    <p className="leading-relaxed">
                       Run <Code>npx designystem init</Code> to set up your project, then add individual components:
                     </p>
                     <p className="mt-2">
@@ -906,12 +652,12 @@ export default function ComponentPreview() {
         {/* Code */}
         <Section title="Code">
           <Row label="Inline code">
-            <p className="text-sm text-fg-secondary">
+            <p className="text-sm text-fg-secondary leading-relaxed">
               Run <Code>npx designystem init</Code> to set up your project.
             </p>
           </Row>
           <Row label="In context">
-            <p className="text-sm text-fg-secondary">
+            <p className="text-sm text-fg-secondary leading-relaxed">
               Set <Code>data-theme=&quot;light&quot;</Code> on <Code>&lt;html&gt;</Code> to enable light mode. All
               tokens use <Code>oklch()</Code> color space.
             </p>

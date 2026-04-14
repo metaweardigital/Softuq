@@ -36,18 +36,18 @@ const TESTIMONIALS: Testimonial[] = [
 
 export default function Testimonials01() {
   return (
-    <section className="px-[var(--ds-space-section-x)] py-[var(--ds-space-section-y)]">
+    <section className="px-[var(--ds-space-page-x)] py-[var(--ds-space-section-y)]">
       <div className="mx-auto max-w-5xl">
         <div className="text-center max-w-2xl mx-auto">
           <Badge variant="outline" className="mb-[var(--ds-space-stack)]">
             Loved by builders
           </Badge>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-fg-primary">What teams are saying</h2>
-          <p className="mt-[var(--ds-space-stack)] text-fg-muted">
+          <p className="mt-[var(--ds-space-stack-sm)] text-fg-muted">
             Real feedback from designers and engineers shipping production apps.
           </p>
         </div>
-        <div className="mt-[var(--ds-space-stack)] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[var(--ds-space-gap)]">
+        <div className="mt-[var(--ds-space-stack-lg)] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[var(--ds-space-gap)]">
           {TESTIMONIALS.map((t) => (
             <Card key={t.name}>
               <CardContent className="pt-[var(--ds-space-card)] space-y-[var(--ds-space-gap)]">

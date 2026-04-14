@@ -10,9 +10,9 @@ const kbdVariants = cva(
   {
     variants: {
       size: {
-        sm: "h-5 min-w-5 px-1 text-[11px] rounded-[3px]",
-        md: "h-6 min-w-6 px-1.5 text-xs rounded-[4px]",
-        lg: "h-7 min-w-7 px-2 text-sm rounded-[5px]",
+        sm: "h-5 min-w-5 px-1 text-[11px] rounded-[var(--ds-radius-checkbox)]",
+        md: "h-6 min-w-6 px-1.5 text-xs rounded-[var(--ds-radius-checkbox)]",
+        lg: "h-7 min-w-7 px-2 text-sm rounded-[var(--ds-radius-checkbox)]",
       },
     },
     defaultVariants: {

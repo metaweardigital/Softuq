@@ -1,7 +1,7 @@
 "use client";
 
-import { Avatar, Badge, Button, cn, Input, Separator } from "@designystem/react";
-import { Archive, Forward, Inbox, MoreHorizontal, Reply, Search, Star, Trash2 } from "lucide-react";
+import { Avatar, Badge, Button, cn, SearchInput, Separator } from "@designystem/react";
+import { Archive, Forward, Inbox, MoreHorizontal, Reply, Star, Trash2 } from "lucide-react";
 import * as React from "react";
 
 type Message = {
@@ -82,7 +82,7 @@ export default function InboxSplit() {
 
   return (
     <div className="min-h-screen bg-surface-base flex flex-col">
-      <header className="border-b border-edge-subtle px-[var(--ds-space-section-x)] py-4 flex items-center gap-[var(--ds-space-gap)]">
+      <header className="border-b border-edge-subtle px-[var(--ds-space-app-page-x)] py-4 flex items-center gap-[var(--ds-space-app-gap)]">
         <div className="flex items-center gap-2">
           <Inbox className="size-4 text-fg-muted" />
           <h1 className="text-lg font-semibold tracking-tight text-fg-primary">Inbox</h1>
@@ -90,10 +90,7 @@ export default function InboxSplit() {
             {MESSAGES.filter((m) => m.unread).length} unread
           </Badge>
         </div>
-        <div className="ml-auto relative w-64">
-          <Search className="size-3.5 absolute left-2.5 top-1/2 -translate-y-1/2 text-fg-dimmed pointer-events-none" />
-          <Input placeholder="Search mail..." className="h-8 pl-8 text-xs" />
-        </div>
+        <SearchInput placeholder="Search mail..." inputSize="sm" className="ml-auto w-64" />
       </header>
 
       <div className="flex-1 grid grid-cols-1 lg:grid-cols-[360px_1fr] min-h-0">
@@ -146,7 +143,7 @@ export default function InboxSplit() {
         </aside>
 
         <section className="flex flex-col min-w-0">
-          <header className="px-[var(--ds-space-section-x)] py-4 border-b border-edge-subtle flex items-start justify-between gap-[var(--ds-space-gap)]">
+          <header className="px-[var(--ds-space-app-page-x)] py-4 border-b border-edge-subtle flex items-start justify-between gap-[var(--ds-space-app-gap)]">
             <div className="min-w-0">
               <h2 className="text-lg font-semibold text-fg-primary">{selected.subject}</h2>
               <div className="flex items-center gap-2 mt-1">
@@ -173,7 +170,7 @@ export default function InboxSplit() {
             </div>
           </header>
 
-          <div className="flex-1 px-[var(--ds-space-section-x)] py-6 overflow-y-auto scrollbar-thin">
+          <div className="flex-1 px-[var(--ds-space-app-page-x)] py-6 overflow-y-auto scrollbar-thin">
             <div className="max-w-2xl space-y-4 text-sm text-fg-secondary leading-relaxed">
               <p>Hi team,</p>
               <p>{selected.preview}</p>
@@ -192,7 +189,7 @@ export default function InboxSplit() {
             </div>
           </div>
 
-          <footer className="px-[var(--ds-space-section-x)] py-4 border-t border-edge-subtle flex items-center gap-2">
+          <footer className="px-[var(--ds-space-app-page-x)] py-4 border-t border-edge-subtle flex items-center gap-2">
             <Button size="sm">
               <Reply />
               Reply

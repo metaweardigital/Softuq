@@ -2,6 +2,11 @@
 
 Custom design system. Soft UI / neumorphic aesthetic. Copy-paste component distribution.
 
+## Interaction rules
+
+- **When asked a question, ANSWER it.** Do not start editing files or writing code. Answer first, wait for instruction.
+- Questions end with `?` or are phrased as "jak", "co", "proc", "jestli", "resi se" etc. — always respond with an answer, never with an action.
+
 ## Quick reference
 
 - **Monorepo**: pnpm workspaces — `packages/{tokens,tailwind,react,cli,docs}`
@@ -79,6 +84,13 @@ Always order from most global → most specific:
 
 - All values on 4px grid
 - Base spacing scale: 0, 4, 8, 12, 16, 20, 24, 32, 40, 48, 64
+- Stack hierarchy: `--ds-space-stack-sm` (title↔desc) < `--ds-space-stack` (group gap) < `--ds-space-stack-lg` (header→content)
+- Page padding: `--ds-space-page-x` — fluid `clamp()`, scales with viewport
+- Section vertical: `--ds-space-section-y` — fluid `clamp()`, web sections only
+- Web blocks use `px-[var(--ds-space-page-x)] py-[var(--ds-space-section-y)]`
+- App blocks use `p-[var(--ds-space-app-page-x)]` + `space-y-[var(--ds-space-app-stack)]` + `gap-[var(--ds-space-app-gap)]`
+- App spacing tokens (`--ds-space-app-*`) cap at web `md` values on the `lg` preset — app UI stays denser than marketing pages
+- SidebarNav includes a sticky mobile topbar (`md:hidden`) with hamburger trigger — don't add SidebarTrigger manually in children
 
 ### Components
 
@@ -145,6 +157,13 @@ pnpm lint       # biome check
 pnpm lint:fix   # biome auto-fix
 pnpm format     # biome format
 ```
+
+- `pnpm build` kills the running dev server and leaves stale `.next` cache → always clean up after build:
+  ```bash
+  lsof -ti:3333 | xargs kill -9 2>/dev/null; rm -rf packages/docs/.next
+  pnpm dev
+  ```
+- If dev server returns 500 or won't start, first nuke `.next`: `rm -rf packages/docs/.next`
 
 ## Versioning
 

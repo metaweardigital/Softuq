@@ -9,7 +9,7 @@ const Code = React.forwardRef<HTMLElement, CodeProps>(({ className, ...props }, 
     <code
       ref={ref}
       className={cn(
-        "text-xs bg-surface-elevated px-1.5 py-0.5 rounded-md text-fg-primary font-mono border border-edge-subtle",
+        "text-xs bg-surface-elevated px-1.5 py-0.5 rounded-[var(--ds-radius-checkbox)] text-fg-primary font-mono border border-edge-subtle",
         "transition-colors duration-fast ease-soft hover:bg-surface-hover hover:border-edge-default",
         className,
       )}
@@ -124,13 +124,13 @@ const CodeBlock = React.forwardRef<HTMLDivElement, CodeBlockProps>(
         {codeText ? (
           <pre
             className="p-[var(--ds-space-card)] overflow-x-auto text-xs leading-relaxed font-mono scrollbar-thin selection:[background:var(--accent-muted)] selection:[color:var(--text-primary)]"
-            style={{ background: "var(--bg-card)", color: "var(--text-secondary)" }}
+            style={{ background: "var(--bg-base)", color: "var(--text-secondary)" }}
             dangerouslySetInnerHTML={{ __html: highlight(codeText) }}
           />
         ) : (
           <pre
             className="p-[var(--ds-space-card)] overflow-x-auto text-xs leading-relaxed font-mono scrollbar-thin selection:[background:var(--accent-muted)] selection:[color:var(--text-primary)]"
-            style={{ background: "var(--bg-card)", color: "var(--text-secondary)" }}
+            style={{ background: "var(--bg-base)", color: "var(--text-secondary)" }}
           >
             {children}
           </pre>

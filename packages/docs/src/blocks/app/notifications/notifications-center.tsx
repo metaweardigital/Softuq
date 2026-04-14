@@ -1,6 +1,19 @@
 "use client";
 
-import { Avatar, Badge, Button, cn, Separator, Tabs, TabsContent, TabsList, TabsTrigger } from "@designystem/react";
+import {
+  Avatar,
+  Badge,
+  Button,
+  cn,
+  Empty,
+  EmptyDescription,
+  EmptyIcon,
+  Separator,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@designystem/react";
 import { AtSign, Bell, CheckCheck, CreditCard, GitPullRequest, MessageSquare, Settings, UserPlus } from "lucide-react";
 
 type NotifType = "mention" | "comment" | "invite" | "release" | "billing";
@@ -123,10 +136,12 @@ function NotificationRow({ n }: { n: Notification }) {
 function NotificationList({ items }: { items: Notification[] }) {
   if (items.length === 0) {
     return (
-      <div className="rounded-[var(--ds-radius-card)] border border-dashed border-edge-subtle bg-surface-card px-6 py-12 text-center">
-        <Bell className="size-6 mx-auto text-fg-dimmed" />
-        <p className="text-sm text-fg-muted mt-3">You're all caught up.</p>
-      </div>
+      <Empty>
+        <EmptyIcon>
+          <Bell />
+        </EmptyIcon>
+        <EmptyDescription>You're all caught up.</EmptyDescription>
+      </Empty>
     );
   }
   return (
@@ -146,9 +161,9 @@ export default function NotificationsCenter() {
   const mentions = NOTIFICATIONS.filter((n) => n.type === "mention");
 
   return (
-    <div className="min-h-screen bg-surface-base p-[var(--ds-space-section-x)]">
-      <div className="mx-auto max-w-6xl space-y-[var(--ds-space-stack)]">
-        <header className="flex items-start justify-between gap-[var(--ds-space-gap)]">
+    <div className="min-h-screen bg-surface-base p-[var(--ds-space-app-page-x)]">
+      <div className="mx-auto max-w-6xl space-y-[var(--ds-space-app-stack)]">
+        <header className="flex items-start justify-between gap-[var(--ds-space-app-gap)]">
           <div>
             <h1 className="text-2xl font-semibold tracking-tight text-fg-primary">Notifications</h1>
             <p className="text-sm text-fg-muted">
@@ -167,14 +182,14 @@ export default function NotificationsCenter() {
         </header>
 
         <Tabs defaultValue="all">
-          <TabsList>
-            <TabsTrigger value="all">
+          <TabsList className="sm:w-fit">
+            <TabsTrigger value="all" className="flex-1 sm:flex-initial">
               All
               <Badge variant="secondary" size="sm" className="ml-2">
                 {NOTIFICATIONS.length}
               </Badge>
             </TabsTrigger>
-            <TabsTrigger value="unread">
+            <TabsTrigger value="unread" className="flex-1 sm:flex-initial">
               Unread
               {unread.length > 0 && (
                 <Badge variant="default" size="sm" className="ml-2">
@@ -182,7 +197,7 @@ export default function NotificationsCenter() {
                 </Badge>
               )}
             </TabsTrigger>
-            <TabsTrigger value="mentions">
+            <TabsTrigger value="mentions" className="flex-1 sm:flex-initial">
               Mentions
               <Badge variant="secondary" size="sm" className="ml-2">
                 {mentions.length}

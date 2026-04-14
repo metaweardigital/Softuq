@@ -68,7 +68,7 @@ function StatCard({ stat }: { stat: Stat }) {
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between">
           <CardDescription>{stat.label}</CardDescription>
-          <div className="size-8 rounded-[var(--ds-radius-button)] bg-surface-elevated border border-edge-subtle flex items-center justify-center text-fg-muted">
+          <div className="size-8 rounded-[var(--ds-radius-checkbox)] bg-surface-elevated border border-edge-subtle flex items-center justify-center text-fg-muted">
             <Icon className="size-4" />
           </div>
         </div>
@@ -89,14 +89,14 @@ function StatCard({ stat }: { stat: Stat }) {
 
 export default function Dashboard01() {
   return (
-    <div className="min-h-screen bg-surface-base p-[var(--ds-space-section-x)]">
-      <div className="mx-auto max-w-6xl space-y-[var(--ds-space-stack)]">
-        <header className="flex items-start justify-between gap-[var(--ds-space-gap)]">
+    <div className="min-h-screen bg-surface-base p-[var(--ds-space-app-page-x)]">
+      <div className="mx-auto max-w-6xl space-y-[var(--ds-space-app-stack)]">
+        <header className="flex items-start justify-between gap-[var(--ds-space-app-gap)]">
           <div>
             <h1 className="text-2xl font-semibold tracking-tight text-fg-primary">Overview</h1>
             <p className="text-sm text-fg-muted">Snapshot of your workspace for the last 30 days.</p>
           </div>
-          <div className="flex items-center gap-[var(--ds-space-gap)]">
+          <div className="flex items-center gap-[var(--ds-space-app-gap)]">
             <Button variant="outline" size="sm">
               Export
             </Button>
@@ -107,13 +107,13 @@ export default function Dashboard01() {
           </div>
         </header>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[var(--ds-space-gap)]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[var(--ds-space-app-gap)]">
           {STATS.map((s) => (
             <StatCard key={s.label} stat={s} />
           ))}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-[var(--ds-space-gap)]">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-[var(--ds-space-app-gap)]">
           <Card className="lg:col-span-2">
             <CardHeader>
               <div className="flex items-center justify-between">
@@ -125,11 +125,11 @@ export default function Dashboard01() {
               </div>
             </CardHeader>
             <CardContent>
-              <div className="h-48 flex items-end gap-[var(--ds-space-gap)]">
+              <div className="h-48 flex items-end gap-[var(--ds-space-app-gap)]">
                 {REVENUE_WEEKS.map((w, i) => (
                   <div
                     key={w.label}
-                    className="flex-1 rounded-[var(--ds-radius-button)]"
+                    className="flex-1 rounded-[var(--ds-radius-checkbox)]"
                     style={{
                       height: `${w.height}%`,
                       background: `color-mix(in oklch, var(--accent) ${40 + i * 4}%, transparent)`,
@@ -153,10 +153,10 @@ export default function Dashboard01() {
                 </Button>
               </div>
             </CardHeader>
-            <CardContent className="space-y-[var(--ds-space-gap)]">
+            <CardContent className="space-y-[var(--ds-space-app-gap)]">
               {ACTIVITY.map((a, i) => (
                 <div key={a.name}>
-                  <div className="flex items-start gap-[var(--ds-space-gap)]">
+                  <div className="flex items-start gap-[var(--ds-space-app-gap)]">
                     <Avatar size="sm" fallback={a.initials} />
                     <div className="min-w-0 flex-1">
                       <p className="text-sm text-fg-primary">

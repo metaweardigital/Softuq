@@ -200,7 +200,7 @@ const PopoverContent = React.forwardRef<HTMLDivElement, PopoverContentProps>(
         className={cn(
           "absolute z-popover min-w-48",
           "bg-surface-popover border border-edge-subtle rounded-[var(--ds-radius-card)]",
-          "shadow-lg p-4",
+          "shadow-lg p-[var(--ds-space-card)]",
           "animate-scale-in",
           sideClasses[resolvedSide],
           alignClasses[resolvedSide][align],

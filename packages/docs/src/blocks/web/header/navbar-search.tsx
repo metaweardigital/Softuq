@@ -25,7 +25,7 @@ export default function NavbarSearch() {
   return (
     <>
       <header className="sticky top-0 z-sticky border-b border-edge-subtle bg-surface-base/80 backdrop-blur-glass">
-        <div className="mx-auto max-w-6xl h-16 px-4 sm:px-[var(--ds-space-section-x)] flex items-center gap-6">
+        <div className="mx-auto max-w-6xl h-16 px-4 sm:px-[var(--ds-space-page-x)] flex items-center gap-6">
           <a href="#" className="flex items-center gap-2 shrink-0">
             <div className="size-8 rounded-[var(--ds-radius-button)] bg-[color-mix(in_oklch,var(--accent)_14%,transparent)] text-accent-text flex items-center justify-center">
               <Sparkles className="size-4" />
@@ -35,13 +35,9 @@ export default function NavbarSearch() {
 
           <nav className="hidden lg:flex items-center gap-1">
             {NAV_LINKS.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="px-3 h-9 inline-flex items-center rounded-[var(--ds-radius-button)] text-sm text-fg-secondary hover:text-fg-primary hover:bg-surface-hover transition-colors"
-              >
-                {link.label}
-              </a>
+              <Button key={link.label} variant="ghost" size="sm" asChild>
+                <a href={link.href}>{link.label}</a>
+              </Button>
             ))}
           </nav>
 
@@ -78,14 +74,11 @@ export default function NavbarSearch() {
           <Separator />
           <nav className="flex flex-col">
             {NAV_LINKS.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                className="h-10 px-3 flex items-center rounded-[var(--ds-radius-button)] text-sm text-fg-secondary hover:text-fg-primary hover:bg-surface-hover transition-colors"
-              >
-                {link.label}
-              </a>
+              <Button key={link.label} variant="ghost" size="sm" asChild className="justify-start">
+                <a href={link.href} onClick={() => setOpen(false)}>
+                  {link.label}
+                </a>
+              </Button>
             ))}
           </nav>
           <Separator />

@@ -8,16 +8,17 @@ import {
   CardContent,
   CardFooter,
   CardHeader,
-  cn,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-  Input,
   Progress,
+  SearchInput,
+  ToggleGroup,
+  ToggleGroupItem,
 } from "@designystem/react";
-import { Archive, CheckCircle2, Clock, Copy, MoreHorizontal, Pencil, Plus, Search, Trash2 } from "lucide-react";
+import { Archive, CheckCircle2, Clock, Copy, MoreHorizontal, Pencil, Plus, Trash2 } from "lucide-react";
 import * as React from "react";
 
 type Status = "active" | "on-hold" | "completed";
@@ -131,7 +132,7 @@ function ProjectCard({ project }: { project: Project }) {
   return (
     <Card className="flex flex-col">
       <CardHeader>
-        <div className="flex items-start justify-between gap-[var(--ds-space-gap)]">
+        <div className="flex items-start justify-between gap-[var(--ds-space-app-gap)]">
           <div className="min-w-0">
             <h3 className="text-base font-semibold text-fg-primary truncate">{project.name}</h3>
             <p className="text-xs text-fg-muted mt-0.5 line-clamp-2">{project.description}</p>
@@ -180,10 +181,10 @@ function ProjectCard({ project }: { project: Project }) {
           <span>Due {project.due}</span>
         </div>
       </CardContent>
-      <CardFooter className="border-t border-edge-subtle">
+      <CardFooter>
         <div className="flex -space-x-2">
           {project.members.map((m) => (
-            <Avatar key={m} size="sm" fallback={m} className="border-2 border-bg-card" />
+            <Avatar key={m} size="sm" fallback={m} className="border-2 border-surface-card" />
           ))}
         </div>
       </CardFooter>
@@ -205,9 +206,9 @@ export default function ProjectsGrid() {
   const filtered = filter === "all" ? PROJECTS : PROJECTS.filter((p) => p.status === filter);
 
   return (
-    <div className="min-h-screen bg-surface-base p-[var(--ds-space-section-x)]">
-      <div className="mx-auto max-w-6xl space-y-[var(--ds-space-stack)]">
-        <header className="flex items-start justify-between gap-[var(--ds-space-gap)]">
+    <div className="min-h-screen bg-surface-base p-[var(--ds-space-app-page-x)]">
+      <div className="mx-auto max-w-6xl space-y-[var(--ds-space-app-stack)]">
+        <header className="flex items-start justify-between gap-[var(--ds-space-app-gap)]">
           <div>
             <h1 className="text-2xl font-semibold tracking-tight text-fg-primary">Projects</h1>
             <p className="text-sm text-fg-muted">{PROJECTS.length} projects across the workspace.</p>
@@ -218,31 +219,25 @@ export default function ProjectsGrid() {
           </Button>
         </header>
 
-        <div className="flex items-center gap-[var(--ds-space-gap)] flex-wrap">
-          <div className="relative w-full sm:w-64">
-            <Search className="size-3.5 absolute left-2.5 top-1/2 -translate-y-1/2 text-fg-dimmed pointer-events-none" />
-            <Input placeholder="Search projects..." className="h-9 pl-8 text-sm" />
-          </div>
-          <div className="flex items-center gap-1 ml-auto">
+        <div className="flex items-center gap-[var(--ds-space-app-gap)] flex-wrap">
+          <SearchInput placeholder="Search projects..." inputSize="sm" className="w-full sm:w-64" />
+          <ToggleGroup
+            type="single"
+            value={filter}
+            onValueChange={(v) => v && setFilter(v as Filter)}
+            variant="outline"
+            size="sm"
+            className="ml-auto"
+          >
             {FILTERS.map((f) => (
-              <button
-                key={f.value}
-                type="button"
-                onClick={() => setFilter(f.value)}
-                className={cn(
-                  "px-3 h-8 inline-flex items-center rounded-[var(--ds-radius-button)] text-xs transition-colors",
-                  filter === f.value
-                    ? "bg-[color-mix(in_oklch,var(--accent)_14%,transparent)] text-accent-text"
-                    : "text-fg-secondary hover:bg-surface-hover hover:text-fg-primary",
-                )}
-              >
+              <ToggleGroupItem key={f.value} value={f.value}>
                 {f.label}
-              </button>
+              </ToggleGroupItem>
             ))}
-          </div>
+          </ToggleGroup>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[var(--ds-space-gap)]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[var(--ds-space-app-gap)]">
           {filtered.map((p) => (
             <ProjectCard key={p.id} project={p} />
           ))}

@@ -10,7 +10,7 @@ const Empty = React.forwardRef<HTMLDivElement, EmptyProps>(({ className, ...prop
       className={cn(
         "flex flex-col items-center justify-center text-center",
         "rounded-[var(--ds-radius-card)] border border-dashed border-edge-subtle",
-        "px-6 py-12 gap-4",
+        "px-[var(--ds-space-card)] py-[var(--ds-space-stack-lg)] gap-4",
         className,
       )}
       {...props}

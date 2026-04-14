@@ -74,7 +74,7 @@ const Sheet = React.forwardRef<HTMLDivElement, SheetProps>(
           <button
             type="button"
             onClick={onClose}
-            className="absolute right-4 top-4 rounded-lg p-1 text-fg-muted hover:text-fg-primary transition-colors"
+            className="absolute right-4 top-4 rounded-[var(--ds-radius-tooltip)] p-1 text-fg-muted hover:text-fg-primary transition-colors"
           >
             <X className="h-4 w-4" />
           </button>

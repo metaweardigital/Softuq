@@ -16,7 +16,7 @@ export default function SearchBar() {
   const [query, setQuery] = React.useState("");
 
   return (
-    <div className="min-h-[480px] bg-surface-base flex items-start justify-center p-[var(--ds-space-section-x)] pt-20">
+    <div className="min-h-[480px] bg-surface-base flex items-start justify-center p-[var(--ds-space-app-page-x)] pt-20">
       <div className="w-full max-w-md">
         <Search value={query} onValueChange={setQuery}>
           <SearchInput placeholder="Search anything..." />

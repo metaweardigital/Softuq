@@ -29,18 +29,18 @@ const FAQS: Faq[] = [
 
 export default function Faq01() {
   return (
-    <section className="px-[var(--ds-space-section-x)] py-[var(--ds-space-section-y)]">
+    <section className="px-[var(--ds-space-page-x)] py-[var(--ds-space-section-y)]">
       <div className="mx-auto max-w-3xl">
         <div className="text-center">
           <Badge variant="outline" className="mb-[var(--ds-space-stack)]">
             FAQ
           </Badge>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-fg-primary">Questions, answered</h2>
-          <p className="mt-[var(--ds-space-stack)] text-fg-muted">
+          <p className="mt-[var(--ds-space-stack-sm)] text-fg-muted">
             Can't find what you're looking for? Reach out and we'll help.
           </p>
         </div>
-        <div className="mt-[var(--ds-space-stack)]">
+        <div className="mt-[var(--ds-space-stack-lg)]">
           <Accordion type="single">
             {FAQS.map((f) => (
               <AccordionItem key={f.q} value={f.q}>

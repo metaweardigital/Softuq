@@ -116,15 +116,17 @@ function PlanCard({ plan }: { plan: Plan }) {
       </CardContent>
       <CardFooter>
         {plan.current ? (
-          <Button variant="outline" className="w-full">
+          <Button variant="outline" size="sm" className="w-full">
             Manage plan
           </Button>
         ) : plan.name === "Enterprise" ? (
-          <Button variant="outline" className="w-full">
+          <Button variant="outline" size="sm" className="w-full">
             Contact sales
           </Button>
         ) : (
-          <Button className="w-full">Upgrade</Button>
+          <Button size="sm" className="w-full">
+            Upgrade
+          </Button>
         )}
       </CardFooter>
     </Card>
@@ -155,8 +157,8 @@ function StatusBadge({ status }: { status: Invoice["status"] }) {
 
 export default function BillingPlans() {
   return (
-    <div className="min-h-screen bg-surface-base p-[var(--ds-space-section-x)]">
-      <div className="mx-auto max-w-6xl space-y-[var(--ds-space-stack)]">
+    <div className="min-h-screen bg-surface-base p-[var(--ds-space-app-page-x)]">
+      <div className="mx-auto max-w-6xl space-y-[var(--ds-space-app-stack)]">
         <header>
           <h1 className="text-2xl font-semibold tracking-tight text-fg-primary">Billing</h1>
           <p className="text-sm text-fg-muted">Manage your subscription, payment methods, and invoices.</p>
@@ -164,7 +166,7 @@ export default function BillingPlans() {
 
         <Card>
           <CardHeader>
-            <div className="flex items-center justify-between gap-[var(--ds-space-gap)]">
+            <div className="flex items-center justify-between gap-[var(--ds-space-app-gap)]">
               <div>
                 <CardTitle className="text-base">Payment method</CardTitle>
                 <CardDescription>Visa ending in 4242 · expires 08/27</CardDescription>
@@ -182,7 +184,7 @@ export default function BillingPlans() {
             <h2 className="text-base font-semibold text-fg-primary">Plans</h2>
             <p className="text-sm text-fg-muted">Upgrade or downgrade at any time.</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-[var(--ds-space-gap)]">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[var(--ds-space-app-gap)]">
             {PLANS.map((p) => (
               <PlanCard key={p.name} plan={p} />
             ))}

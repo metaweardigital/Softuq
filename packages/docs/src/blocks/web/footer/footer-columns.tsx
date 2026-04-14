@@ -1,6 +1,6 @@
 "use client";
 
-import { Separator } from "@designystem/react";
+import { Button, Separator } from "@designystem/react";
 import { Github, Sparkles, Twitter } from "lucide-react";
 
 type FooterColumn = { title: string; links: { label: string; href: string }[] };
@@ -37,7 +37,7 @@ const COLUMNS: FooterColumn[] = [
 
 export default function Footer01() {
   return (
-    <footer className="px-[var(--ds-space-section-x)] py-[var(--ds-space-section-y)] bg-surface-base border-t border-edge-subtle">
+    <footer className="px-[var(--ds-space-page-x)] py-[var(--ds-space-section-y)] bg-surface-base border-t border-edge-subtle">
       <div className="mx-auto max-w-5xl">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-[var(--ds-space-stack)]">
           <div className="space-y-[var(--ds-space-gap)]">
@@ -68,12 +68,16 @@ export default function Footer01() {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-[var(--ds-space-gap)]">
           <p className="text-xs text-fg-muted">© 2026 DesignYstem. MIT licensed.</p>
           <div className="flex items-center gap-[var(--ds-space-gap)]">
-            <a href="#" aria-label="GitHub" className="text-fg-muted hover:text-accent transition-colors">
-              <Github className="size-4" />
-            </a>
-            <a href="#" aria-label="Twitter" className="text-fg-muted hover:text-accent transition-colors">
-              <Twitter className="size-4" />
-            </a>
+            <Button variant="ghost" size="icon-sm" asChild>
+              <a href="#" aria-label="GitHub">
+                <Github />
+              </a>
+            </Button>
+            <Button variant="ghost" size="icon-sm" asChild>
+              <a href="#" aria-label="Twitter">
+                <Twitter />
+              </a>
+            </Button>
           </div>
         </div>
       </div>

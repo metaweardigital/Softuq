@@ -26,8 +26,8 @@ export default function Settings01() {
   const [emailNotif, setEmailNotif] = React.useState(true);
   const [marketing, setMarketing] = React.useState(false);
   return (
-    <div className="min-h-screen bg-surface-base p-[var(--ds-space-section-x)]">
-      <div className="mx-auto max-w-6xl space-y-[var(--ds-space-stack)]">
+    <div className="min-h-screen bg-surface-base p-[var(--ds-space-app-page-x)]">
+      <div className="mx-auto max-w-6xl space-y-[var(--ds-space-app-stack)]">
         <header>
           <h1 className="text-2xl font-semibold tracking-tight text-fg-primary">Settings</h1>
           <p className="text-sm text-fg-muted">Manage your account, preferences, and billing.</p>
@@ -38,15 +38,15 @@ export default function Settings01() {
             <CardTitle>Profile</CardTitle>
             <CardDescription>Update your personal information and avatar.</CardDescription>
           </CardHeader>
-          <CardContent className="space-y-[var(--ds-space-gap)]">
-            <div className="flex items-center gap-[var(--ds-space-gap)]">
+          <CardContent className="space-y-[var(--ds-space-app-gap)]">
+            <div className="flex items-center gap-[var(--ds-space-app-gap)]">
               <Avatar size="lg" fallback="AP" />
               <Button variant="outline" size="sm">
                 <Upload />
                 Upload new
               </Button>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-[var(--ds-space-gap)]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-[var(--ds-space-app-gap)]">
               <FormField>
                 <Label>Full name</Label>
                 <Input defaultValue="Ava Pollard" />
@@ -68,7 +68,7 @@ export default function Settings01() {
             <CardTitle>Preferences</CardTitle>
             <CardDescription>Choose how DesignYstem looks and behaves.</CardDescription>
           </CardHeader>
-          <CardContent className="space-y-[var(--ds-space-gap)]">
+          <CardContent className="space-y-[var(--ds-space-app-gap)]">
             <FormField>
               <Label>Language</Label>
               <Select defaultValue="en">
@@ -82,14 +82,14 @@ export default function Settings01() {
               </Select>
             </FormField>
             <Separator />
-            <div className="flex items-start justify-between gap-[var(--ds-space-gap)]">
+            <div className="flex items-start justify-between gap-[var(--ds-space-app-gap)]">
               <div>
                 <p className="text-sm font-medium text-fg-primary">Email notifications</p>
                 <p className="text-xs text-fg-muted">Receive product updates and tips.</p>
               </div>
               <Toggle checked={emailNotif} onCheckedChange={setEmailNotif} />
             </div>
-            <div className="flex items-start justify-between gap-[var(--ds-space-gap)]">
+            <div className="flex items-start justify-between gap-[var(--ds-space-app-gap)]">
               <div>
                 <p className="text-sm font-medium text-fg-primary">Marketing emails</p>
                 <p className="text-xs text-fg-muted">Occasional news and offers.</p>
@@ -105,7 +105,7 @@ export default function Settings01() {
             <CardDescription>Irreversible actions. Proceed with care.</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="flex items-center justify-between gap-[var(--ds-space-gap)]">
+            <div className="flex items-center justify-between gap-[var(--ds-space-app-gap)]">
               <div>
                 <p className="text-sm font-medium text-fg-primary">Delete account</p>
                 <p className="text-xs text-fg-muted">Remove your account and all associated data.</p>

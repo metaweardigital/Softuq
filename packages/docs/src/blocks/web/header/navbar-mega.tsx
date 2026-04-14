@@ -54,9 +54,9 @@ function MegaPanel({ group }: { group: MegaGroup }) {
           <a
             key={item.title}
             href="#"
-            className="flex items-start gap-3 p-3 rounded-[var(--ds-radius-button)] hover:bg-surface-hover transition-colors"
+            className="flex items-start gap-3 p-3 rounded-[calc(var(--ds-radius-card)-8px)] hover:bg-surface-hover transition-colors"
           >
-            <div className="size-8 shrink-0 rounded-[var(--ds-radius-button)] bg-[color-mix(in_oklch,var(--accent)_14%,transparent)] text-accent-text flex items-center justify-center">
+            <div className="size-8 shrink-0 rounded-[var(--ds-radius-checkbox)] bg-[color-mix(in_oklch,var(--accent)_14%,transparent)] text-accent-text flex items-center justify-center">
               <Icon className="size-4" />
             </div>
             <div className="min-w-0">
@@ -84,15 +84,12 @@ function MobileGroup({ group, onNavigate }: { group: MegaGroup; onNavigate: () =
       {group.items.map((item) => {
         const Icon = item.icon;
         return (
-          <a
-            key={item.title}
-            href="#"
-            onClick={onNavigate}
-            className="flex items-center gap-3 px-3 h-10 rounded-[var(--ds-radius-button)] text-sm text-fg-secondary hover:text-fg-primary hover:bg-surface-hover transition-colors"
-          >
-            <Icon className="size-4 text-fg-dimmed" />
-            {item.title}
-          </a>
+          <Button key={item.title} variant="ghost" size="sm" asChild className="justify-start gap-3">
+            <a href="#" onClick={onNavigate}>
+              <Icon className="size-4 text-fg-dimmed" />
+              {item.title}
+            </a>
+          </Button>
         );
       })}
     </div>
@@ -105,7 +102,7 @@ export default function NavbarMega() {
   return (
     <>
       <header className="sticky top-0 z-sticky border-b border-edge-subtle bg-surface-base/80 backdrop-blur-glass">
-        <div className="mx-auto max-w-6xl h-16 px-4 sm:px-[var(--ds-space-section-x)] flex items-center gap-6">
+        <div className="mx-auto max-w-6xl h-16 px-4 sm:px-[var(--ds-space-page-x)] flex items-center gap-6">
           <a href="#" className="flex items-center gap-2 shrink-0">
             <div className="size-8 rounded-[var(--ds-radius-button)] bg-[color-mix(in_oklch,var(--accent)_14%,transparent)] text-accent-text flex items-center justify-center">
               <Sparkles className="size-4" />
@@ -136,18 +133,12 @@ export default function NavbarMega() {
                 <MegaPanel group={RESOURCES_GROUP} />
               </PopoverContent>
             </Popover>
-            <a
-              href="#pricing"
-              className="px-3 h-9 inline-flex items-center rounded-[var(--ds-radius-button)] text-sm text-fg-secondary hover:text-fg-primary hover:bg-surface-hover transition-colors"
-            >
-              Pricing
-            </a>
-            <a
-              href="#customers"
-              className="px-3 h-9 inline-flex items-center rounded-[var(--ds-radius-button)] text-sm text-fg-secondary hover:text-fg-primary hover:bg-surface-hover transition-colors"
-            >
-              Customers
-            </a>
+            <Button variant="ghost" size="sm" asChild>
+              <a href="#pricing">Pricing</a>
+            </Button>
+            <Button variant="ghost" size="sm" asChild>
+              <a href="#customers">Customers</a>
+            </Button>
           </nav>
 
           <div className="ml-auto hidden md:flex items-center gap-2">

@@ -35,8 +35,9 @@ const FONT_OPTIONS: FontPreset[] = ["system", "inter", "geist"];
 type NavLink = { href: string; label: string; matchPrefix?: string };
 
 const NAV_LINKS: NavLink[] = [
-  { href: "/", label: "Components" },
   { href: "/getting-started", label: "Getting Started", matchPrefix: "/getting-started" },
+  { href: "/", label: "Components" },
+  { href: "/foundations", label: "Foundations", matchPrefix: "/foundations" },
   { href: "/blocks", label: "Blocks", matchPrefix: "/blocks" },
   { href: "/templates", label: "Templates", matchPrefix: "/templates" },
 ];
@@ -84,7 +85,7 @@ function ThemeSettingsPopover() {
           <Settings2 className="size-4" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent align="end" className="w-64 p-4 space-y-3">
+      <PopoverContent align="end" className="w-64 p-[var(--ds-space-card)] space-y-3">
         <div>
           <h3 className="text-sm font-semibold text-fg-primary">Theme</h3>
           <p className="text-xs text-fg-muted mt-0.5">Tune tokens in real time.</p>
@@ -119,7 +120,7 @@ export function Navbar() {
   const pathname = usePathname();
   return (
     <header className="sticky top-0 z-sticky border-b border-edge-subtle bg-surface-base/80 backdrop-blur-glass">
-      <div className="max-w-6xl mx-auto h-14 px-6 flex items-center gap-6">
+      <div className="max-w-6xl mx-auto h-14 px-[var(--ds-space-page-x)] flex items-center gap-[var(--ds-space-gap)]">
         <Link href="/" className="flex items-center gap-2 shrink-0 font-sans">
           <div className="leading-tight">
             <div className="text-sm font-bold tracking-tight text-fg-primary">DesignYstem</div>

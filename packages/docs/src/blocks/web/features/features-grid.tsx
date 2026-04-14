@@ -44,7 +44,7 @@ const FEATURES: Feature[] = [
 
 export default function Features01() {
   return (
-    <section className="px-[var(--ds-space-section-x)] py-[var(--ds-space-section-y)]">
+    <section className="px-[var(--ds-space-page-x)] py-[var(--ds-space-section-y)]">
       <div className="mx-auto max-w-5xl">
         <div className="max-w-2xl">
           <Badge variant="outline" className="mb-[var(--ds-space-stack)]">
@@ -53,18 +53,18 @@ export default function Features01() {
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-fg-primary">
             Everything you need, nothing you don't
           </h2>
-          <p className="mt-[var(--ds-space-stack)] text-fg-muted">
+          <p className="mt-[var(--ds-space-stack-sm)] text-fg-muted">
             A compact set of primitives and blocks. Tokens do the heavy lifting so your product stays consistent as it
             grows.
           </p>
         </div>
-        <div className="mt-[var(--ds-space-stack)] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[var(--ds-space-gap)]">
+        <div className="mt-[var(--ds-space-stack-lg)] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[var(--ds-space-gap)]">
           {FEATURES.map((f) => {
             const Icon = f.icon;
             return (
               <Card key={f.title}>
                 <CardContent className="pt-[var(--ds-space-card)] space-y-[var(--ds-space-gap)]">
-                  <div className="size-10 rounded-[var(--ds-radius-button)] bg-[color-mix(in_oklch,var(--accent)_14%,transparent)] text-accent-text flex items-center justify-center">
+                  <div className="size-10 rounded-[var(--ds-radius-checkbox)] bg-[color-mix(in_oklch,var(--accent)_14%,transparent)] text-accent-text flex items-center justify-center">
                     <Icon className="size-5" />
                   </div>
                   <div className="space-y-1">

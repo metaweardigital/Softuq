@@ -52,7 +52,7 @@ const TIERS: Tier[] = [
 
 export default function Pricing01() {
   return (
-    <section className="px-[var(--ds-space-section-x)] py-[var(--ds-space-section-y)]">
+    <section className="px-[var(--ds-space-page-x)] py-[var(--ds-space-section-y)]">
       <div className="mx-auto max-w-5xl">
         <div className="text-center max-w-2xl mx-auto">
           <Badge variant="outline" className="mb-[var(--ds-space-stack)]">
@@ -61,11 +61,11 @@ export default function Pricing01() {
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-fg-primary">
             Simple pricing. No surprises.
           </h2>
-          <p className="mt-[var(--ds-space-stack)] text-fg-muted">
+          <p className="mt-[var(--ds-space-stack-sm)] text-fg-muted">
             Start free, scale when you need to. Cancel anytime — no questions asked.
           </p>
         </div>
-        <div className="mt-[var(--ds-space-stack)] grid grid-cols-1 md:grid-cols-3 gap-[var(--ds-space-gap)]">
+        <div className="mt-[var(--ds-space-stack-lg)] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[var(--ds-space-gap)]">
           {TIERS.map((tier) => (
             <Card key={tier.name} className={tier.featured ? "relative border-edge-accent" : undefined}>
               {tier.featured && (
@@ -91,8 +91,15 @@ export default function Pricing01() {
                   ))}
                 </ul>
               </CardContent>
-              <CardFooter>
-                <Button className="w-full" variant={tier.featured ? "default" : "outline"}>
+              <CardFooter className="flex-col gap-0">
+                <Button size="md" className="w-full sm:hidden" variant={tier.featured ? "default" : "outline"}>
+                  {tier.cta}
+                </Button>
+                <Button
+                  size="lg"
+                  className="hidden sm:inline-flex w-full"
+                  variant={tier.featured ? "default" : "outline"}
+                >
                   {tier.cta}
                 </Button>
               </CardFooter>

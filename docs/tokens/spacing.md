@@ -48,7 +48,21 @@ Components use `--ds-space-*` variables instead of hardcoded values (e.g. `p-[va
 
 Default preset: `md`.
 
+## App spacing tokens
+
+App blocks use separate spacing tokens that cap at `md` web values on the `lg` preset. App UI needs higher density than marketing pages.
+
+| Variable | sm | md | lg | Used by |
+|---|---|---|---|---|
+| `--ds-space-app-gap` | 12px | 16px | 16px | Grid/inline gaps |
+| `--ds-space-app-stack` | 16px | 24px | 24px | Vertical group gap |
+| `--ds-space-app-page-x` | 16-24px | 20-32px | 20-32px | Page padding |
+
+On `sm` and `md`, app tokens equal web tokens. On `lg`, app tokens are capped at web `md` values.
+
 ## Usage
+
+### Web blocks
 
 | Context | Recommended |
 |---|---|
@@ -57,6 +71,16 @@ Default preset: `md`.
 | Card padding | 24px (`p-6`) |
 | Section spacing | 24-48px (`py-6` - `py-12`) |
 | Page padding | 24px mobile, 48px desktop |
+
+Web blocks use `px-[var(--ds-space-page-x)] py-[var(--ds-space-section-y)]`.
+
+### App blocks
+
+App blocks use `--ds-space-app-*` tokens instead of the generic web tokens:
+
+- Page padding: `p-[var(--ds-space-app-page-x)]`
+- Vertical rhythm: `space-y-[var(--ds-space-app-stack)]`
+- Grid/inline gaps: `gap-[var(--ds-space-app-gap)]`
 
 ## Component heights
 
