@@ -2,6 +2,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { Loader2, Search as SearchIcon, X } from "lucide-react";
 import * as React from "react";
 import { cn } from "../../lib/utils";
+import { Kbd } from "./kbd";
 import { Tag } from "./tag";
 
 /* === Context === */
@@ -121,6 +122,7 @@ interface SearchInputProps
     VariantProps<typeof searchInputVariants> {
   loading?: boolean;
   tags?: SearchInputTag[];
+  shortcut?: string[];
   onClear?: () => void;
   value?: string;
   onValueChange?: (value: string) => void;
@@ -128,7 +130,20 @@ interface SearchInputProps
 
 const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
   (
-    { className, variant, inputSize, loading, tags, onClear, value, onValueChange, onFocus, onKeyDown, ...props },
+    {
+      className,
+      variant,
+      inputSize,
+      loading,
+      tags,
+      shortcut,
+      onClear,
+      value,
+      onValueChange,
+      onFocus,
+      onKeyDown,
+      ...props
+    },
     ref,
   ) => {
     const ctx = useSearchContext();
@@ -233,6 +248,15 @@ const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
           onKeyDown={handleKeyDown}
           {...props}
         />
+        {shortcut && !loading && currentValue.length === 0 && (
+          <span className="flex shrink-0 items-center gap-0.5 pointer-events-none">
+            {shortcut.map((key) => (
+              <Kbd key={key} size="sm">
+                {key}
+              </Kbd>
+            ))}
+          </span>
+        )}
         {loading && <Loader2 className="h-4 w-4 shrink-0 animate-spin text-text-muted" />}
         {showClear && (
           <button

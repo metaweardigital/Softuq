@@ -119,7 +119,7 @@
     "search": {
       "files": ["components/ui/search.tsx"],
       "dependencies": ["class-variance-authority", "lucide-react"],
-      "registryDeps": ["tag"]
+      "registryDeps": ["kbd", "tag"]
     },
     "separator": {
       "files": ["components/ui/separator.tsx"],

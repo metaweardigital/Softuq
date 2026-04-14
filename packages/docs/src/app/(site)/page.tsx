@@ -1374,6 +1374,10 @@ export default function ComponentPreview() {
                 <SearchInput placeholder="Search..." inputSize="sm" />
               </div>
               <div className="space-y-2">
+                <p className="text-xs font-medium text-text-muted uppercase tracking-wide">Shortcut</p>
+                <SearchInput placeholder="Search docs..." shortcut={["⌘", "K"]} />
+              </div>
+              <div className="space-y-2">
                 <p className="text-xs font-medium text-text-muted uppercase tracking-wide">With tags</p>
                 <SearchInput placeholder="Search in tag..." tags={[{ label: "Design", onDismiss: () => {} }]} />
               </div>

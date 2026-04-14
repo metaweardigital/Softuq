@@ -5,6 +5,7 @@ import EmptyProjects from "./app/empty-states/empty-projects";
 import InboxSplit from "./app/inbox/inbox-split";
 import NotificationsCenter from "./app/notifications/notifications-center";
 import ProjectsGrid from "./app/projects/projects-grid";
+import SearchBar from "./app/search/search-bar";
 import SettingsProfile from "./app/settings/settings-profile";
 import SidebarNav from "./app/sidebar/sidebar-nav";
 import TeamList from "./app/user-management/team-list";
@@ -316,6 +317,13 @@ export const BLOCKS: BlockMeta[] = [
     slug: "empty-projects",
     name: "No projects with dual action",
     component: EmptyProjects,
+  },
+  {
+    type: "app",
+    category: "search",
+    slug: "search-bar",
+    name: "Search bar with recent history and suggestions",
+    component: SearchBar,
   },
 ];
 

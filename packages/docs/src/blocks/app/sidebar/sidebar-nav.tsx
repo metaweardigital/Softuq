@@ -1,7 +1,7 @@
 "use client";
 
-import { Avatar, Badge, Button, cn, Input, Separator } from "@designystem/react";
-import { Bell, CreditCard, FolderKanban, Home, Inbox, Plus, Search, Settings, Sparkles, Users } from "lucide-react";
+import { Avatar, Badge, Button, cn, SearchInput, Separator } from "@designystem/react";
+import { Bell, CreditCard, FolderKanban, Home, Inbox, Plus, Settings, Sparkles, Users } from "lucide-react";
 import Link from "next/link";
 import type * as React from "react";
 
@@ -73,10 +73,7 @@ export default function SidebarNav({
           <span className="text-sm font-semibold text-text-primary">DesignYstem</span>
         </div>
 
-        <div className="relative">
-          <Search className="size-3.5 absolute left-2.5 top-1/2 -translate-y-1/2 text-text-dimmed pointer-events-none" />
-          <Input placeholder="Search..." className="h-8 pl-8 text-xs" />
-        </div>
+        <SearchInput placeholder="Search..." inputSize="sm" />
 
         <nav className="flex flex-col gap-0.5">
           {primaryItems.map((item) => (

@@ -1,7 +1,7 @@
 "use client";
 
-import { Button, Input, Kbd, Separator, Sheet } from "@designystem/react";
-import { Menu, Search, Sparkles } from "lucide-react";
+import { Button, SearchInput, Separator, Sheet } from "@designystem/react";
+import { Menu, Sparkles } from "lucide-react";
 import * as React from "react";
 
 const NAV_LINKS = [
@@ -13,13 +13,8 @@ const NAV_LINKS = [
 
 function SearchField({ className }: { className?: string }) {
   return (
-    <div className={`relative ${className ?? ""}`}>
-      <Search className="size-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-text-dimmed pointer-events-none" />
-      <Input placeholder="Search docs..." className="h-9 pl-9 pr-14 text-sm" />
-      <div className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none flex items-center gap-0.5">
-        <Kbd>⌘</Kbd>
-        <Kbd>K</Kbd>
-      </div>
+    <div className={className}>
+      <SearchInput placeholder="Search docs..." inputSize="sm" shortcut={["⌘", "K"]} />
     </div>
   );
 }
