@@ -24,7 +24,7 @@
     "neumorphic"
   ],
   "bin": {
-    "softuq": "./dist/index.js"
+    "softuq": "dist/index.js"
   },
   "files": [
     "dist",
