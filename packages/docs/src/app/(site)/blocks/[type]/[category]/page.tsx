@@ -1,6 +1,6 @@
 "use client";
 
-import { buttonVariants, cn, ToggleGroup, ToggleGroupItem } from "@designystem/react";
+import { buttonVariants, cn, ToggleGroup, ToggleGroupItem } from "@softuq/react";
 import { ExternalLink, Monitor, Smartphone, Tablet } from "lucide-react";
 import { notFound, useParams } from "next/navigation";
 import * as React from "react";

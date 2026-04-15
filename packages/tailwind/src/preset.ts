@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss";
 
-const designystemPreset: Partial<Config> = {
+const softuqPreset: Partial<Config> = {
   theme: {
     extend: {
       colors: {
@@ -158,4 +158,4 @@ const designystemPreset: Partial<Config> = {
   },
 };
 
-export default designystemPreset;
+export default softuqPreset;

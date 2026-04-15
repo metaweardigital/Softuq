@@ -14,7 +14,7 @@ export default function TemplatesLandingPage() {
   return (
     <PageShell
       title="Templates"
-      description="Complete page compositions built from DesignYstem blocks. Preview, theme, and adapt."
+      description="Complete page compositions built from Softuq blocks. Preview, theme, and adapt."
       crumbs={[{ label: "Templates" }]}
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-[var(--ds-space-gap)]">

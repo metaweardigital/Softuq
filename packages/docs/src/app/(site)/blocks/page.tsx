@@ -37,7 +37,7 @@ export default function BlocksLandingPage() {
   return (
     <PageShell
       title="Blocks"
-      description="Ready-made compositions built from DesignYstem components. Preview and adapt."
+      description="Ready-made compositions built from Softuq components. Preview and adapt."
       crumbs={[{ label: "Blocks" }]}
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-[var(--ds-space-gap)]">

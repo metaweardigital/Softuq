@@ -1,13 +1,13 @@
 "use client";
 
-import { Badge, Button } from "@designystem/react";
+import { Badge, Button } from "@softuq/react";
 import { ArrowRight, MessageCircle } from "lucide-react";
 
 type Faq = { q: string; a: string };
 
 const FAQS: Faq[] = [
   {
-    q: "How is DesignYstem distributed?",
+    q: "How is Softuq distributed?",
     a: "Tokens ship as an npm package. Components are copied into your project via the CLI, so you own the code and can customize it freely.",
   },
   {
@@ -28,7 +28,7 @@ const FAQS: Faq[] = [
   },
   {
     q: "How do I get updates?",
-    a: "Run `npx designystem diff` to see which components have upstream changes, then `update` to pull them in with a confirmation prompt.",
+    a: "Run `npx softuq diff` to see which components have upstream changes, then `update` to pull them in with a confirmation prompt.",
   },
 ];
 

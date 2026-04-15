@@ -21,7 +21,7 @@ import {
 /* ============================================
    Context & Hook
    ============================================ */
-interface DesignYstemContextValue {
+interface SoftuqContextValue {
   palette: PalettePreset;
   setPalette: (p: PalettePreset) => void;
   accent: AccentPreset;
@@ -34,7 +34,7 @@ interface DesignYstemContextValue {
   setFont: (f: FontPreset) => void;
 }
 
-const DesignYstemContext = React.createContext<DesignYstemContextValue>({
+const SoftuqContext = React.createContext<SoftuqContextValue>({
   palette: "neutral",
   setPalette: () => {},
   accent: "blue",
@@ -47,14 +47,14 @@ const DesignYstemContext = React.createContext<DesignYstemContextValue>({
   setFont: () => {},
 });
 
-function useDesignYstem() {
-  return React.useContext(DesignYstemContext);
+function useSoftuq() {
+  return React.useContext(SoftuqContext);
 }
 
 /* ============================================
    Provider
    ============================================ */
-interface DesignYstemProviderProps {
+interface SoftuqProviderProps {
   palette?: PalettePreset;
   accent?: AccentPreset;
   radius?: RadiusPreset;
@@ -90,7 +90,7 @@ function readStored(storageKey?: string): StoredSettings {
   }
 }
 
-function DesignYstemProvider({
+function SoftuqProvider({
   palette: initialPalette = "neutral",
   accent: initialAccent = "blue",
   radius: initialRadius = "lg",
@@ -98,7 +98,7 @@ function DesignYstemProvider({
   font: initialFont = "system",
   storageKey,
   children,
-}: DesignYstemProviderProps) {
+}: SoftuqProviderProps) {
   // Init with defaults so SSR and client first render match exactly (no hydration mismatch).
   // Stored values are read in useEffect below; CSS vars are already applied
   // by the pre-hydration script, so there's no visual flash during this catch-up.
@@ -186,19 +186,11 @@ function DesignYstemProvider({
     [palette, accent, radius, spacing, font],
   );
 
-  return <DesignYstemContext.Provider value={value}>{children}</DesignYstemContext.Provider>;
+  return <SoftuqContext.Provider value={value}>{children}</SoftuqContext.Provider>;
 }
 
 /* ============================================
    Exports
    ============================================ */
-export type { AccentPreset, DesignYstemProviderProps, FontPreset, PalettePreset, RadiusPreset, SpacingPreset };
-export {
-  ACCENT_PRESETS,
-  DesignYstemProvider,
-  FONT_PRESETS,
-  PALETTE_PRESETS,
-  RADIUS_PRESETS,
-  SPACING_PRESETS,
-  useDesignYstem,
-};
+export type { AccentPreset, FontPreset, PalettePreset, RadiusPreset, SoftuqProviderProps, SpacingPreset };
+export { ACCENT_PRESETS, FONT_PRESETS, PALETTE_PRESETS, RADIUS_PRESETS, SoftuqProvider, SPACING_PRESETS, useSoftuq };

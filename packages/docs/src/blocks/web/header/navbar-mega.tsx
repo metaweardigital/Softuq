@@ -1,6 +1,6 @@
 "use client";
 
-import { Badge, Button, Popover, PopoverContent, PopoverTrigger, Separator, Sheet } from "@designystem/react";
+import { Badge, Button, Popover, PopoverContent, PopoverTrigger, Separator, Sheet } from "@softuq/react";
 import {
   BarChart3,
   BookOpen,

@@ -1,6 +1,6 @@
 "use client";
 
-import { Badge, Search, SearchContent, SearchGroup, SearchInput, SearchItem } from "@designystem/react";
+import { Badge, Search, SearchContent, SearchGroup, SearchInput, SearchItem } from "@softuq/react";
 import { Clock, Search as SearchLucide, X } from "lucide-react";
 import * as React from "react";
 

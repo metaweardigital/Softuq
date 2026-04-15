@@ -43,7 +43,7 @@ Applied to `Input`, `Textarea`, `SearchInput`. Independent of body scale — won
 
 ## Font presets
 
-Controlled via `<DesignYstemProvider font="...">`. Overrides `--font-sans` and `--font-mono`.
+Controlled via `<SoftuqProvider font="...">`. Overrides `--font-sans` and `--font-mono`.
 
 | Preset | Sans | Mono |
 |---|---|---|

@@ -7,7 +7,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@designystem/react";
+} from "@softuq/react";
 import { Home } from "lucide-react";
 import Link from "next/link";
 import React, { type ReactNode } from "react";

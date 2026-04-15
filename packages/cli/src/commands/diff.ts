@@ -10,10 +10,10 @@ interface DiffOptions {
 
 export async function diff(options: DiffOptions) {
   const cwd = process.cwd();
-  const configPath = path.join(cwd, "designystem.json");
+  const configPath = path.join(cwd, "softuq.json");
 
   if (!(await fs.pathExists(configPath))) {
-    console.log(pc.red("\n  No designystem.json found. Run `designystem init` first.\n"));
+    console.log(pc.red("\n  No softuq.json found. Run `softuq init` first.\n"));
     process.exit(1);
   }
 
@@ -29,7 +29,7 @@ export async function diff(options: DiffOptions) {
   const sourceDir = getSourceDir(framework);
   const componentDir = config.componentDir;
 
-  console.log(pc.bold("\n  DesignYstem Diff\n"));
+  console.log(pc.bold("\n  Softuq Diff\n"));
 
   let changed = 0;
   let unchanged = 0;
@@ -98,8 +98,8 @@ export async function diff(options: DiffOptions) {
   const cssDir = detected.cssFile ? path.dirname(path.join(cwd, detected.cssFile)) : path.join(cwd, "src/app");
   const tokensDir = path.resolve(sourceDir, "../../tokens/src");
   const cssFiles = [
-    { local: "designystem-tokens.css", source: ["primitives.css", "semantic.css"], label: "tokens CSS" },
-    { local: "designystem-theme.css", source: ["tailwind-theme.css"], label: "theme CSS" },
+    { local: "softuq-tokens.css", source: ["primitives.css", "semantic.css"], label: "tokens CSS" },
+    { local: "softuq-theme.css", source: ["tailwind-theme.css"], label: "theme CSS" },
   ];
   for (const { local, source, label } of cssFiles) {
     const localPath = path.join(cssDir, local);
@@ -110,7 +110,7 @@ export async function diff(options: DiffOptions) {
       const fp = path.join(tokensDir, f);
       if (await fs.pathExists(fp)) sourceContent += `${await fs.readFile(fp, "utf-8")}\n\n`;
     }
-    if (local === "designystem-tokens.css") sourceContent = `/* DesignYstem */\n${sourceContent}`;
+    if (local === "softuq-tokens.css") sourceContent = `/* Softuq */\n${sourceContent}`;
     if (localContent.trim() !== sourceContent.trim()) {
       console.log(pc.yellow(`  ↻ ${local}`) + pc.dim(` — ${label} updated upstream`));
       changed++;
@@ -124,7 +124,7 @@ export async function diff(options: DiffOptions) {
   console.log(pc.dim(`\n  ${changed} changed, ${unchanged} up to date\n`));
 
   if (changed > 0) {
-    console.log(pc.dim(`  Run ${pc.white("designystem update")} to pull changes.\n`));
+    console.log(pc.dim(`  Run ${pc.white("softuq update")} to pull changes.\n`));
   }
 }
 

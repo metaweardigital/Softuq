@@ -1,4 +1,4 @@
-# DesignYstem
+# Softuq
 
 Custom design system. Soft UI / neumorphic aesthetic. Copy-paste component distribution.
 
@@ -24,10 +24,10 @@ Custom design system. Soft UI / neumorphic aesthetic. Copy-paste component distr
 
 - Primitives: `packages/tokens/src/primitives.css` (OKLCH values)
 - Semantic (dark/light): `packages/tokens/src/semantic.css`
-- Component (radius/spacing): `packages/react/src/designystem-provider.tsx`
+- Component (radius/spacing): `packages/react/src/softuq-provider.tsx`
 - Tailwind v4 mapping: `packages/docs/src/app/globals.css`
 
-## Theming (DesignYstemProvider)
+## Theming (SoftuqProvider)
 
 4 axes, ordered from most global to most specific:
 
@@ -43,7 +43,7 @@ Per-component override via `className` — not extra props.
 
 ### File organization
 
-- Provider: `packages/react/src/designystem-provider.tsx` (beside index.ts, not in components/ui/)
+- Provider: `packages/react/src/softuq-provider.tsx` (beside index.ts, not in components/ui/)
 - Components: `packages/react/src/components/ui/`
 - Utilities: `packages/react/src/lib/`
 
@@ -122,7 +122,7 @@ Always order from most global → most specific:
 
 ## Docs
 
-- [Design Plan](docs/plans/2026-03-16-designystem-design.md) — overview, component list, planned work
+- [Design Plan](docs/plans/2026-03-16-softuq-design.md) — overview, component list, planned work
 - [Spacing](docs/tokens/spacing.md) — 4px grid
 - [Typography](docs/tokens/typography.md) — Major Third scale, fluid clamp()
 - [Colors](docs/tokens/colors.md) — palettes, semantic dark/light mapping
@@ -132,23 +132,23 @@ Always order from most global → most specific:
 - [Icons](docs/tokens/icons.md) — Lucide (UI) + Simple Icons (brand), per-framework packages, coloring via currentColor
 - [Tailwind v4 Guide](docs/guides/tailwind-v4.md) — @theme, @source
 - [Component Pattern](docs/guides/component-pattern.md) — CVA template, theming override
-- [Theming Guide](docs/guides/theming.md) — DesignYstemProvider, palette/accent/radius/spacing presets
+- [Theming Guide](docs/guides/theming.md) — SoftuqProvider, palette/accent/radius/spacing presets
 
 ## CLI
 
-CLI tool for adding DesignYstem to any project. Located in `packages/cli/`.
+CLI tool for adding Softuq to any project. Located in `packages/cli/`.
 
 ```bash
-npx designystem init          # setup tokens, utils, provider, globals.css
-npx designystem add button    # copy component files + install deps
-npx designystem add --all     # add all components
-npx designystem list          # show available components
-npx designystem diff          # show which components have upstream updates
-npx designystem update        # pull updated components (with confirmation)
+npx softuq init          # setup tokens, utils, provider, globals.css
+npx softuq add button    # copy component files + install deps
+npx softuq add --all     # add all components
+npx softuq list          # show available components
+npx softuq diff          # show which components have upstream updates
+npx softuq update        # pull updated components (with confirmation)
 ```
 
 - `init` detects framework (React/Svelte), package manager, and project structure
-- `init` copies `lib/tokens.ts` (JS token values) + rewrites provider import (`@designystem/tokens` → `@/lib/tokens`)
+- `init` copies `lib/tokens.ts` (JS token values) + rewrites provider import (`@softuq/tokens` → `@/lib/tokens`)
 - `init` writes tokens + @theme to separate CSS files imported via `@import` (avoids circular var() refs in Tailwind v4)
 - `add` resolves transitive registry deps (e.g. select → tag)
 - `add` rewrites import paths (`../../lib/utils` → `@/lib/utils`)

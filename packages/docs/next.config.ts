@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  transpilePackages: ["@designystem/react", "@designystem/tokens", "@designystem/tailwind"],
+  transpilePackages: ["@softuq/react", "@softuq/tokens", "@softuq/tailwind"],
 };
 
 export default nextConfig;

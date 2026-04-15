@@ -16,7 +16,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@designystem/react";
+} from "@softuq/react";
 import { Check, CreditCard, Download, ExternalLink, Receipt } from "lucide-react";
 
 type Plan = {

@@ -19,8 +19,8 @@ import {
   SelectTrigger,
   Separator,
   type SpacingPreset,
-  useDesignYstem,
-} from "@designystem/react";
+  useSoftuq,
+} from "@softuq/react";
 import { Moon, Settings2, Sun } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -76,8 +76,7 @@ function ThemeSelect<T extends string>({
 }
 
 function ThemeSettingsPopover() {
-  const { radius, setRadius, spacing, setSpacing, palette, setPalette, accent, setAccent, font, setFont } =
-    useDesignYstem();
+  const { radius, setRadius, spacing, setSpacing, palette, setPalette, accent, setAccent, font, setFont } = useSoftuq();
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -123,7 +122,7 @@ export function Navbar() {
       <div className="max-w-6xl mx-auto h-14 px-[var(--ds-space-page-x)] flex items-center gap-[var(--ds-space-gap)]">
         <Link href="/" className="flex items-center gap-2 shrink-0 font-sans">
           <div className="leading-tight">
-            <div className="text-sm font-bold tracking-tight text-fg-primary">DesignYstem</div>
+            <div className="text-sm font-bold tracking-tight text-fg-primary">Softuq</div>
             <div className="text-[10px] text-fg-muted">Component Preview</div>
           </div>
         </Link>

@@ -1,6 +1,6 @@
 "use client";
 
-import { Badge } from "@designystem/react";
+import { Badge } from "@softuq/react";
 import { TrendingUp } from "lucide-react";
 
 type Stat = {

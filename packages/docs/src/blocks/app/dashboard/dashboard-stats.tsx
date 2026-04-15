@@ -11,7 +11,7 @@ import {
   CardHeader,
   CardTitle,
   Separator,
-} from "@designystem/react";
+} from "@softuq/react";
 import { ArrowDownRight, ArrowUpRight, DollarSign, MoreHorizontal, Plus, Users, Wallet, Zap } from "lucide-react";
 
 type Stat = {

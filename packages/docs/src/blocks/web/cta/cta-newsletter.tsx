@@ -1,6 +1,6 @@
 "use client";
 
-import { Badge, Button, Input } from "@designystem/react";
+import { Badge, Button, Input } from "@softuq/react";
 import { ArrowRight, Mail } from "lucide-react";
 
 export default function CtaNewsletter() {

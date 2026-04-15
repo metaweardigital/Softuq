@@ -1,10 +1,10 @@
 {
-  "name": "designystem",
+  "name": "softuq",
   "private": true,
   "type": "module",
   "scripts": {
     "build": "pnpm -r build",
-    "dev": "pnpm --filter @designystem/docs dev",
+    "dev": "pnpm --filter @softuq/docs dev",
     "lint": "biome check .",
     "lint:fix": "biome check --fix .",
     "format": "biome format --write ."

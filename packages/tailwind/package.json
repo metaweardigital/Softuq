@@ -1,6 +1,6 @@
 {
-  "name": "@designystem/tailwind",
-  "version": "0.1.0",
+  "name": "@softuq/tailwind",
+  "version": "0.2.0",
   "type": "module",
   "main": "./src/preset.ts",
   "exports": {
@@ -8,6 +8,6 @@
   },
   "files": ["src"],
   "dependencies": {
-    "@designystem/tokens": "workspace:*"
+    "@softuq/tokens": "workspace:*"
   }
 }

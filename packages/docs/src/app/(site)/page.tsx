@@ -97,7 +97,7 @@ import {
   ToggleGroupItem,
   Tooltip,
   useToast,
-} from "@designystem/react";
+} from "@softuq/react";
 import {
   AlertCircle,
   AlertTriangle,
@@ -314,7 +314,7 @@ export default function ComponentPreview() {
               <p className="text-xs font-medium text-fg-muted uppercase tracking-wide">Default</p>
               <Accordion variant="default">
                 <AccordionItem value="item-1">
-                  <AccordionTrigger>What is DesignYstem?</AccordionTrigger>
+                  <AccordionTrigger>What is Softuq?</AccordionTrigger>
                   <AccordionContent>
                     A custom design system library with a <span className="text-accent">soft UI / neumorphic</span>{" "}
                     aesthetic. Built as a monorepo with tokens, a Tailwind preset, and copy-paste components you fully
@@ -325,10 +325,10 @@ export default function ComponentPreview() {
                   <AccordionTrigger>How do I install it?</AccordionTrigger>
                   <AccordionContent>
                     <p className="leading-relaxed">
-                      Run <Code>npx designystem init</Code> to set up your project, then add individual components:
+                      Run <Code>npx softuq init</Code> to set up your project, then add individual components:
                     </p>
                     <p className="mt-2">
-                      <Code>npx designystem add button card input</Code>
+                      <Code>npx softuq add button card input</Code>
                     </p>
                     <p className="mt-2">
                       Components are copied directly into your project — no runtime dependency, full control over the
@@ -653,7 +653,7 @@ export default function ComponentPreview() {
         <Section title="Code">
           <Row label="Inline code">
             <p className="text-sm text-fg-secondary leading-relaxed">
-              Run <Code>npx designystem init</Code> to set up your project.
+              Run <Code>npx softuq init</Code> to set up your project.
             </p>
           </Row>
           <Row label="In context">
@@ -1601,7 +1601,7 @@ export default function Page() {
       </div>
 
       <footer className="border-t border-edge-subtle py-8 text-center text-xs text-fg-muted">
-        DesignYstem v0.1.0 — Soft UI Design System
+        Softuq v0.1.0 — Soft UI Design System
       </footer>
     </ToastProvider>
   );

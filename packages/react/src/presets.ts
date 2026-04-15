@@ -1,4 +1,4 @@
-import { colors, fontFamily, radius, spacing } from "@designystem/tokens";
+import { colors, fontFamily, radius, spacing } from "@softuq/tokens";
 
 /* ============================================
    Types

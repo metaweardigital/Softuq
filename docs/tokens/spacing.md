@@ -22,7 +22,7 @@ Micro spacing (`p-0.5` = 2px) is an exception for badge padding, icon offsets, a
 
 ## Component spacing variables
 
-Components use `--ds-space-*` variables instead of hardcoded values (e.g. `p-[var(--ds-space-card)]`). Controlled globally via `<DesignYstemProvider spacing="...">`.
+Components use `--ds-space-*` variables instead of hardcoded values (e.g. `p-[var(--ds-space-card)]`). Controlled globally via `<SoftuqProvider spacing="...">`.
 
 | Variable | Component |
 |---|---|

@@ -1,10 +1,4 @@
-import {
-  ACCENT_PRESETS,
-  FONT_PRESETS,
-  PALETTE_PRESETS,
-  RADIUS_PRESETS,
-  SPACING_PRESETS,
-} from "@designystem/react/presets";
+import { ACCENT_PRESETS, FONT_PRESETS, PALETTE_PRESETS, RADIUS_PRESETS, SPACING_PRESETS } from "@softuq/react/presets";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
@@ -19,8 +13,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "DesignYstem — Component Preview",
-  description: "Live preview of all DesignYstem components",
+  title: "Softuq — Component Preview",
+  description: "Live preview of all Softuq components",
 };
 
 const PRESET_MAP = JSON.stringify({

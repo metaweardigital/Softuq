@@ -1,6 +1,6 @@
 "use client";
 
-import { Avatar, Badge, Card, CardContent } from "@designystem/react";
+import { Avatar, Badge, Card, CardContent } from "@softuq/react";
 import { Quote, Star } from "lucide-react";
 
 type Testimonial = {
@@ -12,7 +12,7 @@ type Testimonial = {
 
 const FEATURED: Testimonial = {
   quote:
-    "DesignYstem is the first system that feels like it was built by people who actually ship products. The tokens are sharp, the components compose, and the CLI respects our codebase. We replaced three libraries with it in a week.",
+    "Softuq is the first system that feels like it was built by people who actually ship products. The tokens are sharp, the components compose, and the CLI respects our codebase. We replaced three libraries with it in a week.",
   name: "Ava Pollard",
   role: "Staff Engineer, Northwind",
   initials: "AP",

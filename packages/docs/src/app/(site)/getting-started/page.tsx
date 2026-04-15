@@ -1,6 +1,6 @@
 "use client";
 
-import { Code, CodeBlock } from "@designystem/react";
+import { Code, CodeBlock } from "@softuq/react";
 
 function Step({ n, title, children }: { n: number; title: string; children: React.ReactNode }) {
   return (
@@ -23,14 +23,14 @@ export default function GettingStartedPage() {
   return (
     <>
       <h1 className="text-3xl font-bold text-fg-primary tracking-tight">Getting Started</h1>
-      <p className="text-fg-secondary mt-2 text-lg">Add DesignYstem to your project in 2 minutes.</p>
+      <p className="text-fg-secondary mt-2 text-lg">Add Softuq to your project in 2 minutes.</p>
 
       <div className="mt-10">
         <Step n={1} title="Initialize">
           <p className="text-fg-secondary">
             Run this in your project root. Works with Next.js, Vite, or any React project.
           </p>
-          <CodeBlock title="terminal">{`npx designystem init`}</CodeBlock>
+          <CodeBlock title="terminal">{`npx softuq init`}</CodeBlock>
           <p className="text-fg-muted text-sm leading-relaxed">
             This copies design tokens, Tailwind theme, <Code>cn()</Code> utility, and the theme provider into your
             project. It also installs <Code>clsx</Code> and <Code>tailwind-merge</Code>.
@@ -41,13 +41,13 @@ export default function GettingStartedPage() {
           <p className="text-fg-secondary">Pick the components you need.</p>
           <CodeBlock title="terminal">
             {`# Add specific components
-npx designystem add button card input
+npx softuq add button card input
 
 # Or add everything
-npx designystem add --all
+npx softuq add --all
 
 # See what's available
-npx designystem list`}
+npx softuq list`}
           </CodeBlock>
           <p className="text-fg-muted text-sm leading-relaxed">
             Dependencies are resolved automatically — e.g. adding <Code>select</Code> also adds <Code>tag</Code> since
@@ -57,25 +57,24 @@ npx designystem list`}
 
         <Step n={3} title="Wrap with provider">
           <p className="text-fg-secondary leading-relaxed">
-            Add <Code>DesignYstemProvider</Code> to your layout and set <Code>data-theme</Code> on{" "}
-            <Code>{"<html>"}</Code>.
+            Add <Code>SoftuqProvider</Code> to your layout and set <Code>data-theme</Code> on <Code>{"<html>"}</Code>.
           </p>
           <CodeBlock title="layout.tsx">
-            {`import { DesignYstemProvider } from "@/components/designystem-provider";
+            {`import { SoftuqProvider } from "@/components/softuq-provider";
 import "./globals.css";
 
 export default function Layout({ children }) {
   return (
     <html lang="en" data-theme="dark">
       <body>
-        <DesignYstemProvider
+        <SoftuqProvider
           accent="violet"
           radius="lg"
           spacing="md"
           font="system"
         >
           {children}
-        </DesignYstemProvider>
+        </SoftuqProvider>
       </body>
     </html>
   );
@@ -113,13 +112,13 @@ export default function Page() {
         <p className="text-fg-secondary">When components get updated upstream, check what changed and pull updates.</p>
         <CodeBlock title="terminal">
           {`# See which components have upstream changes
-npx designystem diff
+npx softuq diff
 
 # Update all changed components
-npx designystem update
+npx softuq update
 
 # Update specific components
-npx designystem update button card`}
+npx softuq update button card`}
         </CodeBlock>
         <p className="text-fg-muted text-sm">
           Components are your code — if you've modified a component locally, review the diff before updating.

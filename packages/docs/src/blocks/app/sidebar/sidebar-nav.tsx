@@ -12,7 +12,7 @@ import {
   SearchInput,
   Separator,
   Sheet,
-} from "@designystem/react";
+} from "@softuq/react";
 import {
   ArrowUpRight,
   Bell,
@@ -147,7 +147,7 @@ function SidebarNavContent({
         <div className="size-7 rounded-[var(--ds-radius-button)] bg-[color-mix(in_oklch,var(--accent)_14%,transparent)] text-accent-text flex items-center justify-center">
           <Sparkles className="size-4" />
         </div>
-        <span className="text-sm font-semibold text-fg-primary">DesignYstem</span>
+        <span className="text-sm font-semibold text-fg-primary">Softuq</span>
       </div>
 
       <SearchInput placeholder="Search..." inputSize="sm" />
@@ -261,7 +261,7 @@ export default function SidebarNav({
             <div className="size-6 rounded-[var(--ds-radius-button)] bg-[color-mix(in_oklch,var(--accent)_14%,transparent)] text-accent-text flex items-center justify-center">
               <Sparkles className="size-3.5" />
             </div>
-            <span className="text-sm font-semibold text-fg-primary">DesignYstem</span>
+            <span className="text-sm font-semibold text-fg-primary">Softuq</span>
           </div>
           {children ?? <DefaultContent />}
         </main>

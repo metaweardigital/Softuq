@@ -15,9 +15,9 @@ export async function add(components: string[], options: AddOptions) {
   const cwd = process.cwd();
 
   // Load config
-  const configPath = path.join(cwd, "designystem.json");
+  const configPath = path.join(cwd, "softuq.json");
   if (!(await fs.pathExists(configPath))) {
-    console.log(pc.red("\n  No designystem.json found. Run `designystem init` first.\n"));
+    console.log(pc.red("\n  No softuq.json found. Run `softuq init` first.\n"));
     process.exit(1);
   }
 
@@ -39,7 +39,7 @@ export async function add(components: string[], options: AddOptions) {
   }
 
   if (names.length === 0) {
-    console.log(pc.yellow("\n  No components specified. Usage: designystem add button card\n"));
+    console.log(pc.yellow("\n  No components specified. Usage: softuq add button card\n"));
     process.exit(1);
   }
 
@@ -47,7 +47,7 @@ export async function add(components: string[], options: AddOptions) {
   const invalid = names.filter((n) => !registry.components[n]);
   if (invalid.length > 0) {
     console.log(pc.red(`\n  Unknown components: ${invalid.join(", ")}`));
-    console.log(pc.dim("  Run `designystem list` to see available components.\n"));
+    console.log(pc.dim("  Run `softuq list` to see available components.\n"));
     process.exit(1);
   }
 

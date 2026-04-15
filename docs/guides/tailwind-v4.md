@@ -11,7 +11,7 @@ Tailwind v4 uses CSS-based configuration instead of `tailwind.config.js`.
 @source "../../../../packages/react/src/**/*.tsx";
 
 /* Import design tokens (CSS variables) */
-@import "@designystem/tokens/css";
+@import "@softuq/tokens/css";
 
 /* Map tokens to Tailwind utilities */
 @theme {

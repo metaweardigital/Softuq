@@ -1,7 +1,7 @@
 "use client";
 
-import { Button, Separator } from "@designystem/react";
 import { SiGithub, SiX } from "@icons-pack/react-simple-icons";
+import { Button, Separator } from "@softuq/react";
 import { Sparkles } from "lucide-react";
 
 type FooterColumn = { title: string; links: { label: string; href: string }[] };
@@ -46,7 +46,7 @@ export default function Footer01() {
               <div className="size-8 rounded-[var(--ds-radius-button)] bg-[color-mix(in_oklch,var(--accent)_14%,transparent)] text-accent-text flex items-center justify-center">
                 <Sparkles className="size-4" />
               </div>
-              <span className="text-sm font-semibold text-fg-primary">DesignYstem</span>
+              <span className="text-sm font-semibold text-fg-primary">Softuq</span>
             </div>
             <p className="text-xs text-fg-muted leading-relaxed">A soft, tactile design system for modern products.</p>
           </div>
@@ -67,7 +67,7 @@ export default function Footer01() {
         </div>
         <Separator className="my-[var(--ds-space-stack)]" />
         <div className="flex flex-col sm:flex-row items-center justify-between gap-[var(--ds-space-gap)]">
-          <p className="text-xs text-fg-muted">© 2026 DesignYstem. MIT licensed.</p>
+          <p className="text-xs text-fg-muted">© 2026 Softuq. MIT licensed.</p>
           <div className="flex items-center gap-[var(--ds-space-gap)]">
             <Button variant="ghost" size="icon-sm" asChild>
               <a href="#" aria-label="GitHub">

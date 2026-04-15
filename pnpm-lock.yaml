@@ -45,18 +45,18 @@ importers:
 
   packages/docs:
     dependencies:
-      '@designystem/react':
-        specifier: workspace:*
-        version: link:../react
-      '@designystem/tailwind':
-        specifier: workspace:*
-        version: link:../tailwind
-      '@designystem/tokens':
-        specifier: workspace:*
-        version: link:../tokens
       '@icons-pack/react-simple-icons':
         specifier: ^13.13.0
         version: 13.13.0(react@19.2.5)
+      '@softuq/react':
+        specifier: workspace:*
+        version: link:../react
+      '@softuq/tailwind':
+        specifier: workspace:*
+        version: link:../tailwind
+      '@softuq/tokens':
+        specifier: workspace:*
+        version: link:../tokens
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -100,7 +100,7 @@ importers:
 
   packages/react:
     dependencies:
-      '@designystem/tokens':
+      '@softuq/tokens':
         specifier: workspace:*
         version: link:../tokens
       class-variance-authority:
@@ -131,7 +131,7 @@ importers:
 
   packages/tailwind:
     dependencies:
-      '@designystem/tokens':
+      '@softuq/tokens':
         specifier: workspace:*
         version: link:../tokens
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { Badge, Card, CardContent, Code, useDesignYstem } from "@designystem/react";
+import { Badge, Card, CardContent, Code, useSoftuq } from "@softuq/react";
 import * as React from "react";
 import { PageShell } from "../../_components/page-shell";
 
@@ -100,7 +100,7 @@ function FluidScaleDemo() {
 }
 
 function FontPresetsDemo() {
-  const { font } = useDesignYstem();
+  const { font } = useSoftuq();
   return (
     <Card>
       <CardContent className="pt-[var(--ds-space-card)]">
@@ -203,7 +203,7 @@ function RatioDemo() {
 }
 
 export default function TypographyFoundationPage() {
-  const { font } = useDesignYstem();
+  const { font } = useSoftuq();
 
   return (
     <div className="max-w-6xl mx-auto px-[var(--ds-space-page-x)] py-12">

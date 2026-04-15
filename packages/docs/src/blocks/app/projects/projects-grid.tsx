@@ -17,7 +17,7 @@ import {
   SearchInput,
   ToggleGroup,
   ToggleGroupItem,
-} from "@designystem/react";
+} from "@softuq/react";
 import { Archive, CheckCircle2, Clock, Copy, MoreHorizontal, Pencil, Plus, Trash2 } from "lucide-react";
 import * as React from "react";
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { Avatar, Badge, Placeholder } from "@designystem/react";
+import { Avatar, Badge, Placeholder } from "@softuq/react";
 import { ArrowUpRight } from "lucide-react";
 
 type Post = {

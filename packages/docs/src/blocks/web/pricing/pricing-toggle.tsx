@@ -11,7 +11,7 @@ import {
   CardTitle,
   ToggleGroup,
   ToggleGroupItem,
-} from "@designystem/react";
+} from "@softuq/react";
 import { Check } from "lucide-react";
 import * as React from "react";
 

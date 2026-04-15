@@ -13,10 +13,10 @@ interface UpdateOptions {
 
 export async function update(components: string[], options: UpdateOptions) {
   const cwd = process.cwd();
-  const configPath = path.join(cwd, "designystem.json");
+  const configPath = path.join(cwd, "softuq.json");
 
   if (!(await fs.pathExists(configPath))) {
-    console.log(pc.red("\n  No designystem.json found. Run `designystem init` first.\n"));
+    console.log(pc.red("\n  No softuq.json found. Run `softuq init` first.\n"));
     process.exit(1);
   }
 
@@ -61,23 +61,23 @@ export async function update(components: string[], options: UpdateOptions) {
   const semantic = await fs.readFile(path.join(tokensDir, "semantic.css"), "utf-8");
   const tailwindTheme = await fs.readFile(path.join(tokensDir, "tailwind-theme.css"), "utf-8");
 
-  const tokensPath = path.join(cssDir, "designystem-tokens.css");
+  const tokensPath = path.join(cssDir, "softuq-tokens.css");
   if (await fs.pathExists(tokensPath)) {
     const local = await fs.readFile(tokensPath, "utf-8");
-    const source = `/* DesignYstem */\n${primitives}\n\n${semantic}\n`;
+    const source = `/* Softuq */\n${primitives}\n\n${semantic}\n`;
     if (local.trim() !== source.trim()) {
       await fs.writeFile(tokensPath, source);
-      console.log(pc.green("  ✓ ") + pc.dim("designystem-tokens.css"));
+      console.log(pc.green("  ✓ ") + pc.dim("softuq-tokens.css"));
       updated++;
     }
   }
 
-  const themePath = path.join(cssDir, "designystem-theme.css");
+  const themePath = path.join(cssDir, "softuq-theme.css");
   if (await fs.pathExists(themePath)) {
     const local = await fs.readFile(themePath, "utf-8");
     if (local.trim() !== tailwindTheme.trim()) {
       await fs.writeFile(themePath, tailwindTheme);
-      console.log(pc.green("  ✓ ") + pc.dim("designystem-theme.css"));
+      console.log(pc.green("  ✓ ") + pc.dim("softuq-theme.css"));
       updated++;
     }
   }

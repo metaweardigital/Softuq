@@ -8,11 +8,11 @@ import { update } from "./commands/update.js";
 
 const program = new Command();
 
-program.name("designystem").description("Add DesignYstem components to your project").version("0.1.0");
+program.name("softuq").description("Add Softuq components to your project").version("0.1.0");
 
 program
   .command("init")
-  .description("Initialize DesignYstem in your project")
+  .description("Initialize Softuq in your project")
   .option("-f, --framework <framework>", "Framework to use (react, svelte)")
   .option("-d, --dir <dir>", "Component directory (default: src/components/ui)")
   .option("-y, --yes", "Skip prompts and use defaults")

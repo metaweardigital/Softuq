@@ -1,6 +1,6 @@
 "use client";
 
-import { Badge, Card, CardContent } from "@designystem/react";
+import { Badge, Card, CardContent } from "@softuq/react";
 import { Gauge, Layers, Palette, Shield, Sparkles, Zap } from "lucide-react";
 
 type Feature = {
@@ -48,7 +48,7 @@ export default function Features01() {
       <div className="mx-auto max-w-5xl">
         <div className="max-w-2xl">
           <Badge variant="outline" className="mb-[var(--ds-space-stack)]">
-            Why DesignYstem
+            Why Softuq
           </Badge>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-fg-primary">
             Everything you need, nothing you don't

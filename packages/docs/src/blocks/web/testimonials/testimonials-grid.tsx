@@ -1,6 +1,6 @@
 "use client";
 
-import { Avatar, Badge, Card, CardContent } from "@designystem/react";
+import { Avatar, Badge, Card, CardContent } from "@softuq/react";
 import { Quote } from "lucide-react";
 
 type Testimonial = {
@@ -13,7 +13,7 @@ type Testimonial = {
 const TESTIMONIALS: Testimonial[] = [
   {
     quote:
-      "Shipping a polished product UI used to take weeks. With DesignYstem we moved from wireframe to production in a weekend.",
+      "Shipping a polished product UI used to take weeks. With Softuq we moved from wireframe to production in a weekend.",
     name: "Ava Pollard",
     role: "Staff Engineer, Northwind",
     initials: "AP",

@@ -1,7 +1,7 @@
 "use client";
 
-import { Avatar, Badge, Button } from "@designystem/react";
 import { SiGithub, SiX } from "@icons-pack/react-simple-icons";
+import { Avatar, Badge, Button } from "@softuq/react";
 import { Globe } from "lucide-react";
 
 type Member = {

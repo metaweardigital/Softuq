@@ -15,7 +15,7 @@
 
 ## Component radius variables
 
-Components use `--ds-radius-*` variables instead of hardcoded values (e.g. `rounded-[var(--ds-radius-card)]`). Controlled globally via `<DesignYstemProvider radius="...">`.
+Components use `--ds-radius-*` variables instead of hardcoded values (e.g. `rounded-[var(--ds-radius-card)]`). Controlled globally via `<SoftuqProvider radius="...">`.
 
 | Variable | Component |
 |---|---|

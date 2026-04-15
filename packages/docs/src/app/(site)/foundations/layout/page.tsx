@@ -1,6 +1,6 @@
 "use client";
 
-import { Badge, Button, Placeholder } from "@designystem/react";
+import { Badge, Button, Placeholder } from "@softuq/react";
 import { ArrowRight, Monitor, Smartphone, Tablet } from "lucide-react";
 import * as React from "react";
 import { PageShell } from "../../_components/page-shell";

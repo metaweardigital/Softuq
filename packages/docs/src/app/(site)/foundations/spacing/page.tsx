@@ -1,6 +1,6 @@
 "use client";
 
-import { Badge, Card, CardContent, useDesignYstem } from "@designystem/react";
+import { Badge, Card, CardContent, useSoftuq } from "@softuq/react";
 import * as React from "react";
 import { PageShell } from "../../_components/page-shell";
 
@@ -191,7 +191,7 @@ function SectionYDemo() {
 }
 
 export default function SpacingFoundationPage() {
-  const { spacing } = useDesignYstem();
+  const { spacing } = useSoftuq();
 
   return (
     <div className="max-w-6xl mx-auto px-[var(--ds-space-page-x)] py-12">

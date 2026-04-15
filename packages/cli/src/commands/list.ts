@@ -14,7 +14,7 @@ export async function list(options: ListOptions) {
   // Try to load config, fallback to detection
   let framework = options.framework;
   if (!framework) {
-    const configPath = path.join(cwd, "designystem.json");
+    const configPath = path.join(cwd, "softuq.json");
     if (await fs.pathExists(configPath)) {
       const config = await fs.readJson(configPath);
       framework = config.framework;
@@ -27,7 +27,7 @@ export async function list(options: ListOptions) {
   const registry = await loadRegistry(framework as "react" | "svelte");
   const names = Object.keys(registry.components).sort();
 
-  console.log(pc.bold(`\n  DesignYstem — ${framework} components\n`));
+  console.log(pc.bold(`\n  Softuq — ${framework} components\n`));
 
   for (const name of names) {
     const entry = registry.components[name];
@@ -36,5 +36,5 @@ export async function list(options: ListOptions) {
   }
 
   console.log(pc.dim(`\n  ${names.length} components available`));
-  console.log(pc.dim(`  Usage: designystem add ${names.slice(0, 3).join(" ")}\n`));
+  console.log(pc.dim(`  Usage: softuq add ${names.slice(0, 3).join(" ")}\n`));
 }

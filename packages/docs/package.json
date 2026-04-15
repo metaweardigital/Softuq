@@ -1,5 +1,5 @@
 {
-  "name": "@designystem/docs",
+  "name": "@softuq/docs",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -9,9 +9,9 @@
     "start": "next start --port 3333"
   },
   "dependencies": {
-    "@designystem/react": "workspace:*",
-    "@designystem/tailwind": "workspace:*",
-    "@designystem/tokens": "workspace:*",
+    "@softuq/react": "workspace:*",
+    "@softuq/tailwind": "workspace:*",
+    "@softuq/tokens": "workspace:*",
     "@icons-pack/react-simple-icons": "^13.13.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

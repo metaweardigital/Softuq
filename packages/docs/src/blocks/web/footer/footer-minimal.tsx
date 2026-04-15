@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "@designystem/react";
 import { SiDiscord, SiGithub, SiX } from "@icons-pack/react-simple-icons";
+import { Button } from "@softuq/react";
 import { Sparkles } from "lucide-react";
 
 const LINKS = [
@@ -19,7 +19,7 @@ export default function FooterMinimal() {
           <div className="size-8 rounded-[var(--ds-radius-button)] bg-[color-mix(in_oklch,var(--accent)_14%,transparent)] text-accent-text flex items-center justify-center">
             <Sparkles className="size-4" />
           </div>
-          <span className="text-sm font-semibold text-fg-primary">DesignYstem</span>
+          <span className="text-sm font-semibold text-fg-primary">Softuq</span>
           <span className="text-xs text-fg-dimmed hidden sm:inline">© 2026</span>
         </div>
         <nav className="flex items-center gap-[var(--ds-space-gap)]">

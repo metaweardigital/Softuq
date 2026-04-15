@@ -13,7 +13,7 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@designystem/react";
+} from "@softuq/react";
 import { AtSign, Bell, CheckCheck, CreditCard, GitPullRequest, MessageSquare, Settings, UserPlus } from "lucide-react";
 
 type NotifType = "mention" | "comment" | "invite" | "release" | "billing";

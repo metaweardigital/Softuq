@@ -1,6 +1,6 @@
 "use client";
 
-import { Avatar, Badge, Button, cn, SearchInput, Separator } from "@designystem/react";
+import { Avatar, Badge, Button, cn, SearchInput, Separator } from "@softuq/react";
 import { Archive, Forward, Inbox, MoreHorizontal, Reply, Star, Trash2 } from "lucide-react";
 import * as React from "react";
 

@@ -186,16 +186,16 @@ export {
   toggleGroupItemVariants,
 } from "./components/ui/toggle-group";
 export { Tooltip, type TooltipProps } from "./components/ui/tooltip";
-export {
-  type AccentPreset,
-  DesignYstemProvider,
-  type DesignYstemProviderProps,
-  type FontPreset,
-  type PalettePreset,
-  type RadiusPreset,
-  type SpacingPreset,
-  useDesignYstem,
-} from "./designystem-provider";
 export { generateSquirclePath as squirclePath, useSquircleClip } from "./lib/squircle";
 // Utilities
 export { cn } from "./lib/utils";
+export {
+  type AccentPreset,
+  type FontPreset,
+  type PalettePreset,
+  type RadiusPreset,
+  SoftuqProvider,
+  type SoftuqProviderProps,
+  type SpacingPreset,
+  useSoftuq,
+} from "./softuq-provider";

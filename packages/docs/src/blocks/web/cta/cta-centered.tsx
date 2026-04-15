@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@designystem/react";
+import { Button } from "@softuq/react";
 import { ArrowRight } from "lucide-react";
 
 export default function Cta01() {

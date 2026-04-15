@@ -1,13 +1,13 @@
 # Theming
 
-Runtime theming via `DesignYstemProvider`. Five axes: palette, accent, radius, spacing, font. All values applied as CSS custom properties on `:root`.
+Runtime theming via `SoftuqProvider`. Five axes: palette, accent, radius, spacing, font. All values applied as CSS custom properties on `:root`.
 
-## DesignYstemProvider
+## SoftuqProvider
 
 ```tsx
-import { DesignYstemProvider } from "@designystem/react";
+import { SoftuqProvider } from "@softuq/react";
 
-<DesignYstemProvider
+<SoftuqProvider
   palette="zinc"
   accent="violet"
   radius="lg"
@@ -15,7 +15,7 @@ import { DesignYstemProvider } from "@designystem/react";
   font="geist"
 >
   <App />
-</DesignYstemProvider>
+</SoftuqProvider>
 ```
 
 ### Props
@@ -32,7 +32,7 @@ import { DesignYstemProvider } from "@designystem/react";
 ### Hook
 
 ```tsx
-const { palette, setPalette, accent, setAccent, radius, setRadius, spacing, setSpacing, font, setFont } = useDesignYstem();
+const { palette, setPalette, accent, setAccent, radius, setRadius, spacing, setSpacing, font, setFont } = useSoftuq();
 ```
 
 ## Palette presets

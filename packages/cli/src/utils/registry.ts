@@ -1,3 +1,4 @@
+import { existsSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import reactRegistry from "../registry/react.json";
@@ -55,7 +56,13 @@ export function resolveAllDeps(registry: Registry, names: string[]): { component
 }
 
 export function getSourceDir(framework: Framework): string {
-  // __dirname points to dist/ in bundled output, so go up to packages/cli/ then to sibling package
+  // __dirname points to dist/ in bundled output → cliRoot = packages/cli/
   const cliRoot = path.resolve(__dirname, "..");
+
+  // Published state: bundled templates inside the CLI package
+  const bundled = path.resolve(cliRoot, "templates", framework);
+  if (existsSync(bundled)) return bundled;
+
+  // Monorepo dev fallback: read directly from sibling framework package
   return path.resolve(cliRoot, `../${framework}/src`);
 }

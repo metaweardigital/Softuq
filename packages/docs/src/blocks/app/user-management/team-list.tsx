@@ -16,7 +16,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@designystem/react";
+} from "@softuq/react";
 import { Mail, MoreHorizontal, Shield, Trash2, UserPlus } from "lucide-react";
 
 type Role = "owner" | "admin" | "member" | "billing";

@@ -14,7 +14,7 @@ interface InitOptions {
 
 export async function init(options: InitOptions) {
   const cwd = process.cwd();
-  console.log(pc.bold("\n  DesignYstem Init\n"));
+  console.log(pc.bold("\n  Softuq Init\n"));
 
   // Detect project
   const detected = await detectProject(cwd);
@@ -78,12 +78,12 @@ export async function init(options: InitOptions) {
 
   // 3. Copy provider (rewrite token import)
   const providerSrc = path.join(sourceDir, registry.provider.file);
-  const providerDest = path.join(cwd, componentDir, "../designystem-provider.tsx");
+  const providerDest = path.join(cwd, componentDir, "../softuq-provider.tsx");
   await fs.ensureDir(path.dirname(providerDest));
   let providerContent = await fs.readFile(providerSrc, "utf-8");
-  providerContent = providerContent.replace(/from\s+["']@designystem\/tokens["']/g, `from "@/lib/tokens"`);
+  providerContent = providerContent.replace(/from\s+["']@softuq\/tokens["']/g, `from "@/lib/tokens"`);
   await fs.writeFile(providerDest, providerContent);
-  console.log(pc.green("  ✓ ") + pc.dim("designystem-provider.tsx"));
+  console.log(pc.green("  ✓ ") + pc.dim("softuq-provider.tsx"));
 
   // 3. Append tokens + theme to globals.css (like shadcn does)
   const cssPath = detected.cssFile || `${detected.srcDir}/app/globals.css`;
@@ -101,16 +101,16 @@ export async function init(options: InitOptions) {
     componentDir,
     libDir,
   };
-  await fs.writeJson(path.join(cwd, "designystem.json"), config, { spaces: 2 });
-  console.log(pc.green("  ✓ ") + pc.dim("designystem.json"));
+  await fs.writeJson(path.join(cwd, "softuq.json"), config, { spaces: 2 });
+  console.log(pc.green("  ✓ ") + pc.dim("softuq.json"));
 
-  console.log(pc.bold(pc.green("\n  Done! ")) + pc.dim("Run `designystem add button card` to add components.\n"));
+  console.log(pc.bold(pc.green("\n  Done! ")) + pc.dim("Run `softuq add button card` to add components.\n"));
 }
 
 async function setupCSS(cwd: string, cssPath: string, sourceDir: string) {
   const fullPath = path.join(cwd, cssPath);
   const cssDir = path.dirname(fullPath);
-  const marker = "/* DesignYstem */";
+  const marker = "/* Softuq */";
 
   // Read token + theme files
   const tokensDir = path.resolve(sourceDir, "../../tokens/src");
@@ -119,23 +119,23 @@ async function setupCSS(cwd: string, cssPath: string, sourceDir: string) {
   const tailwindTheme = await fs.readFile(path.join(tokensDir, "tailwind-theme.css"), "utf-8");
 
   // Write tokens to separate file (must be @imported before @theme so var() refs resolve)
-  const tokensFile = path.join(cssDir, "designystem-tokens.css");
+  const tokensFile = path.join(cssDir, "softuq-tokens.css");
   await fs.writeFile(tokensFile, `${marker}\n${primitives}\n\n${semantic}\n`);
-  console.log(pc.green("  ✓ ") + pc.dim("designystem-tokens.css"));
+  console.log(pc.green("  ✓ ") + pc.dim("softuq-tokens.css"));
 
   // Write theme to separate file
-  const themeFile = path.join(cssDir, "designystem-theme.css");
+  const themeFile = path.join(cssDir, "softuq-theme.css");
   await fs.writeFile(themeFile, tailwindTheme);
-  console.log(pc.green("  ✓ ") + pc.dim("designystem-theme.css"));
+  console.log(pc.green("  ✓ ") + pc.dim("softuq-theme.css"));
 
   // Update globals.css with imports + @source
   const sourceDirective = `@source "../components/ui";`;
-  const tokenImport = `@import "./designystem-tokens.css";`;
-  const themeImport = `@import "./designystem-theme.css";`;
+  const tokenImport = `@import "./softuq-tokens.css";`;
+  const themeImport = `@import "./softuq-theme.css";`;
 
   if (await fs.pathExists(fullPath)) {
     const content = await fs.readFile(fullPath, "utf-8");
-    if (content.includes(marker) || content.includes("designystem-tokens")) {
+    if (content.includes(marker) || content.includes("softuq-tokens")) {
       console.log(pc.gray("  ○ ") + pc.dim(`${cssPath} (already configured)`));
       return;
     }

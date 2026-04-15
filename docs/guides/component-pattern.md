@@ -58,12 +58,12 @@ export type { ComponentProps };
 
 ## Theming: Radius & Spacing
 
-Components use CSS custom properties for radius and spacing, controlled globally via `<DesignYstemProvider>`:
+Components use CSS custom properties for radius and spacing, controlled globally via `<SoftuqProvider>`:
 
 ```tsx
-<DesignYstemProvider palette="zinc" accent="violet" radius="lg" spacing="md">
+<SoftuqProvider palette="zinc" accent="violet" radius="lg" spacing="md">
   <App />
-</DesignYstemProvider>
+</SoftuqProvider>
 ```
 
 **Palette presets:** `neutral` | `zinc` | `stone` | `slate` | `mauve` | `olive`

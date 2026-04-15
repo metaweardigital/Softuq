@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Card, CardContent, useDesignYstem } from "@designystem/react";
+import { Button, Card, CardContent, useSoftuq } from "@softuq/react";
 import * as React from "react";
 import { PageShell } from "../../_components/page-shell";
 
@@ -130,7 +130,7 @@ function GlassDemo() {
 }
 
 function RadiusPresetsDemo() {
-  const { radius } = useDesignYstem();
+  const { radius } = useSoftuq();
   return (
     <Card>
       <CardContent className="pt-[var(--ds-space-card)]">
@@ -293,7 +293,7 @@ function AnimationsDemo() {
 }
 
 function DensityDemo() {
-  const { spacing } = useDesignYstem();
+  const { spacing } = useSoftuq();
   return (
     <Card>
       <CardContent className="pt-[var(--ds-space-card)]">
@@ -342,7 +342,7 @@ function ZIndexDemo() {
 }
 
 export default function EffectsFoundationPage() {
-  const { radius, spacing } = useDesignYstem();
+  const { radius, spacing } = useSoftuq();
 
   return (
     <div className="max-w-6xl mx-auto px-[var(--ds-space-page-x)] py-12">

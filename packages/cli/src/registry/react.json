@@ -7,7 +7,7 @@
     }
   },
   "provider": {
-    "file": "designystem-provider.tsx",
+    "file": "softuq-provider.tsx",
     "dependencies": []
   },
   "components": {

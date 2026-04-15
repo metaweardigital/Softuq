@@ -1,15 +1,6 @@
 "use client";
 
-import {
-  Badge,
-  Button,
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@designystem/react";
+import { Badge, Button, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@softuq/react";
 import { Check } from "lucide-react";
 
 type Tier = {

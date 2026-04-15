@@ -1,6 +1,6 @@
 "use client";
 
-import { Badge, Button, Placeholder } from "@designystem/react";
+import { Badge, Button, Placeholder } from "@softuq/react";
 import { ArrowRight, Check, Sparkles } from "lucide-react";
 
 const BULLETS = ["Tokens in OKLCH", "Copy-paste CLI", "Five fluid presets"];

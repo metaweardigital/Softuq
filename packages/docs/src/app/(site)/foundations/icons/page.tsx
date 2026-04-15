@@ -1,6 +1,5 @@
 "use client";
 
-import { Alert, AlertDescription, AlertTitle, Card, CardContent, CodeBlock } from "@designystem/react";
 import {
   SiDiscord,
   SiFigma,
@@ -11,6 +10,7 @@ import {
   SiVercel,
   SiX,
 } from "@icons-pack/react-simple-icons";
+import { Alert, AlertDescription, AlertTitle, Card, CardContent, CodeBlock } from "@softuq/react";
 import {
   AlertCircle,
   AlertTriangle,

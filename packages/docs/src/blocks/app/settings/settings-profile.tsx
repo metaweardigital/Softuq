@@ -18,7 +18,7 @@ import {
   Separator,
   Textarea,
   Toggle,
-} from "@designystem/react";
+} from "@softuq/react";
 import { Upload } from "lucide-react";
 import * as React from "react";
 
@@ -66,7 +66,7 @@ export default function Settings01() {
         <Card>
           <CardHeader>
             <CardTitle>Preferences</CardTitle>
-            <CardDescription>Choose how DesignYstem looks and behaves.</CardDescription>
+            <CardDescription>Choose how Softuq looks and behaves.</CardDescription>
           </CardHeader>
           <CardContent className="space-y-[var(--ds-space-app-gap)]">
             <FormField>

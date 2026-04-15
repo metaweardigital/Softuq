@@ -190,7 +190,7 @@ Hue ~38–74. Warm accent.
 
 ## Tinted gray palettes
 
-5 tinted variants of the gray scale, used by `<DesignYstemProvider palette="...">`. Each has the same 18 shades as gray but with added chroma and hue. Low chroma keeps them neutral-feeling while adding warmth or coolness.
+5 tinted variants of the gray scale, used by `<SoftuqProvider palette="...">`. Each has the same 18 shades as gray but with added chroma and hue. Low chroma keeps them neutral-feeling while adding warmth or coolness.
 
 ### Zinc
 

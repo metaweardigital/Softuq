@@ -1,6 +1,6 @@
 "use client";
 
-import { Badge, Button, FormField, Input, Label, Textarea } from "@designystem/react";
+import { Badge, Button, FormField, Input, Label, Textarea } from "@softuq/react";
 import { ArrowRight, Mail, MapPin, MessageCircle } from "lucide-react";
 
 type InfoItem = {
@@ -14,13 +14,13 @@ const INFO: InfoItem[] = [
   {
     icon: Mail,
     title: "Email",
-    value: "hello@designystem.dev",
+    value: "hello@softuq.dev",
     hint: "We reply within one business day.",
   },
   {
     icon: MessageCircle,
     title: "Community",
-    value: "discord.gg/designystem",
+    value: "discord.gg/softuq",
     hint: "Join 2,400+ designers and engineers.",
   },
   {

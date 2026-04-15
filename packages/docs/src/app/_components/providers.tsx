@@ -1,6 +1,6 @@
 "use client";
 
-import { DesignYstemProvider } from "@designystem/react";
+import { SoftuqProvider } from "@softuq/react";
 import * as React from "react";
 import { SETTINGS_STORAGE_KEY, THEME_STORAGE_KEY } from "./storage-keys";
 
@@ -89,7 +89,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
 
   return (
     <ThemeContext.Provider value={value}>
-      <DesignYstemProvider storageKey={SETTINGS_STORAGE_KEY}>{children}</DesignYstemProvider>
+      <SoftuqProvider storageKey={SETTINGS_STORAGE_KEY}>{children}</SoftuqProvider>
     </ThemeContext.Provider>
   );
 }

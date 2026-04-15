@@ -1,12 +1,12 @@
 "use client";
 
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Badge } from "@designystem/react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Badge } from "@softuq/react";
 
 type Faq = { q: string; a: string };
 
 const FAQS: Faq[] = [
   {
-    q: "How is DesignYstem distributed?",
+    q: "How is Softuq distributed?",
     a: "Tokens ship as an npm package. Components are copied into your project via the CLI, so you own the code and can customize it freely.",
   },
   {

@@ -1,14 +1,45 @@
 {
-  "name": "designystem",
-  "version": "0.3.0",
-  "description": "CLI for DesignYstem — add UI components to your project",
+  "name": "softuq",
+  "version": "0.4.0",
+  "description": "CLI for Softuq — add UI components to your project",
   "type": "module",
+  "license": "MIT",
+  "homepage": "https://github.com/metaweardigital/Softuq#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/metaweardigital/Softuq.git",
+    "directory": "packages/cli"
+  },
+  "bugs": {
+    "url": "https://github.com/metaweardigital/Softuq/issues"
+  },
+  "keywords": [
+    "softuq",
+    "design-system",
+    "cli",
+    "components",
+    "react",
+    "tailwind",
+    "ui",
+    "neumorphic"
+  ],
   "bin": {
-    "designystem": "./dist/index.js"
+    "softuq": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "templates",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
-    "build": "tsup src/index.ts --format esm --dts",
-    "dev": "tsup src/index.ts --format esm --watch"
+    "sync": "node scripts/sync-templates.mjs",
+    "prebuild": "pnpm sync",
+    "build": "tsup src/index.ts --format esm",
+    "dev": "tsup src/index.ts --format esm --watch",
+    "prepublishOnly": "pnpm build"
   },
   "dependencies": {
     "commander": "^14.0.3",

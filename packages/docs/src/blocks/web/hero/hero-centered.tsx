@@ -1,6 +1,6 @@
 "use client";
 
-import { Badge, Button } from "@designystem/react";
+import { Badge, Button } from "@softuq/react";
 import { ArrowRight, Sparkles } from "lucide-react";
 
 export default function Hero01() {

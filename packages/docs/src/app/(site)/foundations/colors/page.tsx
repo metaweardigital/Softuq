@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, CardContent, ToastProvider, Tooltip, useDesignYstem, useToast } from "@designystem/react";
+import { Card, CardContent, ToastProvider, Tooltip, useSoftuq, useToast } from "@softuq/react";
 import { PageShell } from "../../_components/page-shell";
 
 const GRAY_SHADES = [
@@ -70,12 +70,12 @@ function ColorSwatch({
 }
 
 function ActivePaletteLabel() {
-  const { palette } = useDesignYstem();
+  const { palette } = useSoftuq();
   return <>{palette.charAt(0).toUpperCase() + palette.slice(1)}</>;
 }
 
 function GraySwatches({ shades, compact }: { shades: string[]; compact?: boolean }) {
-  const { palette } = useDesignYstem();
+  const { palette } = useSoftuq();
   return (
     <>
       {shades.map((shade) => (
@@ -219,7 +219,7 @@ function NonChangingScales() {
 }
 
 function ColorsContent() {
-  const { palette, accent } = useDesignYstem();
+  const { palette, accent } = useSoftuq();
 
   return (
     <div className="max-w-6xl mx-auto px-[var(--ds-space-page-x)] py-12">

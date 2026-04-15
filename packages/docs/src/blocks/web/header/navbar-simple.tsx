@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Separator, Sheet } from "@designystem/react";
+import { Button, Separator, Sheet } from "@softuq/react";
 import { Menu, Sparkles } from "lucide-react";
 import * as React from "react";
 

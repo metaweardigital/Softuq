@@ -1,6 +1,6 @@
 "use client";
 
-import { Badge, Button, Placeholder } from "@designystem/react";
+import { Badge, Button, Placeholder } from "@softuq/react";
 import { ArrowRight, Check, Layers, Palette } from "lucide-react";
 
 type Row = {
