@@ -1,4 +1,5 @@
 import { cva, type VariantProps } from "class-variance-authority";
+import { Plus } from "lucide-react";
 import * as React from "react";
 import { cn } from "../../lib/utils";
 
@@ -110,16 +111,7 @@ const AccordionTrigger = React.forwardRef<HTMLButtonElement, React.ButtonHTMLAtt
       >
         {children}
         <span className="shrink-0 w-5 h-5 flex items-center justify-center text-accent">
-          <svg
-            className={cn("w-4 h-4 transition-transform duration-normal ease-smooth", isOpen && "rotate-45")}
-            viewBox="0 0 16 16"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-          >
-            <line x1="8" y1="3" x2="8" y2="13" />
-            <line x1="3" y1="8" x2="13" y2="8" />
-          </svg>
+          <Plus className={cn("w-4 h-4 transition-transform duration-normal ease-smooth", isOpen && "rotate-45")} />
         </span>
       </button>
     );

@@ -1,4 +1,4 @@
-import { ArrowRight, LayoutGrid, Palette, Space, Sparkles, Type } from "lucide-react";
+import { ArrowRight, LayoutGrid, Palette, Shapes, Space, Sparkles, Type } from "lucide-react";
 import Link from "next/link";
 import { PageShell } from "../_components/page-shell";
 
@@ -44,6 +44,13 @@ const FOUNDATIONS: FoundationCard[] = [
     title: "Effects",
     description: "Shadows, border radius presets, animation curves, and component density.",
     icon: Sparkles,
+    ready: true,
+  },
+  {
+    href: "/foundations/icons",
+    title: "Icons",
+    description: "Lucide for UI primitives, Simple Icons for brand logos. Per-framework packages.",
+    icon: Shapes,
     ready: true,
   },
 ];

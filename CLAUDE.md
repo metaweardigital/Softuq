@@ -12,7 +12,7 @@ Custom design system. Soft UI / neumorphic aesthetic. Copy-paste component distr
 - **Monorepo**: pnpm workspaces — `packages/{tokens,tailwind,react,cli,docs}`
 - **Distribution**: tokens as npm, components copied via CLI
 - **Variants**: CVA (class-variance-authority) + `cn()` helper
-- **Icons**: lucide-react
+- **Icons**: `lucide-react` for UI primitives + `@icons-pack/react-simple-icons` for brand logos. Never inline raw SVG. Per-framework packages swap automatically (e.g. `lucide-vue-next` + `@icons-pack/vue-simple-icons` for Vue). See `/foundations/icons`.
 - **Colors**: OKLCH color space (not hex, not HSL)
 - **Theme**: `data-theme="dark"` (default) / `data-theme="light"` on `<html>`
 - **Tailwind**: v4 — config via `@theme` in CSS, not config file
@@ -121,6 +121,7 @@ Always order from most global → most specific:
 - [Shadows](docs/tokens/shadows.md) — sm/md/lg/inset, palette-tinted light mode, glass
 - [Border Radius](docs/tokens/radius.md) — scale + nested rule
 - [Animation](docs/tokens/animation.md) — easing, duration, keyframes, z-index
+- [Icons](docs/tokens/icons.md) — Lucide (UI) + Simple Icons (brand), per-framework packages, coloring via currentColor
 - [Tailwind v4 Guide](docs/guides/tailwind-v4.md) — @theme, @source
 - [Component Pattern](docs/guides/component-pattern.md) — CVA template, theming override
 - [Theming Guide](docs/guides/theming.md) — DesignYstemProvider, palette/accent/radius/spacing presets

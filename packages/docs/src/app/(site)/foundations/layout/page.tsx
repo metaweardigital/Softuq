@@ -221,7 +221,7 @@ function ConventionsTable() {
       </div>
       <div className="divide-y divide-edge-subtle">
         {conventions.map((c) => (
-          <div key={c.breakpoint} className="px-5 py-3 grid grid-cols-3 gap-4 items-center">
+          <div key={`${c.breakpoint}-${c.component}`} className="px-5 py-3 grid grid-cols-3 gap-4 items-center">
             <span className="text-xs font-mono text-accent-text">{c.breakpoint}</span>
             <span className="text-sm text-fg-primary">{c.component}</span>
             <span className="text-xs font-mono text-fg-secondary">{c.rule}</span>

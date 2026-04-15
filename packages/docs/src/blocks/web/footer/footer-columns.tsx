@@ -1,7 +1,8 @@
 "use client";
 
 import { Button, Separator } from "@designystem/react";
-import { Github, Sparkles, Twitter } from "lucide-react";
+import { SiGithub, SiX } from "@icons-pack/react-simple-icons";
+import { Sparkles } from "lucide-react";
 
 type FooterColumn = { title: string; links: { label: string; href: string }[] };
 
@@ -70,12 +71,12 @@ export default function Footer01() {
           <div className="flex items-center gap-[var(--ds-space-gap)]">
             <Button variant="ghost" size="icon-sm" asChild>
               <a href="#" aria-label="GitHub">
-                <Github />
+                <SiGithub />
               </a>
             </Button>
             <Button variant="ghost" size="icon-sm" asChild>
-              <a href="#" aria-label="Twitter">
-                <Twitter />
+              <a href="#" aria-label="X">
+                <SiX />
               </a>
             </Button>
           </div>
