@@ -25,6 +25,20 @@ export default function GettingStartedPage() {
       <h1 className="text-3xl font-bold text-fg-primary tracking-tight">Getting Started</h1>
       <p className="text-fg-secondary mt-2 text-lg">Add Softuq to your project in 2 minutes.</p>
 
+      <div className="mt-8 p-4 rounded-[var(--ds-radius-card)] border border-edge-subtle bg-bg-card">
+        <p className="font-medium text-fg-primary mb-2 text-sm">Prerequisites</p>
+        <ul className="text-sm text-fg-secondary space-y-1 list-disc pl-5">
+          <li>Node.js 18 or newer</li>
+          <li>
+            A React project — Next.js (App Router) or Vite with <Code>@/*</Code> path alias
+          </li>
+          <li>
+            <Code>tailwindcss@4</Code> already set up — init appends its config to your existing{" "}
+            <Code>globals.css</Code>
+          </li>
+        </ul>
+      </div>
+
       <div className="mt-10">
         <Step n={1} title="Initialize">
           <p className="text-fg-secondary">
@@ -32,8 +46,9 @@ export default function GettingStartedPage() {
           </p>
           <CodeBlock title="terminal">{`npx softuq init`}</CodeBlock>
           <p className="text-fg-muted text-sm leading-relaxed">
-            This copies design tokens, Tailwind theme, <Code>cn()</Code> utility, and the theme provider into your
-            project. It also installs <Code>clsx</Code> and <Code>tailwind-merge</Code>.
+            Creates <Code>softuq-tokens.css</Code> + <Code>softuq-theme.css</Code> next to your <Code>globals.css</Code>
+            , copies <Code>cn()</Code> + token helpers into <Code>lib/</Code>, and drops the provider into{" "}
+            <Code>components/</Code>. Installs <Code>clsx</Code> and <Code>tailwind-merge</Code>.
           </p>
         </Step>
 
@@ -202,6 +217,7 @@ npx softuq update button card`}
             "kbd",
             "label",
             "pagination",
+            "placeholder",
             "popover",
             "progress",
             "radio",
