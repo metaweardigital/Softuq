@@ -3,6 +3,18 @@
    Purpose-driven tokens mapped from primitives
    ============================================ */
 
+/* --- Accent (provider-driven, theme-independent) ---
+   Declared on :root only, NOT inside [data-theme] blocks,
+   so SoftuqProvider's inline overrides on <html> cascade
+   into nested data-theme scopes (e.g. CodeBlock, hero terminal). */
+:root {
+  --accent: var(--blue-500);
+  --accent-hover: var(--blue-400);
+  --accent-muted: color-mix(in oklch, var(--accent) 12%, transparent);
+  --accent-border: color-mix(in oklch, var(--accent) 30%, transparent);
+  --accent-text: var(--blue-400);
+}
+
 /* --- Dark Mode (default) --- */
 :root,
 [data-theme="dark"] {
@@ -22,13 +34,6 @@
   --text-muted: var(--gray-700);
   --text-dimmed: var(--gray-750);
   --text-inverse: var(--gray-980);
-
-  /* Accent */
-  --accent: var(--blue-500);
-  --accent-hover: var(--blue-400);
-  --accent-muted: color-mix(in oklch, var(--accent) 12%, transparent);
-  --accent-border: color-mix(in oklch, var(--accent) 30%, transparent);
-  --accent-text: var(--blue-400);
 
   /* Destructive */
   --destructive: var(--red-500);
@@ -109,13 +114,6 @@
   --text-muted: var(--gray-400);
   --text-dimmed: var(--gray-300);
   --text-inverse: var(--gray-50);
-
-  /* Accent */
-  --accent: var(--blue-600);
-  --accent-hover: var(--blue-700);
-  --accent-muted: color-mix(in oklch, var(--accent) 8%, transparent);
-  --accent-border: color-mix(in oklch, var(--accent) 25%, transparent);
-  --accent-text: var(--blue-600);
 
   /* Destructive */
   --destructive: var(--red-600);

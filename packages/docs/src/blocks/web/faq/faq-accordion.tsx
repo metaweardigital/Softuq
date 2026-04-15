@@ -1,10 +1,21 @@
 "use client";
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Badge } from "@softuq/react";
+import type * as React from "react";
 
-type Faq = { q: string; a: string };
+export interface FaqItem {
+  q: string;
+  a: React.ReactNode;
+}
 
-const FAQS: Faq[] = [
+export interface FaqAccordionProps {
+  badge?: string;
+  title?: string;
+  description?: string;
+  faqs?: FaqItem[];
+}
+
+const DEFAULT_FAQS: FaqItem[] = [
   {
     q: "How is Softuq distributed?",
     a: "Tokens ship as an npm package. Components are copied into your project via the CLI, so you own the code and can customize it freely.",
@@ -27,26 +38,31 @@ const FAQS: Faq[] = [
   },
 ];
 
-export default function Faq01() {
+export default function FaqAccordion({
+  badge = "FAQ",
+  title = "Questions, answered",
+  description = "Can't find what you're looking for? Reach out and we'll help.",
+  faqs = DEFAULT_FAQS,
+}: FaqAccordionProps = {}) {
   return (
     <section className="px-[var(--ds-space-page-x)] py-[var(--ds-space-section-y)]">
       <div className="mx-auto max-w-3xl">
         <div className="text-center">
-          <Badge variant="outline" className="mb-[var(--ds-space-stack)]">
-            FAQ
-          </Badge>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-fg-primary">Questions, answered</h2>
-          <p className="mt-[var(--ds-space-stack-sm)] text-base text-fg-muted">
-            Can't find what you're looking for? Reach out and we'll help.
-          </p>
+          {badge ? (
+            <Badge variant="outline" className="mb-[var(--ds-space-stack)]">
+              {badge}
+            </Badge>
+          ) : null}
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-balance text-fg-primary">{title}</h2>
+          {description ? <p className="mt-[var(--ds-space-stack-sm)] text-base text-fg-muted">{description}</p> : null}
         </div>
         <div className="mt-[var(--ds-space-stack-lg)]">
           <Accordion type="single">
-            {FAQS.map((f) => (
+            {faqs.map((f) => (
               <AccordionItem key={f.q} value={f.q}>
                 <AccordionTrigger>{f.q}</AccordionTrigger>
                 <AccordionContent>
-                  <p className="text-sm text-fg-muted leading-relaxed">{f.a}</p>
+                  {typeof f.a === "string" ? <p className="text-sm text-fg-muted leading-relaxed">{f.a}</p> : f.a}
                 </AccordionContent>
               </AccordionItem>
             ))}

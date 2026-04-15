@@ -1,7 +1,7 @@
 {
   "name": "softuq",
-  "version": "0.4.1",
-  "description": "CLI for Softuq — add UI components to your project",
+  "version": "0.5.0",
+  "description": "CLI for Softuq — add UI components and the design skill to your project",
   "type": "module",
   "license": "MIT",
   "homepage": "https://softuq.com",
@@ -13,7 +13,10 @@
     "react",
     "tailwind",
     "ui",
-    "neumorphic"
+    "neumorphic",
+    "claude-code",
+    "skill",
+    "ai"
   ],
   "bin": {
     "softuq": "dist/index.js"
@@ -21,6 +24,7 @@
   "files": [
     "dist",
     "templates",
+    "skill",
     "README.md"
   ],
   "publishConfig": {

@@ -4,6 +4,7 @@ import { add } from "./commands/add.js";
 import { diff } from "./commands/diff.js";
 import { init } from "./commands/init.js";
 import { list } from "./commands/list.js";
+import { skill } from "./commands/skill.js";
 import { update } from "./commands/update.js";
 
 const program = new Command();
@@ -46,5 +47,14 @@ program
   .option("--all", "Update all changed components")
   .option("-y, --yes", "Skip confirmation")
   .action(update);
+
+program
+  .command("skill")
+  .description("Install the Softuq design skill for Claude Code / AI agents")
+  .option("-g, --global", "Install globally to ~/.claude/skills/ (default: project-level)")
+  .option("-d, --dir <dir>", "Custom install directory")
+  .option("--overwrite", "Overwrite existing skill without prompt")
+  .option("-y, --yes", "Skip confirmation")
+  .action(skill);
 
 program.parse();

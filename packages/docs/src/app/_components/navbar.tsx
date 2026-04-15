@@ -3,8 +3,6 @@
 import {
   type AccentPreset,
   Button,
-  buttonVariants,
-  cn,
   type FontPreset,
   FormField,
   Label,
@@ -24,6 +22,7 @@ import {
 import { Moon, Settings2, Sun } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import NavbarSimple, { type NavLinkItem } from "@/blocks/web/header/navbar-simple";
 import { useTheme } from "./providers";
 
 const RADIUS_OPTIONS: RadiusPreset[] = ["none", "sm", "md", "lg", "full"];
@@ -32,20 +31,14 @@ const PALETTE_OPTIONS: PalettePreset[] = ["neutral", "zinc", "stone", "slate", "
 const ACCENT_OPTIONS: AccentPreset[] = ["blue", "violet", "emerald", "amber", "red", "rose", "cyan", "orange"];
 const FONT_OPTIONS: FontPreset[] = ["system", "inter", "geist"];
 
-type NavLink = { href: string; label: string; matchPrefix?: string };
-
-const NAV_LINKS: NavLink[] = [
+const NAV_LINKS: NavLinkItem[] = [
   { href: "/getting-started", label: "Getting Started", matchPrefix: "/getting-started" },
-  { href: "/", label: "Components" },
+  { href: "/components", label: "Components", matchPrefix: "/components" },
   { href: "/foundations", label: "Foundations", matchPrefix: "/foundations" },
   { href: "/blocks", label: "Blocks", matchPrefix: "/blocks" },
   { href: "/templates", label: "Templates", matchPrefix: "/templates" },
+  { href: "/skill", label: "Skill", matchPrefix: "/skill" },
 ];
-
-function isActive(pathname: string, link: NavLink): boolean {
-  if (link.matchPrefix) return pathname === link.matchPrefix || pathname.startsWith(`${link.matchPrefix}/`);
-  return pathname === link.href;
-}
 
 function ThemeSelect<T extends string>({
   label,
@@ -115,44 +108,28 @@ function ThemeToggle() {
   );
 }
 
+function SoftuqBrand() {
+  return (
+    <Link href="/" className="font-sans text-base font-medium tracking-[0.2em] text-fg-primary">
+      softuq
+    </Link>
+  );
+}
+
 export function Navbar() {
   const pathname = usePathname();
   return (
-    <header className="sticky top-0 z-sticky border-b border-edge-subtle bg-surface-base/80 backdrop-blur-glass">
-      <div className="max-w-6xl mx-auto h-14 px-[var(--ds-space-page-x)] flex items-center gap-[var(--ds-space-gap)]">
-        <Link href="/" className="flex items-center gap-2 shrink-0 font-sans">
-          <div className="leading-tight">
-            <div className="text-sm font-bold tracking-tight text-fg-primary">Softuq</div>
-            <div className="text-[10px] text-fg-muted">Component Preview</div>
-          </div>
-        </Link>
-
-        <nav className="flex-1 flex items-center justify-center gap-1">
-          {NAV_LINKS.map((link) => {
-            const active = isActive(pathname, link);
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                aria-current={active ? "page" : undefined}
-                className={cn(
-                  buttonVariants({ variant: "ghost", size: "sm" }),
-                  "font-sans",
-                  active &&
-                    "text-accent-text hover:text-accent-text bg-[color-mix(in_oklch,var(--accent)_14%,transparent)] hover:bg-[color-mix(in_oklch,var(--accent)_18%,transparent)]",
-                )}
-              >
-                {link.label}
-              </Link>
-            );
-          })}
-        </nav>
-
-        <div className="flex items-center gap-2 shrink-0">
+    <NavbarSimple
+      logo={<SoftuqBrand />}
+      links={NAV_LINKS}
+      linkComponent={Link}
+      currentPath={pathname}
+      actions={
+        <>
           <ThemeSettingsPopover />
           <ThemeToggle />
-        </div>
-      </div>
-    </header>
+        </>
+      }
+    />
   );
 }

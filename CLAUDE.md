@@ -86,6 +86,7 @@ Always order from most global → most specific:
 - Body scale: `text-sm` (13→15px), `text-base` (15→18px), `text-lg` (17→20px) — deliberate ~15–20% mobile→desktop bump for readability
 - **Always set explicit `text-*` on `<p>`** — never inherit browser default (16px fixed, no fluid scaling)
 - Paragraph hierarchy: hero lead under H1 = `text-base sm:text-lg`, section description under H2 = `text-base`, in-card description = `text-sm`, caption/helper = `text-xs`
+- **H1/H2 always get `text-balance`** — prevents single-word last lines (widows) on large titles. Never rely on forced `<br />`. Escape hatch: `&nbsp;` between last 2–3 words when balance doesn't break where you want
 - Inputs (`Input`, `Textarea`, `SearchInput`) are pinned to `text-[16px] sm:text-{xs|sm}` — mobile floor at 16px prevents iOS Safari auto-zoom on focus. `Select` is exempt (custom popover, not native input)
 
 ### Spacing
@@ -116,9 +117,18 @@ Always order from most global → most specific:
 - FormField wraps Label + Input/Select/Textarea + FormDescription + FormMessage; `size` prop cascades to children
 - Scrollbar utilities: `.scrollbar-thin` (4px styled), `.scrollbar-hidden` (no scrollbar)
 - Fade-edge utilities: `.fade-edge-r/l/t/b` — mask-based gradient fade with theme-transitioning `background-color` (not `background-image` which can't transition)
-- Code = inline code snippet (hover effect, border). CodeBlock = block-level with syntax highlighting, copy-to-clipboard, always-dark (`data-theme="dark"`). CodeBlock uses `style` props with semantic CSS vars (`var(--bg-card)`, `var(--text-secondary)`, etc.) for colors — Tailwind `@theme` vars don't resolve correctly on child `data-theme` elements. Radius/spacing use Tailwind arbitrary values (`var(--ds-radius-card)`, `var(--ds-space-card)`) since those aren't in `@theme`. Single-pass regex for syntax highlighting (never multi-pass — later rules corrupt HTML from earlier ones). Internal dep: lucide-react.
+- Code = inline code snippet (hover effect, border). CodeBlock = block-level with syntax highlighting, copy-to-clipboard, always-dark (`data-theme="dark"`). `language` prop picks the highlighter: `auto` (default, JS/TSX/shell), `md`/`markdown` (headings, inline code, bold, lists, links), `plain` (no highlighting). CodeBlock uses `style` props with semantic CSS vars (`var(--bg-card)`, `var(--text-secondary)`, etc.) for colors — Tailwind `@theme` vars don't resolve correctly on child `data-theme` elements. Radius/spacing use Tailwind arbitrary values (`var(--ds-radius-card)`, `var(--ds-space-card)`) since those aren't in `@theme`. Single-pass regex per flavor for syntax highlighting (never multi-pass — later rules corrupt HTML from earlier ones). Internal dep: lucide-react.
 - DialogTrigger supports `asChild` prop — pass `<Button>` as child instead of nesting `<button>` in `<button>`
 - See [Component Pattern](docs/guides/component-pattern.md) for full template
+
+### Blocks
+
+Blocks live in `packages/docs/src/blocks/web/*` and `packages/docs/src/blocks/app/*`. They are **self-contained showcase sections** (hero, navbar, faq, footer, etc.) — demoed on `/blocks`, composed into templates, and dogfooded by the docs site itself.
+
+- **Slot-based pattern** — every block ships with sensible defaults so it renders standalone on `/blocks`, but exposes slots for real-world use. Typical props: `logo` / `brand` (ReactNode), `links` (array of `{label, href, matchPrefix?}`), `actions` (ReactNode), `linkComponent` (default `"a"`, pass Next `Link` for client routing), `currentPath` (for active-link styling). Defaults mirror a demo brand ("Acme" + Sparkles); overrides flow in via props.
+- **Dogfooding** — the docs site's `_components/navbar.tsx` wraps `NavbarSimple` (not a hand-rolled header). Home page FAQ + footer use `FaqAccordion` and `FooterMinimal`. When adding marketing sections to the docs site, reach for a block first.
+- **Content props for copy-heavy blocks** — FAQ-style blocks accept `{q, a}[]` where `a` can be a string (renders as `<p className="text-sm text-fg-muted">`) or a ReactNode (rendered as-is, for inline `<Code>` or links).
+- **Refactoring existing blocks to be slot-based** follows `NavbarSimple` → `FaqAccordion` → `FooterMinimal`: extract defaults into a `DEFAULT_*` const, make each slot optional with a fallback, leave existing `<BlockName />` (no-args) usage working.
 
 ## Docs
 
@@ -145,6 +155,8 @@ npx softuq add --all     # add all components
 npx softuq list          # show available components
 npx softuq diff          # show which components have upstream updates
 npx softuq update        # pull updated components (with confirmation)
+npx softuq skill         # install design skill to .claude/skills/ (project)
+npx softuq skill -g      # install globally to ~/.claude/skills/
 ```
 
 - `init` detects framework (React/Svelte), package manager, and project structure
@@ -156,7 +168,8 @@ npx softuq update        # pull updated components (with confirmation)
 - `update` pulls changed components with confirmation prompt, installs new deps if needed
 - Registry: `packages/cli/src/registry/react.json` — maps components to files, npm deps, internal deps
 - Getting started tutorial: `/getting-started` page in docs app
-- Component templates are bundled into the published tarball — `prepublishOnly` → `scripts/sync-templates.mjs` copies `packages/react/src` → `packages/cli/templates/react/`. `getSourceDir()` in `src/utils/registry.ts` prefers bundled `templates/` (npm install) and falls back to sibling `packages/react/src` (monorepo dev). `packages/cli/templates/` is gitignored.
+- `skill` copies `skills/softuq/` (AI coding-agent rules) to `.claude/skills/softuq/` in CWD, or `~/.claude/skills/...` with `--global`. Prompts before overwrite unless `--yes` or `--overwrite`. Skill source is bundled into the tarball the same way as templates.
+- Component templates + skill are bundled into the published tarball — `prepublishOnly` → `scripts/sync-templates.mjs` copies `packages/react/src` → `packages/cli/templates/react/` and `skills/softuq/` → `packages/cli/skill/`. `getSourceDir()` in `src/utils/registry.ts` and `getSkillSource()` in `src/commands/skill.ts` prefer the bundled copy (npm install) and fall back to the monorepo source (dev). Both `packages/cli/templates/` and `packages/cli/skill/` are gitignored.
 
 ## Dev
 

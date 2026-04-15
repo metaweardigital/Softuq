@@ -30,6 +30,24 @@ Body sizes (`sm` / `base` / `lg`) jump **~15–20%** from mobile to desktop — 
 | In-card description | `text-sm` | Smaller, lower in hierarchy |
 | Captions, helpers, footnotes | `text-xs` | Smallest, dimmed color |
 
+## Headings & line breaks
+
+**Always apply `text-balance` to H1 and H2** — it maps to `text-wrap: balance` and tells the browser to distribute words evenly across lines. Prevents single-word last lines (widows) that make large titles look broken.
+
+```tsx
+<h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-balance">
+  A design system for AI-era projects.
+</h1>
+```
+
+Rules:
+
+- **H1/H2 always get `text-balance`** — no exceptions for marketing pages, blocks, templates
+- **H3/H4** — optional; balance helps in narrow cards but usually not needed
+- **Paragraphs (`<p>`) never get `text-balance`** — use `text-pretty` instead if you want to avoid orphans in body copy; balance makes long paragraphs look awkward
+- **Manual `&nbsp;` escape hatch** — if `text-balance` doesn't give the exact break you want, use a non-breaking space between the last 2–3 words: `AI-era&nbsp;projects`
+- **Never rely on forced `<br />`** in titles — they break responsive reflow and look wrong on other viewports
+
 ## Inputs (special case)
 
 Form inputs are pinned to **16px on mobile** to prevent iOS Safari from auto-zooming on focus. Implementation:
