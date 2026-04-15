@@ -40,8 +40,7 @@ Run any command with `--help` for options.
 
 ## Links
 
-- Repository: <https://github.com/metaweardigital/Softuq>
-- Issues: <https://github.com/metaweardigital/Softuq/issues>
+- Website: <https://softuq.com>
 
 ## License
 

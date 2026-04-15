@@ -13,7 +13,7 @@
     "lint": "biome check .",
     "lint:fix": "biome check --fix .",
     "format": "biome format --write .",
-    "publish:cli": "set -a && . ./.env && set +a && pnpm --filter softuq publish --//registry.npmjs.org/:_authToken=$NPM_TOKEN --no-git-checks"
+    "publish:cli": "set -a && . ./.env && set +a && echo \"//registry.npmjs.org/:_authToken=$NPM_TOKEN\" > packages/cli/.npmrc && pnpm --filter softuq publish --no-git-checks; EXIT=$?; rm -f packages/cli/.npmrc; exit $EXIT"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.12",

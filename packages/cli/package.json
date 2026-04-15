@@ -1,18 +1,10 @@
 {
   "name": "softuq",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "CLI for Softuq — add UI components to your project",
   "type": "module",
   "license": "MIT",
-  "homepage": "https://github.com/metaweardigital/Softuq#readme",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/metaweardigital/Softuq.git",
-    "directory": "packages/cli"
-  },
-  "bugs": {
-    "url": "https://github.com/metaweardigital/Softuq/issues"
-  },
+  "homepage": "https://softuq.com",
   "keywords": [
     "softuq",
     "design-system",

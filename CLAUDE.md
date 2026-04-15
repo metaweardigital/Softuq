@@ -136,7 +136,7 @@ Always order from most global → most specific:
 
 ## CLI
 
-CLI tool for adding Softuq to any project. Located in `packages/cli/`.
+CLI tool for adding Softuq to any project. Published as [`softuq`](https://www.npmjs.com/package/softuq) on npm. Source in `packages/cli/`.
 
 ```bash
 npx softuq init          # setup tokens, utils, provider, globals.css
@@ -156,6 +156,7 @@ npx softuq update        # pull updated components (with confirmation)
 - `update` pulls changed components with confirmation prompt, installs new deps if needed
 - Registry: `packages/cli/src/registry/react.json` — maps components to files, npm deps, internal deps
 - Getting started tutorial: `/getting-started` page in docs app
+- Component templates are bundled into the published tarball — `prepublishOnly` → `scripts/sync-templates.mjs` copies `packages/react/src` → `packages/cli/templates/react/`. `getSourceDir()` in `src/utils/registry.ts` prefers bundled `templates/` (npm install) and falls back to sibling `packages/react/src` (monorepo dev). `packages/cli/templates/` is gitignored.
 
 ## Dev
 
@@ -173,6 +174,33 @@ pnpm format     # biome format
   pnpm dev
   ```
 - If dev server returns 500 or won't start, first nuke `.next`: `rm -rf packages/docs/.next`
+
+## Deploy & Publish
+
+### Docs site — Railway
+
+Live at [softuq.com](https://softuq.com). Hosted on Railway, auto-deploys on push to `main`.
+
+- Config: `railway.json` at repo root (Nixpacks builder)
+- Build: `pnpm install --frozen-lockfile && pnpm --filter @softuq/docs build`
+- Start: `pnpm --filter @softuq/docs start` (uses `${PORT:-3333}` so Railway injects its port)
+- Restart policy: `ON_FAILURE`, max 10 retries
+- Root `package.json` pins `packageManager: "pnpm@10.28.1"` and `engines.node: ">=20"` so Nixpacks picks the right toolchain
+
+### CLI — npm
+
+```bash
+pnpm publish:cli
+```
+
+Defined in root `package.json`. Sources `NPM_TOKEN` from `.env` (gitignored), writes a temp `packages/cli/.npmrc` with the auth line, runs `pnpm --filter softuq publish --no-git-checks`, then removes the `.npmrc` (even on failure). `prepublishOnly` in `packages/cli/package.json` runs `sync-templates` + `build` automatically.
+
+- `.env` holds `NPM_TOKEN=npm_...` — granular token with publish scope on `softuq` (never commit)
+- `.npmrc` is gitignored — the temp file the publish script writes would leak the token otherwise
+- Do NOT pass `--//registry.npmjs.org/:_authToken=$NPM_TOKEN` as a pnpm flag — pnpm swallows it, npm never sees it, publish falls back to interactive OTP and fails with `EOTP`
+- `packages/cli/package.json` → `"access": "public"`, `"files": ["dist", "templates", "README.md"]`, no `repository`/`bugs` fields (repo is private — don't leak github links into npm metadata)
+- Bin entry: `"bin": { "softuq": "dist/index.js" }` — no leading `./` (npm strips invalid bin values silently on publish)
+- Bump `packages/cli/package.json` `version` before running `publish:cli` (npm rejects republish of same version)
 
 ## Versioning
 

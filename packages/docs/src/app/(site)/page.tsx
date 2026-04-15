@@ -385,8 +385,11 @@ export default function ComponentPreview() {
                   </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="b3">
-                  <AccordionTrigger>Where can I report bugs?</AccordionTrigger>
-                  <AccordionContent>Short answer: GitHub Issues.</AccordionContent>
+                  <AccordionTrigger>Is it TypeScript-first?</AccordionTrigger>
+                  <AccordionContent>
+                    Yes. Every component ships with full <span className="text-accent">TypeScript types</span> — props,
+                    variants, and refs are fully inferred.
+                  </AccordionContent>
                 </AccordionItem>
               </Accordion>
             </div>
