@@ -7,7 +7,6 @@ import { type BlockType, getBlock, getCategory, isBlockType } from "@/blocks/reg
 import { PageShell } from "../../../../_components/page-shell";
 
 const MIN_HEIGHT = 280;
-const MAX_HEIGHT = 1600;
 
 export default function BlockDetailPage() {
   const params = useParams<{ type: string; category: string; slug: string }>();
@@ -37,7 +36,7 @@ export default function BlockDetailPage() {
       const doc = iframe.contentDocument;
       if (!doc?.body) return;
       const h = doc.body.scrollHeight;
-      setHeight(Math.min(MAX_HEIGHT, Math.max(MIN_HEIGHT, h)));
+      setHeight(Math.max(MIN_HEIGHT, h));
     };
 
     const onLoad = () => {

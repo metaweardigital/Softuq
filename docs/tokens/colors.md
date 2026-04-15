@@ -298,7 +298,7 @@ Neutral borders for chrome, dividers, inputs.
 | `--border-subtle` | `oklch(1 0 0 / 0.08)` | `oklch(0 0 0 / 0.06)` |
 | `--border-default` | `oklch(1 0 0 / 0.12)` | `oklch(0 0 0 / 0.1)` |
 | `--border-strong` | gray-800 | gray-250 |
-| `--border-accent` | blue-500 | blue-600 |
+| `--border-accent` | `var(--accent)` | `var(--accent)` |
 
 Status-tinted borders (`--accent-border`, `--destructive-border`, `--success-border`, `--warning-border`) live alongside the base colors above.
 

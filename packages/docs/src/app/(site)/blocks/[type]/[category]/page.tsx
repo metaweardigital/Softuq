@@ -16,7 +16,6 @@ const VIEWPORT_WIDTH: Record<Viewport, string> = {
 };
 
 const MIN_HEIGHT = 280;
-const MAX_HEIGHT = 960;
 
 function BlockPreview({ block }: { block: BlockMeta }) {
   const previewHref = `/blocks-preview/${block.type}/${block.category}/${block.slug}`;
@@ -32,7 +31,7 @@ function BlockPreview({ block }: { block: BlockMeta }) {
       const doc = iframe.contentDocument;
       if (!doc?.body) return;
       const h = doc.body.scrollHeight;
-      setHeight(Math.min(MAX_HEIGHT, Math.max(MIN_HEIGHT, h)));
+      setHeight(Math.max(MIN_HEIGHT, h));
     };
 
     const onLoad = () => {

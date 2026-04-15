@@ -61,13 +61,16 @@ export default function Pricing01() {
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-fg-primary">
             Simple pricing. No surprises.
           </h2>
-          <p className="mt-[var(--ds-space-stack-sm)] text-fg-muted">
+          <p className="mt-[var(--ds-space-stack-sm)] text-base text-fg-muted">
             Start free, scale when you need to. Cancel anytime — no questions asked.
           </p>
         </div>
         <div className="mt-[var(--ds-space-stack-lg)] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[var(--ds-space-gap)]">
           {TIERS.map((tier) => (
-            <Card key={tier.name} className={tier.featured ? "relative border-edge-accent" : undefined}>
+            <Card
+              key={tier.name}
+              className={`flex flex-col h-full ${tier.featured ? "relative border-edge-accent" : ""}`}
+            >
               {tier.featured && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2">
                   <Badge>Most popular</Badge>
@@ -77,7 +80,7 @@ export default function Pricing01() {
                 <CardTitle>{tier.name}</CardTitle>
                 <CardDescription>{tier.description}</CardDescription>
               </CardHeader>
-              <CardContent className="space-y-[var(--ds-space-gap)]">
+              <CardContent className="flex-1 space-y-[var(--ds-space-gap)]">
                 <div className="flex items-baseline gap-1">
                   <span className="text-4xl font-bold tracking-tight text-fg-primary">{tier.price}</span>
                   <span className="text-sm text-fg-muted">/ {tier.cadence}</span>

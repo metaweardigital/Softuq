@@ -53,7 +53,7 @@ export default function Features01() {
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-fg-primary">
             Everything you need, nothing you don't
           </h2>
-          <p className="mt-[var(--ds-space-stack-sm)] text-fg-muted">
+          <p className="mt-[var(--ds-space-stack-sm)] text-base text-fg-muted">
             A compact set of primitives and blocks. Tokens do the heavy lifting so your product stays consistent as it
             grows.
           </p>

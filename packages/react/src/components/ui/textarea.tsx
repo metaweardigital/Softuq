@@ -5,7 +5,7 @@ import { cn } from "../../lib/utils";
 const textareaVariants = cva(
   [
     "flex w-full min-h-[120px] resize-y bg-surface-input text-fg-primary placeholder:text-fg-muted",
-    "border border-edge-subtle rounded-[var(--ds-radius-textarea)] px-[var(--ds-space-input-x)] py-[var(--ds-space-input-y)] text-sm",
+    "border border-edge-subtle rounded-[var(--ds-radius-textarea)] px-[var(--ds-space-input-x)] py-[var(--ds-space-input-y)] text-[16px] sm:text-sm",
     "transition-colors duration-normal ease-soft",
     "focus:outline-none focus:ring-2 focus:ring-ring/20 focus:border-accent",
     "disabled:cursor-not-allowed disabled:opacity-50",

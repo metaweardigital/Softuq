@@ -96,6 +96,7 @@ export { Input, type InputProps, inputVariants } from "./components/ui/input";
 export { Kbd, type KbdProps, kbdVariants } from "./components/ui/kbd";
 export { Label, type LabelProps, labelVariants } from "./components/ui/label";
 export { Pagination, type PaginationProps } from "./components/ui/pagination";
+export { Placeholder, type PlaceholderProps, placeholderVariants } from "./components/ui/placeholder";
 export {
   Popover,
   PopoverContent,

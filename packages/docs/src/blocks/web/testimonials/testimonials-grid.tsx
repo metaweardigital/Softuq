@@ -43,7 +43,7 @@ export default function Testimonials01() {
             Loved by builders
           </Badge>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-fg-primary">What teams are saying</h2>
-          <p className="mt-[var(--ds-space-stack-sm)] text-fg-muted">
+          <p className="mt-[var(--ds-space-stack-sm)] text-base text-fg-muted">
             Real feedback from designers and engineers shipping production apps.
           </p>
         </div>

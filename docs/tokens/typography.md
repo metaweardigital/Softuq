@@ -9,13 +9,37 @@ All sizes use fluid `clamp()` — scales smoothly between mobile and desktop.
 | Token | Mobile | Desktop | Ratio |
 |---|---|---|---|
 | `--text-xs` | 11px | 12px | — |
-| `--text-sm` | 13px | 14px | ×1.17 |
-| `--text-base` | 15px | 16px | ×1.14 |
-| `--text-lg` | 17px | 18px | ×1.13 |
+| `--text-sm` | 13px | 15px | ×1.15 |
+| `--text-base` | 15px | 18px | ×1.20 |
+| `--text-lg` | 17px | 20px | ×1.18 |
 | `--text-xl` | 19px | 22px | ×1.22 |
 | `--text-2xl` | 22px | 28px | ×1.27 |
 | `--text-3xl` | 28px | 36px | ×1.29 |
 | `--text-4xl` | 34px | 48px | ×1.33 |
+
+## Body scale (paragraphs)
+
+Body sizes (`sm` / `base` / `lg`) jump **~15–20%** from mobile to desktop — visible enough to feel comfortable on large screens. This is deliberate; earlier scales only bumped 6% which was invisible.
+
+**Always set an explicit `text-*` class on `<p>`** — never inherit the browser default (16px fixed). Hierarchy:
+
+| Context | Class | Notes |
+|---|---|---|
+| Hero lead (under H1) | `text-base sm:text-lg` | Largest body text, prominent intro |
+| Section description (under H2) | `text-base` | Default for marketing sections |
+| In-card description | `text-sm` | Smaller, lower in hierarchy |
+| Captions, helpers, footnotes | `text-xs` | Smallest, dimmed color |
+
+## Inputs (special case)
+
+Form inputs are pinned to **16px on mobile** to prevent iOS Safari from auto-zooming on focus. Implementation:
+
+```tsx
+sm: "h-8 ... text-[16px] sm:text-xs",
+md: "h-10 ... text-[16px] sm:text-sm",
+```
+
+Applied to `Input`, `Textarea`, `SearchInput`. Independent of body scale — won't change when `--text-*` tokens are tweaked. `Select` is exempt (custom popover, not a native input → no iOS zoom).
 
 ## Font presets
 

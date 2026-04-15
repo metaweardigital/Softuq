@@ -101,8 +101,8 @@ const searchInputVariants = cva(
         error: "border-destructive focus-within:ring-destructive/20 focus-within:border-destructive",
       },
       inputSize: {
-        sm: "h-8 px-[var(--ds-space-button-sm)] text-xs",
-        md: "h-10 px-[var(--ds-space-input-x)] text-sm",
+        sm: "h-8 px-[var(--ds-space-button-sm)] text-[16px] sm:text-xs",
+        md: "h-10 px-[var(--ds-space-input-x)] text-[16px] sm:text-sm",
       },
     },
     defaultVariants: {

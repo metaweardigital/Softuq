@@ -9,16 +9,27 @@ import SearchBar from "./app/search/search-bar";
 import SettingsProfile from "./app/settings/settings-profile";
 import SidebarNav from "./app/sidebar/sidebar-nav";
 import TeamList from "./app/user-management/team-list";
+import BlogGrid from "./web/blog/blog-grid";
+import ContactSplit from "./web/contact/contact-split";
 import CtaCentered from "./web/cta/cta-centered";
+import CtaNewsletter from "./web/cta/cta-newsletter";
 import FaqAccordion from "./web/faq/faq-accordion";
+import FaqTwoColumn from "./web/faq/faq-two-column";
+import FeaturesAlternating from "./web/features/features-alternating";
 import FeaturesGrid from "./web/features/features-grid";
 import FooterColumns from "./web/footer/footer-columns";
+import FooterMinimal from "./web/footer/footer-minimal";
 import NavbarMega from "./web/header/navbar-mega";
 import NavbarSearch from "./web/header/navbar-search";
 import NavbarSimple from "./web/header/navbar-simple";
 import HeroCentered from "./web/hero/hero-centered";
+import HeroSplit from "./web/hero/hero-split";
 import LogosCloud from "./web/logos/logos-cloud";
 import PricingTiers from "./web/pricing/pricing-tiers";
+import PricingToggle from "./web/pricing/pricing-toggle";
+import StatsGrid from "./web/stats/stats-grid";
+import TeamGrid from "./web/team/team-grid";
+import TestimonialsFeatured from "./web/testimonials/testimonials-featured";
 import TestimonialsGrid from "./web/testimonials/testimonials-grid";
 
 export type BlockType = "web" | "app";
@@ -208,10 +219,24 @@ export const BLOCKS: BlockMeta[] = [
   },
   {
     type: "web",
+    category: "hero",
+    slug: "hero-split",
+    name: "Split hero with dashboard preview",
+    component: HeroSplit,
+  },
+  {
+    type: "web",
     category: "features",
     slug: "features-grid",
     name: "Three-column feature grid",
     component: FeaturesGrid,
+  },
+  {
+    type: "web",
+    category: "features",
+    slug: "features-alternating",
+    name: "Alternating zig-zag feature rows",
+    component: FeaturesAlternating,
   },
   {
     type: "web",
@@ -222,10 +247,24 @@ export const BLOCKS: BlockMeta[] = [
   },
   {
     type: "web",
+    category: "cta",
+    slug: "cta-newsletter",
+    name: "Newsletter signup with inline input",
+    component: CtaNewsletter,
+  },
+  {
+    type: "web",
     category: "pricing",
     slug: "pricing-tiers",
     name: "Three-tier pricing with featured plan",
     component: PricingTiers,
+  },
+  {
+    type: "web",
+    category: "pricing",
+    slug: "pricing-toggle",
+    name: "Pricing with monthly/yearly toggle",
+    component: PricingToggle,
   },
   {
     type: "web",
@@ -236,10 +275,24 @@ export const BLOCKS: BlockMeta[] = [
   },
   {
     type: "web",
+    category: "testimonials",
+    slug: "testimonials-featured",
+    name: "Featured quote with supporting grid",
+    component: TestimonialsFeatured,
+  },
+  {
+    type: "web",
     category: "faq",
     slug: "faq-accordion",
     name: "Single-open accordion FAQ",
     component: FaqAccordion,
+  },
+  {
+    type: "web",
+    category: "faq",
+    slug: "faq-two-column",
+    name: "Two-column FAQ cards",
+    component: FaqTwoColumn,
   },
   {
     type: "web",
@@ -250,10 +303,45 @@ export const BLOCKS: BlockMeta[] = [
   },
   {
     type: "web",
+    category: "stats",
+    slug: "stats-grid",
+    name: "Four-metric stats grid with deltas",
+    component: StatsGrid,
+  },
+  {
+    type: "web",
+    category: "team",
+    slug: "team-grid",
+    name: "Team member grid with socials",
+    component: TeamGrid,
+  },
+  {
+    type: "web",
+    category: "contact",
+    slug: "contact-split",
+    name: "Contact form with info sidebar",
+    component: ContactSplit,
+  },
+  {
+    type: "web",
+    category: "blog",
+    slug: "blog-grid",
+    name: "Three-column blog post grid",
+    component: BlogGrid,
+  },
+  {
+    type: "web",
     category: "footer",
     slug: "footer-columns",
     name: "Four-column footer with socials",
     component: FooterColumns,
+  },
+  {
+    type: "web",
+    category: "footer",
+    slug: "footer-minimal",
+    name: "Single-line minimal footer",
+    component: FooterMinimal,
   },
   {
     type: "app",

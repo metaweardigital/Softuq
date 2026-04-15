@@ -107,7 +107,11 @@ function DesignYstemProvider({
   const [radius, setRadius] = React.useState<RadiusPreset>(initialRadius);
   const [spacing, setSpacing] = React.useState<SpacingPreset>(initialSpacing);
   const [font, setFont] = React.useState<FontPreset>(initialFont);
-  const hydratedRef = React.useRef(false);
+  // useState (not useRef) so the Write effect only fires AFTER the Read effect's
+  // state updates have committed. A synchronous ref flip would let Write run in
+  // the same effect pass with stale (default) state, overwriting localStorage
+  // with defaults — which cross-iframe storage events then propagate.
+  const [hydrated, setHydrated] = React.useState(false);
 
   // One-shot: read localStorage after mount and sync state.
   // Pre-hydration script already applied the matching CSS vars, so no flash.
@@ -118,7 +122,7 @@ function DesignYstemProvider({
     if (stored.radius) setRadius(stored.radius);
     if (stored.spacing) setSpacing(stored.spacing);
     if (stored.font) setFont(stored.font);
-    hydratedRef.current = true;
+    setHydrated(true);
   }, [storageKey]);
 
   // Tracks whether the pending state update was triggered by a cross-window
@@ -131,7 +135,7 @@ function DesignYstemProvider({
   // already wrote the correct (stored) values; running this with defaults would
   // briefly overwrite them and cause a visible flash.
   React.useEffect(() => {
-    if (!hydratedRef.current) return;
+    if (!hydrated) return;
     const root = document.documentElement;
     const vars = {
       ...PALETTE_PRESETS[palette],
@@ -154,7 +158,7 @@ function DesignYstemProvider({
       }
     }
     fromStorageRef.current = false;
-  }, [storageKey, palette, accent, radius, spacing, font]);
+  }, [hydrated, storageKey, palette, accent, radius, spacing, font]);
 
   // Sync across windows (iframe previews <-> parent navbar)
   React.useEffect(() => {

@@ -96,6 +96,11 @@
       "dependencies": ["class-variance-authority", "lucide-react"],
       "registryDeps": []
     },
+    "placeholder": {
+      "files": ["components/ui/placeholder.tsx"],
+      "dependencies": ["class-variance-authority", "lucide-react"],
+      "registryDeps": []
+    },
     "popover": {
       "files": ["components/ui/popover.tsx"],
       "dependencies": [],

@@ -16,7 +16,7 @@ export default function Cta01() {
         <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-fg-primary">
           Ship something you're proud of
         </h2>
-        <p className="mt-[var(--ds-space-stack-sm)] text-fg-secondary max-w-xl mx-auto">
+        <p className="mt-[var(--ds-space-stack-sm)] text-base text-fg-secondary max-w-xl mx-auto">
           Copy the components, own the code. No lock-in, no package sprawl — just a system that scales with you.
         </p>
         <div className="mt-[var(--ds-space-stack-lg)] flex flex-col sm:flex-row items-center justify-center gap-[var(--ds-space-gap)]">

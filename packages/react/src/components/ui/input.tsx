@@ -19,8 +19,8 @@ const inputVariants = cva(
         success: "border-success focus:ring-success/20 focus:border-success",
       },
       inputSize: {
-        sm: "h-8 px-[var(--ds-space-button-sm)] text-xs",
-        md: "h-10 px-[var(--ds-space-input-x)] text-sm",
+        sm: "h-8 px-[var(--ds-space-button-sm)] text-[16px] sm:text-xs",
+        md: "h-10 px-[var(--ds-space-input-x)] text-[16px] sm:text-sm",
       },
     },
     defaultVariants: {

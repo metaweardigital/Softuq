@@ -224,6 +224,50 @@ export default function TypographyFoundationPage() {
           </section>
 
           <section>
+            <h2 className="text-lg font-semibold text-fg-primary mb-2">Body text scales deliberately</h2>
+            <p className="text-sm text-fg-muted mb-6">
+              Body sizes (<strong>sm / base / lg</strong>) jump <strong>~15–20%</strong> from mobile to desktop — enough
+              to feel comfortable on large screens, not just a token gesture. <strong>base</strong> goes 15→18px,{" "}
+              <strong>lg</strong> 17→20px. Headings scale on top of that, so the hierarchy stays intact at every
+              viewport.
+            </p>
+            <Card>
+              <CardContent className="pt-[var(--ds-space-card)] space-y-[var(--ds-space-stack)]">
+                <div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <Badge variant="outline" size="sm">
+                      Body
+                    </Badge>
+                    <span className="text-xs font-mono text-fg-muted">--text-base</span>
+                    <span className="text-xs text-fg-muted">15px → 18px (fluid)</span>
+                  </div>
+                  <p className="text-base text-fg-secondary">
+                    Paragraphs use fluid{" "}
+                    <code className="text-xs bg-surface-elevated px-1 py-0.5 rounded">clamp()</code> so prose stays
+                    readable on phones and breathes on desktop. Resize the window to feel it.
+                  </p>
+                </div>
+                <div className="border-t border-edge-subtle pt-[var(--ds-space-stack)]">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Badge variant="outline" size="sm">
+                      Inputs
+                    </Badge>
+                    <span className="text-xs font-mono text-fg-muted">Input / Textarea / Search</span>
+                    <span className="text-xs text-fg-muted">16px floor on mobile</span>
+                  </div>
+                  <p className="text-sm text-fg-secondary">
+                    Form inputs are a special case — they’re hard-pinned to <strong>16px</strong> on mobile (
+                    <code className="text-xs bg-surface-elevated px-1 py-0.5 rounded">text-[16px] sm:text-sm</code>) to
+                    prevent iOS Safari from auto-zooming on focus. This rule is independent of the body scale and won’t
+                    change when you tweak{" "}
+                    <code className="text-xs bg-surface-elevated px-1 py-0.5 rounded">--text-*</code> tokens.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          </section>
+
+          <section>
             <h2 className="text-lg font-semibold text-fg-primary mb-2">Scale ratio</h2>
             <p className="text-sm text-fg-muted mb-6">
               Progressive ratio — body text steps are tight (~1.15), heading jumps are larger (~1.33).

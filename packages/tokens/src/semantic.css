@@ -55,7 +55,7 @@
   --border-subtle: oklch(1 0 0 / 0.08);
   --border-default: oklch(1 0 0 / 0.12);
   --border-strong: var(--gray-800);
-  --border-accent: var(--blue-500);
+  --border-accent: var(--accent);
 
   /* Shadows — dark: high opacity black (tint invisible on dark bg) */
   --shadow-sm: 0 1px 2px oklch(0 0 0 / 0.5);
@@ -142,7 +142,7 @@
   --border-subtle: oklch(0 0 0 / 0.06);
   --border-default: oklch(0 0 0 / 0.1);
   --border-strong: var(--gray-250);
-  --border-accent: var(--blue-600);
+  --border-accent: var(--accent);
 
   /* Shadows — palette-tinted via gray-500 */
   --shadow-sm: 0 2px 6px color-mix(in oklch, var(--gray-500) 8%, transparent);

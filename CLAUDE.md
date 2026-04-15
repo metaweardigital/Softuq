@@ -79,6 +79,14 @@ Always order from most global → most specific:
 - Background elevation order (dark): `bg-base → bg-input → bg-card → bg-elevated → bg-popover`
 - Light mode shadows: palette-tinted via `color-mix` with `var(--gray-500)`, dark mode: plain black high opacity
 - Non-changing scales `--dark-{5..90,100}` (gray-980 alpha) and `--light-{5..90,100}` (gray-50 alpha) live in a separate `:root {}` block in `semantic.css` — palette-aware, never flip with theme. Use for overlays, imagery scrims, theme-independent chips (e.g. block hover badges in template previews). `-100` = solid.
+- `--border-accent` follows the active `--accent` (never hardcoded to a palette color) — featured cards, focused inputs, and accent borders auto-recolor when the user changes accent.
+
+### Typography
+
+- Body scale: `text-sm` (13→15px), `text-base` (15→18px), `text-lg` (17→20px) — deliberate ~15–20% mobile→desktop bump for readability
+- **Always set explicit `text-*` on `<p>`** — never inherit browser default (16px fixed, no fluid scaling)
+- Paragraph hierarchy: hero lead under H1 = `text-base sm:text-lg`, section description under H2 = `text-base`, in-card description = `text-sm`, caption/helper = `text-xs`
+- Inputs (`Input`, `Textarea`, `SearchInput`) are pinned to `text-[16px] sm:text-{xs|sm}` — mobile floor at 16px prevents iOS Safari auto-zoom on focus. `Select` is exempt (custom popover, not native input)
 
 ### Spacing
 

@@ -36,7 +36,7 @@ export default function Faq01() {
             FAQ
           </Badge>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-fg-primary">Questions, answered</h2>
-          <p className="mt-[var(--ds-space-stack-sm)] text-fg-muted">
+          <p className="mt-[var(--ds-space-stack-sm)] text-base text-fg-muted">
             Can't find what you're looking for? Reach out and we'll help.
           </p>
         </div>

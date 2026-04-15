@@ -27,7 +27,10 @@ export function Providers({ children }: { children: React.ReactNode }) {
   // Pre-hydration script already applied the correct data-theme attribute,
   // so there's no visual flash while React catches up via the effect below.
   const [theme, setThemeState] = React.useState<Theme>("dark");
-  const hydratedRef = React.useRef(false);
+  // useState (not useRef) so the Write effect only fires AFTER the Read effect's
+  // state updates have committed. A synchronous ref flip would let Write run in
+  // the same effect pass with stale (default) state, overwriting localStorage.
+  const [hydrated, setHydrated] = React.useState(false);
 
   // One-shot: read localStorage after mount and sync state.
   React.useEffect(() => {
@@ -37,7 +40,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
     } catch {
       // ignore
     }
-    hydratedRef.current = true;
+    setHydrated(true);
   }, []);
 
   // Don't persist updates that arrived via a cross-window storage event —
@@ -48,7 +51,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
   // script already set the correct attribute; overriding it here with the default
   // would briefly flash the wrong theme.
   React.useEffect(() => {
-    if (!hydratedRef.current) return;
+    if (!hydrated) return;
     document.documentElement.setAttribute("data-theme", theme);
     if (!fromStorageRef.current) {
       try {
@@ -60,7 +63,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
       }
     }
     fromStorageRef.current = false;
-  }, [theme]);
+  }, [hydrated, theme]);
 
   // Sync across windows (iframe previews <-> parent navbar)
   React.useEffect(() => {

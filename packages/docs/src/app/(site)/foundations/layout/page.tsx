@@ -1,9 +1,18 @@
 "use client";
 
-import { Badge, Button } from "@designystem/react";
+import { Badge, Button, Placeholder } from "@designystem/react";
 import { ArrowRight, Monitor, Smartphone, Tablet } from "lucide-react";
 import * as React from "react";
 import { PageShell } from "../../_components/page-shell";
+
+const RATIOS = [
+  { ratio: "square", hint: "1 / 1" },
+  { ratio: "portrait", hint: "2 / 3" },
+  { ratio: "landscape", hint: "3 / 2" },
+  { ratio: "classic", hint: "4 / 3" },
+  { ratio: "video", hint: "16 / 9" },
+  { ratio: "wide", hint: "21 / 9" },
+] as const;
 
 const BREAKPOINTS = [
   { name: "base", min: "0px", label: "Mobile", icon: Smartphone },
@@ -270,6 +279,35 @@ export default function LayoutFoundationPage() {
               render both sizes, toggle visibility with breakpoint utilities.
             </p>
             <ResponsiveButtonDemo />
+          </section>
+
+          <section>
+            <h2 className="text-lg font-semibold text-fg-primary mb-4">Aspect ratios</h2>
+            <p className="text-sm text-fg-muted mb-6">
+              <strong>Placeholder</strong> is a ratio-locked primitive for media slots — hero visuals, blog thumbnails,
+              team avatars, feature illustrations. Six presets, all pinned to the same baseline so the proportions are
+              easy to compare. <code className="font-mono text-xs text-accent-text">variant="dashed"</code> reads as an
+              empty / drop-zone state.
+            </p>
+            <div className="rounded-[var(--ds-radius-card)] border border-edge-subtle bg-surface-card overflow-hidden">
+              <div className="px-5 py-3 border-b border-edge-subtle">
+                <h3 className="text-sm font-medium text-fg-primary">Placeholder ratios</h3>
+                <p className="text-xs text-fg-muted">Same height, width derived from the aspect ratio.</p>
+              </div>
+              <div className="p-[var(--ds-space-card)] overflow-x-auto">
+                <div className="flex flex-wrap items-end gap-5">
+                  {RATIOS.map((r) => (
+                    <div key={r.ratio} className="flex flex-col items-start gap-2">
+                      <Placeholder ratio={r.ratio} className="h-28 w-auto" />
+                      <div className="flex items-center gap-2 font-mono text-xs">
+                        <span className="text-accent-text">{r.ratio}</span>
+                        <span className="text-fg-dimmed">{r.hint}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </section>
 
           <section>
