@@ -7,7 +7,8 @@
     "dev": "pnpm --filter @softuq/docs dev",
     "lint": "biome check .",
     "lint:fix": "biome check --fix .",
-    "format": "biome format --write ."
+    "format": "biome format --write .",
+    "publish:cli": "set -a && . ./.env && set +a && pnpm --filter softuq publish --//registry.npmjs.org/:_authToken=$NPM_TOKEN --no-git-checks"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.12",
