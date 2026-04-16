@@ -17,6 +17,7 @@ program
   .option("-f, --framework <framework>", "Framework to use (react, svelte)")
   .option("-d, --dir <dir>", "Component directory (default: src/components/ui)")
   .option("-y, --yes", "Skip prompts and use defaults")
+  .option("--no-starter", "Skip the starter landing page (provider is still wired)")
   .action(init);
 
 program

@@ -43,6 +43,7 @@ Always set the class. Never leave `<p>` bare — browser default is 16px fixed, 
 - H1 / H2 — **always `text-balance`**. No exceptions.
 - Escape hatch for exact breaks: `&nbsp;` between last 2–3 words (never `<br />`)
 - Never hardcode widths to force line breaks
+- Font family comes from the `headingFont` axis (`sans` / `lora` / `playfair` / `fraunces`) — don't hardcode `font-serif` or `font-[Playfair]` on headings, the provider handles it
 
 **Inputs**
 
@@ -216,6 +217,7 @@ If you catch yourself doing any of these, STOP and fix:
 | `<Button><button>...</button></Button>` | `<DialogTrigger asChild><Button>...</Button></DialogTrigger>` |
 | Hardcoded `rounded-md` on DS components | `rounded-[var(--ds-radius-card)]` |
 | Forced `<br />` in headings | `text-balance` or `&nbsp;` |
+| `font-serif` / `font-[Playfair]` on h1/h2 | Use `headingFont` provider axis |
 | `w-4 h-4` on icon | `size-4` |
 | `h-8` on sm Input/SearchInput (overriding mobile height) | Don't — component already does `h-10 sm:h-8` |
 | Full-width TabsList on desktop | Don't — component already does `w-full sm:w-auto sm:self-center` |

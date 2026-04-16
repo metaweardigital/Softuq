@@ -37,6 +37,11 @@ Dark-mode elevation order (each layer sits on top of the previous):
 | `bg-bg-popover` | Dropdowns, menus, tooltips |
 | `bg-bg-hover` | Hover state for interactive elements |
 | `bg-bg-selected` | Selected list items, active nav links |
+| `bg-bg-overlay` | Modal scrims, dimmed backdrops behind dialogs/sheets |
+
+### Glass
+
+Frosted-panel utilities (use via `bg-[var(--glass-bg)]` + `backdrop-blur-[var(--glass-blur)]` + `border-[var(--glass-border)]`). Palette-aware, theme-transitioning. Use for floating nav bars, sticky toolbars, overlay panels where translucency is wanted.
 
 ### Border (`border-edge-*`)
 
@@ -89,20 +94,23 @@ Same pattern for `destructive`, `success`, `warning`:
 
 ## Radius
 
-Use component-specific tokens from `SoftuqProvider`:
+Use component-specific tokens from `SoftuqProvider` (driven by the `radius` axis — `none` / `sm` / `md` / `lg` / `full`):
 
 | Token | Typical element |
 |---|---|
 | `--ds-radius-button` | Buttons, tags |
 | `--ds-radius-input` | Inputs, selects |
-| `--ds-radius-card` | Cards, panels, code blocks |
-| `--ds-radius-badge` | Badges |
+| `--ds-radius-textarea` | Textareas (slightly softer than inputs on some presets) |
+| `--ds-radius-card` | Cards, panels, code blocks, dialogs, popovers |
+| `--ds-radius-checkbox` | Checkbox |
+| `--ds-radius-tooltip` | Tooltips, toasts |
+| `--ds-radius-avatar` | Avatars (becomes `rounded-full` on `lg`/`full` presets) |
 
 ```tsx
 <div className="rounded-[var(--ds-radius-card)]">
 ```
 
-**Hardcoded `rounded-full` is allowed for:** Avatar (lg/full preset), Radio, Toggle, Progress.
+**Hardcoded `rounded-full` is allowed for:** Avatar (on `lg`/`full` preset the token already resolves to `full`), Radio, Toggle, Progress.
 
 **Nested radius rule:** Outer radius must be >= inner radius. Never the reverse — it creates visible gaps at corners.
 

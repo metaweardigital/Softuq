@@ -28,6 +28,21 @@ Ordered tight → loose. Pick by semantic relationship, not visual guess.
 | `--ds-space-section-y` | Vertical section spacing. Fluid `clamp()` |
 | `--ds-space-gap` | Grid / flex gap for columns and rows |
 | `--ds-space-card` | Inner padding for cards, panels |
+| `--ds-space-card-sm` | Compact card padding — dense list items, toasts, small surfaces |
+
+### Component padding
+
+Inputs and buttons size themselves from tokens too — don't override with raw Tailwind.
+
+| Token | Use |
+|---|---|
+| `--ds-space-input-x` | Input / select / textarea horizontal padding |
+| `--ds-space-input-y` | Input / select / textarea vertical padding |
+| `--ds-space-button-sm` | Button `sm` horizontal padding |
+| `--ds-space-button-md` | Button `md` horizontal padding (default) |
+| `--ds-space-button-lg` | Button `lg` horizontal padding |
+
+These are already wired into `Input`, `Textarea`, `Select`, and `Button`. Only reference them directly when composing a custom control that should match DS density.
 
 ### App rhythm (dashboards, auth, admin UI)
 

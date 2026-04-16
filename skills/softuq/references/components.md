@@ -100,12 +100,21 @@ Complex components split into multiple parts for composability. Example: `Card` 
 Components with composable APIs currently:
 - `Card` — header, title, description, content, footer
 - `Dialog` — trigger, content, header, title, description, footer
-- `Select` — trigger, content, item, group, label, separator
+- `Select` — trigger, content, item, group, label, separator. Supports single + multi (`multiple` prop) with responsive tag display (`maxTags`, default 2), `+N` counter, and width-based breakpoints.
 - `Accordion` — item, trigger, content
-- `Breadcrumb` — list, item, link, page, separator, ellipsis, collapsed
-- `Search` — input, content, item, group
+- `Breadcrumb` — list, item, link, page, separator, ellipsis, collapsed (`BreadcrumbCollapsed` wraps ellipsis + DropdownMenu for collapsed middle levels)
+- `Search` — input, content, item, group. `SearchInput` works standalone (no wrapper needed). Props: `loading`, `tags`, `shortcut`.
+- `NavigationMenu` — list, item, trigger, content, link, viewport. Hover-triggered mega-menu with auto-positioned portal-rendered viewport. Use `navigationMenuTriggerStyle()` for standalone link styling.
+- `SectionNav` — group, item. Auto-tracks visible sections via IntersectionObserver (`observeSelector`) or accepts controlled `activeId`. Mobile: dots inheriting text color.
 
 **Don't add props to composable components to skip the composition.** If `Card` feels verbose, the answer is a wrapper in the consumer's code, not a new prop.
+
+## Code display
+
+Two components, different roles:
+
+- `Code` — **inline** snippet. Hover effect, border. Use inside paragraphs for identifiers, CSS vars, short references.
+- `CodeBlock` — **block-level** with syntax highlighting + copy-to-clipboard. Always-dark (`data-theme="dark"` internally, independent of page theme). `language` prop: `auto` (default, JS/TSX/shell), `md`/`markdown`, or `plain`. Never render markdown code blocks as raw `<pre>` — use `CodeBlock`.
 
 ## Variants via className (not props)
 

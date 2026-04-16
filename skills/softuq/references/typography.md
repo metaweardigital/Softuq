@@ -81,6 +81,32 @@ Major Third (1.25) with fluid `clamp()`. All sizes scale between mobile and desk
 | `tracking-normal` | 0 | Default |
 | `tracking-wide` | 0.025em | Uppercase labels, badges, eyebrows |
 
+## Font axes
+
+Set via `SoftuqProvider` props (or `useSoftuq()` at runtime). Two independent axes:
+
+**`font` (body)** — applies to `body { font-family: var(--font-sans) }`
+
+| Value | Resolves to |
+|---|---|
+| `system` | Native system stack (SF Pro, Segoe UI, Roboto) |
+| `inter` | `var(--font-inter)` — Inter |
+| `geist` | `var(--font-geist-sans)` — Geist |
+
+**`headingFont`** — applies to `h1..h6 { font-family: var(--font-heading) }`
+
+| Value | Resolves to | Character |
+|---|---|---|
+| `sans` | `var(--font-sans)` | Matches body font |
+| `lora` | `var(--font-lora)` | Humanist serif, readable |
+| `playfair` | `var(--font-playfair)` | High-contrast display serif |
+| `fraunces` | `var(--font-fraunces)` | Expressive variable serif |
+
+**Rules**:
+- Don't hardcode `font-family` on specific elements — use `font` / `headingFont` axes so the whole site stays consistent.
+- Serif heading fonts (`lora`, `playfair`, `fraunces`) only apply to `<h1>` through `<h6>`. If you want a display-serif on a non-heading element (eyebrow, pull quote), use `font-ds-heading` utility — don't hardcode.
+- Next.js gets fonts via `next/font/google` injected through `src/softuq-fonts.ts`. Vite gets them via `@fontsource-variable/*` imports in `main.tsx`. Both contracts provide `--font-inter`, `--font-geist-sans`, `--font-geist-mono`, `--font-lora`, `--font-playfair`, `--font-fraunces` as CSS variables.
+
 ## Inputs — 16px mobile floor
 
 `Input`, `Textarea`, `SearchInput` are pinned to 16px on mobile:

@@ -3,7 +3,7 @@ import fs from "fs-extra";
 
 export type Framework = "react" | "svelte";
 
-interface DetectedProject {
+export interface DetectedProject {
   framework: Framework;
   srcDir: string;
   cssFile: string | null;
