@@ -259,6 +259,7 @@ export const spacing = {
 export const fontFamily = {
   sans: "-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif",
   mono: "'SF Mono', ui-monospace, SFMono-Regular, 'Cascadia Code', monospace",
+  serif: "Georgia, 'Times New Roman', serif",
 } as const;
 
 export const easing = {

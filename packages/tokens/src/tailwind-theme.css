@@ -73,6 +73,7 @@
   /* Font families — use --ds- prefix to avoid circular ref with Tailwind built-ins */
   --font-ds-sans: var(--font-sans);
   --font-ds-mono: var(--font-mono);
+  --font-ds-heading: var(--font-heading);
 
   /* Shadows */
   --shadow-sm: var(--shadow-sm);
@@ -227,3 +228,4 @@ select:-webkit-autofill:focus {
   caret-color: var(--text-primary);
   transition: background-color 5000s ease-in-out 0s;
 }
+

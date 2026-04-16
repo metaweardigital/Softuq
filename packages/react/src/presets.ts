@@ -8,6 +8,7 @@ export type AccentPreset = "blue" | "violet" | "emerald" | "amber" | "red" | "ro
 export type RadiusPreset = "none" | "sm" | "md" | "lg" | "full";
 export type SpacingPreset = "sm" | "md" | "lg";
 export type FontPreset = "system" | "inter" | "geist";
+export type HeadingFontPreset = "sans" | "lora" | "playfair" | "fraunces";
 
 /* ============================================
    Palette presets — gray scale tinting
@@ -178,8 +179,27 @@ export const FONT_PRESETS: Record<FontPreset, Record<string, string>> = {
   },
 };
 
+/* ============================================
+   Heading font presets — heading typeface
+   ============================================ */
+export const HEADING_FONT_PRESETS: Record<HeadingFontPreset, Record<string, string>> = {
+  sans: {
+    "--font-heading": "var(--font-sans)",
+  },
+  lora: {
+    "--font-heading": "var(--font-lora), 'Lora', Georgia, serif",
+  },
+  playfair: {
+    "--font-heading": "var(--font-playfair), 'Playfair Display', Georgia, serif",
+  },
+  fraunces: {
+    "--font-heading": "var(--font-fraunces), 'Fraunces', Georgia, serif",
+  },
+};
+
 export const VALID_PALETTES: PalettePreset[] = ["neutral", "zinc", "stone", "slate", "mauve", "olive"];
 export const VALID_ACCENTS: AccentPreset[] = ["blue", "violet", "emerald", "amber", "red", "rose", "cyan", "orange"];
 export const VALID_RADII: RadiusPreset[] = ["none", "sm", "md", "lg", "full"];
 export const VALID_SPACINGS: SpacingPreset[] = ["sm", "md", "lg"];
 export const VALID_FONTS: FontPreset[] = ["system", "inter", "geist"];
+export const VALID_HEADING_FONTS: HeadingFontPreset[] = ["sans", "lora", "playfair", "fraunces"];

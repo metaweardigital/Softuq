@@ -214,6 +214,7 @@ export { cn } from "./lib/utils";
 export {
   type AccentPreset,
   type FontPreset,
+  type HeadingFontPreset,
   type PalettePreset,
   type RadiusPreset,
   SoftuqProvider,

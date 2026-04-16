@@ -5,6 +5,8 @@ import {
   type AccentPreset,
   FONT_PRESETS,
   type FontPreset,
+  HEADING_FONT_PRESETS,
+  type HeadingFontPreset,
   PALETTE_PRESETS,
   type PalettePreset,
   RADIUS_PRESETS,
@@ -13,6 +15,7 @@ import {
   type SpacingPreset,
   VALID_ACCENTS,
   VALID_FONTS,
+  VALID_HEADING_FONTS,
   VALID_PALETTES,
   VALID_RADII,
   VALID_SPACINGS,
@@ -32,6 +35,8 @@ interface SoftuqContextValue {
   setSpacing: (s: SpacingPreset) => void;
   font: FontPreset;
   setFont: (f: FontPreset) => void;
+  headingFont: HeadingFontPreset;
+  setHeadingFont: (hf: HeadingFontPreset) => void;
 }
 
 const SoftuqContext = React.createContext<SoftuqContextValue>({
@@ -45,6 +50,8 @@ const SoftuqContext = React.createContext<SoftuqContextValue>({
   setSpacing: () => {},
   font: "system",
   setFont: () => {},
+  headingFont: "sans",
+  setHeadingFont: () => {},
 });
 
 function useSoftuq() {
@@ -60,6 +67,7 @@ interface SoftuqProviderProps {
   radius?: RadiusPreset;
   spacing?: SpacingPreset;
   font?: FontPreset;
+  headingFont?: HeadingFontPreset;
   storageKey?: string;
   children: React.ReactNode;
 }
@@ -70,6 +78,7 @@ type StoredSettings = {
   radius?: RadiusPreset;
   spacing?: SpacingPreset;
   font?: FontPreset;
+  headingFont?: HeadingFontPreset;
 };
 
 function readStored(storageKey?: string): StoredSettings {
@@ -84,6 +93,7 @@ function readStored(storageKey?: string): StoredSettings {
     if (parsed.radius && VALID_RADII.includes(parsed.radius)) out.radius = parsed.radius;
     if (parsed.spacing && VALID_SPACINGS.includes(parsed.spacing)) out.spacing = parsed.spacing;
     if (parsed.font && VALID_FONTS.includes(parsed.font)) out.font = parsed.font;
+    if (parsed.headingFont && VALID_HEADING_FONTS.includes(parsed.headingFont)) out.headingFont = parsed.headingFont;
     return out;
   } catch {
     return {};
@@ -96,6 +106,7 @@ function SoftuqProvider({
   radius: initialRadius = "lg",
   spacing: initialSpacing = "md",
   font: initialFont = "system",
+  headingFont: initialHeadingFont = "sans",
   storageKey,
   children,
 }: SoftuqProviderProps) {
@@ -107,6 +118,7 @@ function SoftuqProvider({
   const [radius, setRadius] = React.useState<RadiusPreset>(initialRadius);
   const [spacing, setSpacing] = React.useState<SpacingPreset>(initialSpacing);
   const [font, setFont] = React.useState<FontPreset>(initialFont);
+  const [headingFont, setHeadingFont] = React.useState<HeadingFontPreset>(initialHeadingFont);
   // useState (not useRef) so the Write effect only fires AFTER the Read effect's
   // state updates have committed. A synchronous ref flip would let Write run in
   // the same effect pass with stale (default) state, overwriting localStorage
@@ -122,6 +134,7 @@ function SoftuqProvider({
     if (stored.radius) setRadius(stored.radius);
     if (stored.spacing) setSpacing(stored.spacing);
     if (stored.font) setFont(stored.font);
+    if (stored.headingFont) setHeadingFont(stored.headingFont);
     setHydrated(true);
   }, [storageKey]);
 
@@ -143,13 +156,14 @@ function SoftuqProvider({
       ...RADIUS_PRESETS[radius],
       ...SPACING_PRESETS[spacing],
       ...FONT_PRESETS[font],
+      ...HEADING_FONT_PRESETS[headingFont],
     };
     for (const [key, value] of Object.entries(vars)) {
       root.style.setProperty(key, value);
     }
     if (storageKey && !fromStorageRef.current) {
       try {
-        const next = JSON.stringify({ palette, accent, radius, spacing, font });
+        const next = JSON.stringify({ palette, accent, radius, spacing, font, headingFont });
         if (window.localStorage.getItem(storageKey) !== next) {
           window.localStorage.setItem(storageKey, next);
         }
@@ -158,7 +172,7 @@ function SoftuqProvider({
       }
     }
     fromStorageRef.current = false;
-  }, [hydrated, storageKey, palette, accent, radius, spacing, font]);
+  }, [hydrated, storageKey, palette, accent, radius, spacing, font, headingFont]);
 
   // Sync across windows (iframe previews <-> parent navbar)
   React.useEffect(() => {
@@ -173,6 +187,7 @@ function SoftuqProvider({
         if (s.radius && VALID_RADII.includes(s.radius)) setRadius(s.radius);
         if (s.spacing && VALID_SPACINGS.includes(s.spacing)) setSpacing(s.spacing);
         if (s.font && VALID_FONTS.includes(s.font)) setFont(s.font);
+        if (s.headingFont && VALID_HEADING_FONTS.includes(s.headingFont)) setHeadingFont(s.headingFont);
       } catch {
         // ignore
       }
@@ -182,8 +197,21 @@ function SoftuqProvider({
   }, [storageKey]);
 
   const value = React.useMemo(
-    () => ({ palette, setPalette, accent, setAccent, radius, setRadius, spacing, setSpacing, font, setFont }),
-    [palette, accent, radius, spacing, font],
+    () => ({
+      palette,
+      setPalette,
+      accent,
+      setAccent,
+      radius,
+      setRadius,
+      spacing,
+      setSpacing,
+      font,
+      setFont,
+      headingFont,
+      setHeadingFont,
+    }),
+    [palette, accent, radius, spacing, font, headingFont],
   );
 
   return <SoftuqContext.Provider value={value}>{children}</SoftuqContext.Provider>;
@@ -192,5 +220,22 @@ function SoftuqProvider({
 /* ============================================
    Exports
    ============================================ */
-export type { AccentPreset, FontPreset, PalettePreset, RadiusPreset, SoftuqProviderProps, SpacingPreset };
-export { ACCENT_PRESETS, FONT_PRESETS, PALETTE_PRESETS, RADIUS_PRESETS, SoftuqProvider, SPACING_PRESETS, useSoftuq };
+export type {
+  AccentPreset,
+  FontPreset,
+  HeadingFontPreset,
+  PalettePreset,
+  RadiusPreset,
+  SoftuqProviderProps,
+  SpacingPreset,
+};
+export {
+  ACCENT_PRESETS,
+  FONT_PRESETS,
+  HEADING_FONT_PRESETS,
+  PALETTE_PRESETS,
+  RADIUS_PRESETS,
+  SoftuqProvider,
+  SPACING_PRESETS,
+  useSoftuq,
+};

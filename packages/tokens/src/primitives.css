@@ -222,6 +222,7 @@
   /* --- Typography --- */
   --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
   --font-mono: 'SF Mono', ui-monospace, SFMono-Regular, 'Cascadia Code', monospace;
+  --font-heading: var(--font-sans);
 
   --text-xs: clamp(0.688rem, 0.5vw + 0.625rem, 0.75rem);
   --text-sm: clamp(0.813rem, 0.75vw + 0.6875rem, 0.9375rem);
