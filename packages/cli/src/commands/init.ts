@@ -7,6 +7,12 @@ import { installDeps } from "../utils/deps.js";
 import { type DetectedProject, detectProject, type Framework } from "../utils/detect.js";
 import { getSourceDir, getTokensDir, loadRegistry, resolveAllDeps } from "../utils/registry.js";
 
+// Join srcDir + subpath for path construction and display.
+// srcDir="" (no-src Next) collapses to just subpath — no leading slash.
+function srcPath(srcDir: string, sub: string): string {
+  return srcDir ? `${srcDir}/${sub}` : sub;
+}
+
 interface InitOptions {
   framework?: string;
   dir?: string;
@@ -31,8 +37,8 @@ export async function init(options: InitOptions) {
   );
 
   let framework: Framework = (options.framework as Framework) || detected.framework;
-  const componentDir = options.dir || `${detected.srcDir}/components/ui`;
-  const libDir = `${detected.srcDir}/lib`;
+  const componentDir = options.dir || srcPath(detected.srcDir, "components/ui");
+  const libDir = srcPath(detected.srcDir, "lib");
   const withStarter = options.starter !== false;
 
   if (!options.yes) {
@@ -85,7 +91,7 @@ export async function init(options: InitOptions) {
   let providerContent = await fs.readFile(providerSrc, "utf-8");
   providerContent = providerContent.replace(/from\s+["']@softuq\/tokens["']/g, `from "@/lib/tokens"`);
   await fs.writeFile(providerDest, providerContent);
-  console.log(pc.green("  ✓ ") + pc.dim(`${detected.srcDir}/softuq-provider.tsx`));
+  console.log(pc.green("  ✓ ") + pc.dim(srcPath(detected.srcDir, "softuq-provider.tsx")));
 
   const presetsSrc = path.join(sourceDir, "presets.ts");
   if (await fs.pathExists(presetsSrc)) {
@@ -93,11 +99,14 @@ export async function init(options: InitOptions) {
     let presetsContent = await fs.readFile(presetsSrc, "utf-8");
     presetsContent = presetsContent.replace(/from\s+["']@softuq\/tokens["']/g, `from "@/lib/tokens"`);
     await fs.writeFile(presetsDest, presetsContent);
-    console.log(pc.green("  ✓ ") + pc.dim(`${detected.srcDir}/presets.ts`));
+    console.log(pc.green("  ✓ ") + pc.dim(srcPath(detected.srcDir, "presets.ts")));
   }
 
   // 4. CSS: tokens + theme imports
-  const cssPath = detected.cssFile || `${detected.srcDir}/app/globals.css`;
+  const defaultCssPath = detected.appDir
+    ? `${detected.appDir}/globals.css`
+    : srcPath(detected.srcDir, "index.css");
+  const cssPath = detected.cssFile || defaultCssPath;
   await setupCSS(cwd, cssPath, detected);
 
   // 5. Vite needs @ alias (Next has it by default)
@@ -247,7 +256,7 @@ async function setupFonts(cwd: string, detected: DetectedProject) {
     const fontsPath = path.join(cwd, detected.srcDir, "softuq-fonts.ts");
     if (!(await fs.pathExists(fontsPath))) {
       await fs.writeFile(fontsPath, NEXT_FONTS_TS);
-      console.log(pc.green("  ✓ ") + pc.dim(`${detected.srcDir}/softuq-fonts.ts`));
+      console.log(pc.green("  ✓ ") + pc.dim(srcPath(detected.srcDir, "softuq-fonts.ts")));
     }
   } else if (detected.isVite) {
     console.log(pc.dim("\n  Installing font packages..."));
@@ -312,7 +321,7 @@ async function setupViteAlias(cwd: string) {
 
 async function setupProvider(cwd: string, detected: DetectedProject) {
   if (detected.isNextjs) {
-    await wireNextLayout(cwd, detected.srcDir);
+    await wireNextLayout(cwd, detected.appDir);
   } else if (detected.isVite) {
     await wireViteMain(cwd);
     await wireViteIndexHtml(cwd);
@@ -321,8 +330,8 @@ async function setupProvider(cwd: string, detected: DetectedProject) {
   }
 }
 
-async function wireNextLayout(cwd: string, srcDir: string) {
-  const layoutPath = path.join(cwd, `${srcDir}/app/layout.tsx`);
+async function wireNextLayout(cwd: string, appDir: string) {
+  const layoutPath = path.join(cwd, `${appDir}/layout.tsx`);
   if (!(await fs.pathExists(layoutPath))) {
     console.log(pc.gray("  ○ ") + pc.dim("layout.tsx not found — wire SoftuqProvider manually"));
     return;
@@ -339,7 +348,7 @@ async function wireNextLayout(cwd: string, srcDir: string) {
     content = mergeHtmlClassName(content, "${softuqFontVariables}");
   }
   await fs.writeFile(layoutPath, content);
-  console.log(pc.green("  ✓ ") + pc.dim(`${srcDir}/app/layout.tsx`));
+  console.log(pc.green("  ✓ ") + pc.dim(`${appDir}/layout.tsx`));
 }
 
 async function wireViteMain(cwd: string) {
@@ -452,10 +461,10 @@ async function addStarterComponents(cwd: string, detected: DetectedProject, comp
 
 async function writeStarterPage(cwd: string, detected: DetectedProject) {
   if (detected.isNextjs) {
-    const pagePath = path.join(cwd, `${detected.srcDir}/app/page.tsx`);
+    const pagePath = path.join(cwd, `${detected.appDir}/page.tsx`);
     const content = renderStarter({ useClient: true, exportName: "Home" });
     await fs.writeFile(pagePath, content);
-    console.log(pc.green("  ✓ ") + pc.dim(`${detected.srcDir}/app/page.tsx`));
+    console.log(pc.green("  ✓ ") + pc.dim(`${detected.appDir}/page.tsx`));
   } else if (detected.isVite) {
     const appPath = path.join(cwd, "src/App.tsx");
     const content = renderStarter({ useClient: false, exportName: "App" });

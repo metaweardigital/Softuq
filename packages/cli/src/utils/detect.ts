@@ -6,6 +6,7 @@ export type Framework = "react" | "svelte";
 export interface DetectedProject {
   framework: Framework;
   srcDir: string;
+  appDir: string;
   cssFile: string | null;
   packageManager: "pnpm" | "yarn" | "npm" | "bun";
   isNextjs: boolean;
@@ -29,22 +30,29 @@ export async function detectProject(cwd: string): Promise<DetectedProject | null
   const isNextjs = !!allDeps.next;
   const isVite = !!allDeps.vite;
 
-  // Detect src dir
+  // Detect src dir + Next.js app-router dir
+  // srcDir = where components/lib/provider live ("" = project root for --no-src-dir Next)
+  // appDir = Next.js app-router location (layout.tsx, page.tsx, globals.css)
   let srcDir = "src";
+  let appDir = "";
   if (isNextjs && (await fs.pathExists(path.join(cwd, "app")))) {
-    srcDir = "app";
+    // --no-src-dir Next: @/* → ./*, everything at root
+    srcDir = "";
+    appDir = "app";
   } else if (isNextjs && (await fs.pathExists(path.join(cwd, "src/app")))) {
     srcDir = "src";
+    appDir = "src/app";
   }
 
   // Detect CSS file
+  const cssCandidates = [
+    appDir && `${appDir}/globals.css`,
+    srcDir && `${srcDir}/index.css`,
+    srcDir && `${srcDir}/styles/globals.css`,
+    "index.css",
+  ].filter(Boolean) as string[];
   let cssFile: string | null = null;
-  const candidates = [
-    `${srcDir}/app/globals.css`,
-    `${srcDir}/globals.css`,
-    `${srcDir}/index.css`,
-    `${srcDir}/styles/globals.css`,
-  ];
+  const candidates = cssCandidates;
   for (const c of candidates) {
     const fullPath = path.join(cwd, c);
     if (await fs.pathExists(fullPath)) {
@@ -62,5 +70,5 @@ export async function detectProject(cwd: string): Promise<DetectedProject | null
   else if (await fs.pathExists(path.join(cwd, "yarn.lock"))) packageManager = "yarn";
   else if (await fs.pathExists(path.join(cwd, "bun.lockb"))) packageManager = "bun";
 
-  return { framework, srcDir, cssFile, packageManager, isNextjs, isVite };
+  return { framework, srcDir, appDir, cssFile, packageManager, isNextjs, isVite };
 }
