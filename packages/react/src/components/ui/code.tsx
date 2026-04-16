@@ -153,13 +153,13 @@ const CodeBlock = React.forwardRef<HTMLDivElement, CodeBlockProps>(
         )}
         {codeText ? (
           <pre
-            className="p-[var(--ds-space-card)] overflow-x-auto text-xs leading-relaxed font-mono scrollbar-thin selection:[background:var(--accent-muted)] selection:[color:var(--text-primary)]"
+            className="p-[var(--ds-space-card)] overflow-x-auto text-left text-xs leading-relaxed font-mono scrollbar-thin selection:[background:var(--accent-muted)] selection:[color:var(--text-primary)]"
             style={{ background: "var(--bg-base)", color: "var(--text-secondary)" }}
             dangerouslySetInnerHTML={{ __html: highlight(codeText, language) }}
           />
         ) : (
           <pre
-            className="p-[var(--ds-space-card)] overflow-x-auto text-xs leading-relaxed font-mono scrollbar-thin selection:[background:var(--accent-muted)] selection:[color:var(--text-primary)]"
+            className="p-[var(--ds-space-card)] overflow-x-auto text-left text-xs leading-relaxed font-mono scrollbar-thin selection:[background:var(--accent-muted)] selection:[color:var(--text-primary)]"
             style={{ background: "var(--bg-base)", color: "var(--text-secondary)" }}
           >
             {children}

@@ -4,7 +4,7 @@ import pc from "picocolors";
 import prompts from "prompts";
 import { installDeps } from "../utils/deps.js";
 import { detectProject, type Framework } from "../utils/detect.js";
-import { getSourceDir, loadRegistry } from "../utils/registry.js";
+import { getSourceDir, getTokensDir, loadRegistry } from "../utils/registry.js";
 
 interface InitOptions {
   framework?: string;
@@ -71,7 +71,8 @@ export async function init(options: InitOptions) {
   console.log(pc.green("  ✓ ") + pc.dim(`${libDir}/utils.ts`));
 
   // 2. Copy JS tokens (used by provider at runtime)
-  const tokensSrc = path.resolve(sourceDir, "../../tokens/src/index.ts");
+  const tokensDir = getTokensDir();
+  const tokensSrc = path.join(tokensDir, "index.ts");
   const tokensDest = path.join(cwd, libDir, "tokens.ts");
   await fs.copy(tokensSrc, tokensDest);
   console.log(pc.green("  ✓ ") + pc.dim(`${libDir}/tokens.ts`));
@@ -87,7 +88,7 @@ export async function init(options: InitOptions) {
 
   // 3. Append tokens + theme to globals.css (like shadcn does)
   const cssPath = detected.cssFile || `${detected.srcDir}/app/globals.css`;
-  await setupCSS(cwd, cssPath, sourceDir);
+  await setupCSS(cwd, cssPath);
 
   // 4. Install deps
   const allDeps = [...registry.utils.cn.dependencies];
@@ -107,13 +108,13 @@ export async function init(options: InitOptions) {
   console.log(pc.bold(pc.green("\n  Done! ")) + pc.dim("Run `softuq add button card` to add components.\n"));
 }
 
-async function setupCSS(cwd: string, cssPath: string, sourceDir: string) {
+async function setupCSS(cwd: string, cssPath: string) {
   const fullPath = path.join(cwd, cssPath);
   const cssDir = path.dirname(fullPath);
   const marker = "/* Softuq */";
 
   // Read token + theme files
-  const tokensDir = path.resolve(sourceDir, "../../tokens/src");
+  const tokensDir = getTokensDir();
   const primitives = await fs.readFile(path.join(tokensDir, "primitives.css"), "utf-8");
   const semantic = await fs.readFile(path.join(tokensDir, "semantic.css"), "utf-8");
   const tailwindTheme = await fs.readFile(path.join(tokensDir, "tailwind-theme.css"), "utf-8");

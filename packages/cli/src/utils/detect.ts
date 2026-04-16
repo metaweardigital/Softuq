@@ -42,14 +42,17 @@ export async function detectProject(cwd: string): Promise<DetectedProject | null
   const candidates = [
     `${srcDir}/app/globals.css`,
     `${srcDir}/globals.css`,
-    `${srcDir}/app.css`,
     `${srcDir}/index.css`,
     `${srcDir}/styles/globals.css`,
   ];
   for (const c of candidates) {
-    if (await fs.pathExists(path.join(cwd, c))) {
-      cssFile = c;
-      break;
+    const fullPath = path.join(cwd, c);
+    if (await fs.pathExists(fullPath)) {
+      const content = await fs.readFile(fullPath, "utf-8");
+      if (content.includes("tailwindcss")) {
+        cssFile = c;
+        break;
+      }
     }
   }
 

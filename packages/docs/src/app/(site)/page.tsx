@@ -4,7 +4,6 @@ import { Badge, Code } from "@softuq/react";
 import { ArrowRight, Sparkles } from "lucide-react";
 import Link from "next/link";
 import FaqAccordion, { type FaqItem } from "@/blocks/web/faq/faq-accordion";
-import FooterMinimal, { type FooterLinkItem } from "@/blocks/web/footer/footer-minimal";
 import cliPkg from "../../../../cli/package.json";
 
 const VERSION = cliPkg.version;
@@ -136,14 +135,6 @@ const FAQ_JSON_LD = {
   ],
 };
 
-const FOOTER_LINKS: FooterLinkItem[] = [
-  { label: "Getting started", href: "/getting-started" },
-  { label: "Components", href: "/components" },
-  { label: "Blocks", href: "/blocks" },
-  { label: "Templates", href: "/templates" },
-  { label: "Skill", href: "/skill" },
-];
-
 function AnimatedTerminal() {
   return (
     <div
@@ -206,10 +197,6 @@ function AnimatedTerminal() {
   );
 }
 
-function FooterBrand() {
-  return <span className="font-sans text-sm font-medium tracking-[0.2em] text-fg-primary">softuq</span>;
-}
-
 export default function HomePage() {
   return (
     <>
@@ -230,6 +217,12 @@ export default function HomePage() {
           </p>
           <div className="mt-[var(--ds-space-stack-lg)] max-w-xl">
             <AnimatedTerminal />
+            <div className="mt-[var(--ds-space-stack)] flex flex-wrap items-center gap-1.5">
+              <Badge variant="secondary">React</Badge>
+              <Badge variant="ghost" className="text-fg-muted">Vue — soon</Badge>
+              <Badge variant="ghost" className="text-fg-muted">Svelte — soon</Badge>
+              <Badge variant="ghost" className="text-fg-muted">Astro — soon</Badge>
+            </div>
           </div>
         </div>
       </section>
@@ -274,15 +267,6 @@ export default function HomePage() {
         title="Questions, answered."
         description="Everything you need to know before copy-pasting."
         faqs={SOFTUQ_FAQS}
-      />
-
-      {/* Footer */}
-      <FooterMinimal
-        brand={<FooterBrand />}
-        copyright={`© ${new Date().getFullYear()}`}
-        links={FOOTER_LINKS}
-        linkComponent={Link}
-        socials={[]}
       />
     </>
   );

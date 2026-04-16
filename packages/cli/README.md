@@ -1,6 +1,6 @@
 # Softuq
 
-CLI for **Softuq** — a soft UI / neumorphic design system with copy-paste component distribution.
+CLI for **Softuq** — a soft UI design system with copy-paste component distribution.
 
 > **v0.5.0** — now ships the Softuq design skill for Claude Code / AI agents. Run `npx softuq skill` to install it.
 

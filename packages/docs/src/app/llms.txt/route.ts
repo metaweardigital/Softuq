@@ -5,7 +5,7 @@ export function GET() {
 
 ## What is Softuq?
 
-Softuq is a React design system with soft UI / neumorphic aesthetic. It ships 37+ accessible components, 40+ pre-composed page sections (blocks), and full page templates. Distribution is copy-paste via CLI — you own every line of code. Tokens are the only runtime dependency.
+Softuq is a React design system with a soft UI aesthetic. It ships 37+ accessible components, 40+ pre-composed page sections (blocks), and full page templates. Distribution is copy-paste via CLI — you own every line of code. Tokens are the only runtime dependency.
 
 ## Key features
 

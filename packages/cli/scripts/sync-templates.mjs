@@ -15,6 +15,7 @@ const templatesDir = path.join(cliRoot, "templates");
 const skillDir = path.join(cliRoot, "skill");
 
 const frameworks = [{ name: "react", src: path.join(repoRoot, "packages/react/src") }];
+const tokensSrc = path.join(repoRoot, "packages/tokens/src");
 
 const filter = (src) => {
   const base = path.basename(src);
@@ -39,7 +40,12 @@ for (const fw of frameworks) {
   console.log(`[sync-templates] ${fw.name}: ${path.relative(repoRoot, fw.src)} → ${path.relative(repoRoot, dest)}`);
 }
 
-// 2. Design skill → skill/
+// 2. Tokens → templates/tokens/
+const tokensDest = path.join(templatesDir, "tokens");
+fs.copySync(tokensSrc, tokensDest, { filter });
+console.log(`[sync-templates] tokens: ${path.relative(repoRoot, tokensSrc)} → ${path.relative(repoRoot, tokensDest)}`);
+
+// 3. Design skill → skill/
 const skillSrc = path.join(repoRoot, "skills/softuq");
 if (!existsSync(skillSrc)) {
   console.error(`[sync-templates] Missing skill source: ${skillSrc}`);

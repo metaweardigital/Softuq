@@ -1,6 +1,6 @@
 # Softuq
 
-Custom design system. Soft UI / neumorphic aesthetic. Copy-paste component distribution.
+Custom design system. Soft UI aesthetic. Copy-paste component distribution.
 
 ## Interaction rules
 

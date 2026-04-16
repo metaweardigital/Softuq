@@ -55,6 +55,13 @@ export function resolveAllDeps(registry: Registry, names: string[]): { component
   };
 }
 
+export function getTokensDir(): string {
+  const cliRoot = path.resolve(__dirname, "..");
+  const bundled = path.resolve(cliRoot, "templates", "tokens");
+  if (existsSync(bundled)) return bundled;
+  return path.resolve(cliRoot, "../tokens/src");
+}
+
 export function getSourceDir(framework: Framework): string {
   // __dirname points to dist/ in bundled output → cliRoot = packages/cli/
   const cliRoot = path.resolve(__dirname, "..");

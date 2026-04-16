@@ -38,7 +38,7 @@ const POSTS: Post[] = [
     category: "Design",
     title: "The case for soft UI in 2026",
     excerpt:
-      "Neumorphism got a bad rap for the wrong reasons. Here's how we make tactile interfaces that still pass WCAG AA.",
+      "Soft UI got a bad rap for the wrong reasons. Here's how we make tactile interfaces that still pass WCAG AA.",
     author: "Ava Pollard",
     initials: "AP",
     date: "Mar 24, 2026",

@@ -410,7 +410,7 @@ export default function ComponentPreview() {
                     <AccordionItem value="item-1">
                       <AccordionTrigger>What is Softuq?</AccordionTrigger>
                       <AccordionContent>
-                        A custom design system library with a <span className="text-accent">soft UI / neumorphic</span>{" "}
+                        A custom design system library with a <span className="text-accent">soft UI</span>{" "}
                         aesthetic. Built as a monorepo with tokens, a Tailwind preset, and copy-paste components you
                         fully own.
                       </AccordionContent>
@@ -767,7 +767,7 @@ export default function ComponentPreview() {
                 <Card variant="elevated">
                   <CardHeader>
                     <CardTitle>Elevated Card</CardTitle>
-                    <CardDescription>Neumorphic raised shadow</CardDescription>
+                    <CardDescription>Soft raised shadow</CardDescription>
                   </CardHeader>
                   <CardContent>
                     <p className="text-sm text-fg-secondary">More prominent elevation.</p>
