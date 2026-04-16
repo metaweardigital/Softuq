@@ -167,11 +167,4 @@ export default function ${exportName}() {
  * Components required by the starter template.
  * Kept in sync with imports above — used by init to auto-install.
  */
-export const STARTER_COMPONENTS = [
-  "button",
-  "card",
-  "form-text",
-  "label",
-  "select",
-  "separator",
-];
+export const STARTER_COMPONENTS = ["button", "card", "form-text", "label", "select", "separator"];

@@ -219,9 +219,15 @@ export default function HomePage() {
             <AnimatedTerminal />
             <div className="mt-[var(--ds-space-stack)] flex flex-wrap items-center gap-1.5">
               <Badge variant="secondary">React</Badge>
-              <Badge variant="ghost" className="text-fg-muted">Vue — soon</Badge>
-              <Badge variant="ghost" className="text-fg-muted">Svelte — soon</Badge>
-              <Badge variant="ghost" className="text-fg-muted">Astro — soon</Badge>
+              <Badge variant="ghost" className="text-fg-muted">
+                Vue — soon
+              </Badge>
+              <Badge variant="ghost" className="text-fg-muted">
+                Svelte — soon
+              </Badge>
+              <Badge variant="ghost" className="text-fg-muted">
+                Astro — soon
+              </Badge>
             </div>
           </div>
         </div>

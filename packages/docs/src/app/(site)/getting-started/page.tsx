@@ -23,21 +23,19 @@ export default function GettingStartedPage() {
   return (
     <>
       <h1 className="text-3xl font-bold text-fg-primary tracking-tight">Getting Started</h1>
-      <p className="text-fg-secondary mt-2 text-lg">
-        Scaffold Softuq into a fresh Next.js or Vite app in one command.
-      </p>
+      <p className="text-fg-secondary mt-2 text-lg">Scaffold Softuq into a fresh Next.js or Vite app in one command.</p>
 
       <div className="mt-8 p-4 rounded-[var(--ds-radius-card)] border border-edge-subtle bg-bg-card">
         <p className="font-medium text-fg-primary mb-2 text-sm">Prerequisites</p>
         <ul className="text-sm text-fg-secondary space-y-1 list-disc pl-5">
           <li>Node.js 20 or newer</li>
           <li>
-            A React project — <Code>create-next-app</Code> (App Router) or{" "}
-            <Code>npm create vite@latest</Code> (react-ts)
+            A React project — <Code>create-next-app</Code> (App Router) or <Code>npm create vite@latest</Code>{" "}
+            (react-ts)
           </li>
           <li>
-            <Code>tailwindcss@4</Code> installed — in Vite you&rsquo;ll also need{" "}
-            <Code>@tailwindcss/vite</Code> wired into <Code>vite.config.ts</Code>
+            <Code>tailwindcss@4</Code> installed — in Vite you&rsquo;ll also need <Code>@tailwindcss/vite</Code> wired
+            into <Code>vite.config.ts</Code>
           </li>
         </ul>
       </div>
@@ -63,9 +61,9 @@ export default function GettingStartedPage() {
               and adds <Code>data-theme=&quot;dark&quot;</Code> to <Code>{"<html>"}</Code>
             </li>
             <li>
-              Sets up fonts:{" "}
-              <Code>next/font/google</Code> via a generated <Code>src/softuq-fonts.ts</Code> for Next.js, or installs{" "}
-              <Code>@fontsource-variable/*</Code> packages and imports them in <Code>main.tsx</Code> for Vite
+              Sets up fonts: <Code>next/font/google</Code> via a generated <Code>src/softuq-fonts.ts</Code> for Next.js,
+              or installs <Code>@fontsource-variable/*</Code> packages and imports them in <Code>main.tsx</Code> for
+              Vite
             </li>
             <li>
               For Vite: adds the <Code>@/*</Code> path alias to <Code>tsconfig.app.json</Code> and{" "}

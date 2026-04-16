@@ -103,9 +103,7 @@ export async function init(options: InitOptions) {
   }
 
   // 4. CSS: tokens + theme imports
-  const defaultCssPath = detected.appDir
-    ? `${detected.appDir}/globals.css`
-    : srcPath(detected.srcDir, "index.css");
+  const defaultCssPath = detected.appDir ? `${detected.appDir}/globals.css` : srcPath(detected.srcDir, "index.css");
   const cssPath = detected.cssFile || defaultCssPath;
   await setupCSS(cwd, cssPath, detected);
 
@@ -141,7 +139,7 @@ export async function init(options: InitOptions) {
   const nextSteps = withStarter
     ? "Run `npm run dev` and open your browser."
     : "Run `softuq add button card` to add components.";
-  console.log(pc.bold(pc.green("\n  Done! ")) + pc.dim(nextSteps) + "\n");
+  console.log(`${pc.bold(pc.green("\n  Done! "))}${pc.dim(nextSteps)}\n`);
 }
 
 /* ============================================
@@ -345,6 +343,7 @@ async function wireNextLayout(cwd: string, appDir: string) {
   }
   if (!content.includes("softuqFontVariables")) {
     content = addImport(content, `import { softuqFontVariables } from "@/softuq-fonts";`);
+    // biome-ignore lint/suspicious/noTemplateCurlyInString: literal source code being generated into layout.tsx, not a runtime template
     content = mergeHtmlClassName(content, "${softuqFontVariables}");
   }
   await fs.writeFile(layoutPath, content);
@@ -371,7 +370,7 @@ async function wireViteMain(cwd: string) {
 async function wireViteIndexHtml(cwd: string) {
   const htmlPath = path.join(cwd, "index.html");
   if (!(await fs.pathExists(htmlPath))) return;
-  let content = await fs.readFile(htmlPath, "utf-8");
+  const content = await fs.readFile(htmlPath, "utf-8");
   const next = addDataThemeAttr(content);
   if (next === content) return;
   await fs.writeFile(htmlPath, next);
