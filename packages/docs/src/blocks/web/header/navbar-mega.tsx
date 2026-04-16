@@ -139,37 +139,40 @@ function MegaPanel({
           {group.items.map((item) => {
             const Icon = item.icon;
             return (
-              <LinkComponent
-                key={item.title}
-                href={item.href}
-                onClick={onNavigate}
-                className="flex items-start gap-3 p-3 rounded-[var(--ds-radius-checkbox)] hover:bg-surface-hover transition-colors"
-              >
-                <div className="size-8 shrink-0 rounded-[var(--ds-radius-checkbox)] bg-[color-mix(in_oklch,var(--accent)_14%,transparent)] text-accent-text flex items-center justify-center">
-                  <Icon className="size-4" />
-                </div>
-                <div className="min-w-0">
-                  <div className="flex items-center gap-1.5">
-                    <p className="text-sm font-medium text-fg-primary">{item.title}</p>
-                    {item.badge && (
-                      <Badge variant="default" size="sm">
-                        {item.badge}
-                      </Badge>
-                    )}
+              <NavigationMenuLink key={item.title} asChild>
+                <LinkComponent
+                  href={item.href}
+                  onClick={onNavigate}
+                  className="flex items-start gap-3 p-3 rounded-[var(--ds-radius-checkbox)] hover:bg-surface-hover transition-colors"
+                >
+                  <div className="size-8 shrink-0 rounded-[var(--ds-radius-checkbox)] bg-[color-mix(in_oklch,var(--accent)_14%,transparent)] text-accent-text flex items-center justify-center">
+                    <Icon className="size-4" />
                   </div>
-                  <p className="text-xs text-fg-muted mt-0.5 line-clamp-2">{item.description}</p>
-                </div>
-              </LinkComponent>
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-1.5">
+                      <p className="text-sm font-medium text-fg-primary">{item.title}</p>
+                      {item.badge && (
+                        <Badge variant="default" size="sm">
+                          {item.badge}
+                        </Badge>
+                      )}
+                    </div>
+                    <p className="text-xs text-fg-muted mt-0.5 line-clamp-2">{item.description}</p>
+                  </div>
+                </LinkComponent>
+              </NavigationMenuLink>
             );
           })}
           {group.viewAllHref && (
-            <LinkComponent
-              href={group.viewAllHref}
-              onClick={onNavigate}
-              className="block px-3 pt-2 text-xs font-medium text-accent-text hover:underline"
-            >
-              {group.viewAllLabel ?? "View all →"}
-            </LinkComponent>
+            <NavigationMenuLink asChild>
+              <LinkComponent
+                href={group.viewAllHref}
+                onClick={onNavigate}
+                className="block px-3 pt-2 text-xs font-medium text-accent-text hover:underline"
+              >
+                {group.viewAllLabel ?? "View all →"}
+              </LinkComponent>
+            </NavigationMenuLink>
           )}
         </div>
       ))}

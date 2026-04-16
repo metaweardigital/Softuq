@@ -121,6 +121,11 @@
       "dependencies": ["class-variance-authority"],
       "registryDeps": []
     },
+    "section-nav": {
+      "files": ["components/ui/section-nav.tsx"],
+      "dependencies": [],
+      "registryDeps": []
+    },
     "select": {
       "files": ["components/ui/select.tsx"],
       "dependencies": ["class-variance-authority", "lucide-react"],

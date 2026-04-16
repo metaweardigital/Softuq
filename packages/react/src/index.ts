@@ -141,6 +141,14 @@ export {
   searchInputVariants,
 } from "./components/ui/search";
 export {
+  SectionNav,
+  SectionNavGroup,
+  type SectionNavGroupProps,
+  SectionNavItem,
+  type SectionNavItemProps,
+  type SectionNavProps,
+} from "./components/ui/section-nav";
+export {
   Select,
   SelectContent,
   SelectGroup,
