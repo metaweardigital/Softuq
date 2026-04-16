@@ -60,6 +60,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://softuq.com",
   },
+  verification: {
+    google: "kOHARhTfsCBNk7UxT6uA_PgJg5I8ec0aWfDuvXW0t-0",
+  },
 };
 
 const PRESET_MAP = JSON.stringify({
