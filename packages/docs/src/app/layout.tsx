@@ -13,8 +13,31 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Softuq — Component Preview",
-  description: "Live preview of all Softuq components",
+  metadataBase: new URL("https://softuq.com"),
+  title: {
+    default: "Softuq — Design System for AI-Era Projects",
+    template: "%s — Softuq",
+  },
+  description:
+    "Components, blocks, and page templates with copy-paste distribution. Own the code, theme via tokens, deploy today.",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://softuq.com",
+    siteName: "Softuq",
+    title: "Softuq — Design System for AI-Era Projects",
+    description:
+      "Components, blocks, and page templates with copy-paste distribution. Own the code, theme via tokens, deploy today.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Softuq — Design System for AI-Era Projects",
+    description:
+      "Components, blocks, and page templates with copy-paste distribution. Own the code, theme via tokens, deploy today.",
+  },
+  alternates: {
+    canonical: "https://softuq.com",
+  },
 };
 
 const PRESET_MAP = JSON.stringify({

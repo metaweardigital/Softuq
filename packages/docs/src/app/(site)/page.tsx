@@ -81,6 +81,61 @@ const SOFTUQ_FAQS: FaqItem[] = [
   },
 ];
 
+const FAQ_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "What makes Softuq different?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Copy-paste distribution with a skill for AI coding agents. You own every line — tokens are the only runtime dep, components and blocks live in your repo.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How do I install it?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Run npx softuq init to wire up tokens and the provider, then npx softuq add button card to copy components.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Does it work with my AI assistant?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Run npx softuq skill to install the Softuq design skill into .claude/skills/. Claude Code auto-activates it whenever you touch UI.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Can I customize the tokens?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Every token is a CSS variable. Override at the :root level or scope per component via className. Presets cover palette, accent, radius, spacing, and font.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Is it accessible?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Components ship with keyboard navigation, focus rings, and semantic ARIA. Target is WCAG 2.1 AA contrast in both dark and light modes.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What's the license?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "MIT. Use in personal and commercial projects without attribution.",
+      },
+    },
+  ],
+};
+
 const FOOTER_LINKS: FooterLinkItem[] = [
   { label: "Getting started", href: "/getting-started" },
   { label: "Components", href: "/components" },
@@ -158,6 +213,7 @@ function FooterBrand() {
 export default function HomePage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_JSON_LD) }} />
       {/* Hero */}
       <section className="px-[var(--ds-space-page-x)] py-[var(--ds-space-section-y)] border-b border-edge-subtle">
         <div className="mx-auto max-w-4xl">
