@@ -1,4 +1,6 @@
 import type { MetadataRoute } from "next";
+import { APP_CATEGORIES, BLOCKS, WEB_CATEGORIES } from "@/blocks/registry";
+import { TEMPLATES } from "@/templates/registry";
 
 const BASE = "https://softuq.com";
 
@@ -21,8 +23,50 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/foundations/layout`, changeFrequency: "monthly" as const, priority: 0.5 },
   ];
 
-  return staticRoutes.map((route) => ({
-    ...route,
-    lastModified: now,
+  const blockTypeRoutes = [
+    { url: `${BASE}/blocks/web`, changeFrequency: "weekly" as const, priority: 0.7 },
+    { url: `${BASE}/blocks/app`, changeFrequency: "weekly" as const, priority: 0.7 },
+  ];
+
+  const categoryHasBlocks = (type: "web" | "app", slug: string) =>
+    BLOCKS.some((b) => b.type === type && b.category === slug);
+
+  const blockCategoryRoutes = [
+    ...WEB_CATEGORIES.filter((c) => categoryHasBlocks("web", c.slug)).map((c) => ({
+      url: `${BASE}/blocks/web/${c.slug}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    })),
+    ...APP_CATEGORIES.filter((c) => categoryHasBlocks("app", c.slug)).map((c) => ({
+      url: `${BASE}/blocks/app/${c.slug}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    })),
+  ];
+
+  const blockRoutes = BLOCKS.map((b) => ({
+    url: `${BASE}/blocks/${b.type}/${b.category}/${b.slug}`,
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
   }));
+
+  const templateTypeRoutes = [
+    { url: `${BASE}/templates/web`, changeFrequency: "weekly" as const, priority: 0.7 },
+    { url: `${BASE}/templates/app`, changeFrequency: "weekly" as const, priority: 0.7 },
+  ];
+
+  const templateRoutes = TEMPLATES.map((t) => ({
+    url: `${BASE}/templates/${t.type}/${t.slug}`,
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
+  return [
+    ...staticRoutes,
+    ...blockTypeRoutes,
+    ...blockCategoryRoutes,
+    ...blockRoutes,
+    ...templateTypeRoutes,
+    ...templateRoutes,
+  ].map((route) => ({ ...route, lastModified: now }));
 }
