@@ -53,6 +53,14 @@ import {
   Input,
   Kbd,
   Label,
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  NavigationMenuViewport,
+  navigationMenuTriggerStyle,
   Pagination,
   Popover,
   PopoverContent,
@@ -105,7 +113,9 @@ import {
   AlignLeft,
   AlignRight,
   ArrowRight,
+  BarChart3,
   Bold,
+  BookOpen,
   CheckCircle2,
   Clock,
   CreditCard,
@@ -123,6 +133,7 @@ import {
   Trash2,
   Underline,
   User,
+  Zap,
 } from "lucide-react";
 import React from "react";
 
@@ -130,8 +141,9 @@ import React from "react";
 /* Section wrapper                                           */
 /* --------------------------------------------------------- */
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
+  const id = title.toLowerCase().replace(/\s+/g, "-");
   return (
-    <section className="space-y-4">
+    <section id={id} className="scroll-mt-20 space-y-4">
       <h3 className="text-base font-semibold text-fg-primary">{title}</h3>
       <div className="rounded-[var(--ds-radius-card)] border border-edge-subtle bg-surface-card p-[var(--ds-space-card)] space-y-6">
         {children}
@@ -1005,6 +1017,52 @@ export default function Page() {
               <FormMessage variant="warning">Password is weak.</FormMessage>
             </FormField>
           </div>
+        </Section>
+
+        {/* Navigation Menu */}
+        <Section title="Navigation Menu">
+          <NavigationMenu>
+            <NavigationMenuList>
+              <NavigationMenuItem value="products">
+                <NavigationMenuTrigger>Products</NavigationMenuTrigger>
+                <NavigationMenuContent className="p-4 w-[400px]">
+                  <div className="grid grid-cols-2 gap-1">
+                    {[
+                      { icon: Zap, title: "Automation", desc: "Workflows that run on their own" },
+                      { icon: BarChart3, title: "Analytics", desc: "Real-time dashboards" },
+                      { icon: BookOpen, title: "Docs", desc: "Guides and API reference" },
+                      { icon: Settings, title: "Settings", desc: "Configure your workspace" },
+                    ].map((item) => (
+                      <a
+                        key={item.title}
+                        href="#"
+                        className="flex items-start gap-3 p-3 rounded-[var(--ds-radius-checkbox)] hover:bg-surface-hover transition-colors"
+                      >
+                        <div className="size-8 shrink-0 rounded-[var(--ds-radius-checkbox)] bg-[color-mix(in_oklch,var(--accent)_14%,transparent)] text-accent-text flex items-center justify-center">
+                          <item.icon className="size-4" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium text-fg-primary">{item.title}</p>
+                          <p className="text-xs text-fg-muted">{item.desc}</p>
+                        </div>
+                      </a>
+                    ))}
+                  </div>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink href="#" className={navigationMenuTriggerStyle()}>
+                  Pricing
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink href="#" className={navigationMenuTriggerStyle()}>
+                  About
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+            <NavigationMenuViewport />
+          </NavigationMenu>
         </Section>
 
         {/* Pagination */}

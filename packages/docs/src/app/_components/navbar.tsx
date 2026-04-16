@@ -19,26 +19,38 @@ import {
   type SpacingPreset,
   useSoftuq,
 } from "@softuq/react";
-import { Moon, Settings2, Sun } from "lucide-react";
+import {
+  BarChart3,
+  Blocks,
+  Component,
+  Fingerprint,
+  LayoutGrid,
+  LayoutList,
+  ListFilter,
+  Moon,
+  Palette,
+  PanelBottom,
+  PanelLeft,
+  Settings2,
+  Shapes,
+  Space,
+  Sparkles,
+  Sun,
+  Table2,
+  Type,
+} from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import NavbarSimple, { type NavLinkItem } from "@/blocks/web/header/navbar-simple";
+import NavbarMega, { type MegaMenuGroup, type NavMegaItem } from "@/blocks/web/header/navbar-mega";
 import { useTheme } from "./providers";
+
+/* ===  Theme Controls  === */
 
 const RADIUS_OPTIONS: RadiusPreset[] = ["none", "sm", "md", "lg", "full"];
 const SPACING_OPTIONS: SpacingPreset[] = ["sm", "md", "lg"];
 const PALETTE_OPTIONS: PalettePreset[] = ["neutral", "zinc", "stone", "slate", "mauve", "olive"];
 const ACCENT_OPTIONS: AccentPreset[] = ["blue", "violet", "emerald", "amber", "red", "rose", "cyan", "orange"];
 const FONT_OPTIONS: FontPreset[] = ["system", "inter", "geist"];
-
-const NAV_LINKS: NavLinkItem[] = [
-  { href: "/getting-started", label: "Getting Started", matchPrefix: "/getting-started" },
-  { href: "/components", label: "Components", matchPrefix: "/components" },
-  { href: "/foundations", label: "Foundations", matchPrefix: "/foundations" },
-  { href: "/blocks", label: "Blocks", matchPrefix: "/blocks" },
-  { href: "/templates", label: "Templates", matchPrefix: "/templates" },
-  { href: "/skill", label: "Skill", matchPrefix: "/skill" },
-];
 
 function ThemeSelect<T extends string>({
   label,
@@ -108,6 +120,130 @@ function ThemeToggle() {
   );
 }
 
+/* ===  Menu Structure  === */
+
+const LIBRARY_COMPONENTS: MegaMenuGroup = {
+  label: "Components",
+  description: "37 primitives",
+  viewAllHref: "/components",
+  viewAllLabel: "View all components →",
+  items: [
+    {
+      icon: Component,
+      title: "Button",
+      description: "Primary actions, CTAs, and icon triggers",
+      href: "/components#button",
+    },
+    {
+      icon: Fingerprint,
+      title: "Dialog",
+      description: "Modal overlays, confirms, and alerts",
+      href: "/components#dialog",
+    },
+    {
+      icon: ListFilter,
+      title: "Select",
+      description: "Single & multi-select dropdown menus",
+      href: "/components#select",
+    },
+    { icon: Table2, title: "Table", description: "Data grids with sorting and pagination", href: "/components#table" },
+    { icon: LayoutList, title: "Tabs", description: "Tabbed content panels and navigation", href: "/components#tabs" },
+  ],
+};
+
+const LIBRARY_BLOCKS: MegaMenuGroup = {
+  label: "Blocks",
+  description: "40+ sections",
+  viewAllHref: "/blocks",
+  viewAllLabel: "View all blocks →",
+  items: [
+    {
+      icon: Sparkles,
+      title: "Hero",
+      description: "Headlines, CTAs, and background patterns",
+      href: "/blocks/web#hero",
+    },
+    { icon: Blocks, title: "Pricing", description: "Tiers, toggles, and plan comparison", href: "/blocks/web#pricing" },
+    { icon: PanelBottom, title: "Footer", description: "Multi-column and minimal layouts", href: "/blocks/web#footer" },
+    {
+      icon: PanelLeft,
+      title: "Sidebar",
+      description: "App navigation with collapsible search",
+      href: "/blocks/app#sidebar",
+    },
+    {
+      icon: BarChart3,
+      title: "Dashboard",
+      description: "Stats, charts, and activity feeds",
+      href: "/blocks/app#dashboard",
+    },
+  ],
+};
+
+const LIBRARY_TEMPLATES: MegaMenuGroup = {
+  label: "Templates",
+  description: "Full pages",
+  viewAllHref: "/templates",
+  viewAllLabel: "View all templates →",
+  items: [
+    {
+      icon: LayoutGrid,
+      title: "Landing",
+      description: "Marketing page with hero and CTA",
+      href: "/templates/web#landing",
+    },
+    {
+      icon: BarChart3,
+      title: "Dashboard",
+      description: "App overview with stats and charts",
+      href: "/templates/app#dashboard",
+    },
+  ],
+};
+
+const FOUNDATIONS_GROUP: MegaMenuGroup = {
+  label: "Design Tokens",
+  viewAllHref: "/foundations",
+  viewAllLabel: "All foundations →",
+  items: [
+    { icon: Palette, title: "Colors", description: "OKLCH palettes and semantic mapping", href: "/foundations/colors" },
+    {
+      icon: Type,
+      title: "Typography",
+      description: "Major Third scale and fluid sizes",
+      href: "/foundations/typography",
+    },
+    { icon: Space, title: "Spacing", description: "4px grid, stack and button anatomy", href: "/foundations/spacing" },
+    {
+      icon: LayoutGrid,
+      title: "Layout",
+      description: "Breakpoints and responsive grid patterns",
+      href: "/foundations/layout",
+    },
+    {
+      icon: Sparkles,
+      title: "Effects",
+      description: "Shadows, border radius, and animation",
+      href: "/foundations/effects",
+    },
+    { icon: Shapes, title: "Icons", description: "Lucide for UI, Simple Icons for brands", href: "/foundations/icons" },
+  ],
+};
+
+const NAV_ITEMS: NavMegaItem[] = [
+  { type: "link", label: "Getting Started", href: "/getting-started", matchPrefix: "/getting-started" },
+  {
+    type: "dropdown",
+    label: "Library",
+    groups: [LIBRARY_COMPONENTS, LIBRARY_BLOCKS, LIBRARY_TEMPLATES],
+    matchPrefix: "/components",
+  },
+  { type: "dropdown", label: "Foundations", groups: [FOUNDATIONS_GROUP], matchPrefix: "/foundations" },
+  { type: "link", label: "Skill", href: "/skill", matchPrefix: "/skill" },
+];
+
+/* ===  Navbar  === */
+
 function SoftuqBrand() {
   return (
     <Link href="/" className="font-sans text-base font-medium tracking-[0.2em] text-fg-primary">
@@ -119,9 +255,9 @@ function SoftuqBrand() {
 export function Navbar() {
   const pathname = usePathname();
   return (
-    <NavbarSimple
+    <NavbarMega
       logo={<SoftuqBrand />}
-      links={NAV_LINKS}
+      items={NAV_ITEMS}
       linkComponent={Link}
       currentPath={pathname}
       actions={

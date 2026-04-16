@@ -1,6 +1,7 @@
 "use client";
 
-import { Badge, Card, CardContent, useSoftuq } from "@softuq/react";
+import { Badge, Button, Card, CardContent, useSoftuq } from "@softuq/react";
+import { Zap } from "lucide-react";
 import * as React from "react";
 import { PageShell } from "../../_components/page-shell";
 
@@ -122,6 +123,72 @@ function AppLayoutDemo() {
   );
 }
 
+function ButtonAnatomyDemo() {
+  const sizes = [
+    { label: "sm", heightPx: "32px", gapPx: "6px", padding: "--ds-space-button-sm", textSize: "text-xs" },
+    { label: "md", heightPx: "40px", gapPx: "8px", padding: "--ds-space-button-md", textSize: "text-sm" },
+    { label: "lg", heightPx: "48px", gapPx: "10px", padding: "--ds-space-button-lg", textSize: "text-base" },
+  ];
+
+  return (
+    <div className="rounded-[var(--ds-radius-card)] border border-edge-subtle bg-surface-card overflow-hidden">
+      <div className="px-5 py-3 border-b border-edge-subtle">
+        <h3 className="text-sm font-medium text-fg-primary">Button anatomy</h3>
+        <p className="text-xs text-fg-muted">Padding scales per size, gap is always smaller than padding</p>
+      </div>
+      <div className="p-[var(--ds-space-card)] space-y-6">
+        {sizes.map((s) => (
+          <div key={s.label} className="space-y-3">
+            <div className="flex items-center gap-2">
+              <Badge variant="outline" size="sm">
+                {s.label}
+              </Badge>
+              <span className="text-xs text-fg-muted">
+                padding: <Computed name={s.padding} /> · gap: {s.gapPx}
+              </span>
+            </div>
+            {/* Simulated anatomy */}
+            <div className="flex items-center" style={{ height: s.heightPx }}>
+              {/* Left padding */}
+              <div
+                className="shrink-0 h-full bg-[color-mix(in_oklch,var(--accent)_12%,transparent)] border-y border-l border-dashed border-[color-mix(in_oklch,var(--accent)_30%,transparent)] rounded-l-[var(--ds-radius-button)] flex items-center justify-center"
+                style={{ width: `var(${s.padding})` }}
+              >
+                <span className="text-[9px] font-mono text-accent-text">px</span>
+              </div>
+              {/* Icon placeholder */}
+              <div className="shrink-0 bg-surface-elevated border border-edge-subtle rounded-sm flex items-center justify-center size-5">
+                <Zap className="size-3 text-fg-muted" />
+              </div>
+              {/* Gap */}
+              <div
+                className="shrink-0 h-full bg-[color-mix(in_oklch,var(--accent)_8%,transparent)] border-y border-dashed border-[color-mix(in_oklch,var(--accent)_20%,transparent)] flex items-center justify-center"
+                style={{ width: s.gapPx }}
+              >
+                <span className="text-[8px] font-mono text-accent-text leading-none">g</span>
+              </div>
+              {/* Text */}
+              <div className={`shrink-0 ${s.textSize} font-medium text-fg-primary`}>Label</div>
+              {/* Right padding */}
+              <div
+                className="shrink-0 h-full bg-[color-mix(in_oklch,var(--accent)_12%,transparent)] border-y border-r border-dashed border-[color-mix(in_oklch,var(--accent)_30%,transparent)] rounded-r-[var(--ds-radius-button)] flex items-center justify-center"
+                style={{ width: `var(${s.padding})` }}
+              >
+                <span className="text-[9px] font-mono text-accent-text">px</span>
+              </div>
+            </div>
+            {/* Real button */}
+            <Button size={s.label as "sm" | "md" | "lg"}>
+              <Zap />
+              Label
+            </Button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function TokenTable() {
   const tokens = [
     { name: "--ds-space-page-x", desc: "Page horizontal padding", type: "fluid" },
@@ -212,6 +279,15 @@ export default function SpacingFoundationPage() {
               <WebSectionDemo />
               <AppLayoutDemo />
             </div>
+          </section>
+
+          <section>
+            <h2 className="text-lg font-semibold text-fg-primary mb-4">Button spacing</h2>
+            <p className="text-sm text-fg-muted mb-6">
+              Padding scales per size via tokens. Gap between icon and text is always smaller than side padding — keeps
+              content visually centered.
+            </p>
+            <ButtonAnatomyDemo />
           </section>
 
           <section>

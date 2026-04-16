@@ -99,6 +99,7 @@ Always order from most global → most specific:
 - Web blocks use `px-[var(--ds-space-page-x)] py-[var(--ds-space-section-y)]`
 - App blocks use `p-[var(--ds-space-app-page-x)]` + `space-y-[var(--ds-space-app-stack)]` + `gap-[var(--ds-space-app-gap)]`
 - App spacing tokens (`--ds-space-app-*`) cap at web `md` values on the `lg` preset — app UI stays denser than marketing pages
+- Button/ToggleGroup gap scales per size: sm `gap-1.5` (6px), md `gap-2` (8px), lg `gap-2.5` (10px) — always smaller than side padding
 - SidebarNav includes a sticky mobile topbar (`md:hidden`) with hamburger trigger — don't add SidebarTrigger manually in children
 
 ### Components
@@ -119,6 +120,7 @@ Always order from most global → most specific:
 - Fade-edge utilities: `.fade-edge-r/l/t/b` — mask-based gradient fade with theme-transitioning `background-color` (not `background-image` which can't transition)
 - Code = inline code snippet (hover effect, border). CodeBlock = block-level with syntax highlighting, copy-to-clipboard, always-dark (`data-theme="dark"`). `language` prop picks the highlighter: `auto` (default, JS/TSX/shell), `md`/`markdown` (headings, inline code, bold, lists, links), `plain` (no highlighting). CodeBlock uses `style` props with semantic CSS vars (`var(--bg-card)`, `var(--text-secondary)`, etc.) for colors — Tailwind `@theme` vars don't resolve correctly on child `data-theme` elements. Radius/spacing use Tailwind arbitrary values (`var(--ds-radius-card)`, `var(--ds-space-card)`) since those aren't in `@theme`. Single-pass regex per flavor for syntax highlighting (never multi-pass — later rules corrupt HTML from earlier ones). Internal dep: lucide-react.
 - DialogTrigger supports `asChild` prop — pass `<Button>` as child instead of nesting `<button>` in `<button>`
+- NavigationMenu: composable API (NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink, NavigationMenuViewport). Hover-triggered with delay (150ms enter, 300ms leave). Viewport rendered internally by NavigationMenu (NavigationMenuViewport is a no-op for API compat). Content uses `createPortal` into viewport. Viewport position clamped to nav bounds. NavigationMenuLink has `active` prop + `asChild`. `navigationMenuTriggerStyle()` for standalone link styling, `navigationMenuActiveClass` for active state. Internal dep: lucide-react.
 - See [Component Pattern](docs/guides/component-pattern.md) for full template
 
 ### Blocks
@@ -126,7 +128,7 @@ Always order from most global → most specific:
 Blocks live in `packages/docs/src/blocks/web/*` and `packages/docs/src/blocks/app/*`. They are **self-contained showcase sections** (hero, navbar, faq, footer, etc.) — demoed on `/blocks`, composed into templates, and dogfooded by the docs site itself.
 
 - **Slot-based pattern** — every block ships with sensible defaults so it renders standalone on `/blocks`, but exposes slots for real-world use. Typical props: `logo` / `brand` (ReactNode), `links` (array of `{label, href, matchPrefix?}`), `actions` (ReactNode), `linkComponent` (default `"a"`, pass Next `Link` for client routing), `currentPath` (for active-link styling). Defaults mirror a demo brand ("Acme" + Sparkles); overrides flow in via props.
-- **Dogfooding** — the docs site's `_components/navbar.tsx` wraps `NavbarSimple` (not a hand-rolled header). Home page FAQ + footer use `FaqAccordion` and `FooterMinimal`. When adding marketing sections to the docs site, reach for a block first.
+- **Dogfooding** — the docs site's `_components/navbar.tsx` wraps `NavbarMega` (not a hand-rolled header). Home page FAQ + footer use `FaqAccordion` and `FooterMinimal`. When adding marketing sections to the docs site, reach for a block first.
 - **Content props for copy-heavy blocks** — FAQ-style blocks accept `{q, a}[]` where `a` can be a string (renders as `<p className="text-sm text-fg-muted">`) or a ReactNode (rendered as-is, for inline `<Code>` or links).
 - **Refactoring existing blocks to be slot-based** follows `NavbarSimple` → `FaqAccordion` → `FooterMinimal`: extract defaults into a `DEFAULT_*` const, make each slot optional with a fallback, leave existing `<BlockName />` (no-args) usage working.
 

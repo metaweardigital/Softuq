@@ -101,6 +101,11 @@
       "dependencies": ["class-variance-authority", "lucide-react"],
       "registryDeps": []
     },
+    "navigation-menu": {
+      "files": ["components/ui/navigation-menu.tsx"],
+      "dependencies": ["lucide-react"],
+      "registryDeps": []
+    },
     "popover": {
       "files": ["components/ui/popover.tsx"],
       "dependencies": [],

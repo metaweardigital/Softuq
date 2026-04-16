@@ -95,6 +95,20 @@ export {
 export { Input, type InputProps, inputVariants } from "./components/ui/input";
 export { Kbd, type KbdProps, kbdVariants } from "./components/ui/kbd";
 export { Label, type LabelProps, labelVariants } from "./components/ui/label";
+export {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  type NavigationMenuItemProps,
+  NavigationMenuLink,
+  type NavigationMenuLinkProps,
+  NavigationMenuList,
+  type NavigationMenuProps,
+  NavigationMenuTrigger,
+  NavigationMenuViewport,
+  navigationMenuActiveClass,
+  navigationMenuTriggerStyle,
+} from "./components/ui/navigation-menu";
 export { Pagination, type PaginationProps } from "./components/ui/pagination";
 export { Placeholder, type PlaceholderProps, placeholderVariants } from "./components/ui/placeholder";
 export {

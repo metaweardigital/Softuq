@@ -66,13 +66,25 @@ App blocks use separate spacing tokens that cap at `md` web values on the `lg` p
 
 On `sm` and `md`, app tokens equal web tokens. On `lg`, app tokens are capped at web `md` values.
 
+## Button internal spacing
+
+Gap between icon and text scales per button size — always smaller than side padding to keep content visually centered.
+
+| Size | Padding token | Gap | Height |
+|---|---|---|---|
+| sm | `--ds-space-button-sm` | `gap-1.5` (6px) | 32px |
+| md | `--ds-space-button-md` | `gap-2` (8px) | 40px |
+| lg | `--ds-space-button-lg` | `gap-2.5` (10px) | 48px |
+
+Same pattern applies to `ToggleGroupItem`. `NavigationMenuTrigger` uses `gap-1.5` (matches sm).
+
 ## Usage
 
 ### Web blocks
 
 | Context | Recommended |
 |---|---|
-| Inline gap (icon + text) | 8px (`gap-2`) |
+| Inline gap (icon + text) | 6–10px per size (see button table above) |
 | Component padding | 16px (`p-4`) |
 | Card padding | 24px (`p-6`) |
 | Section spacing | 24-48px (`py-6` - `py-12`) |

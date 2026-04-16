@@ -16,7 +16,7 @@ export interface NavbarSimpleProps {
   logo?: React.ReactNode;
   /** Nav link items. Block renders each with `linkComponent`. */
   links?: NavLinkItem[];
-  /** Desktop-right actions (rendered in both desktop header and mobile sheet). */
+  /** Actions shown in the header bar on all breakpoints. On mobile, placed before the hamburger. */
   actions?: React.ReactNode;
   /** Component used to render links. Default `"a"`. Pass Next.js `Link` for client-side routing. */
   linkComponent?: React.ElementType;
@@ -104,7 +104,7 @@ export default function NavbarSimple({
           </nav>
 
           <div className="col-start-3 justify-self-end flex items-center gap-2">
-            <div className="hidden md:flex items-center gap-2">{resolvedActions}</div>
+            {resolvedActions}
             <Button
               variant="ghost"
               size="icon-sm"
@@ -123,8 +123,6 @@ export default function NavbarSimple({
           <div>{resolvedLogo}</div>
           <Separator />
           <nav className="flex flex-col">{links.map((link) => renderLink(link, true))}</nav>
-          <Separator />
-          <div className="flex flex-col gap-2">{resolvedActions}</div>
         </div>
       </Sheet>
     </>

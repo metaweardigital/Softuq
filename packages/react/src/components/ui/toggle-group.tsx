@@ -97,7 +97,7 @@ function ToggleGroup(props: ToggleGroupProps) {
 
 const itemVariants = cva(
   [
-    "inline-flex items-center justify-center gap-2 font-medium whitespace-nowrap",
+    "inline-flex items-center justify-center font-medium whitespace-nowrap",
     "transition-colors duration-fast ease-soft",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-bg-base",
     "disabled:pointer-events-none disabled:opacity-50",
@@ -106,9 +106,9 @@ const itemVariants = cva(
   {
     variants: {
       size: {
-        sm: "h-7 px-2 text-xs [&_svg]:size-3.5",
-        md: "h-8 px-3 text-sm [&_svg]:size-4",
-        lg: "h-10 px-4 text-sm [&_svg]:size-5",
+        sm: "h-7 gap-1.5 px-2 text-xs [&_svg]:size-3.5",
+        md: "h-8 gap-2 px-3 text-sm [&_svg]:size-4",
+        lg: "h-10 gap-2.5 px-4 text-sm [&_svg]:size-5",
       },
       variant: {
         default:
