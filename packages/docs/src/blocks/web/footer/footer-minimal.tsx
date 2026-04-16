@@ -35,7 +35,9 @@ function DefaultBrand() {
       <div className="size-8 rounded-[var(--ds-radius-button)] bg-[color-mix(in_oklch,var(--accent)_14%,transparent)] text-accent-text flex items-center justify-center">
         <Sparkles className="size-4" />
       </div>
-      <span className="text-sm font-semibold text-fg-primary">Softuq</span>
+      <span className="text-sm font-semibold text-fg-primary tracking-[0.1em]">
+        softuq<span className="text-xs font-normal text-fg-muted tracking-normal">.com</span>
+      </span>
     </>
   );
 }

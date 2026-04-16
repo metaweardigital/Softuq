@@ -1,8 +1,15 @@
-import { ACCENT_PRESETS, FONT_PRESETS, PALETTE_PRESETS, RADIUS_PRESETS, SPACING_PRESETS } from "@softuq/react/presets";
+import {
+  ACCENT_PRESETS,
+  FONT_PRESETS,
+  HEADING_FONT_PRESETS,
+  PALETTE_PRESETS,
+  RADIUS_PRESETS,
+  SPACING_PRESETS,
+} from "@softuq/react/presets";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Fraunces, Inter, Lora, Playfair_Display } from "next/font/google";
 import { Providers } from "./_components/providers";
 import { SETTINGS_STORAGE_KEY, THEME_STORAGE_KEY } from "./_components/storage-keys";
 import "./globals.css";
@@ -10,6 +17,21 @@ import "./globals.css";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+});
+
+const lora = Lora({
+  subsets: ["latin"],
+  variable: "--font-lora",
+});
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+});
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-fraunces",
 });
 
 export const metadata: Metadata = {
@@ -46,6 +68,7 @@ const PRESET_MAP = JSON.stringify({
   radius: RADIUS_PRESETS,
   spacing: SPACING_PRESETS,
   font: FONT_PRESETS,
+  headingFont: HEADING_FONT_PRESETS,
 });
 
 // Pre-hydration script: applies saved theme + tokens before first paint
@@ -61,7 +84,7 @@ var P=${PRESET_MAP};
 var st=root.style;
 function apply(sec,key){var v=key&&P[sec]&&P[sec][key];if(v)for(var k in v)st.setProperty(k,v[k]);}
 apply('palette',s.palette);apply('accent',s.accent);apply('radius',s.radius);
-apply('spacing',s.spacing);apply('font',s.font);
+apply('spacing',s.spacing);apply('font',s.font);apply('headingFont',s.headingFont);
 }catch(e){}})();`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -69,7 +92,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       data-theme="dark"
-      className={`${inter.variable} ${GeistSans.variable} ${GeistMono.variable}`}
+      className={`${inter.variable} ${GeistSans.variable} ${GeistMono.variable} ${lora.variable} ${playfair.variable} ${fraunces.variable}`}
       suppressHydrationWarning
     >
       <head>

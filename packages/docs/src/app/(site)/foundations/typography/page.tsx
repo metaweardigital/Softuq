@@ -4,6 +4,8 @@ import { Badge, Card, CardContent, Code, useSoftuq } from "@softuq/react";
 import * as React from "react";
 import { PageShell } from "../../_components/page-shell";
 
+const HEADING_TOKENS = new Set(["--text-xl", "--text-2xl", "--text-3xl", "--text-4xl"]);
+
 const TYPE_SCALE = [
   { token: "--text-xs", label: "xs", use: "Captions, fine print" },
   { token: "--text-sm", label: "sm", use: "Labels, helper text" },
@@ -57,7 +59,13 @@ function TypeScaleDemo() {
           {TYPE_SCALE.map((t) => (
             <div key={t.token} className="flex items-baseline gap-4 py-3">
               <span className="text-xs font-mono text-fg-muted shrink-0 w-16">{t.label}</span>
-              <span className="flex-1 text-fg-primary font-semibold truncate" style={{ fontSize: `var(${t.token})` }}>
+              <span
+                className="flex-1 text-fg-primary font-semibold truncate"
+                style={{
+                  fontSize: `var(${t.token})`,
+                  fontFamily: HEADING_TOKENS.has(t.token) ? "var(--font-heading)" : undefined,
+                }}
+              >
                 The quick brown fox
               </span>
               <span className="text-xs font-mono text-fg-secondary shrink-0">

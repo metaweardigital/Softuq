@@ -81,6 +81,7 @@
   /* Font families — use --ds- prefix to avoid circular ref with Tailwind built-ins */
   --font-ds-sans: var(--font-sans);
   --font-ds-mono: var(--font-mono);
+  --font-ds-heading: var(--font-heading);
 
   /* Shadows */
   --shadow-sm: var(--shadow-sm);
@@ -246,4 +247,8 @@ body {
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
 }

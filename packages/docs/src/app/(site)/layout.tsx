@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { SiteFooter } from "../_components/footer";
 import { Navbar } from "../_components/navbar";
 
 const jsonLd = {
@@ -38,6 +39,7 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <Navbar />
       <main className="flex-1 bg-surface-base">{children}</main>
+      <SiteFooter />
     </div>
   );
 }

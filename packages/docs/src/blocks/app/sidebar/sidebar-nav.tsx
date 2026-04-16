@@ -147,7 +147,9 @@ function SidebarNavContent({
         <div className="size-7 rounded-[var(--ds-radius-button)] bg-[color-mix(in_oklch,var(--accent)_14%,transparent)] text-accent-text flex items-center justify-center">
           <Sparkles className="size-4" />
         </div>
-        <span className="text-sm font-semibold text-fg-primary">Softuq</span>
+        <span className="text-sm font-semibold text-fg-primary tracking-[0.1em]">
+          softuq<span className="text-xs font-normal text-fg-muted tracking-normal">.com</span>
+        </span>
       </div>
 
       <SearchInput placeholder="Search..." inputSize="sm" />
@@ -261,7 +263,9 @@ export default function SidebarNav({
             <div className="size-6 rounded-[var(--ds-radius-button)] bg-[color-mix(in_oklch,var(--accent)_14%,transparent)] text-accent-text flex items-center justify-center">
               <Sparkles className="size-3.5" />
             </div>
-            <span className="text-sm font-semibold text-fg-primary">Softuq</span>
+            <span className="text-sm font-semibold text-fg-primary tracking-[0.1em]">
+              softuq<span className="text-xs font-normal text-fg-muted tracking-normal">.com</span>
+            </span>
           </div>
           {children ?? <DefaultContent />}
         </main>
