@@ -21,7 +21,7 @@ const REFERENCES = [
   {
     file: "SKILL.md",
     title: "Pre-flight checklist & red flags",
-    desc: "The entry point Claude reads first. 7 rules + 9 anti-patterns.",
+    desc: "The entry point Claude reads first. 7 rules, mobile-first patterns, 13 anti-patterns.",
   },
   {
     file: "references/typography.md",

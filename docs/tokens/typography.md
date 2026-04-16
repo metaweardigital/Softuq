@@ -50,10 +50,10 @@ Rules:
 
 ## Inputs (special case)
 
-Form inputs are pinned to **16px on mobile** to prevent iOS Safari from auto-zooming on focus. Implementation:
+Form inputs are pinned to **16px on mobile** to prevent iOS Safari from auto-zooming on focus. The `sm` size also uses a mobile-first touch-friendly height (`h-10` on mobile, `h-8` on desktop):
 
 ```tsx
-sm: "h-8 ... text-[16px] sm:text-xs",
+sm: "h-10 sm:h-8 ... text-[16px] sm:text-xs",
 md: "h-10 ... text-[16px] sm:text-sm",
 ```
 

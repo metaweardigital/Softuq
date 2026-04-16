@@ -61,7 +61,7 @@ const enterAnimationMap: Record<ToastPosition, string> = {
 
 const positionClasses: Record<ToastPosition, string> = {
   left: "fixed bottom-4 left-4 items-start",
-  center: "fixed bottom-4 left-1/2 -translate-x-1/2 items-center",
+  center: "fixed bottom-4 inset-x-4 sm:inset-x-auto sm:left-1/2 sm:-translate-x-1/2 items-center",
   right: "fixed bottom-4 right-4 items-end",
 };
 

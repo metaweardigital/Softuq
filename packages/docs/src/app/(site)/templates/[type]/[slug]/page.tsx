@@ -36,7 +36,9 @@ export default function TemplateDetailPage() {
   const category = getTemplateCategory(params.type);
   const typeLabel = category?.name ?? (params.type === "web" ? "Web Templates" : "App Templates");
 
-  const [viewport, setViewport] = React.useState<Viewport>("desktop");
+  const [viewport, setViewport] = React.useState<Viewport>(() =>
+    typeof window !== "undefined" && window.innerWidth < 768 ? "mobile" : "desktop",
+  );
   const [regions, setRegions] = React.useState<Region[]>([]);
   const [hoveredRef, setHoveredRef] = React.useState<string | null>(null);
   const [scrollTop, setScrollTop] = React.useState(0);
@@ -161,6 +163,7 @@ export default function TemplateDetailPage() {
               value={viewport}
               onValueChange={(v) => v && setViewport(v as Viewport)}
               aria-label="Viewport"
+              className="hidden md:flex"
             >
               <ToggleGroupItem value="desktop" aria-label="Desktop">
                 <Monitor className="size-3.5" />

@@ -2,6 +2,7 @@
 
 import {
   Breadcrumb,
+  BreadcrumbCollapsed,
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
@@ -10,7 +11,7 @@ import {
 } from "@softuq/react";
 import { Home } from "lucide-react";
 import Link from "next/link";
-import React, { type ReactNode } from "react";
+import type { ReactNode } from "react";
 
 export type Crumb = { label: string; href?: string };
 
@@ -25,10 +26,14 @@ export function PageShell({
   crumbs: Crumb[];
   children: ReactNode;
 }) {
+  const middleCrumbs = crumbs.slice(0, -1);
+  const lastCrumb = crumbs[crumbs.length - 1];
+  const collapsibleItems = middleCrumbs.filter((c) => c.href).map((c) => ({ label: c.label, href: c.href as string }));
+
   return (
     <>
       <Breadcrumb>
-        <BreadcrumbList>
+        <BreadcrumbList className="flex-nowrap">
           <BreadcrumbItem>
             <BreadcrumbLink asChild>
               <Link href="/">
@@ -36,25 +41,42 @@ export function PageShell({
               </Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
-          {crumbs.map((c, i) => {
-            const isLast = i === crumbs.length - 1;
-            return (
-              <React.Fragment key={c.label}>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  {c.href && !isLast ? (
-                    <BreadcrumbLink asChild>
-                      <Link href={c.href}>{c.label}</Link>
-                    </BreadcrumbLink>
-                  ) : isLast ? (
-                    <BreadcrumbPage>{c.label}</BreadcrumbPage>
-                  ) : (
-                    <span>{c.label}</span>
-                  )}
-                </BreadcrumbItem>
-              </React.Fragment>
-            );
-          })}
+
+          {/* Mobile: collapse middle crumbs into ellipsis */}
+          {middleCrumbs.length > 0 && (
+            <span className="contents md:hidden">
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbCollapsed items={collapsibleItems} />
+              </BreadcrumbItem>
+            </span>
+          )}
+
+          {/* Desktop: show all crumbs */}
+          {middleCrumbs.map((c) => (
+            <span key={c.label} className="hidden md:contents">
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                {c.href ? (
+                  <BreadcrumbLink asChild>
+                    <Link href={c.href}>{c.label}</Link>
+                  </BreadcrumbLink>
+                ) : (
+                  <span>{c.label}</span>
+                )}
+              </BreadcrumbItem>
+            </span>
+          ))}
+
+          {/* Last crumb: always visible */}
+          {lastCrumb && (
+            <>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem className="min-w-0">
+                <BreadcrumbPage className="truncate">{lastCrumb.label}</BreadcrumbPage>
+              </BreadcrumbItem>
+            </>
+          )}
         </BreadcrumbList>
       </Breadcrumb>
 

@@ -31,16 +31,13 @@ const DIGIT_LADDER = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] as const;
 
 function DigitRoll({ digit }: { digit: number }) {
   return (
-    <span
-      className="relative inline-block overflow-hidden align-baseline"
-      style={{ height: "1em", width: "0.6em", lineHeight: 1 }}
-    >
+    <span className="relative inline-block overflow-hidden leading-none" style={{ height: "1em", width: "0.6em" }}>
       <span
         className="absolute left-0 top-0 flex flex-col transition-transform duration-500 ease-[var(--ease-smooth)]"
         style={{ transform: `translateY(-${digit}em)` }}
       >
         {DIGIT_LADDER.map((n) => (
-          <span key={n} style={{ height: "1em", lineHeight: 1 }}>
+          <span key={n} className="block leading-none" style={{ height: "1em" }}>
             {n}
           </span>
         ))}
@@ -53,8 +50,8 @@ function AnimatedPrice({ value }: { value: number }) {
   if (value === 0) return <span>$0</span>;
   const digits = String(value).split("").map(Number);
   return (
-    <span className="inline-flex items-baseline tabular-nums">
-      <span>$</span>
+    <span className="inline-flex items-end tabular-nums leading-none">
+      <span className="leading-none">$</span>
       {digits.map((d, i) => (
         // biome-ignore lint/suspicious/noArrayIndexKey: position-based stability required so digit columns persist across value changes and animate via transform
         <DigitRoll key={i} digit={d} />

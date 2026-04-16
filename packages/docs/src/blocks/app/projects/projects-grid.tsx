@@ -220,14 +220,14 @@ export default function ProjectsGrid() {
         </header>
 
         <div className="flex items-center gap-[var(--ds-space-app-gap)] flex-wrap">
-          <SearchInput placeholder="Search projects..." inputSize="sm" className="w-full sm:w-64" />
+          <SearchInput placeholder="Search projects..." inputSize="md" className="w-full sm:w-64" />
           <ToggleGroup
             type="single"
             value={filter}
             onValueChange={(v) => v && setFilter(v as Filter)}
             variant="outline"
             size="sm"
-            className="ml-auto"
+            className="w-full [&>button]:flex-1 sm:w-auto sm:[&>button]:flex-none sm:ml-auto"
           >
             {FILTERS.map((f) => (
               <ToggleGroupItem key={f.value} value={f.value}>

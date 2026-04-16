@@ -69,7 +69,7 @@ const NavigationMenu = React.forwardRef<HTMLElement, NavigationMenuProps>(
       if (activeValue) setVisibleValue(activeValue);
     }, [activeValue]);
 
-    // Position viewport centered under the active trigger, clamped to nav bounds
+    // Position viewport centered under the active trigger, clamped to container bounds
     React.useEffect(() => {
       if (!activeValue || !navRef.current || !wrapperRef.current) return;
       const trigger = triggerMapRef.current.get(activeValue);
@@ -82,7 +82,17 @@ const NavigationMenu = React.forwardRef<HTMLElement, NavigationMenuProps>(
         const vpWidth = wrapperRef.current.offsetWidth;
         const triggerCenter = triggerRect.left - navRect.left + triggerRect.width / 2;
         const ideal = triggerCenter - vpWidth / 2;
-        const clamped = Math.max(0, Math.min(ideal, navRect.width - vpWidth));
+
+        // Clamp to the viewport window (not just nav bounds) so mega panels
+        // wider than the nav still stay on-screen
+        const pad = 16;
+        const idealScreenLeft = navRect.left + ideal;
+        let clamped = ideal;
+        if (idealScreenLeft < pad) {
+          clamped = ideal + (pad - idealScreenLeft);
+        } else if (idealScreenLeft + vpWidth > window.innerWidth - pad) {
+          clamped = ideal - (idealScreenLeft + vpWidth - (window.innerWidth - pad));
+        }
         setViewportLeft(clamped);
       });
       return () => cancelAnimationFrame(raf);
@@ -296,7 +306,7 @@ const NavigationMenuLink = React.forwardRef<HTMLAnchorElement, NavigationMenuLin
       navCtx?.close();
     };
 
-    const classes = cn(navigationMenuTriggerStyle(), className, active && ACTIVE_LINK_CLASS);
+    const classes = cn(className, active && ACTIVE_LINK_CLASS);
 
     if (asChild && React.isValidElement<Record<string, unknown>>(children)) {
       return React.cloneElement(children, {

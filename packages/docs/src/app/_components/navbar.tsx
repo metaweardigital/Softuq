@@ -206,27 +206,12 @@ const FOUNDATIONS_GROUP: MegaMenuGroup = {
   viewAllHref: "/foundations",
   viewAllLabel: "All foundations →",
   items: [
-    { icon: Palette, title: "Colors", description: "OKLCH palettes and semantic mapping", href: "/foundations/colors" },
-    {
-      icon: Type,
-      title: "Typography",
-      description: "Major Third scale and fluid sizes",
-      href: "/foundations/typography",
-    },
-    { icon: Space, title: "Spacing", description: "4px grid, stack and button anatomy", href: "/foundations/spacing" },
-    {
-      icon: LayoutGrid,
-      title: "Layout",
-      description: "Breakpoints and responsive grid patterns",
-      href: "/foundations/layout",
-    },
-    {
-      icon: Sparkles,
-      title: "Effects",
-      description: "Shadows, border radius, and animation",
-      href: "/foundations/effects",
-    },
-    { icon: Shapes, title: "Icons", description: "Lucide for UI, Simple Icons for brands", href: "/foundations/icons" },
+    { icon: Palette, title: "Colors", description: "Color tokens", href: "/foundations/colors" },
+    { icon: Type, title: "Typography", description: "Fluid type scale", href: "/foundations/typography" },
+    { icon: Space, title: "Spacing", description: "Grid & stack tokens", href: "/foundations/spacing" },
+    { icon: LayoutGrid, title: "Layout", description: "Responsive patterns", href: "/foundations/layout" },
+    { icon: Sparkles, title: "Effects", description: "Shadows & motion", href: "/foundations/effects" },
+    { icon: Shapes, title: "Icons", description: "UI & brand packs", href: "/foundations/icons" },
   ],
 };
 

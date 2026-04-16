@@ -11,6 +11,7 @@ import {
   NavigationMenuTrigger,
   NavigationMenuViewport,
   navigationMenuActiveClass,
+  navigationMenuTriggerStyle,
   Separator,
   Sheet,
 } from "@softuq/react";
@@ -164,15 +165,13 @@ function MegaPanel({
             );
           })}
           {group.viewAllHref && (
-            <NavigationMenuLink asChild>
-              <LinkComponent
-                href={group.viewAllHref}
-                onClick={onNavigate}
-                className="block px-3 pt-2 text-xs font-medium text-accent-text hover:underline"
-              >
-                {group.viewAllLabel ?? "View all →"}
-              </LinkComponent>
-            </NavigationMenuLink>
+            <LinkComponent
+              href={group.viewAllHref}
+              onClick={onNavigate}
+              className="block px-3 pt-2 text-xs font-medium text-accent-text hover:underline"
+            >
+              {group.viewAllLabel ?? "View all →"}
+            </LinkComponent>
           )}
         </div>
       ))}
@@ -264,7 +263,11 @@ export default function NavbarMega({
               {items.map((item) =>
                 item.type === "link" ? (
                   <NavigationMenuItem key={item.label}>
-                    <NavigationMenuLink asChild active={isLinkActive(item, currentPath)}>
+                    <NavigationMenuLink
+                      asChild
+                      active={isLinkActive(item, currentPath)}
+                      className={navigationMenuTriggerStyle()}
+                    >
                       <LinkComponent href={item.href}>{item.label}</LinkComponent>
                     </NavigationMenuLink>
                   </NavigationMenuItem>

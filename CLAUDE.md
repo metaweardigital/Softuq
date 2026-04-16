@@ -102,6 +102,13 @@ Always order from most global → most specific:
 - Button/ToggleGroup gap scales per size: sm `gap-1.5` (6px), md `gap-2` (8px), lg `gap-2.5` (10px) — always smaller than side padding
 - SidebarNav includes a sticky mobile topbar (`md:hidden`) with hamburger trigger — don't add SidebarTrigger manually in children
 
+### Mobile-first responsive
+
+- Input / SearchInput `sm`: `h-10 sm:h-8` — built into component, don't override mobile height
+- TabsList (default): `w-full sm:w-auto sm:self-center` — triggers `flex-1 sm:flex-none`. Built into component.
+- ToggleGroup as tab filter: add `className="w-full [&>button]:flex-1 sm:w-auto sm:[&>button]:flex-none"` — NOT built into component (ToggleGroup has many uses), apply via className
+- Device/viewport picker: `hidden md:flex` on ToggleGroup, default viewport from `window.innerWidth < 768`
+
 ### Components
 
 - CVA for variants, `cn()` for class merging

@@ -175,6 +175,33 @@ export { Button, buttonVariants };
 
 ---
 
+## Mobile-first patterns
+
+These rules are baked into the DS components. When composing layouts that use them, respect the responsive behavior — don't override with fixed widths or heights.
+
+**Inputs (Input, SearchInput)**
+
+- `sm` variant: `h-10` on mobile, `h-8` on desktop — larger touch target on phones, compact on desktop
+- Already built into the component. Don't override height on mobile with `h-8` or similar.
+
+**TabsList (default variant)**
+
+- `w-full` on mobile (triggers stretch evenly via `flex-1`), `w-auto` + centered on desktop
+- Already built into the component. Don't add `w-full` on desktop — it stretches unnecessarily.
+
+**ToggleGroup as tab filter (app blocks)**
+
+- When used as a full-width tab bar: add `className="w-full [&>button]:flex-1 sm:w-auto sm:[&>button]:flex-none"` — items stretch on mobile, hug content on desktop
+- NOT built into the component (ToggleGroup has many uses). Apply via className when the context is a tab-like filter row.
+
+**Device/viewport picker (block & template previews)**
+
+- Hide on mobile: `className="hidden md:flex"` on the ToggleGroup
+- Default viewport from screen width: `useState(() => window.innerWidth < 768 ? "mobile" : "desktop")`
+- Mobile users can't resize iframes meaningfully — always show mobile preview.
+
+---
+
 ## Red flags
 
 If you catch yourself doing any of these, STOP and fix:
@@ -190,6 +217,10 @@ If you catch yourself doing any of these, STOP and fix:
 | Hardcoded `rounded-md` on DS components | `rounded-[var(--ds-radius-card)]` |
 | Forced `<br />` in headings | `text-balance` or `&nbsp;` |
 | `w-4 h-4` on icon | `size-4` |
+| `h-8` on sm Input/SearchInput (overriding mobile height) | Don't — component already does `h-10 sm:h-8` |
+| Full-width TabsList on desktop | Don't — component already does `w-full sm:w-auto sm:self-center` |
+| ToggleGroup tab filter without mobile stretch | Add `w-full [&>button]:flex-1 sm:w-auto sm:[&>button]:flex-none` |
+| Device picker visible on mobile | Add `hidden md:flex` + default to `"mobile"` viewport |
 
 ---
 

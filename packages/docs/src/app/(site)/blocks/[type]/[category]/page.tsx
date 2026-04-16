@@ -21,7 +21,9 @@ function BlockPreview({ block }: { block: BlockMeta }) {
   const previewHref = `/blocks-preview/${block.type}/${block.category}/${block.slug}`;
   const iframeRef = React.useRef<HTMLIFrameElement>(null);
   const [height, setHeight] = React.useState(MIN_HEIGHT);
-  const [viewport, setViewport] = React.useState<Viewport>("desktop");
+  const [viewport, setViewport] = React.useState<Viewport>(() =>
+    typeof window !== "undefined" && window.innerWidth < 768 ? "mobile" : "desktop",
+  );
 
   React.useEffect(() => {
     const iframe = iframeRef.current;
@@ -74,6 +76,7 @@ function BlockPreview({ block }: { block: BlockMeta }) {
             value={viewport}
             onValueChange={(v) => v && setViewport(v as Viewport)}
             aria-label="Viewport"
+            className="hidden md:flex"
           >
             <ToggleGroupItem value="desktop" aria-label="Desktop">
               <Monitor className="size-3.5" />

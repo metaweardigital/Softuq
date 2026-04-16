@@ -88,23 +88,23 @@ function WebGridDemo() {
         <h3 className="text-sm font-medium text-fg-primary">Web blocks</h3>
         <p className="text-xs text-fg-muted">Centered container, responsive columns: 1 → 2 → 3</p>
       </div>
-      <div className="p-[var(--ds-space-card)]">
-        <div className="mx-auto max-w-md">
+      <div className="p-[var(--ds-space-card)] flex flex-col items-center">
+        <div className="w-full max-w-md">
           <div className="text-center mb-4">
             <span className="text-[10px] font-mono text-accent-text">max-w-6xl centered</span>
           </div>
           <div className="rounded-sm border border-dashed border-[color-mix(in_oklch,var(--accent)_30%,transparent)] p-3">
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
               {[1, 2, 3].map((i) => (
                 <div key={i} className="rounded-sm bg-surface-elevated border border-edge-subtle p-2 text-center">
                   <span className="text-[10px] text-fg-muted">col</span>
                 </div>
               ))}
             </div>
-            <div className="mt-2 flex items-center justify-between">
+            <div className="mt-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 text-center">
               <span className="text-[10px] font-mono text-fg-dimmed">1 col mobile</span>
-              <span className="text-[10px] font-mono text-fg-dimmed">2 col sm</span>
-              <span className="text-[10px] font-mono text-fg-dimmed">3 col lg</span>
+              <span className="text-[10px] font-mono text-fg-dimmed hidden sm:block">2 col sm</span>
+              <span className="text-[10px] font-mono text-fg-dimmed hidden lg:block">3 col lg</span>
             </div>
           </div>
         </div>
@@ -120,10 +120,10 @@ function AppGridDemo() {
         <h3 className="text-sm font-medium text-fg-primary">App blocks</h3>
         <p className="text-xs text-fg-muted">Sidebar + content area, sidebar hidden on mobile</p>
       </div>
-      <div className="p-[var(--ds-space-card)]">
-        <div className="mx-auto max-w-md">
+      <div className="p-[var(--ds-space-card)] flex flex-col items-center">
+        <div className="w-full max-w-md">
           <div className="rounded-sm border border-dashed border-[color-mix(in_oklch,var(--accent)_30%,transparent)] overflow-hidden flex">
-            <div className="w-16 shrink-0 border-r border-dashed border-[color-mix(in_oklch,var(--accent)_30%,transparent)] bg-[color-mix(in_oklch,var(--accent)_6%,transparent)] p-2 flex flex-col items-center gap-2">
+            <div className="w-16 shrink-0 border-r border-dashed border-[color-mix(in_oklch,var(--accent)_30%,transparent)] bg-[color-mix(in_oklch,var(--accent)_6%,transparent)] p-2 flex items-center justify-center">
               <span
                 className="text-[10px] font-mono text-accent-text writing-mode-vertical"
                 style={{ writingMode: "vertical-rl" }}
@@ -266,7 +266,7 @@ export default function LayoutFoundationPage() {
               <strong>App blocks</strong> use a sidebar + content split with the sidebar collapsing to a Sheet on
               mobile.
             </p>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-[var(--ds-space-gap)]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-[var(--ds-space-gap)]">
               <WebGridDemo />
               <AppGridDemo />
             </div>
