@@ -5,7 +5,7 @@ export function GET() {
 
 ## What is Softuq?
 
-Softuq is a React design system with a soft UI aesthetic. It ships 37+ accessible components, 40+ pre-composed page sections (blocks), and full page templates. Distribution is copy-paste via CLI — you own every line of code. Tokens are the only runtime dependency.
+Softuq is a React design system with a soft UI aesthetic. It ships 40+ accessible components, 40+ pre-composed page sections (blocks), and full page templates. Distribution is copy-paste via CLI — you own every line of code. Tokens are the only runtime dependency.
 
 ## Key features
 
@@ -21,10 +21,10 @@ Softuq is a React design system with a soft UI aesthetic. It ships 37+ accessibl
 
 - [Home](https://softuq.com): Overview and value proposition
 - [Getting Started](https://softuq.com/getting-started): Installation and setup guide
-- [Components](https://softuq.com/components): 37+ React primitives (buttons, dialogs, inputs, tables, etc.)
+- [Components](https://softuq.com/components): 40+ React primitives (buttons, dialogs, inputs, tables, etc.)
 - [Blocks](https://softuq.com/blocks): 40+ pre-composed page sections (heroes, pricing, FAQ, footers)
 - [Templates](https://softuq.com/templates): Full page templates (landing pages, dashboards, auth flows)
-- [Foundations](https://softuq.com/foundations): Design tokens — colors, typography, spacing, effects, icons, layout
+- [Foundations](https://softuq.com/foundations): Design tokens — colors, typography, spacing, effects, icons, layout, AI layer
 - [Design Skill](https://softuq.com/skill): AI coding agent skill for enforcing design system rules
 
 ## Installation

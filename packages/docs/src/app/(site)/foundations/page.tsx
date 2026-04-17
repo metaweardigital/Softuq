@@ -40,6 +40,13 @@ const FOUNDATIONS: FoundationCard[] = [
     ready: true,
   },
   {
+    href: "/foundations/ai-layer",
+    title: "AI Layer",
+    description: "Pastel iridescent palette and motion primitives for AI-driven UI.",
+    icon: Sparkles,
+    ready: true,
+  },
+  {
     href: "/foundations/effects",
     title: "Effects",
     description: "Shadows, border radius presets, animation curves, and component density.",

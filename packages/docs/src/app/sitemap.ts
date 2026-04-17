@@ -21,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/foundations/effects`, changeFrequency: "monthly" as const, priority: 0.5 },
     { url: `${BASE}/foundations/icons`, changeFrequency: "monthly" as const, priority: 0.5 },
     { url: `${BASE}/foundations/layout`, changeFrequency: "monthly" as const, priority: 0.5 },
+    { url: `${BASE}/foundations/ai-layer`, changeFrequency: "monthly" as const, priority: 0.5 },
   ];
 
   const blockTypeRoutes = [
