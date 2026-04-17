@@ -95,6 +95,15 @@
   --ds-space-button-sm: var(--space-3);
   --ds-space-button-md: var(--space-4);
   --ds-space-button-lg: var(--space-6);
+  --ds-space-page-x: clamp(20px, 5vw, 32px);
+  --ds-space-section-y: clamp(48px, 8vw, 96px);
+  --ds-space-stack-sm: var(--space-2);
+  --ds-space-stack: var(--space-6);
+  --ds-space-stack-lg: var(--space-10);
+  --ds-space-gap: var(--space-4);
+  --ds-space-app-gap: var(--space-4);
+  --ds-space-app-stack: var(--space-6);
+  --ds-space-app-page-x: clamp(20px, 5vw, 32px);
 }
 
 /* --- Light Mode --- */

@@ -102,15 +102,17 @@ export async function init(options: InitOptions) {
     console.log(pc.green("  ✓ ") + pc.dim(srcPath(detected.srcDir, "presets.ts")));
   }
 
-  // 4. CSS: tokens + theme imports
+  // 4. Vite: install Tailwind + wire vite.config.ts (plugin + @ alias).
+  //    Next ships Tailwind via create-next-app, no extra install needed.
+  if (detected.isVite) {
+    await ensureViteTailwind(cwd, detected);
+    await setupViteConfig(cwd);
+  }
+
+  // 5. CSS: tokens + theme imports
   const defaultCssPath = detected.appDir ? `${detected.appDir}/globals.css` : srcPath(detected.srcDir, "index.css");
   const cssPath = detected.cssFile || defaultCssPath;
   await setupCSS(cwd, cssPath, detected);
-
-  // 5. Vite needs @ alias (Next has it by default)
-  if (detected.isVite) {
-    await setupViteAlias(cwd);
-  }
 
   // 5b. Fonts — next/font for Next.js, @fontsource for Vite
   await setupFonts(cwd, detected);
@@ -178,24 +180,37 @@ async function setupCSS(cwd: string, cssPath: string, detected: DetectedProject)
   const tokenImport = `@import "./softuq-tokens.css";`;
   const themeImport = `@import "./softuq-theme.css";`;
 
+  const head = needsFontsCss ? `${fontsImport}\n@import "tailwindcss";\n` : `@import "tailwindcss";\n`;
+  const minimal = `${head}${sourceDirective}\n${tokenImport}\n${themeImport}\n`;
+
   if (await fs.pathExists(fullPath)) {
     const content = await fs.readFile(fullPath, "utf-8");
     if (content.includes(marker) || content.includes("softuq-tokens")) {
       console.log(pc.gray("  ○ ") + pc.dim(`${cssPath} (already configured)`));
       return;
     }
-    const lines = content.split("\n");
-    const twIndex = lines.findIndex((l) => l.includes("tailwindcss"));
-    if (twIndex !== -1) {
-      // Insert AFTER tailwindcss first so twIndex stays valid, then BEFORE for fonts (Vite only).
-      lines.splice(twIndex + 1, 0, sourceDirective, tokenImport, themeImport);
-      if (needsFontsCss) lines.splice(twIndex, 0, fontsImport);
+    // create-next-app / create-vite demo CSS conflicts with DS theme (body font,
+    // --font-* @theme overrides, prefers-color-scheme vs data-theme, #root sizing).
+    // Signature check: replace the whole file with DS-minimal content.
+    const isCreateNextAppDefault =
+      content.includes("--font-geist-sans") && content.includes("Arial, Helvetica");
+    const isCreateViteDefault =
+      content.includes("--social-bg") || /#root\s*\{[^}]*width:\s*1126px/.test(content);
+    if (isCreateNextAppDefault || isCreateViteDefault) {
+      await fs.writeFile(fullPath, minimal);
+    } else {
+      const lines = content.split("\n");
+      const twIndex = lines.findIndex((l) => l.includes("tailwindcss"));
+      if (twIndex !== -1) {
+        // Insert AFTER tailwindcss first so twIndex stays valid, then BEFORE for fonts (Vite only).
+        lines.splice(twIndex + 1, 0, sourceDirective, tokenImport, themeImport);
+        if (needsFontsCss) lines.splice(twIndex, 0, fontsImport);
+      }
+      await fs.writeFile(fullPath, `${lines.join("\n")}\n`);
     }
-    await fs.writeFile(fullPath, `${lines.join("\n")}\n`);
   } else {
     await fs.ensureDir(cssDir);
-    const head = needsFontsCss ? `${fontsImport}\n@import "tailwindcss";\n` : `@import "tailwindcss";\n`;
-    await fs.writeFile(fullPath, `${head}${sourceDirective}\n${tokenImport}\n${themeImport}\n`);
+    await fs.writeFile(fullPath, minimal);
   }
   console.log(pc.green("  ✓ ") + pc.dim(`${cssPath}`));
 }
@@ -269,47 +284,78 @@ async function wireViteFontImports(cwd: string) {
   if (!(await fs.pathExists(mainPath))) return;
   let content = await fs.readFile(mainPath, "utf-8");
   if (content.includes("@fontsource-variable/inter")) return;
-  const fontImports = VITE_FONTSOURCE_DEPS.map((pkg) => `import "${pkg}";`).join("\n");
+  const fontImports = VITE_FONTSOURCE_DEPS.map((pkg) => `import "${pkg}/index.css";`).join("\n");
   content = `${fontImports}\n${content}`;
   await fs.writeFile(mainPath, content);
   console.log(pc.green("  ✓ ") + pc.dim("src/main.tsx (font imports)"));
 }
 
 /* ============================================
-   Vite @ alias
+   Vite — Tailwind install + config wiring
    ============================================ */
 
-async function setupViteAlias(cwd: string) {
-  // tsconfig.app.json — add baseUrl + paths into compilerOptions
+async function ensureViteTailwind(cwd: string, detected: DetectedProject) {
+  const pkgPath = path.join(cwd, "package.json");
+  if (!(await fs.pathExists(pkgPath))) return;
+  const pkg = await fs.readJson(pkgPath);
+  const installed = { ...pkg.dependencies, ...pkg.devDependencies };
+  const missing = ["tailwindcss", "@tailwindcss/vite"].filter((d) => !installed[d]);
+  if (missing.length === 0) return;
+  console.log(pc.dim("\n  Installing Tailwind..."));
+  installDeps(missing, cwd, detected.packageManager);
+  console.log(pc.green("  ✓ ") + pc.dim(missing.join(", ")));
+}
+
+async function setupViteConfig(cwd: string) {
+  // tsconfig.app.json — add paths into compilerOptions
   const tsconfigPath = path.join(cwd, "tsconfig.app.json");
   if (await fs.pathExists(tsconfigPath)) {
     let content = await fs.readFile(tsconfigPath, "utf-8");
     if (!content.includes('"@/*"')) {
       content = content.replace(
         /"compilerOptions":\s*\{/,
-        `"compilerOptions": {\n    "baseUrl": ".",\n    "paths": { "@/*": ["./src/*"] },`,
+        `"compilerOptions": {\n    "paths": { "@/*": ["./src/*"] },`,
       );
       await fs.writeFile(tsconfigPath, content);
       console.log(pc.green("  ✓ ") + pc.dim("tsconfig.app.json"));
     }
   }
 
-  // vite.config.ts — add resolve.alias
+  // vite.config.ts — add @tailwindcss/vite plugin + resolve.alias
   const viteConfigPath = path.join(cwd, "vite.config.ts");
-  if (await fs.pathExists(viteConfigPath)) {
-    let content = await fs.readFile(viteConfigPath, "utf-8");
-    const hasAlias = content.includes('"@":') || content.includes("'@':");
-    if (!hasAlias) {
-      if (!content.includes("fileURLToPath")) {
-        content = `import { fileURLToPath, URL } from "node:url";\n${content}`;
-      }
-      content = content.replace(
-        /defineConfig\(\{/,
-        `defineConfig({\n  resolve: {\n    alias: {\n      "@": fileURLToPath(new URL("./src", import.meta.url)),\n    },\n  },`,
-      );
-      await fs.writeFile(viteConfigPath, content);
-      console.log(pc.green("  ✓ ") + pc.dim("vite.config.ts"));
+  if (!(await fs.pathExists(viteConfigPath))) return;
+  let content = await fs.readFile(viteConfigPath, "utf-8");
+  let changed = false;
+
+  // Add Tailwind plugin
+  if (!content.includes("@tailwindcss/vite")) {
+    content = `import tailwindcss from "@tailwindcss/vite";\n${content}`;
+    // Insert into plugins array: plugins: [react()] → plugins: [react(), tailwindcss()]
+    content = content.replace(/plugins:\s*\[([^\]]*)\]/, (match, inner) => {
+      const trimmed = inner.trim();
+      if (trimmed.length === 0) return `plugins: [tailwindcss()]`;
+      if (trimmed.includes("tailwindcss()")) return match;
+      return `plugins: [${trimmed}, tailwindcss()]`;
+    });
+    changed = true;
+  }
+
+  // Add @ alias
+  const hasAlias = content.includes('"@":') || content.includes("'@':");
+  if (!hasAlias) {
+    if (!content.includes("fileURLToPath")) {
+      content = `import { fileURLToPath, URL } from "node:url";\n${content}`;
     }
+    content = content.replace(
+      /defineConfig\(\{/,
+      `defineConfig({\n  resolve: {\n    alias: {\n      "@": fileURLToPath(new URL("./src", import.meta.url)),\n    },\n  },`,
+    );
+    changed = true;
+  }
+
+  if (changed) {
+    await fs.writeFile(viteConfigPath, content);
+    console.log(pc.green("  ✓ ") + pc.dim("vite.config.ts"));
   }
 }
 
@@ -371,10 +417,29 @@ async function wireViteIndexHtml(cwd: string) {
   const htmlPath = path.join(cwd, "index.html");
   if (!(await fs.pathExists(htmlPath))) return;
   const content = await fs.readFile(htmlPath, "utf-8");
-  const next = addDataThemeAttr(content);
+  let next = addDataThemeAttr(content);
+  next = addFlashPreventStyle(next);
   if (next === content) return;
   await fs.writeFile(htmlPath, next);
   console.log(pc.green("  ✓ ") + pc.dim("index.html"));
+}
+
+/**
+ * Vite CSR loads CSS via JS (import "./index.css" in main.tsx), so the first
+ * paint uses browser defaults = white flash. Inline style in <head> applies
+ * the matching dark/light background BEFORE JS runs — eliminates the flash.
+ * Values match --bg-base / --text-primary in tokens/semantic.css.
+ */
+const FLASH_PREVENT_STYLE = `    <style id="softuq-flash-prevent">
+      html[data-theme="dark"] { color-scheme: dark; background: oklch(0.134 0 0); color: oklch(0.97 0 0); }
+      html[data-theme="light"] { color-scheme: light; background: oklch(0.985 0 0); color: oklch(0.134 0 0); }
+    </style>`;
+
+function addFlashPreventStyle(content: string): string {
+  if (content.includes("softuq-flash-prevent")) return content;
+  // Inject just before </head>. If no <head>, bail — can't wire safely.
+  if (!content.includes("</head>")) return content;
+  return content.replace("</head>", `${FLASH_PREVENT_STYLE}\n  </head>`);
 }
 
 function addImport(content: string, importLine: string): string {

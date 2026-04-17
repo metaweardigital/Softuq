@@ -1,6 +1,6 @@
 {
   "name": "softuq",
-  "version": "0.8.1",
+  "version": "0.8.3",
   "description": "CLI for Softuq — add UI components and the design skill to your project",
   "type": "module",
   "license": "MIT",
@@ -25,7 +25,8 @@
     "dist",
     "templates",
     "skill",
-    "README.md"
+    "README.md",
+    "CHANGELOG.md"
   ],
   "publishConfig": {
     "access": "public"
