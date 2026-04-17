@@ -1,5 +1,8 @@
 // Provider
 
+// Components — AI
+export { Halo, type HaloProps, type HaloTone, haloVariants } from "./components/ai/halo";
+
 // Components — Navigation
 export {
   Accordion,
