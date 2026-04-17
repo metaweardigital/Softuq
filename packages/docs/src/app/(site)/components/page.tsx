@@ -8,6 +8,7 @@ import {
   Alert,
   AlertDescription,
   AlertTitle,
+  Aurora,
   Avatar,
   Badge,
   Breadcrumb,
@@ -34,6 +35,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
+  Dots,
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
@@ -50,6 +52,7 @@ import {
   FormDescription,
   FormField,
   FormMessage,
+  Halo,
   Input,
   Kbd,
   Label,
@@ -170,6 +173,7 @@ function Row({ label, children }: { label?: string; children: React.ReactNode })
 const COMPONENT_SECTIONS = [
   "Accordion",
   "Alert",
+  "Aurora",
   "Avatar",
   "Badge",
   "Breadcrumb",
@@ -178,9 +182,11 @@ const COMPONENT_SECTIONS = [
   "Checkbox",
   "Code",
   "Dialog",
+  "Dots",
   "Dropdown Menu",
   "Empty",
   "Form Text",
+  "Halo",
   "Input & Textarea",
   "Kbd",
   "Label",
@@ -574,6 +580,34 @@ export default function ComponentPreview() {
               </div>
             </Section>
 
+            {/* Aurora */}
+            <Section title="Aurora">
+              <div>
+                <p className="text-sm text-fg-muted max-w-prose">
+                  Drifting multi-color gradient background layer. Parent must have <Code>position: relative</Code> and{" "}
+                  <Code>overflow: hidden</Code>. Decorative only (<Code>aria-hidden</Code>).
+                </p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {(["subtle", "medium", "intense"] as const).map((i) => (
+                  <div
+                    key={i}
+                    className="relative h-40 rounded-[var(--ds-radius-card)] bg-surface-card overflow-hidden border border-edge-subtle"
+                  >
+                    <Aurora intensity={i} />
+                    <div className="relative p-4 text-fg-primary text-sm">{i}</div>
+                  </div>
+                ))}
+              </div>
+              <CodeBlock
+                language="auto"
+                code={`<div className="relative overflow-hidden">
+  <Aurora intensity="medium" />
+  <div className="relative">…content…</div>
+</div>`}
+              />
+            </Section>
+
             {/* Avatar */}
             <Section title="Avatar">
               <Row label="Sizes & Fallback">
@@ -875,6 +909,24 @@ export default function Page() {
               </Row>
             </Section>
 
+            {/* Dots */}
+            <Section title="Dots">
+              <div>
+                <p className="text-sm text-fg-muted max-w-prose">
+                  Three-dot thinking indicator. Renders with <Code>role="status"</Code> and a default{" "}
+                  <Code>aria-label</Code> of <em>Thinking</em>.
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-6 items-center">
+                <Dots size="sm" />
+                <Dots size="md" />
+                <Dots size="lg" />
+                <Dots tone="mono" />
+                <Dots tone="muted" />
+              </div>
+              <CodeBlock language="auto" code={`<Dots size="md" tone="iridescent" />`} />
+            </Section>
+
             {/* Dropdown Menu */}
             <Section title="Dropdown Menu">
               <Row>
@@ -993,6 +1045,39 @@ export default function Page() {
                   <FormMessage variant="warning">Password is weak.</FormMessage>
                 </FormField>
               </div>
+            </Section>
+
+            {/* Halo */}
+            <Section title="Halo">
+              <div>
+                <p className="text-sm text-fg-muted max-w-prose">
+                  Rotating iridescent border around any child. Use for AI-generated or agent-in-progress states.
+                  Respects <Code>prefers-reduced-motion</Code> (freezes in place, keeps visuals).
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-6 items-center">
+                <Halo tone="iridescent">
+                  <Button>Generate</Button>
+                </Halo>
+                <Halo tone="mono">
+                  <Button variant="secondary">Mono</Button>
+                </Halo>
+                <Halo tone="subtle">
+                  <Button variant="outline">Subtle</Button>
+                </Halo>
+                <Halo tone="iridescent" speed="fast">
+                  <Button variant="ghost">Fast</Button>
+                </Halo>
+                <Halo tone="iridescent" active={false}>
+                  <Button variant="outline">Inactive</Button>
+                </Halo>
+              </div>
+              <CodeBlock
+                language="auto"
+                code={`<Halo tone="iridescent" size="md" speed="normal" active>
+  <Button>Generate</Button>
+</Halo>`}
+              />
             </Section>
 
             {/* Input & Textarea */}
@@ -1765,7 +1850,6 @@ export default function Page() {
           </div>
         </div>
       </div>
-
     </ToastProvider>
   );
 }
