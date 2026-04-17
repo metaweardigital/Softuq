@@ -4,13 +4,10 @@ CLI for **Softuq** — a soft UI design system with copy-paste component distrib
 
 Tokens ship as an npm package. Components are copied into your project so you own the code.
 
-See [CHANGELOG.md](./CHANGELOG.md) for release notes.
-
 ## Requirements
 
 - Node.js 20+
-- A React project — Next.js (App Router) or Vite (`react-ts`)
-- Tailwind CSS v4 (in Vite also wire `@tailwindcss/vite` into `vite.config.ts`)
+- A React project — Next.js (App Router, ships with Tailwind v4) or Vite (`react-ts`, `init` installs & wires Tailwind v4 for you)
 
 ## Quick start
 
@@ -49,7 +46,7 @@ Run any command with `--help` for the full option list.
 - **Lib** — `cn()` helper, JS token values, `SoftuqProvider`, and `presets.ts` into `src/lib/` and `src/`.
 - **Provider wiring** — mounts `SoftuqProvider` in `layout.tsx` (Next) or `main.tsx` (Vite), adds `data-theme="dark"` to `<html>`.
 - **Fonts** — generates `src/softuq-fonts.ts` with `next/font/google` for Next.js, or installs `@fontsource-variable/*` packages and imports them in `main.tsx` for Vite.
-- **Vite aliases** — adds `@/*` path alias to `tsconfig.app.json` and `vite.config.ts`.
+- **Vite setup** — installs `tailwindcss` + `@tailwindcss/vite` if missing, registers the plugin in `vite.config.ts`, and adds the `@/*` path alias to both `tsconfig.app.json` and `vite.config.ts`.
 - **Starter page** — scaffolds `app/page.tsx` (Next) or `App.tsx` (Vite) with a live theme playground and pulls in `button`, `card`, `form-text`, `label`, `select`, `separator`. Opt out with `--no-starter`.
 
 ## Design skill

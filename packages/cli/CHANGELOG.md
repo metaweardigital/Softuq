@@ -2,6 +2,11 @@
 
 All notable changes to the `softuq` CLI.
 
+## 0.8.4
+
+- Drop broken relative `CHANGELOG.md` link from README (npm rewrites relative links to `npmjs.com/package/*` and breaks them; repo is private, so no absolute fallback).
+- Update README + `/getting-started` to reflect 0.8.3 behavior — Tailwind v4 is no longer a manual prerequisite for Vite (`init` installs `tailwindcss` + `@tailwindcss/vite` and wires the plugin into `vite.config.ts` automatically).
+
 ## 0.8.3
 
 - `init` runs end-to-end on a bare `create-vite --template react-ts`:

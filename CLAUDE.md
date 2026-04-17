@@ -182,6 +182,16 @@ npx softuq skill -g      # install globally to ~/.claude/skills/
 - `skill` copies `skills/softuq/` (AI coding-agent rules) to `.claude/skills/softuq/` in CWD, or `~/.claude/skills/...` with `--global`. Prompts before overwrite unless `--yes` or `--overwrite`. Skill source is bundled into the tarball the same way as templates.
 - Component templates + skill are bundled into the published tarball — `prepublishOnly` → `scripts/sync-templates.mjs` copies `packages/react/src` → `packages/cli/templates/react/` and `skills/softuq/` → `packages/cli/skill/`. `getSourceDir()` in `src/utils/registry.ts` and `getSkillSource()` in `src/commands/skill.ts` prefer the bundled copy (npm install) and fall back to the monorepo source (dev). Both `packages/cli/templates/` and `packages/cli/skill/` are gitignored.
 
+### Keeping CLI docs in sync
+
+Whenever CLI behavior changes (new command, new auto-install step, new framework support, removed prerequisite, renamed flag, etc.) update **all three** of these so users don't get stale instructions:
+
+1. `packages/cli/README.md` — shipped to npm, rendered on the package page. Prerequisites + "What init does" sections must reflect current behavior.
+2. `packages/docs/src/app/getting-started/page.tsx` — the `/getting-started` tutorial on softuq.com. Prerequisites list + "What init does" bullets.
+3. `packages/cli/CHANGELOG.md` — add an entry under the new version.
+
+Also bump `packages/cli/package.json` version (see Versioning) and republish — npm renders the README from the published tarball, so edits only appear after `pnpm publish:cli`.
+
 ## Dev
 
 ```bash

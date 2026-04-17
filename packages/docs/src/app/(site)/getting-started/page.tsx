@@ -34,8 +34,9 @@ export default function GettingStartedPage() {
             (react-ts)
           </li>
           <li>
-            <Code>tailwindcss@4</Code> installed — in Vite you&rsquo;ll also need <Code>@tailwindcss/vite</Code> wired
-            into <Code>vite.config.ts</Code>
+            No manual Tailwind setup — <Code>create-next-app</Code> ships with Tailwind v4, and for Vite{" "}
+            <Code>softuq init</Code> installs <Code>tailwindcss</Code> + <Code>@tailwindcss/vite</Code> and wires the
+            plugin into <Code>vite.config.ts</Code> automatically
           </li>
         </ul>
       </div>
@@ -66,8 +67,9 @@ export default function GettingStartedPage() {
               Vite
             </li>
             <li>
-              For Vite: adds the <Code>@/*</Code> path alias to <Code>tsconfig.app.json</Code> and{" "}
-              <Code>vite.config.ts</Code>
+              For Vite: installs <Code>tailwindcss</Code> + <Code>@tailwindcss/vite</Code> if missing, registers the
+              plugin in <Code>vite.config.ts</Code>, and adds the <Code>@/*</Code> path alias to{" "}
+              <Code>tsconfig.app.json</Code> and <Code>vite.config.ts</Code>
             </li>
             <li>
               Scaffolds a starter landing page at <Code>app/page.tsx</Code> / <Code>App.tsx</Code> with a live theme
