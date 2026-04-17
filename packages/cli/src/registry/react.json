@@ -21,6 +21,11 @@
       "dependencies": ["class-variance-authority", "lucide-react"],
       "registryDeps": []
     },
+    "aurora": {
+      "files": ["components/ai/aurora.tsx"],
+      "dependencies": ["class-variance-authority"],
+      "registryDeps": []
+    },
     "avatar": {
       "files": ["components/ui/avatar.tsx"],
       "dependencies": ["class-variance-authority"],
@@ -61,6 +66,11 @@
       "dependencies": ["class-variance-authority", "lucide-react"],
       "registryDeps": []
     },
+    "dots": {
+      "files": ["components/ai/dots.tsx"],
+      "dependencies": ["class-variance-authority"],
+      "registryDeps": []
+    },
     "dropdown-menu": {
       "files": ["components/ui/dropdown-menu.tsx"],
       "dependencies": ["lucide-react"],
@@ -73,6 +83,11 @@
     },
     "form-text": {
       "files": ["components/ui/form-text.tsx"],
+      "dependencies": ["class-variance-authority"],
+      "registryDeps": []
+    },
+    "halo": {
+      "files": ["components/ai/halo.tsx"],
       "dependencies": ["class-variance-authority"],
       "registryDeps": []
     },

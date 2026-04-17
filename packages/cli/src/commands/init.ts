@@ -156,10 +156,11 @@ async function setupCSS(cwd: string, cssPath: string, detected: DetectedProject)
   const tokensDir = getTokensDir();
   const primitives = await fs.readFile(path.join(tokensDir, "primitives.css"), "utf-8");
   const semantic = await fs.readFile(path.join(tokensDir, "semantic.css"), "utf-8");
+  const ai = await fs.readFile(path.join(tokensDir, "ai.css"), "utf-8");
   const tailwindTheme = await fs.readFile(path.join(tokensDir, "tailwind-theme.css"), "utf-8");
 
   const tokensFile = path.join(cssDir, "softuq-tokens.css");
-  await fs.writeFile(tokensFile, `${marker}\n${primitives}\n\n${semantic}\n\n${BASE_TYPOGRAPHY_CSS}`);
+  await fs.writeFile(tokensFile, `${marker}\n${primitives}\n\n${semantic}\n\n${ai}\n\n${BASE_TYPOGRAPHY_CSS}`);
   console.log(pc.green("  ✓ ") + pc.dim("softuq-tokens.css"));
 
   const themeFile = path.join(cssDir, "softuq-theme.css");
@@ -192,10 +193,8 @@ async function setupCSS(cwd: string, cssPath: string, detected: DetectedProject)
     // create-next-app / create-vite demo CSS conflicts with DS theme (body font,
     // --font-* @theme overrides, prefers-color-scheme vs data-theme, #root sizing).
     // Signature check: replace the whole file with DS-minimal content.
-    const isCreateNextAppDefault =
-      content.includes("--font-geist-sans") && content.includes("Arial, Helvetica");
-    const isCreateViteDefault =
-      content.includes("--social-bg") || /#root\s*\{[^}]*width:\s*1126px/.test(content);
+    const isCreateNextAppDefault = content.includes("--font-geist-sans") && content.includes("Arial, Helvetica");
+    const isCreateViteDefault = content.includes("--social-bg") || /#root\s*\{[^}]*width:\s*1126px/.test(content);
     if (isCreateNextAppDefault || isCreateViteDefault) {
       await fs.writeFile(fullPath, minimal);
     } else {
