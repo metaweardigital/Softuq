@@ -4,7 +4,7 @@ import { cn } from "../../lib/utils";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./dropdown-menu";
 
 const Breadcrumb = React.forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement>>(({ className, ...props }, ref) => (
-  <nav ref={ref} aria-label="Breadcrumb" className={cn("text-sm", className)} {...props} />
+  <nav ref={ref} aria-label="Breadcrumb" className={cn(className)} {...props} />
 ));
 Breadcrumb.displayName = "Breadcrumb";
 
@@ -35,11 +35,19 @@ const BreadcrumbLink = React.forwardRef<HTMLAnchorElement, BreadcrumbLinkProps>(
     if (asChild && React.isValidElement(props.children)) {
       const child = props.children as React.ReactElement<{ className?: string }>;
       return React.cloneElement(child, {
-        className: cn("transition-colors duration-fast hover:text-fg-primary", child.props.className, className),
+        className: cn(
+          "text-sm transition-colors duration-fast hover:text-fg-primary",
+          child.props.className,
+          className,
+        ),
       });
     }
     return (
-      <a ref={ref} className={cn("transition-colors duration-fast hover:text-fg-primary", className)} {...props} />
+      <a
+        ref={ref}
+        className={cn("text-sm transition-colors duration-fast hover:text-fg-primary", className)}
+        {...props}
+      />
     );
   },
 );
@@ -52,7 +60,7 @@ const BreadcrumbPage = React.forwardRef<HTMLSpanElement, React.HTMLAttributes<HT
       role="link"
       aria-disabled="true"
       aria-current="page"
-      className={cn("font-medium text-fg-primary", className)}
+      className={cn("text-sm font-medium text-fg-primary", className)}
       {...props}
     />
   ),

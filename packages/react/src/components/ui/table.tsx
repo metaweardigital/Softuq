@@ -4,7 +4,7 @@ import { cn } from "../../lib/utils";
 const Table = React.forwardRef<HTMLTableElement, React.HTMLAttributes<HTMLTableElement>>(
   ({ className, ...props }, ref) => (
     <div className="relative w-full overflow-auto scrollbar-thin">
-      <table ref={ref} className={cn("w-full caption-bottom text-sm border-collapse", className)} {...props} />
+      <table ref={ref} className={cn("w-full caption-bottom border-collapse", className)} {...props} />
     </div>
   ),
 );
@@ -28,7 +28,11 @@ const TableFooter = React.forwardRef<HTMLTableSectionElement, React.HTMLAttribut
   ({ className, ...props }, ref) => (
     <tfoot
       ref={ref}
-      className={cn("border-t border-edge-subtle font-medium", "[&>tr]:last:border-b-0", className)}
+      className={cn(
+        "border-t border-edge-subtle [&_td]:font-medium [&_th]:font-medium",
+        "[&>tr]:last:border-b-0",
+        className,
+      )}
       {...props}
     />
   ),
@@ -69,7 +73,7 @@ const TableCell = React.forwardRef<HTMLTableCellElement, React.TdHTMLAttributes<
   ({ className, ...props }, ref) => (
     <td
       ref={ref}
-      className={cn("px-3 py-2.5 align-middle text-fg-primary", "[&:has([role=checkbox])]:pr-0", className)}
+      className={cn("px-3 py-2.5 text-sm align-middle text-fg-primary", "[&:has([role=checkbox])]:pr-0", className)}
       {...props}
     />
   ),
