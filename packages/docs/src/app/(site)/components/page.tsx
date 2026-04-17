@@ -599,13 +599,10 @@ export default function ComponentPreview() {
                   </div>
                 ))}
               </div>
-              <CodeBlock
-                language="auto"
-                code={`<div className="relative overflow-hidden">
+              <CodeBlock language="auto">{`<div className="relative overflow-hidden">
   <Aurora intensity="medium" />
   <div className="relative">…content…</div>
-</div>`}
-              />
+</div>`}</CodeBlock>
             </Section>
 
             {/* Avatar */}
@@ -924,7 +921,7 @@ export default function Page() {
                 <Dots tone="mono" />
                 <Dots tone="muted" />
               </div>
-              <CodeBlock language="auto" code={`<Dots size="md" tone="iridescent" />`} />
+              <CodeBlock language="auto">{`<Dots size="md" tone="iridescent" />`}</CodeBlock>
             </Section>
 
             {/* Dropdown Menu */}
@@ -1072,12 +1069,9 @@ export default function Page() {
                   <Button variant="outline">Inactive</Button>
                 </Halo>
               </div>
-              <CodeBlock
-                language="auto"
-                code={`<Halo tone="iridescent" size="md" speed="normal" active>
+              <CodeBlock language="auto">{`<Halo tone="iridescent" size="md" speed="normal" active>
   <Button>Generate</Button>
-</Halo>`}
-              />
+</Halo>`}</CodeBlock>
             </Section>
 
             {/* Input & Textarea */}
