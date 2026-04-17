@@ -229,3 +229,29 @@ select:-webkit-autofill:focus {
   transition: background-color 5000s ease-in-out 0s;
 }
 
+/* ============================================
+   AI layer keyframes + reduced-motion scope
+   ============================================ */
+
+@keyframes ai-halo-spin {
+  to { transform: rotate(1turn); }
+}
+@keyframes ai-dots-bounce {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.35; }
+  40%           { transform: translateY(-30%); opacity: 1; }
+}
+@keyframes ai-aurora-drift {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(6%, -4%) rotate(18deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-ai-primitive],
+  [data-ai-primitive] [data-ai-layer] {
+    animation: none !important;
+  }
+  [data-ai-primitive="dots"] [data-ai-layer] {
+    opacity: 0.6;
+  }
+}
+

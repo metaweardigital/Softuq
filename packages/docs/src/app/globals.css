@@ -107,6 +107,19 @@
   --animate-pulse: pulse 2s infinite var(--ease-soft);
   --animate-blink: blink 1.1s steps(1) infinite;
 
+  /* AI layer — colors */
+  --color-ai-1: var(--ai-hue-1);
+  --color-ai-2: var(--ai-hue-2);
+  --color-ai-3: var(--ai-hue-3);
+  --color-ai-4: var(--ai-hue-4);
+  --color-ai-5: var(--ai-hue-5);
+  --color-ai-6: var(--ai-hue-6);
+
+  /* AI layer — animations */
+  --animate-ai-halo-spin: ai-halo-spin var(--ds-ai-halo-speed) linear infinite;
+  --animate-ai-dots-bounce: ai-dots-bounce var(--ds-ai-dots-speed) ease-in-out infinite;
+  --animate-ai-aurora-drift: ai-aurora-drift var(--ds-ai-aurora-speed) ease-in-out infinite alternate;
+
   /* Z-index */
   --z-index-dropdown: 50;
   --z-index-sticky: 100;
