@@ -1,0 +1,59 @@
+/* ============================================
+   SOFTUQ — AI layer tokens
+   Pastel iridescent palette and motion defaults.
+   Theme-agnostic: same values in dark and light.
+   ============================================ */
+
+:root {
+  /* Primitives — 6 OKLCH hue anchors */
+  --ai-hue-1: oklch(0.78 0.12 330);  /* magenta */
+  --ai-hue-2: oklch(0.76 0.12 20);   /* warm red */
+  --ai-hue-3: oklch(0.80 0.11 150);  /* emerald */
+  --ai-hue-4: oklch(0.85 0.08 200);  /* cyan */
+  --ai-hue-5: oklch(0.72 0.13 260);  /* blue */
+  --ai-hue-6: oklch(0.68 0.14 300);  /* violet */
+
+  /* Semantic — gradient presets */
+  --ai-gradient-iridescent: conic-gradient(
+    from 0deg,
+    var(--ai-hue-1) 0%,
+    var(--ai-hue-2) 15%,
+    var(--ai-hue-3) 35%,
+    var(--ai-hue-4) 55%,
+    var(--ai-hue-5) 70%,
+    var(--ai-hue-6) 85%,
+    var(--ai-hue-1) 100%
+  );
+  --ai-gradient-mono: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    var(--accent) 30%,
+    var(--accent) 70%,
+    transparent 100%
+  );
+  --ai-gradient-subtle: conic-gradient(
+    from 0deg,
+    color-mix(in oklch, var(--ai-hue-1) 40%, transparent) 0%,
+    color-mix(in oklch, var(--ai-hue-5) 40%, transparent) 50%,
+    color-mix(in oklch, var(--ai-hue-1) 40%, transparent) 100%
+  );
+  --ai-glow-color: color-mix(in oklch, var(--ai-hue-5) 60%, var(--ai-hue-1) 40%);
+  --ai-aurora-from: var(--ai-hue-1);
+  --ai-aurora-via: var(--ai-hue-4);
+  --ai-aurora-to: var(--ai-hue-6);
+
+  /* Component — per-primitive tweakables */
+  --ds-ai-halo-width: 1.5px;
+  --ds-ai-halo-speed: 3s;
+  --ds-ai-halo-blur: 0px;
+  --ds-ai-halo-bloom-size: 20px;
+  --ds-ai-halo-bloom-opacity: 0.35;
+
+  --ds-ai-dots-gap: 6px;
+  --ds-ai-dots-size: 8px;
+  --ds-ai-dots-speed: 1.2s;
+
+  --ds-ai-aurora-blur: 40px;
+  --ds-ai-aurora-opacity: 0.45;
+  --ds-ai-aurora-speed: 12s;
+}
