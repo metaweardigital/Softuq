@@ -1,6 +1,7 @@
 // Provider
 
 // Components — AI
+export { Aurora, type AuroraCoverage, type AuroraProps, auroraVariants } from "./components/ai/aurora";
 export { Dots, type DotsPattern, type DotsProps, type DotsTone, dotsVariants } from "./components/ai/dots";
 export { Halo, type HaloProps, type HaloTone, haloVariants } from "./components/ai/halo";
 
