@@ -29,7 +29,7 @@ Custom design system. Soft UI aesthetic. Copy-paste component distribution.
 
 ## Theming (SoftuqProvider)
 
-4 axes, ordered from most global to most specific:
+5 axes, ordered from most global to most specific:
 
 1. **Palette** (gray tint): neutral / zinc / stone / slate / mauve / olive
 2. **Accent** (brand color): blue / violet / emerald / amber / red / rose / cyan / orange
@@ -153,6 +153,7 @@ Blocks live in `packages/docs/src/blocks/web/*` and `packages/docs/src/blocks/ap
 - [Tailwind v4 Guide](docs/guides/tailwind-v4.md) — @theme, @source
 - [Component Pattern](docs/guides/component-pattern.md) — CVA template, theming override
 - [Theming Guide](docs/guides/theming.md) — SoftuqProvider, palette/accent/radius/spacing presets
+- [Design Skill](skills/softuq/SKILL.md) — AI coding-agent rules (bundled into CLI via `softuq skill`)
 
 ## CLI
 
@@ -190,6 +191,8 @@ pnpm lint       # biome check
 pnpm lint:fix   # biome auto-fix
 pnpm format     # biome format
 ```
+
+- No test suite — verify changes by running `pnpm dev` and exercising the docs site.
 
 - `pnpm build` kills the running dev server and leaves stale `.next` cache → always clean up after build:
   ```bash

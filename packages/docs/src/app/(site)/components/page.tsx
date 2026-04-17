@@ -1766,9 +1766,6 @@ export default function Page() {
         </div>
       </div>
 
-      <footer className="border-t border-edge-subtle py-8 text-center text-xs text-fg-muted">
-        Softuq v0.1.0 — Soft UI Design System
-      </footer>
     </ToastProvider>
   );
 }
