@@ -55,7 +55,7 @@ const Aurora = React.forwardRef<HTMLDivElement, AuroraProps>(
       ].join(", "),
       filter: "blur(var(--ds-ai-aurora-blur))",
       opacity: "var(--ds-ai-aurora-opacity)",
-      mixBlendMode: "screen",
+      mixBlendMode: "var(--ds-ai-aurora-blend, screen)" as React.CSSProperties["mixBlendMode"],
       animation: animate ? "ai-aurora-drift var(--ds-ai-aurora-speed, 12s) ease-in-out infinite alternate" : undefined,
       willChange: animate ? "transform" : undefined,
     };

@@ -191,9 +191,8 @@ npx softuq doctor`}
         </CodeBlock>
         <p className="text-sm leading-relaxed text-fg-muted">
           <Code>diff</Code> normalizes import paths, so local <Code>@/lib/utils</Code> rewrites don&rsquo;t show as
-          changes. <Code>doctor</Code> checks your <Code>@/*</Code> alias, CSS import order,{" "}
-          <Code>SoftuqProvider</Code> wiring, and the <Code>data-theme</Code> attribute — it prints a hint for every
-          failing check.
+          changes. <Code>doctor</Code> checks your <Code>@/*</Code> alias, CSS import order, <Code>SoftuqProvider</Code>{" "}
+          wiring, and the <Code>data-theme</Code> attribute — it prints a hint for every failing check.
         </p>
       </div>
 

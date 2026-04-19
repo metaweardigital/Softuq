@@ -1,6 +1,6 @@
 "use client";
 
-import { Aurora, Card, CardContent, CodeBlock, Dots, Halo } from "@softuq/react";
+import { Aurora, Button, Card, CardContent, CodeBlock, Dots, Halo } from "@softuq/react";
 import { PageShell } from "../../_components/page-shell";
 
 const HUE_TOKENS = [
@@ -13,9 +13,6 @@ const HUE_TOKENS = [
 ];
 
 const SEMANTIC_TOKENS = [
-  { name: "--ai-gradient-iridescent", desc: "Full-spectrum OKLCH sweep — halo and dots iridescent tone" },
-  { name: "--ai-gradient-mono", desc: "Single-hue accent gradient — mono tone for halo and dots" },
-  { name: "--ai-gradient-subtle", desc: "Low-chroma warm gradient — subtle tone, low visual weight" },
   { name: "--ai-glow-color", desc: "Ambient glow color used for AI-tinted box-shadows" },
   { name: "--ai-aurora-from", desc: "Aurora left blob color (magenta anchor)" },
   { name: "--ai-aurora-via", desc: "Aurora center blob color (emerald anchor)" },
@@ -23,16 +20,17 @@ const SEMANTIC_TOKENS = [
 ];
 
 const COMPONENT_VARS = [
-  { name: "--ds-ai-halo-width", default: "1.5px", controls: "<Halo> ring thickness" },
+  { name: "--ds-ai-halo-width", default: "1px", controls: "<Halo> ring thickness" },
   { name: "--ds-ai-halo-speed", default: "3s", controls: "<Halo> rotation period" },
-  { name: "--ds-ai-halo-bloom-size", default: "20px", controls: "<Halo> blur bloom radius" },
-  { name: "--ds-ai-halo-bloom-opacity", default: "0.35", controls: "<Halo> bloom opacity" },
+  { name: "--ds-ai-halo-bloom-size", default: "10px", controls: "<Halo> blur bloom radius" },
+  { name: "--ds-ai-halo-bloom-opacity", default: "0.55", controls: "<Halo> bloom opacity" },
   { name: "--ds-ai-dots-size", default: "8px", controls: "<Dots> dot diameter" },
   { name: "--ds-ai-dots-gap", default: "6px", controls: "<Dots> inter-dot spacing" },
   { name: "--ds-ai-dots-speed", default: "1.2s", controls: "<Dots> bounce period" },
   { name: "--ds-ai-aurora-blur", default: "40px", controls: "<Aurora> blur radius" },
   { name: "--ds-ai-aurora-opacity", default: "0.45", controls: "<Aurora> overall opacity" },
   { name: "--ds-ai-aurora-speed", default: "12s", controls: "<Aurora> drift period" },
+  { name: "--ds-ai-aurora-blend", default: "auto", controls: "<Aurora> blend mode — screen (dark) / multiply (light)" },
 ];
 
 const USE_BULLETS = [
@@ -97,15 +95,16 @@ export default function AiLayerFoundationPage() {
       >
         <div className="space-y-12">
           {/* Hero preview */}
-          <section className="relative rounded-[var(--ds-radius-card)] border border-edge-subtle bg-surface-card overflow-hidden p-8 min-h-48">
-            <Aurora intensity="medium" />
-            <div className="relative flex flex-col sm:flex-row items-center gap-6 justify-center">
-              <Halo tone="iridescent">
-                <div className="h-10 px-4 inline-flex items-center rounded-md bg-surface-elevated border border-edge-subtle text-sm text-fg-primary">
-                  Generating…
-                </div>
+          <section className="relative rounded-[var(--ds-radius-card)] border border-edge-subtle bg-surface-card overflow-hidden h-[320px]">
+            <Aurora intensity="intense" />
+            <div className="relative h-full flex flex-col items-center justify-center gap-5">
+              <Halo tone="iridescent" size="lg">
+                <Button size="lg">
+                  Generate
+                  <Dots size="sm" className="ml-2" />
+                </Button>
               </Halo>
-              <Dots size="md" />
+              <p className="text-sm text-fg-muted">AI is drafting a response…</p>
             </div>
           </section>
 

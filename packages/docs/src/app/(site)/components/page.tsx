@@ -1063,7 +1063,7 @@ export default function Page() {
                   <Button variant="outline">Subtle</Button>
                 </Halo>
                 <Halo tone="iridescent" speed="fast">
-                  <Button variant="ghost">Fast</Button>
+                  <Button variant="secondary">Fast</Button>
                 </Halo>
                 <Halo tone="iridescent" active={false}>
                   <Button variant="outline">Inactive</Button>

@@ -2,6 +2,12 @@
 
 All notable changes to the `softuq` CLI.
 
+## 0.9.1
+
+- AI primitives polish (bundled templates):
+  - `<Halo>` — fix stacking so button text renders above bloom/ring layers (bloom pushed to `z-index: -1` within Halo's isolated context; ring stays on top but mask-composite only shows the border strip).
+  - `<Aurora>` — theme-aware `mix-blend-mode` via new `--ds-ai-aurora-blend` token (`screen` in dark, `multiply` in light). Fixes aurora being invisible on light theme.
+
 ## 0.9.0
 
 - New `softuq remove <component>` — deletes component files, updates `softuq.json`, warns when other installed components depend on the target (`--force` to override, `--yes` to skip confirm).
