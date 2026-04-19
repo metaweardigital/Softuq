@@ -95,12 +95,19 @@ npx softuq add dialog input tabs tooltip
 # Or add everything
 npx softuq add --all
 
-# See what's available
-npx softuq list`}
+# See what's available (installed entries marked with ✓)
+npx softuq list
+
+# See only installed components
+npx softuq list --installed
+
+# Remove a component you no longer need
+npx softuq remove dialog`}
           </CodeBlock>
           <p className="text-sm leading-relaxed text-fg-muted">
             Dependencies resolve automatically — adding <Code>select</Code> pulls in <Code>tag</Code>, adding{" "}
-            <Code>breadcrumb</Code> pulls in <Code>dropdown-menu</Code>, etc.
+            <Code>breadcrumb</Code> pulls in <Code>dropdown-menu</Code>, etc. <Code>remove</Code> refuses to drop a
+            component another installed one still depends on — pass <Code>--force</Code> to override.
           </p>
         </Step>
 
@@ -177,11 +184,16 @@ npx softuq diff
 npx softuq update
 
 # Update specific components
-npx softuq update button card`}
+npx softuq update button card
+
+# Something off? Run a setup diagnostic
+npx softuq doctor`}
         </CodeBlock>
         <p className="text-sm leading-relaxed text-fg-muted">
           <Code>diff</Code> normalizes import paths, so local <Code>@/lib/utils</Code> rewrites don&rsquo;t show as
-          changes.
+          changes. <Code>doctor</Code> checks your <Code>@/*</Code> alias, CSS import order,{" "}
+          <Code>SoftuqProvider</Code> wiring, and the <Code>data-theme</Code> attribute — it prints a hint for every
+          failing check.
         </p>
       </div>
 
@@ -312,7 +324,6 @@ npx softuq skill -g`}
           ))}
         </div>
       </div>
-
     </>
   );
 }

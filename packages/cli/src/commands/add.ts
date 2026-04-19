@@ -1,9 +1,10 @@
 import path from "node:path";
 import fs from "fs-extra";
 import pc from "picocolors";
+import { markInstalled } from "../utils/config.js";
 import { installDeps } from "../utils/deps.js";
 import { detectProject } from "../utils/detect.js";
-import { getSourceDir, loadRegistry, resolveAllDeps } from "../utils/registry.js";
+import { loadRegistry, readSource, resolveAllDeps } from "../utils/registry.js";
 
 interface AddOptions {
   all?: boolean;
@@ -17,19 +18,18 @@ export async function add(components: string[], options: AddOptions) {
   // Load config
   const configPath = path.join(cwd, "softuq.json");
   if (!(await fs.pathExists(configPath))) {
-    console.log(pc.red("\n  No softuq.json found. Run `softuq init` first.\n"));
+    process.stderr.write(pc.red("\n  No softuq.json found. Run `softuq init` first.\n\n"));
     process.exit(1);
   }
 
   const config = await fs.readJson(configPath);
   const detected = await detectProject(cwd);
   if (!detected) {
-    console.log(pc.red("\n  No package.json found.\n"));
+    process.stderr.write(pc.red("\n  No package.json found.\n\n"));
     process.exit(1);
   }
 
   const registry = await loadRegistry(config.framework);
-  const sourceDir = getSourceDir(config.framework);
   const componentDir = options.dir || config.componentDir;
 
   // Resolve components
@@ -39,15 +39,15 @@ export async function add(components: string[], options: AddOptions) {
   }
 
   if (names.length === 0) {
-    console.log(pc.yellow("\n  No components specified. Usage: softuq add button card\n"));
+    process.stderr.write(pc.yellow("\n  No components specified. Usage: softuq add button card\n\n"));
     process.exit(1);
   }
 
   // Validate
   const invalid = names.filter((n) => !registry.components[n]);
   if (invalid.length > 0) {
-    console.log(pc.red(`\n  Unknown components: ${invalid.join(", ")}`));
-    console.log(pc.dim("  Run `softuq list` to see available components.\n"));
+    process.stderr.write(pc.red(`\n  Unknown components: ${invalid.join(", ")}\n`));
+    process.stderr.write(pc.dim("  Run `softuq list` to see available components.\n\n"));
     process.exit(1);
   }
 
@@ -62,7 +62,6 @@ export async function add(components: string[], options: AddOptions) {
   for (const name of allComponents) {
     const entry = registry.components[name];
     for (const file of entry.files) {
-      const src = path.join(sourceDir, file);
       const dest = path.join(cwd, file.startsWith("lib/") ? config.libDir : componentDir, path.basename(file));
 
       if ((await fs.pathExists(dest)) && !options.overwrite) {
@@ -73,8 +72,7 @@ export async function add(components: string[], options: AddOptions) {
 
       await fs.ensureDir(path.dirname(dest));
 
-      // Read source and rewrite import paths
-      let content = await fs.readFile(src, "utf-8");
+      let content = await readSource(config.framework, file);
       content = rewriteImports(content);
 
       await fs.writeFile(dest, content);
@@ -82,6 +80,9 @@ export async function add(components: string[], options: AddOptions) {
       copied++;
     }
   }
+
+  // Track installed components
+  await markInstalled(cwd, allComponents);
 
   // Install dependencies
   if (dependencies.length > 0) {

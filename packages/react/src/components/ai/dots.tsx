@@ -2,28 +2,23 @@ import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 import { cn } from "../../lib/utils";
 
-const dotsVariants = cva(
-  "inline-flex items-end",
-  {
-    variants: {
-      size: {
-        sm: "[--ds-ai-dots-size:6px] [--ds-ai-dots-gap:4px] gap-[var(--ds-ai-dots-gap)] h-3",
-        md: "[--ds-ai-dots-size:8px] [--ds-ai-dots-gap:6px] gap-[var(--ds-ai-dots-gap)] h-4",
-        lg: "[--ds-ai-dots-size:10px] [--ds-ai-dots-gap:8px] gap-[var(--ds-ai-dots-gap)] h-5",
-      },
-    },
-    defaultVariants: {
-      size: "md",
+const dotsVariants = cva("inline-flex items-end", {
+  variants: {
+    size: {
+      sm: "[--ds-ai-dots-size:6px] [--ds-ai-dots-gap:4px] gap-[var(--ds-ai-dots-gap)] h-3",
+      md: "[--ds-ai-dots-size:8px] [--ds-ai-dots-gap:6px] gap-[var(--ds-ai-dots-gap)] h-4",
+      lg: "[--ds-ai-dots-size:10px] [--ds-ai-dots-gap:8px] gap-[var(--ds-ai-dots-gap)] h-5",
     },
   },
-);
+  defaultVariants: {
+    size: "md",
+  },
+});
 
 type DotsTone = "iridescent" | "mono" | "muted";
 type DotsPattern = "bounce" | "pulse";
 
-interface DotsProps
-  extends Omit<React.HTMLAttributes<HTMLSpanElement>, "children">,
-    VariantProps<typeof dotsVariants> {
+interface DotsProps extends Omit<React.HTMLAttributes<HTMLSpanElement>, "children">, VariantProps<typeof dotsVariants> {
   tone?: DotsTone;
   pattern?: DotsPattern;
 }
@@ -40,10 +35,9 @@ const Dots = React.forwardRef<HTMLSpanElement, DotsProps>(
     ref,
   ) => {
     const [c1, c2, c3] = toneColors[tone];
-    const animation =
-      pattern === "bounce"
-        ? "var(--animate-ai-dots-bounce)"
-        : "var(--animate-ai-dots-bounce)";
+    // pattern "pulse" currently maps to same keyframe — reserved for future variant
+    void pattern;
+    const animation = "ai-dots-bounce var(--ds-ai-dots-speed, 1.2s) ease-in-out infinite";
 
     const dot = (color: string, delay: string): React.CSSProperties => ({
       display: "inline-block",

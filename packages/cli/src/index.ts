@@ -1,15 +1,21 @@
 #!/usr/bin/env node
+import { createRequire } from "node:module";
 import { Command } from "commander";
 import { add } from "./commands/add.js";
 import { diff } from "./commands/diff.js";
+import { doctor } from "./commands/doctor.js";
 import { init } from "./commands/init.js";
 import { list } from "./commands/list.js";
+import { remove } from "./commands/remove.js";
 import { skill } from "./commands/skill.js";
 import { update } from "./commands/update.js";
 
+const require = createRequire(import.meta.url);
+const pkg = require("../package.json") as { version: string };
+
 const program = new Command();
 
-program.name("softuq").description("Add Softuq components to your project").version("0.1.0");
+program.name("softuq").description("Add Softuq components to your project").version(pkg.version);
 
 program
   .command("init")
@@ -30,9 +36,18 @@ program
   .action(add);
 
 program
+  .command("remove")
+  .description("Remove installed components")
+  .argument("[components...]", "Components to remove")
+  .option("--force", "Remove even if other components depend on them")
+  .option("-y, --yes", "Skip confirmation")
+  .action(remove);
+
+program
   .command("list")
   .description("List all available components")
   .option("-f, --framework <framework>", "Framework (default: auto-detect)")
+  .option("-i, --installed", "Show only installed components")
   .action(list);
 
 program
@@ -48,6 +63,8 @@ program
   .option("--all", "Update all changed components")
   .option("-y, --yes", "Skip confirmation")
   .action(update);
+
+program.command("doctor").description("Diagnose your Softuq setup").action(doctor);
 
 program
   .command("skill")

@@ -2,6 +2,7 @@
 
 import {
   type AccentPreset,
+  Badge,
   Button,
   type FontPreset,
   FormField,
@@ -247,8 +248,16 @@ const NAV_ITEMS: NavMegaItem[] = [
 
 function SoftuqBrand() {
   return (
-    <Link href="/" className="font-sans text-base font-semibold tracking-[0.1em] text-fg-primary">
-      softuq<span className="text-xs font-normal text-fg-muted tracking-normal">.com</span>
+    <Link
+      href="/"
+      className="inline-flex items-center gap-2 font-sans text-base font-semibold tracking-[0.1em] text-fg-primary"
+    >
+      <span>
+        softuq<span className="text-xs font-normal text-fg-muted tracking-normal">.com</span>
+      </span>
+      <Badge variant="secondary" size="sm" className="font-normal tracking-normal">
+        Beta
+      </Badge>
     </Link>
   );
 }

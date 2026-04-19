@@ -18,6 +18,8 @@ Before touching any JSX/TSX or CSS, confirm:
 5. [ ] **Icons come from `lucide-react` (UI) or `@icons-pack/react-simple-icons` (brand)** — never inline `<svg>`
 6. [ ] **New components follow the CVA pattern** — forwardRef, `type="button"`, variants before interface
 7. [ ] **`<html>` has `data-theme="dark"` by default** — light mode is opt-in via provider
+8. [ ] **Transitions use motion tokens** (`duration-fast/normal/slow`, `ease-soft/smooth/bounce`) — never `duration-200` or `ease-out`
+9. [ ] **Icon-only buttons have `aria-label`**, interactive non-buttons have keyboard handlers, every `<img>` has an `alt`
 
 If you violate any of these, stop and fix before continuing.
 
@@ -203,6 +205,86 @@ These rules are baked into the DS components. When composing layouts that use th
 
 ---
 
+## Motion
+
+All transitions must use the motion tokens — never hardcode `duration-200` or `ease-out`.
+
+**Duration tokens**:
+
+| Class | Value | Use |
+|---|---|---|
+| `duration-fast` | `150ms` | Hover tints, focus rings, checkbox toggle, small color changes |
+| `duration-normal` | `250ms` | Most UI — input focus, select open, accordion, dropdown items |
+| `duration-slow` | `400ms` | Modals, drawers, large scale/fade entrances |
+
+**Easing tokens**:
+
+| Class | Curve | Use |
+|---|---|---|
+| `ease-soft` | `cubic-bezier(0.4, 0, 0.2, 1)` | Default for UI interactions |
+| `ease-smooth` | `cubic-bezier(0.16, 1, 0.3, 1)` | Entrance/exit of floating surfaces (popover, toast) |
+| `ease-bounce` | `cubic-bezier(0.34, 1.56, 0.64, 1)` | Playful overshoot — rare, only for intentional delight |
+
+**Keyframe utilities** (for mount animations): `animate-fade-up`, `animate-fade-down`, `animate-scale-in`, `animate-slide-in-right/left/up/down`, `animate-fade-out`, `animate-pulse`.
+
+**Rules**:
+
+- Default pairing: `transition-colors duration-fast ease-soft` for hover tints, `transition-all duration-normal ease-soft` for most interactive elements
+- Never bare-Tailwind `duration-200` / `ease-in-out` / `duration-[300ms]` on DS components — breaks theme customization
+- Transform animations (scale, translate, rotate) use `duration-normal ease-soft` unless it's a large floating surface (then `duration-slow ease-smooth`)
+- `@keyframes` lives in `tailwind-theme.css` — add there, never inline
+- Provider-level `html` transition on theme flip is already wired (`transition: background-color var(--duration-normal) var(--ease-soft)`) — don't duplicate on `<body>`
+
+---
+
+## Accessibility
+
+Softuq hits WCAG 2.1 AA by default — don't break it.
+
+**Contrast**:
+
+- Semantic text tokens are tuned for ≥4.5:1 on their intended surfaces. `text-fg-primary`, `text-fg-secondary`, `text-fg-muted` all pass AA body-text contrast on `bg-bg-base`, `bg-bg-card`, `bg-bg-elevated`.
+- **Never put `text-fg-muted` on `bg-bg-popover` or `bg-accent`** — contrast may drop below AA. Use `text-fg-primary` or `text-fg-inverse`.
+- Never hardcode colors that haven't been checked — stick to semantic utilities.
+
+**Focus**:
+
+- Every interactive element needs a visible focus ring. DS components ship with `focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg-base` — don't strip it.
+- Use `focus-visible:` (not `focus:`) — keyboard users get the ring, mouse clicks don't show it.
+- Custom interactive divs (`role="button"`): add `tabIndex={0}` + focus-visible ring manually.
+
+**Keyboard**:
+
+- Every action must be reachable without a mouse. If you add a click handler to a non-button (`<div onClick>`), convert it to `<button type="button">` or add `role="button" tabIndex={0}` + `onKeyDown` for Enter/Space.
+- Modals: trap focus inside, return to trigger on close (Dialog/Sheet handle this — don't roll your own).
+- Escape key closes overlays (handled by Dialog, Sheet, Popover, DropdownMenu).
+
+**ARIA & semantics**:
+
+- **Icon-only buttons must have `aria-label`**: `<Button size="icon" aria-label="Close"><X /></Button>`
+- Decorative icons beside text: add `aria-hidden="true"` on the icon so screen readers don't double-read
+- Use native elements first (`<button>`, `<a href>`, `<nav>`, `<main>`, `<aside>`) — reach for ARIA only when semantics are missing
+- Form inputs must have a `<Label htmlFor>` or be wrapped in `<FormField>` (which wires it for you)
+- Status messages: `<FormMessage>` uses `role="alert"` automatically — don't duplicate
+
+**Motion**:
+
+- Respect `prefers-reduced-motion` for non-essential animation. Wrap decorative transforms in:
+  ```css
+  @media (prefers-reduced-motion: reduce) {
+    .motion-safe-only { animation: none; transition: none; }
+  }
+  ```
+  or use Tailwind's `motion-safe:animate-fade-up` / `motion-reduce:transition-none` variants.
+- Essential transitions (focus ring, theme flip) can stay — they're short and informative.
+
+**Images & media**:
+
+- Every `<img>` needs `alt=""` (decorative) or a meaningful alt. Missing `alt` = fail.
+- Iframes (previews, embeds): `title` attribute describing content.
+
+---
+
 ## Red flags
 
 If you catch yourself doing any of these, STOP and fix:
@@ -223,6 +305,12 @@ If you catch yourself doing any of these, STOP and fix:
 | Full-width TabsList on desktop | Don't — component already does `w-full sm:w-auto sm:self-center` |
 | ToggleGroup tab filter without mobile stretch | Add `w-full [&>button]:flex-1 sm:w-auto sm:[&>button]:flex-none` |
 | Device picker visible on mobile | Add `hidden md:flex` + default to `"mobile"` viewport |
+| `duration-200 ease-in-out` | `duration-normal ease-soft` |
+| Hardcoded `cubic-bezier(...)` | `ease-soft` / `ease-smooth` / `ease-bounce` |
+| Icon-only `<Button>` without `aria-label` | `<Button aria-label="Close"><X /></Button>` |
+| `<div onClick={...}>` as interactive | `<button type="button">` (or `role="button" tabIndex={0}` + `onKeyDown`) |
+| `focus:` ring (shows on mouse click) | `focus-visible:` ring |
+| `<img>` without `alt` | `alt=""` (decorative) or meaningful alt |
 
 ---
 

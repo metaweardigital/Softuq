@@ -32,12 +32,12 @@ const AUTO_RE =
 
 function highlightAuto(code: string): string {
   return escapeHtml(code).replace(AUTO_RE, (match, comment, str, tagOpen, tagName, attr, keyword, cli) => {
-    if (comment) return `<span class="text-fg-dimmed">${comment}</span>`;
-    if (str) return `<span class="text-success">${str}</span>`;
-    if (tagOpen && tagName) return `${tagOpen}<span class="text-destructive">${tagName}</span>`;
-    if (attr) return ` <span class="text-warning">${attr}</span>=`;
-    if (keyword) return `<span class="text-accent">${keyword}</span>`;
-    if (cli) return `<span class="text-accent">${cli}</span>`;
+    if (comment) return `<span style="color:var(--text-dimmed)">${comment}</span>`;
+    if (str) return `<span style="color:var(--success-text)">${str}</span>`;
+    if (tagOpen && tagName) return `${tagOpen}<span style="color:var(--destructive-text)">${tagName}</span>`;
+    if (attr) return ` <span style="color:var(--warning-text)">${attr}</span>=`;
+    if (keyword) return `<span style="color:var(--accent-text)">${keyword}</span>`;
+    if (cli) return `<span style="color:var(--accent-text)">${cli}</span>`;
     return match;
   });
 }
@@ -49,13 +49,13 @@ const MD_RE =
 
 function highlightMarkdown(code: string): string {
   return escapeHtml(code).replace(MD_RE, (match, heading, inlineCode, bold, list, blockquote, hr, link) => {
-    if (heading) return `<span class="text-fg-primary font-semibold">${heading}</span>`;
-    if (inlineCode) return `<span class="text-accent-text">${inlineCode}</span>`;
-    if (bold) return `<span class="text-fg-primary font-semibold">${bold}</span>`;
-    if (list) return `<span class="text-fg-dimmed">${list}</span>`;
-    if (blockquote) return `<span class="text-fg-dimmed italic">${blockquote}</span>`;
-    if (hr) return `<span class="text-fg-dimmed">${hr}</span>`;
-    if (link) return `<span class="text-accent-text">${link}</span>`;
+    if (heading) return `<span style="color:var(--text-primary);font-weight:600">${heading}</span>`;
+    if (inlineCode) return `<span style="color:var(--accent-text)">${inlineCode}</span>`;
+    if (bold) return `<span style="color:var(--text-primary);font-weight:600">${bold}</span>`;
+    if (list) return `<span style="color:var(--text-dimmed)">${list}</span>`;
+    if (blockquote) return `<span style="color:var(--text-dimmed);font-style:italic">${blockquote}</span>`;
+    if (hr) return `<span style="color:var(--text-dimmed)">${hr}</span>`;
+    if (link) return `<span style="color:var(--accent-text)">${link}</span>`;
     return match;
   });
 }

@@ -2,21 +2,18 @@ import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 import { cn } from "../../lib/utils";
 
-const auroraVariants = cva(
-  "absolute inset-0 pointer-events-none",
-  {
-    variants: {
-      intensity: {
-        subtle: "[--ds-ai-aurora-opacity:0.25] [--ds-ai-aurora-blur:32px]",
-        medium: "[--ds-ai-aurora-opacity:0.45] [--ds-ai-aurora-blur:40px]",
-        intense: "[--ds-ai-aurora-opacity:0.7] [--ds-ai-aurora-blur:48px]",
-      },
-    },
-    defaultVariants: {
-      intensity: "medium",
+const auroraVariants = cva("absolute inset-0 pointer-events-none", {
+  variants: {
+    intensity: {
+      subtle: "[--ds-ai-aurora-opacity:0.25] [--ds-ai-aurora-blur:32px]",
+      medium: "[--ds-ai-aurora-opacity:0.45] [--ds-ai-aurora-blur:40px]",
+      intense: "[--ds-ai-aurora-opacity:0.7] [--ds-ai-aurora-blur:48px]",
     },
   },
-);
+  defaultVariants: {
+    intensity: "medium",
+  },
+});
 
 type AuroraCoverage = "full" | "top" | "bottom";
 
@@ -58,7 +55,8 @@ const Aurora = React.forwardRef<HTMLDivElement, AuroraProps>(
       ].join(", "),
       filter: "blur(var(--ds-ai-aurora-blur))",
       opacity: "var(--ds-ai-aurora-opacity)",
-      animation: animate ? "var(--animate-ai-aurora-drift)" : undefined,
+      mixBlendMode: "screen",
+      animation: animate ? "ai-aurora-drift var(--ds-ai-aurora-speed, 12s) ease-in-out infinite alternate" : undefined,
       willChange: animate ? "transform" : undefined,
     };
 

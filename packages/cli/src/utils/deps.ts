@@ -15,5 +15,11 @@ export function installDeps(deps: string[], cwd: string, pm: PM, dev = false) {
   }[pm];
 
   console.log(pc.gray(`  $ ${cmd}`));
-  execSync(cmd, { cwd, stdio: "pipe" });
+  try {
+    execSync(cmd, { cwd, stdio: "inherit" });
+  } catch {
+    process.stderr.write(pc.red(`\n  Install failed: ${cmd}\n`));
+    process.stderr.write(pc.dim(`  Fix the error above and re-run softuq.\n\n`));
+    process.exit(1);
+  }
 }

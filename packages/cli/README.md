@@ -32,9 +32,12 @@ npx softuq skill
 | `init --no-starter` | Same as `init` but skip the landing page (provider still wired) |
 | `add <components…>` | Copy component files + install npm deps |
 | `add --all` | Copy every component |
-| `list` | List available components |
+| `remove <components…>` | Delete component files and clear them from `softuq.json` |
+| `list` | List available components (installed entries marked with `✓`) |
+| `list --installed` | List only components tracked in `softuq.json` |
 | `diff` | Show which local components differ from upstream |
 | `update [components…]` | Pull updates for all changed components, or only the named ones |
+| `doctor` | Diagnose your setup (alias, Tailwind, CSS order, provider, theme attr, fonts) |
 | `skill` | Install the Softuq design skill for Claude Code / AI agents |
 | `skill -g` | Install the skill globally (`~/.claude/skills/`) |
 
@@ -69,11 +72,15 @@ Once installed, the agent picks it up automatically whenever you ask it to touch
 ## How it works
 
 - `init` detects your framework (Next.js vs. Vite), package manager, and project structure, then writes `softuq.json`.
-- `add` resolves transitive dependencies between components (e.g. `select` pulls `tag`), copies the files into `components/ui/`, and installs any missing npm dependencies.
+- `softuq.json` tracks installed components under `components` (`{ [name]: { installedAt } }`) — powers `remove` and `list --installed`.
+- `add` resolves transitive dependencies between components (e.g. `select` pulls `tag`), copies the files into `components/ui/`, installs any missing npm dependencies, and records the components in `softuq.json`.
+- `remove` deletes the component files, clears them from `softuq.json`, and refuses to drop a component another installed component still depends on (`--force` to override). npm dependencies stay — remove them manually if they're no longer used.
 - Import paths are rewritten on copy (`../../lib/utils` → `@/lib/utils`).
 - `diff` normalizes import paths, so local `@/lib/utils` rewrites don't show as changes.
 - `update` pulls changed components with a confirmation prompt; pass specific names to limit the update scope.
+- `doctor` inspects your project without modifying files — ideal when something "just stopped working" after a manual edit.
 - `skill` installs a Claude Code skill at `.claude/skills/softuq/` (or `~/.claude/skills/softuq/` with `--global`).
+- Remote registry — the manifest and raw files are fetched from `https://softuq.com` (cached 1 h in `~/.softuq/cache/`), with the bundled templates as an offline fallback. New components published to the docs site reach users without a CLI republish. Override the host via `SOFTUQ_REGISTRY_URL` for testing.
 
 ## Links
 

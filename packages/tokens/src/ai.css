@@ -57,3 +57,46 @@
   --ds-ai-aurora-opacity: 0.45;
   --ds-ai-aurora-speed: 12s;
 }
+
+/* ============================================
+   AI layer — halo ring mask (border-only conic)
+   ============================================ */
+
+.softuq-ai-halo-ring {
+  padding: var(--ds-ai-halo-width);
+  border-radius: inherit;
+  -webkit-mask:
+    linear-gradient(#000, #000) content-box,
+    linear-gradient(#000, #000);
+          mask:
+    linear-gradient(#000, #000) content-box,
+    linear-gradient(#000, #000);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+}
+
+/* ============================================
+   AI layer keyframes + reduced-motion
+   ============================================ */
+
+@keyframes ai-halo-spin {
+  to { transform: rotate(1turn); }
+}
+@keyframes ai-dots-bounce {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.35; }
+  40%           { transform: translateY(-30%); opacity: 1; }
+}
+@keyframes ai-aurora-drift {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(6%, -4%) rotate(18deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-ai-primitive],
+  [data-ai-primitive] [data-ai-layer] {
+    animation: none !important;
+  }
+  [data-ai-primitive="dots"] [data-ai-layer] {
+    opacity: 0.6;
+  }
+}

@@ -3,9 +3,10 @@ import fs from "fs-extra";
 import pc from "picocolors";
 import prompts from "prompts";
 import { renderStarter, STARTER_COMPONENTS } from "../templates/starter.js";
+import { markInstalled, writeConfig } from "../utils/config.js";
 import { installDeps } from "../utils/deps.js";
 import { type DetectedProject, detectProject, type Framework } from "../utils/detect.js";
-import { getSourceDir, getTokensDir, loadRegistry, resolveAllDeps } from "../utils/registry.js";
+import { loadRegistry, readSource, readTokenFile, resolveAllDeps } from "../utils/registry.js";
 
 // Join srcDir + subpath for path construction and display.
 // srcDir="" (no-src Next) collapses to just subpath — no leading slash.
@@ -26,7 +27,7 @@ export async function init(options: InitOptions) {
 
   const detected = await detectProject(cwd);
   if (!detected) {
-    console.log(pc.red("  No package.json found. Run this in a project root."));
+    process.stderr.write(pc.red("\n  No package.json found. Run this in a project root.\n\n"));
     process.exit(1);
   }
 
@@ -67,39 +68,43 @@ export async function init(options: InitOptions) {
     framework = answers.framework;
   }
 
+  if (framework !== "react") {
+    console.log(
+      pc.red(`\n  ${framework} support is not yet available.`) +
+        pc.dim(`\n  Only React is supported today. Follow https://softuq.com for updates.\n`),
+    );
+    process.exit(1);
+  }
+
   const registry = await loadRegistry(framework);
-  const sourceDir = getSourceDir(framework);
 
   // 1. Copy cn() utility
-  const utilsSrc = path.join(sourceDir, registry.utils.cn.file);
   const utilsDest = path.join(cwd, libDir, "utils.ts");
   await fs.ensureDir(path.dirname(utilsDest));
-  await fs.copy(utilsSrc, utilsDest);
+  await fs.writeFile(utilsDest, await readSource(framework, registry.utils.cn.file));
   console.log(pc.green("  ✓ ") + pc.dim(`${libDir}/utils.ts`));
 
   // 2. Copy JS tokens (used by provider at runtime)
-  const tokensDir = getTokensDir();
-  const tokensSrc = path.join(tokensDir, "index.ts");
   const tokensDest = path.join(cwd, libDir, "tokens.ts");
-  await fs.copy(tokensSrc, tokensDest);
+  await fs.writeFile(tokensDest, await readTokenFile("index.ts"));
   console.log(pc.green("  ✓ ") + pc.dim(`${libDir}/tokens.ts`));
 
   // 3. Copy provider + its presets dependency to src root
-  const providerSrc = path.join(sourceDir, registry.provider.file);
   const providerDest = path.join(cwd, detected.srcDir, "softuq-provider.tsx");
   await fs.ensureDir(path.dirname(providerDest));
-  let providerContent = await fs.readFile(providerSrc, "utf-8");
+  let providerContent = await readSource(framework, registry.provider.file);
   providerContent = providerContent.replace(/from\s+["']@softuq\/tokens["']/g, `from "@/lib/tokens"`);
   await fs.writeFile(providerDest, providerContent);
   console.log(pc.green("  ✓ ") + pc.dim(srcPath(detected.srcDir, "softuq-provider.tsx")));
 
-  const presetsSrc = path.join(sourceDir, "presets.ts");
-  if (await fs.pathExists(presetsSrc)) {
-    const presetsDest = path.join(cwd, detected.srcDir, "presets.ts");
-    let presetsContent = await fs.readFile(presetsSrc, "utf-8");
+  try {
+    let presetsContent = await readSource(framework, "presets.ts");
     presetsContent = presetsContent.replace(/from\s+["']@softuq\/tokens["']/g, `from "@/lib/tokens"`);
+    const presetsDest = path.join(cwd, detected.srcDir, "presets.ts");
     await fs.writeFile(presetsDest, presetsContent);
     console.log(pc.green("  ✓ ") + pc.dim(srcPath(detected.srcDir, "presets.ts")));
+  } catch {
+    // presets.ts is optional
   }
 
   // 4. Vite: install Tailwind + wire vite.config.ts (plugin + @ alias).
@@ -124,8 +129,7 @@ export async function init(options: InitOptions) {
   console.log(pc.green("  ✓ ") + pc.dim(baseDeps.join(", ")));
 
   // 7. Write softuq.json (before add(), which requires it)
-  const config = { framework, componentDir, libDir };
-  await fs.writeJson(path.join(cwd, "softuq.json"), config, { spaces: 2 });
+  await writeConfig(cwd, { framework, componentDir, libDir, components: {} });
   console.log(pc.green("  ✓ ") + pc.dim("softuq.json"));
 
   // 8. Wire SoftuqProvider into entry file + data-theme="dark"
@@ -153,11 +157,10 @@ async function setupCSS(cwd: string, cssPath: string, detected: DetectedProject)
   const cssDir = path.dirname(fullPath);
   const marker = "/* Softuq */";
 
-  const tokensDir = getTokensDir();
-  const primitives = await fs.readFile(path.join(tokensDir, "primitives.css"), "utf-8");
-  const semantic = await fs.readFile(path.join(tokensDir, "semantic.css"), "utf-8");
-  const ai = await fs.readFile(path.join(tokensDir, "ai.css"), "utf-8");
-  const tailwindTheme = await fs.readFile(path.join(tokensDir, "tailwind-theme.css"), "utf-8");
+  const primitives = await readTokenFile("primitives.css");
+  const semantic = await readTokenFile("semantic.css");
+  const ai = await readTokenFile("ai.css");
+  const tailwindTheme = await readTokenFile("tailwind-theme.css");
 
   const tokensFile = path.join(cssDir, "softuq-tokens.css");
   await fs.writeFile(tokensFile, `${marker}\n${primitives}\n\n${semantic}\n\n${ai}\n\n${BASE_TYPOGRAPHY_CSS}`);
@@ -493,17 +496,15 @@ function mergeHtmlClassName(content: string, token: string): string {
 
 async function addStarterComponents(cwd: string, detected: DetectedProject, componentDir: string) {
   const registry = await loadRegistry("react");
-  const sourceDir = getSourceDir("react");
   const { components, dependencies } = resolveAllDeps(registry, STARTER_COMPONENTS);
 
   for (const name of components) {
     const entry = registry.components[name];
     for (const file of entry.files) {
-      const src = path.join(sourceDir, file);
       const dest = path.join(cwd, componentDir, path.basename(file));
       if (await fs.pathExists(dest)) continue;
       await fs.ensureDir(path.dirname(dest));
-      let fileContent = await fs.readFile(src, "utf-8");
+      let fileContent = await readSource("react", file);
       fileContent = fileContent
         .replace(/from\s+["']\.\.\/\.\.\/lib\/utils["']/g, `from "@/lib/utils"`)
         .replace(/from\s+["']\.\.\/\.\.\/lib\/squircle["']/g, `from "@/lib/squircle"`);
@@ -511,6 +512,8 @@ async function addStarterComponents(cwd: string, detected: DetectedProject, comp
       console.log(pc.green("  ✓ ") + pc.dim(`${componentDir}/${path.basename(file)}`));
     }
   }
+
+  await markInstalled(cwd, components);
 
   const pkgPath = path.join(cwd, "package.json");
   const pkg = await fs.readJson(pkgPath);

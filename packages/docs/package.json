@@ -4,6 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "sync-registry": "node scripts/sync-registry.mjs",
+    "predev": "pnpm sync-registry",
+    "prebuild": "pnpm sync-registry",
     "dev": "next dev --port 3333",
     "build": "next build",
     "start": "next start -p ${PORT:-3333}"

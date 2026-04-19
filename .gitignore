@@ -9,3 +9,5 @@ dist
 docs/plans/
 .claude/
 .superpowers/
+packages/docs/public/registry.json
+packages/docs/public/r/

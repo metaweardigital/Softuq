@@ -4,7 +4,7 @@ import pc from "picocolors";
 import prompts from "prompts";
 import { installDeps } from "../utils/deps.js";
 import { detectProject } from "../utils/detect.js";
-import { getSourceDir, loadRegistry, resolveAllDeps } from "../utils/registry.js";
+import { getSourceDir, getTokensDir, loadRegistry, resolveAllDeps } from "../utils/registry.js";
 
 interface UpdateOptions {
   all?: boolean;
@@ -16,18 +16,18 @@ export async function update(components: string[], options: UpdateOptions) {
   const configPath = path.join(cwd, "softuq.json");
 
   if (!(await fs.pathExists(configPath))) {
-    console.log(pc.red("\n  No softuq.json found. Run `softuq init` first.\n"));
+    process.stderr.write(pc.red("\n  No softuq.json found. Run `softuq init` first.\n\n"));
     process.exit(1);
   }
 
   const config = await fs.readJson(configPath);
   const detected = await detectProject(cwd);
   if (!detected) {
-    console.log(pc.red("\n  No package.json found.\n"));
+    process.stderr.write(pc.red("\n  No package.json found.\n\n"));
     process.exit(1);
   }
 
-  const registry = loadRegistry(config.framework);
+  const registry = await loadRegistry(config.framework);
   const sourceDir = getSourceDir(config.framework);
   const componentDir = config.componentDir;
 
@@ -55,7 +55,7 @@ export async function update(components: string[], options: UpdateOptions) {
 
   // Update CSS token/theme files first (always safe — user code is in globals.css)
   const cssDir = detected.cssFile ? path.dirname(path.join(cwd, detected.cssFile)) : path.join(cwd, "src/app");
-  const tokensDir = path.resolve(sourceDir, "../../tokens/src");
+  const tokensDir = getTokensDir();
 
   const primitives = await fs.readFile(path.join(tokensDir, "primitives.css"), "utf-8");
   const semantic = await fs.readFile(path.join(tokensDir, "semantic.css"), "utf-8");
@@ -86,7 +86,7 @@ export async function update(components: string[], options: UpdateOptions) {
   const tokensJsDest = path.join(cwd, config.libDir, "tokens.ts");
   if (await fs.pathExists(tokensJsDest)) {
     const local = await fs.readFile(tokensJsDest, "utf-8");
-    const source = await fs.readFile(path.resolve(sourceDir, "../../tokens/src/index.ts"), "utf-8");
+    const source = await fs.readFile(path.join(tokensDir, "index.ts"), "utf-8");
     if (local !== source) {
       await fs.writeFile(tokensJsDest, source);
       console.log(pc.green("  ✓ ") + pc.dim("tokens.ts"));

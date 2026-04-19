@@ -2,6 +2,22 @@
 
 All notable changes to the `softuq` CLI.
 
+## 0.9.0
+
+- New `softuq remove <component>` — deletes component files, updates `softuq.json`, warns when other installed components depend on the target (`--force` to override, `--yes` to skip confirm).
+- New `softuq doctor` — diagnoses a project setup (tsconfig `@/*` alias, Vite Tailwind v4 plugin + alias, CSS import order + softuq imports, provider wiring, `data-theme` attribute, fonts wiring). Prints `✓/!/✗` per check with fix hints; exits non-zero on failures.
+- `softuq list --installed` — show only components tracked in `softuq.json`; full list now also marks installed entries with a `✓`.
+- `softuq.json` now tracks installed components (`components: { [name]: { installedAt } }`). Backward compatible — existing configs without the field default to `{}`. Written on `init` (for starter components) and `add`, cleared by `remove`.
+- Remote registry — CLI fetches `https://softuq.com/registry.json` for the manifest (cached 1 h in `~/.softuq/cache/`) and missing component source files from `https://softuq.com/r/<framework>/...`, falling back to bundled templates offline. New components shipped via the docs deploy reach users without a CLI republish. Override via `SOFTUQ_REGISTRY_URL` env for testing.
+- Fix `softuq update` reading tokens from a hardcoded monorepo path (`../../tokens/src`) that only worked in dev — now uses `getTokensDir()` so published installs resolve tokens correctly.
+- Fix `softuq --version` reporting `0.1.0` regardless of the installed version — now reads from `package.json`.
+- Fix silent crash on Svelte projects — `init` now exits with a clear "not yet available" message instead of propagating `loadRegistry("svelte")`.
+- Fix opaque install failures — dependency installs now stream `pnpm`/`npm`/`yarn`/`bun` output live (`stdio: "inherit"`) and exit 1 with a helpful message when the install command returns non-zero.
+- Enforce `engines.node: ">=20"` in `package.json` — matches README prerequisite, prevents silent breakage on older Node.
+- Error paths now write to `stderr` (not `stdout`) — makes CI/pipe consumers able to separate diagnostics from output. Exit codes unchanged (`1` on failure).
+- `resolveAllDeps` warns on unknown `registryDeps` entries instead of silently skipping them — catches registry drift during `add` / `update`.
+- Expanded bundled `softuq` skill — new Motion section (duration/ease token usage) and Accessibility section (WCAG AA contrast, focus-visible, icon-only button `aria-label`, `prefers-reduced-motion`, keyboard handlers on non-button interactives). `softuq skill` now installs the richer guidance.
+
 ## 0.8.4
 
 - Drop broken relative `CHANGELOG.md` link from README (npm rewrites relative links to `npmjs.com/package/*` and breaks them; repo is private, so no absolute fallback).

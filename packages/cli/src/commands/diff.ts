@@ -13,19 +13,19 @@ export async function diff(options: DiffOptions) {
   const configPath = path.join(cwd, "softuq.json");
 
   if (!(await fs.pathExists(configPath))) {
-    console.log(pc.red("\n  No softuq.json found. Run `softuq init` first.\n"));
+    process.stderr.write(pc.red("\n  No softuq.json found. Run `softuq init` first.\n\n"));
     process.exit(1);
   }
 
   const config = await fs.readJson(configPath);
   const detected = await detectProject(cwd);
   if (!detected) {
-    console.log(pc.red("\n  No package.json found.\n"));
+    process.stderr.write(pc.red("\n  No package.json found.\n\n"));
     process.exit(1);
   }
 
   const framework = (options.framework as "react" | "svelte") || config.framework;
-  const registry = loadRegistry(framework);
+  const registry = await loadRegistry(framework);
   const sourceDir = getSourceDir(framework);
   const componentDir = config.componentDir;
 
